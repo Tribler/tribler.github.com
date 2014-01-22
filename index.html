@@ -52,7 +52,7 @@
 
 <div id="wrap">
 	<header>
-		<a href="#"><img src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+		<a href="index.html"><img src="img/tribler-logo.png" alt="Return to the homepage" /></a>
 		
 		<nav>
 			<ul>
@@ -63,7 +63,7 @@
 				        <li><a href="#">Statistics</a></li>
 				    </ul>
 				</li>
-				<li><a href="http://www.tribler.org/trac/wiki/Download">Download</a></li>
+				<li><a href="download.html">Download</a></li>
 				<li><a href="#">Users</a>
 				    <ul>
 				        <li><a href="#">How does it work</a></li>
@@ -81,15 +81,15 @@
 		</nav>
 	</header>	
 	
-	<section id="feature">
-		<div id="feature-info">
+	<section id="main">
+		<div id="main-info">
 	        <h1>Tribler 6.2.0</h1>
 		    <h2>Overcoming Censorship</h2>
 		    <p>Tribler aims to liberate the media by not relying on websites, severs or DNS infrastructure. Stay in control of your own content. Find share and enjoy, whenever you want!</p>
 		</div>
 	</section>
 	
-	<div id="download">
+	<div id="gettribler">
 
 		<script type="text/javascript">
 			var parser = new UAParser();
@@ -97,18 +97,20 @@
 			var osName = result.os.name;
 			if (osName == "Windows") {
 				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.exe">Download Tribler</a></div>');
-				document.writeln('<p>Voor Windows 8/7/Vista/XP</p>');
+				document.writeln('<p>For Windows 8/7/Vista/XP');
+				document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
 			}
 			else if (osName == "Mac OS X") {
 				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Download Tribler</a></div>');
-				document.writeln('<p>Voor Mac OS X 10.6 of hoger</p>');
+				document.writeln('<p>For Mac OS X 10.6 or higher');
+				document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
 			}
 			else if (osName == "Linux") {
-				document.writeln('<div class="button"><a href="http://www.tribler.org/trac/wiki/Download">Download Tribler</a></div>');
-				document.writeln('<p>Voor Linux (Debian/Ubuntu/Fedora/openSUSE)</p>');
+				document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
+				document.writeln('<p>For Linux (Debian/Ubuntu/Fedora/openSUSE)</p>');
 			}
 			else {
-				document.writeln('<div class="button"><a href="http://www.tribler.org/trac/wiki/Download">Download Tribler</a></div>');
+				document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
 				document.writeln('<p>Unknown OS</p>');
 			}
 		</script>
@@ -116,7 +118,7 @@
 	</div>
 
 	<section id="content">
-		<div class="bucket">
+		<div class="feature">
 			<p class="title"><img src="img/anonimity.png">Towards Anonimity</p>
 			
 			<p>Mass-surveillance and government snooping is becoming increasingly impossible with Tribler. We're trying to combine Bittorrent streaming with the Tor hidden services architecture. A lot of work goes into making this feature stable.</p>
@@ -124,7 +126,7 @@
 			<p><a href="#">How it works</a></p>
 		</div>
 		
-		<div class="bucket">
+		<div class="feature">
 			<p class="title"><img src="img/downloading.png">Downloading</p>
 			
 			<a href="img/screenshot.png" data-lightbox="true" title="Searching for content with Tribler 6.2.0"><img class="screenshot" src="img/screenshot_thumb.png"></a>
@@ -133,13 +135,13 @@
 			<p><a class="more" href="#">Get started</a></p>
 		</div>
 
-		<div class="bucket">
+		<div class="feature">
 			<p class="title"><img src="img/nowebsites.png">No websites</p>
 
 			<p>Tribler software facilitates sharing content without an external server. You can choose to download files without having to search the web for downloadsites.</p>
 		</div>		
 
-		<div class="bucket">
+		<div class="feature">
 			<p class="title"><img src="img/opensource.png">Open Source</p>
 
 			<p>Triblers software is Open Source so you can verify if it works as advertised.</p>
@@ -147,7 +149,7 @@
 			<p><iframe src="http://ghbtns.com/github-btn.html?user=Tribler&repo=tribler&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe></p>
 		</div>
 
-		<div class="bucket">
+		<div class="feature">
 			<p class="title"><img src="img/speed.png">Connectivity Speed</p>
 			
 			<table>
@@ -158,7 +160,7 @@
 			<p><a href="#">Show stats</a></p>
 		</div>
 
-		<div class="bucket">
+		<div class="feature">
 			<p class="title"><img src="img/streaming.png">Streaming</p>
 
 			<p>Tribler has an intergrated videoplayer which allows you to stream videos even before the download is finished.</p>

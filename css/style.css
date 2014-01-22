@@ -93,29 +93,29 @@ header nav {
 						background: #ff896b;
 					}
 		
-#feature {
+#main {
 	clear: both; height: 260px; overflow: hidden; margin: 0 0 20px 0;
 	color: #a6a6a6;
 	background: #000 url(../img/feature_main_background.png) no-repeat;
 }
-	#feature h1 {
+	#main h1 {
 		margin: 10px 0 10px 0;
 		font-size: 35px; color: #ff3300;
 	}
-	#feature h2 {
+	#main h2 {
 		margin: 10px 0 10px 0;
 		font-size: 22px; font-style:italic;	color: #fff;
 	}
-	#feature img {
+	#main img {
 		float: right; margin: 22px 0 0 0;
 	}
-	#feature-info {
+	#main-info {
 		float: left; width: 450px; margin: 80px 0 0 30px;
 	}
-    	#feature-info p {
+    	#main-info p {
 			margin: 0 0 34px 0; font-size: 16px;
 		}
-		#feature-info p.btn a {
+		#main-info p.btn a {
 			display: block; width: 170px; height: 35px;
 			background: #497389;
 			background: -moz-linear-gradient(top, #497389 0%, #151e36 100%);
@@ -128,11 +128,11 @@ header nav {
 			text-transform: uppercase; text-align: center; padding: 12px 0 0 0;
 		}
 
-#download {
+#gettribler {
     margin: 0 30px 20px 20px;
 	float: right;
 }
-	#download .button a {
+	#gettribler .button a {
 		display: block; height: 50px; width: 200px;
 		color: white; font-size: 17px; line-height: 50px;
 		text-decoration: none; text-align: center;
@@ -146,58 +146,91 @@ header nav {
 		box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 		-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 		-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-	}
-	#download p{
+		}
+	#gettribler p{
+		margin-top:10px;
 		text-align: center;
+		font-size: 13px;
+		line-height: 120%;
 	}
 		
 #content {
 	overflow: hidden; clear: both;
 }
-	#content .bucket {
-		width: 289px; height: 250px; float: left; margin: 0 0 20px 20px;
+	#content .feature {
+		width: 289px; height: 250px; float: left; margin: 10px 0 20px 20px;
 		border: 1px solid #e0e0e0;
 		background: #fff;
 	}
-		#content .bucket:hover {
+		#content .feature:hover {
 			background: #f7f7f7;
 		}
-		#content .bucket .title {
+		#content .feature .title {
 			font-size: 20px;
 			font-weight:bold;
 		}
-		#content .bucket .title img {
-			margin: 10px 0 10px 0;
+		#content .feature .title img {
+			margin: 10px 10px 10px 0;
 			vertical-align: middle;
-			margin-right: 10px;
 		}
-		#content .bucket .screenshot {
+		#content .feature .screenshot {
 			margin-right: 13px;
 			float: right;
 		}
-		#content .bucket p {
+		#content .feature p {
 			margin: 0 0 5px 0; padding: 0 13px 0 13px;
 		}
-		#content .bucket table {
+		#content .feature table {
 			width: 263px;
 			margin: 0 13px 0 13px;
 			border-collapse: collapse; 
 			border-spacing: 50px 50px;
 			font-size: 18px; font-weight:bold;
 		}
-			#content .bucket table td{
+			#content .feature table td{
 				padding: 10px 0;
 			}
-			#content .bucket table tr:first-child  td{
+			#content .feature table tr:first-child  td{
 				border-bottom: 2px solid #ff3300;
 			}
-		#content .bucket p a {
+		#content .feature p a {
 		    background: transparent url(../img/link.png) center left no-repeat;
 			padding-left: 15px;
 			color: #ff3300;
 		}
-			#content .bucket p a :hover {
+			#content .feature p a :hover {
 				color: #ff3300;
 			}
 
-			
+#content {
+	overflow: hidden; clear: both;
+}
+	#content .download {
+		width: 289px; height: 250px; float: left; margin: 70px 0 20px 20px;
+		padding-top:20px;
+		border: 1px solid #e0e0e0;
+		background: #fff;
+	}
+		#content .download:hover {
+			background: #f7f7f7;
+		}
+		#content .download .title {
+			font-size: 20px;
+			font-weight:bold;
+			text-align:center;
+		}
+		#content .download img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#content .download p {
+			margin: 0 0 5px 0; padding: 0 13px 0 13px;
+			text-align:center;
+			}
+		#content .download p a {
+			color: #ff3300;
+		}
+			#content .download p a :hover {
+				color: #ff3300;
+			}
