@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link href="css/style.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#06C',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+	
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="#">Features</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="#">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				        <li><a href="#">Explanatory videos</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="content">
+		<div class="download">
+			<p class="title">Windows</p>
+
+			<p><img src="img/win.png"></p>			
+
+			<p>
+				<a href="http://dl.tribler.org/Tribler_6.2.0.exe">Tribler 6.2.0 for Windows</a><br>
+				Windows XP, Windows Vista, and Windows 7 / 8
+			</p>
+		</div>
+		
+		<div class="download">
+			<p class="title">Mac OS X</p>
+
+			<p><img src="img/osx.png"></p>			
+
+			<p><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Tribler 6.2.0 for Mac OS X</a><br></p>
+		</div>
+
+		<div class="download">
+			<p class="title">Ubuntu Linux</p>
+
+			<p><img src="img/linux.png"></p>			
+
+			<p>
+				<a href="http://dl.tribler.org/tribler_6.2.0ubuntu1_all.deb">Tribler 6.2.0 for Ubuntu</a>
+				<br>Swift dependency:<br>
+				<a href="http://dl.tribler.org/tribler-swift_6.2.0ubuntu1_i386.deb">i386</a> or <a href="http://dl.tribler.org/tribler-swift_6.2.0ubuntu1_amd64.deb">amd64</a><br>
+			</p>
+
+			<p><a href="https://github.com/Tribler/tribler/tree/v6.2.0">Browse source code </a> or <a href="https://github.com/Tribler/tribler/archive/v6.2.0.zip">download as zip</a><br></p>
+		
+		</div>
+
+		<div class="changelog">
+
+			Changes since last version:
+			<ul>
+				<li>Video on demand is back! No more waiting for video downloads! Also, we have seeking now.</li>
+				<li>Less disk and CPU consumption</li>
+				<li>UI improvements</li>
+				<li>Fixes for the bugs found in 6.1 and reported by the community during the 6.2 RCs (Thanks!)</li>
+			</ul>
+				
+		</div>
+		
+	</section>
+</div>	
+
+</body>
+</html>
