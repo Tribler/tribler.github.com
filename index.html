@@ -1,86 +1,174 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- saved from url=(0022)http://dl.tribler.org/ -->
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>
-      Github.Tribler.org
-    </title>
-    <link rel="shortcut icon" href="http://dl.tribler.org/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="http://dl.tribler.org/favicon.ico" type="image/x-icon">
-  </head>
-  <body>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
 
-    <h1 id="Chooseyourdownload">Tribler website, hosted by Github CNAME record ! </h1>
+<link href="css/style.css" rel="stylesheet" />
+<link href="css/lightbox.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
 
-    <div style="max-width:700px; margin:30px auto 0 auto;">
-      <div style="float:left; width:33%;">
-        <h1 id="Windows" style="margin:0">Windows</h1>
-        <img src="vistaLogoTransparent.png" align="left/">
-        <p>
-          <a href="http://dl.tribler.org/Tribler_6.1.0.exe">Tribler 6.1 for Windows</a><br>
-          Windows XP, Windows Vista, <br> and Windows 7
-        </p>
-      </div>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/lightbox-2.6.min.js"></script>
+<script type="text/javascript" src="js/ua-parser.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#06C',
+        lang: 'en'
+      };
 
-      <div style="float:left; width:33%;">
-        <h1 id="Apple" style="margin:0">Mac OS X</h1>
-        <img src="appleLogoTransparent.png" align="left/">
-        <p>
-          <a href="http://dl.tribler.org/Tribler_6.1.dmg">Tribler 6.1 for Mac OS X</a><br>
-        </p>
-      </div>
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+	
+</head>
 
-      <div style="float:left; width:33%;">
-        <h1 id="UbuntuLinux" style="margin:0">Ubuntu Linux</h1>
-        <img src="linuxLogoTransparent.png" align="left/">
-        <p>
-          Swift dependency: <a href="http://dl.tribler.org/tribler-swift_6.1ubuntu1_i386.deb">i386</a> or <a href="http://dl.tribler.org/tribler-swift_6.1ubuntu1_amd64.deb">amd64</a><br>
-          <a href="http://dl.tribler.org/tribler_6.1ubuntu1_all.deb">Tribler 6.1 for Linux</a><br>
-          Ubuntu 12.10
-        </p>
-        <p>
-          <a href="https://github.com/Tribler">latest code</a>.<br>
+<body>
 
-          <!-- <b><nobr>deb http://ubuntu.tribler.org/ intrepid main</nobr></b><br> -->
-          <!-- <b><nobr>deb http://ubuntu.tribler.org/ jaunty main</nobr></b><br> -->
-          <!-- <b><nobr>deb http://ubuntu.tribler.org/ karmic main</nobr></b> -->
-        </p>
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="#">Features</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="#">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				        <li><a href="#">Explanatory videos</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="main">
+		<div id="main-info">
+	        <h1>Tribler 6.2.0</h1>
+		    <h2>Overcoming Censorship</h2>
+		    <p>Tribler aims to liberate the media by not relying on websites, severs or DNS infrastructure. Stay in control of your own content. Find share and enjoy, whenever you want!</p>
+		</div>
+	</section>
+	
+	<div id="gettribler">
 
-      </div>
-    </div>
-    <div style="max-width:600px;">
-      <span style="font-weight:bold;">Changes since last version:</span>
-      <ul>
-        <li> Faster downloads: We have switched from the old python based bittorrent core to Rasterbar's libtorrent, so expect less resource usage too, we are saturating a symmetric 100Mb/s connection without much trouble.
-        </li>
-        <li> Less disk and CPU consumption used for community synchronization.
-        </li>
-        <li> UI improvements (download speed graphs, some new icons, general UI cleanup...)
-        </li>
-        <li> Throttling (Bandwidth limitation) is working again.
-        </li>
-        <li> The LibSwift engine has been updated too.
-        </li>
-        <li> The "Save as" dialog has been modified to improve usability when downloading from magnet links.
-        </li>
-        <li> Thumbnails for downloaded media: Now when a new video file gets downloaded, Tribler will automatically create a thumbnail and make it available to the rest of peers to be shown on the search results for all the media you download from your favourite open channels.
-        </li>
-        <li> Fixed freezing at startup on some machines.
-        </li>
-        <li> Fixed race conditions and lockups in synchronizations.
-        </li>
-        <li> Various bug fixes and minor improvements.
-        </li>
-        <li> Fixes for the bugs reported by the community during beta1 and beta2 (Thanks!)
-        </li>
-      </ul>
+		<script type="text/javascript">
+			var parser = new UAParser();
+			var result = parser.getResult();
+			var osName = result.os.name;
+			if (osName == "Windows") {
+				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.exe">Download Tribler</a></div>');
+				document.writeln('<p>For Windows 8/7/Vista/XP');
+				document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
+			}
+			else if (osName == "Mac OS X") {
+				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Download Tribler</a></div>');
+				document.writeln('<p>For Mac OS X 10.6 or higher');
+				document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
+			}
+			else if (osName == "Linux") {
+				document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
+				document.writeln('<p>For Linux (Debian/Ubuntu/Fedora/openSUSE)</p>');
+			}
+			else {
+				document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
+				document.writeln('<p>Unknown OS</p>');
+			}
+		</script>
 
+	</div>
 
-    </div>
+	<section id="content">
+		<div class="feature">
+			<p class="title"><img src="img/anonimity.png">Towards Anonimity</p>
+			
+			<p>Mass-surveillance and government snooping is becoming increasingly impossible with Tribler. We're trying to combine Bittorrent streaming with the Tor hidden services architecture. A lot of work goes into making this feature stable.</p>
+			
+			<p><a href="#">How it works</a></p>
+		</div>
+		
+		<div class="feature">
+			<p class="title"><img src="img/downloading.png">Downloading</p>
+			
+			<a href="img/screenshot.png" data-lightbox="true" title="Searching for content with Tribler 6.1.0"><img class="screenshot" src="img/screenshot_thumb.png"></a>
+			<p>Tribler is an application that enables its users to find, enjoy and share content. With content we mean video, audio, pictures, and much more.</p>
+			
+			<p><a class="more" href="#">Get started</a></p>
+		</div>
 
-  
+		<div class="feature">
+			<p class="title"><img src="img/nowebsites.png">No websites</p>
 
+			<p>Tribler software facilitates sharing content without an external server. You can choose to download files without having to search the web for downloadsites.</p>
+		</div>		
 
+		<div class="feature">
+			<p class="title"><img src="img/opensource.png">Open Source</p>
 
+			<p>Triblers software is Open Source so you can verify if it works as advertised.</p>
+			
+			<p><iframe src="http://ghbtns.com/github-btn.html?user=Tribler&repo=tribler&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe></p>
+		</div>
 
-</body></html>
+		<div class="feature">
+			<p class="title"><img src="img/speed.png">Connectivity Speed</p>
+			
+			<table>
+				<tr><td>Upload</td><td>4.9</td><td>mb/s</td></tr>
+				<tr><td>Download</td><td>5.2</td><td>mb/s</td></tr>
+			</table>
+			
+			<p><a href="#">Show stats</a></p>
+		</div>
+
+		<div class="feature">
+			<p class="title"><img src="img/streaming.png">Streaming</p>
+
+			<p>Tribler has an intergrated videoplayer which allows you to stream videos even before the download is finished.</p>
+		</div>		
+		
+	</section>
+</div>	
+
+</body>
+</html>
