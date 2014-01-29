@@ -233,6 +233,54 @@ header nav {
 
 		}
 
+.howto {
+	margin: 10px 30px 10px 30px;
+	display: inline-block;
+}
+	.howto:first-child {
+		margin-top: 70px;
+	}
+	.howto:last-child {
+		margin-bottom: 50px;
+	}
+	.howto img{
+		margin-right: 10px;
+		vertical-align:middle;
+	}
+	.howto .text{
+		float:left;
+		width: 26%;
+	}
+	.howto .spacer{
+		float:left; height: 1px;
+		width: 2%;
+	}
+	.howto .image{
+		float:left;
+		width: 70%;
+	}
+	.howto  .image img{
+		width:100%;
+	}
+	.howto .image img.shadow {
+		margin-top: 75px;
+		border: 1px solid #e0e0e0;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+		-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+		-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+	}
+	.howto h2{
+		margin: 10px 0 10px 0;
+		font-size: 15px; font-style:italic;	color: #aaa8a8;
+	}
+	.howto h3{
+		margin: 10px 0 10px 0;
+		font-size: 15px; color: #ff3300;
+	}
+	
 .faq {
 	margin: 70px 10px 50px 10px;
 }

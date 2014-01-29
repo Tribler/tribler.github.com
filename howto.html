@@ -41,7 +41,30 @@
       _loadSuper = window.onload;
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
-	
+
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+
+		$('.faq_answer').hide();
+		$('.faq_question').click(function(){
+		t = $(this);
+		if (!t.hasClass('active'))
+		{
+		t.parent().children('.faq_answer').slideToggle();
+		t.addClass('active');
+		}
+		else
+		{
+		t.parent().children('.faq_answer').slideToggle();
+		t.removeClass('active');
+		}
+		return false;
+		});
+
+		});
+
+	</script>
 </head>
 
 <body>
@@ -79,52 +102,47 @@
 	</header>	
 	
 	<section id="content">
-		<div class="download">
-			<p class="title">Windows</p>
 
-			<p><img src="img/win.png"></p>			
+		<div class="howto">
+			<div class="image">
+				<img src="img/howto1.jpg" />
+			</div>
+			<div class="spacer"></div>
+			<div class="text">
+				<br><br><h1>How it works</h1>
+				<h2>Tribler is a software program that facilitates safe filesharing.</h2>
+				<p>The files are shared by use of the Tribler software which means that there is no download website necessary. Users can choose files that they want to download to their computers and select files that they want to share with other users. The files are shared between users and there is no central computer that provides every file to all users. Tribler uses Torrents to distributes files. A Torrent describes the file content and is required for downloading to start.</p>
+			</div>
+		</div>
 
-			<p>
-				<a href="http://dl.tribler.org/Tribler_6.2.0.exe">Tribler 6.2.0 for Windows</a><br>
-				Windows XP, Windows Vista, and Windows 7 / 8
-			</p>
+		<div class="howto">
+			<h1>Using Tribler</h1>
+			<div class="text">
+				<h3><img src="img/balloon1.jpg" />Search for content</h3>
+				<p>To find the content you would like to download type in a keyword in the search bar. The more specific your search is, the more likely you are to get the result you're looking for.</p>
+			</div>
+			<div class="spacer"></div>
+			<div class="image">
+				<img class="shadow" src="img/howto2.jpg" />
+			</div>
 		</div>
 		
-		<div class="download">
-			<p class="title">Mac OS X</p>
-
-			<p><img src="img/osx.png"></p>			
-
-			<p><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Tribler 6.2.0 for Mac OS X</a><br></p>
+		<div class="howto">
+			<div class="text">
+				<h3><img src="img/balloon2.jpg" />Download content</h3>
+				<p>Before downloading files onto your computer first a Torrent file, decribing the content of the file, must be downloaded. Tribler can go ahead and find the Torrent file of your first results, to speed up the downloading process.</p>
+			</div>
+			<div class="spacer"></div>
+			<div class="image">
+				<img class="shadow" src="img/howto3.jpg" />
+			</div>
 		</div>
 
-		<div class="download">
-			<p class="title">Ubuntu Linux</p>
-
-			<p><img src="img/linux.png"></p>			
-
-			<p>
-				<a href="http://dl.tribler.org/tribler_6.2.0ubuntu1_all.deb">Tribler 6.2.0 for Ubuntu</a>
-				<br>Swift dependency:<br>
-				<a href="http://dl.tribler.org/tribler-swift_6.2.0ubuntu1_i386.deb">i386</a> or <a href="http://dl.tribler.org/tribler-swift_6.2.0ubuntu1_amd64.deb">amd64</a><br>
-			</p>
-
-			<p><a href="https://github.com/Tribler/tribler/tree/v6.2.0">Browse source code </a> or <a href="https://github.com/Tribler/tribler/archive/v6.2.0.zip">download as zip</a><br></p>
-		
+		<div class="howto">				
+			<h3><img src="img/balloon3.jpg" />Consume content</h3>
+			<p>Because of the integrated video and audio player you can almost immediately start watching your favorite video(s) or listen to your favorite song(s).</p>
 		</div>
 
-		<div class="changelog">
-
-			Changes since last version:
-			<ul>
-				<li>Video on demand is back! No more waiting for video downloads! Also, we have seeking now.</li>
-				<li>Less disk and CPU consumption</li>
-				<li>UI improvements</li>
-				<li>Fixes for the bugs found in 6.1 and reported by the community during the 6.2 RCs (Thanks!)</li>
-			</ul>
-				
-		</div>
-		
 	</section>
 </div>	
 
