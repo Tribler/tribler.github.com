@@ -286,7 +286,38 @@ header nav {
 		margin: 10px 0 10px 0;
 		font-size: 15px; color: #ff3300;
 	}
-	
+
+.about {
+	margin: 70px 30px 50px 30px;
+	width: 560px; float: left;
+}
+	.about:last-child {
+		margin: 70px 0 50px 0;
+		width: 310px;
+	}
+	.about h1 {
+		margin-bottom:25px;
+		font-size:25px;
+	}
+	.about h2 {
+		font-size:17px;
+	}
+	.about .vision {
+		color: #ff3300;
+	}
+	.about .contact {
+		color: #fff;
+		padding: 10px 10px 10px 10px;
+		background: #ff3300;
+		border: 1px solid #e0e0e0;
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+		-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+		-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+	}
+
 .faq {
 	margin: 70px 10px 50px 10px;
 }
