@@ -26,7 +26,7 @@
 #trac h2, #trac h3 {
 	margin: 5px 0;
 }
-#trac ul {
+#trac ul, ol {
 	margin: 0 0 0 20px;
 }
 #trac pre.wiki, #trac pre.literal-block, #trac pre.code, #trac .code pre {
