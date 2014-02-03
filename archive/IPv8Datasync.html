@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="IPv8Datasync">IPv8 Datasync</h1>
+<p>
+We want to design an efficient data synchronization algorithm for our wild and wacky <a class="wiki" href="IPv8.html">IPv8 idea</a>.
+Very preliminairy <a class="ext-link" href="http://svn.tribler.org/abc/branches/giorgos/datasync/"><span class="icon">​</span>running Python code</a> is now available,<a class="wiki" href="IPv8Datasync%25252FTestSuite.html">plus detailed documentation</a>.
+</p>
+<p>
+<a class="wiki" href="IPv8Datasync%25252FResults.html">Simulation results</a>
+</p>
+<h2 id="IPv8DatabaseTables">IPv8 Database Tables</h2>
+<p>
+The IPv8 database consists of four tables.
+</p>
+<p>
+<em>PermIds</em>: Table to hold just the PermIds
+</p>
+<table class="wiki">
+<tr><td>id</td><td>PermId
+</td></tr></table>
+<ul><li>id: Autoincrement number
+</li><li>PermId: Peer PermId
+</li></ul><p>
+<em>IPv8</em>: Table to hold the IPv8 to IPv4/IPv6 relation with the following structure
+</p>
+<table class="wiki">
+<tr><td>PermId</td><td>IPv4 / IPv6</td><td>Port</td><td>Certificate</td><td>Timestamp</td><td>OurTimestamp
+</td></tr></table>
+<ul><li>PermId: Relation to <em>PermIds</em> table
+</li><li>IPv4 / IPv6: Last seen IPv4 or IPv6 address
+</li><li>Port: Last seen port
+</li><li>Certificate: Signed by <a class="missing" href="#">PermId</a> to which the IPv4 address belongs or by the <a class="missing" href="#">PermId</a> which created the entry?
+</li><li>Timestamp: Time the entry was created on the original peer
+</li><li>OurTimestamp: Time the entry was created on our node
+</li></ul><p>
+<em>RelationTypes</em> : Table to hold relation types
+</p>
+<table class="wiki">
+<tr><td>RelationId</td><td>PeerRelationType
+</td></tr></table>
+<ul><li>RelationId: Integer name of a relation type
+</li><li>PeerRelationType: Text describing the relation type
+</li></ul><p>
+<em>PeerRelations</em> : Table to hold peer relations
+</p>
+<table class="wiki">
+<tr><td>!PermId1</td><td>!PermId2</td><td>RelationId</td><td>RelationStrengthFactor</td><td>Certificate</td><td>Timestamp
+</td></tr></table>
+<ul><li>!PermId1: First's peer PermId, relation to <em><a class="missing" href="#s">PermIds</a></em>
+</li><li>!PermId2: Second's peer PermId, relation to <em><a class="missing" href="#s">PermIds</a></em>
+</li><li>RelationId: Relation id from the relation types table
+</li><li>RelationStrengthFactor: Somehow we calculate this using betweeness centrality
+</li><li>Certificate: !PermId1 signature of the unique identifier of the entry
+</li><li>Timestamp: Time the entry was created on the original peer
+</li></ul><p>
+<em>SyncLog</em> : Table to hold the last successful sync timestamp
+</p>
+<table class="wiki">
+<tr><td>PermId</td><td>Id
+</td></tr></table>
+<ul><li>PermId: Peer's PermId with which we synced
+</li><li>Id: Row id sent by the Node we successfully synced with
+</li></ul><p>
+<strong>Q</strong>: Are the <a class="missing" href="#">PermId</a>'s always of size 113 chars?
+</p>
+<ul><li>Yes but there are 3 entries -out of 700k- in the permID file from <a class="wiki" href="SuperpeerLogs.html">SuperpeerLogs</a> which are not, but probably an error while generating the file
+</li></ul><h2 id="DatabaseMaintenance">Database Maintenance</h2>
+<p>
+<strong>Not agreed</strong>
+To keep the database clean and tidy and prevent it from growing huge, all the entries should auto expire after a predefined period. We can have an extra row in relation type table defining the grace period of each relation type. By auto expiring we don't need to transfer the database deletions across the network. Entries that need to be retained should be regenerated from the original peer.
+</p>
+<h2 id="SyncingAlgorithm1">Syncing Algorithm 1</h2>
+<p>
+<strong>Syncing using bloom filters</strong>
+</p>
+<hr />
+<p>
+Node A want to sync with Node B
+A new node in the network directly enters live mode by contacting a peer
+</p>
+<p>
+<strong>live mode</strong>
+</p>
+<ol><li>Node A sends <em>SYNC</em> to Node B
+</li><li>Node A send a bloom filter with the entries in it's database of the last 4/24/168 hours (depending on how we define the <em>LIVE</em> mode)
+</li><li>Node B checks it's entries of the last 4/24/168 hours against the received bloom filter
+</li><li>Node B sends back to Node A all the entries that did not match the bloom filter
+</li><li>Node A received the entries and stores them into the database
+</li><li>Node A goes to history mode
+</li></ol><p>
+<strong>history mode</strong>
+</p>
+<ol><li>Node A check if Node B PermID is in the <em>FULLY SYNCED</em> bloom filter
+<ul><li>If Node B <strong>is not</strong> in the <em>FULLY SYNCED</em> bloom filter
+<ol><li>Node A reads from the <em>SYNCLOG</em> the last synced timestamp for Node B
+<ul><li>If there is no entry in the <em>SYNCLOG</em>
+<ul><li>If Node B <strong>is</strong> <em>LIVE</em> create a new entry in the <em>SYNCLOG</em> with timestamp at the last 4/24/168 hours
+</li><li>if Node B <strong>is not</strong> <em>LIVE</em> terminate connection.
+</li></ul></li></ul></li><li>Node A creates a bloom filter with entries starting from timestamp and backwards for 4/24/168 hours
+</li><li>Node A send the timestamp to Node B
+</li><li>Node A sends the bloom filter to Node B 
+</li><li>Node B checks the selected entries against the received bloom filter
+</li><li>Node B sends back to Node A all the entries from the selected set that did not match the bloom filter
+</li><li>Node A saves the oldest timestamp in the <em>SYNCLOG</em> for Node B
+</li></ol></li><li>If Node B <strong>is</strong> in the <em>FULLY SYNCED</em> bloom filter
+<ol><li>Do nothing, we are already fully synced with this node. GOTO <strong>catch up mode</strong>
+</li></ol></li></ul></li></ol><p>
+<strong>catch up mode</strong>
+</p>
+<ol><li>If Node A has not received updates the last 4/24/168 hours
+</li><li>Record two timestamps
+<ul><li>Now
+</li><li>The last update minus 4/24/168 hours
+</li></ul></li><li>Create a bloom filter in which will store the node permids which we used to fill this gap
+</li><li>Send to Node B the two timestamps
+</li><li>Node B selects <em>SLICE</em> entries (or up to the older timestamp which ever comes first) from it's database starting from the newest received timestamp
+</li><li>Node B sends 
+<ul><li>the oldest and the newest timestamp of the selected entries back to Node A to prepare a bloom filter
+</li><li>'-1' if there are no entries between these timestamps
+</li></ul></li><li>Node A 
+<ul><li>If timestamps received: creates a bloom filter with the entries between these two timestamps
+</li><li>If '-1' received: saves Node B in the bloom filter for that gap.
+</li></ul></li><li>Node A sends the bloom filter to Node B
+</li><li>Node B checks the selected entries against the received bloom filter
+</li><li>Node B sends back to Node A all the entries from the selected set that did not match the bloom filter
+</li><li>Node A saves the oldest timestamp in the <em>SYNCLOG</em> for Node B
+</li><li>If Node A has synced with more than <em>CATCHUPNODES</em> this gap, we can delete the timestamps and the bloom filter and consider the gap synced
+</li><li>Do the same for other gaps
+</li></ol><hr />
+<h2 id="Algorithmnotes">Algorithm notes</h2>
+<ul><li>Since we know beforehand how many entries the bloom filter will have we can predefine the error rate of it, leading to very few false positives. 
+</li><li>Bloom filter false positives come with the cost of Node A never getting some database entries, because Node B thinks that there are already there
+</li><li>Note that the syncing is one way only. Node A gets updates from Node B
+</li><li>Since the bloom filter is generated on-the-fly we need a really fast implementation
+</li><li>We can further reduce the bandwidth consumption by compressing the returned database rows and the bloom filter. <em>implemented</em> 
+</li><li>The algorithm successfully synchronizes nodes that have (never) synchronized before
+</li><li>SIZESLICE is a number that defines the maximum number of entries checked in Node B and therefore the maximum number of entries transfered from Node B to Node A. 
+</li><li>The CPU time consumed and traffic sent from Node B is upper bounded to SIZESLICE
+</li><li>A node get maximum SIZESLICE updates from an other node. A bootstrapping node can run the update procedure with lower interval to get more updates faster.
+</li><li>We use bloom filter with 0.05 error rate. Test runs prove that you get false positives (therefore Node A does not receive all the updates) but the bloom filter size is a lot smaller than when error rate is 0.001. Plus when Node A syncs with Node C may get the missed updates from it.
+</li></ul><h2 id="Algorithmissues">Algorithm issues</h2>
+<ul><li><del>Unclear algorithm</del> - solved with version 2
+</li><li><del>If Node B has more than 1k entries to check against the bloom filter sent by Node A, the CPU time is really big (statistics to be added) - enhanced with version 2 but the problem still persists </del> - solved with version 2.5 (problem now in client only)
+</li><li><del>If Node B entries &gt;&gt; Node A bloom filter, then we get many false positives</del> Not a problem with version 2.5 since Node B entries are top bounded to SIZESLICE
+</li></ul><h3 id="Proofofconceptcode">Proof of concept code</h3>
+<p>
+Go to the <a class="wiki" href="IPv8Datasync%25252FTestSuite.html">IPv8Datasync/TestSuite</a>
+</p>
+<h3 id="Benchmarks">Benchmarks</h3>
+<p>
+All time tests run using python's <a class="ext-link" href="http://docs.python.org/library/timeit.html"><span class="icon">​</span>timeit</a>
+</p>
+<p>
+Test machine: Core2Duo 2Ghz - 2Gbyte - Linux
+</p>
+<h4 id="Bloomfiltercreation">Bloom filter creation</h4>
+<table class="wiki">
+<tr><td> Entries </td><td> Time (Î¼sec) 
+</td></tr><tr><td> 100 </td><td> 5476.28 
+</td></tr><tr><td> 1000 </td><td> 53933.61 
+</td></tr><tr><td> 10000 </td><td> 525702.40 
+</td></tr></table>
+<h3 id="Links">Links</h3>
+<ul><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Bloom_filter"><span class="icon">​</span>Bloom filters in Wikipedia</a>
+</li><li>Proof of concept code
+</li><li><a class="missing" href="#">PyBloom</a> library
+</li><li>Twisted python library used for networkin
+</li></ul><h3 id="Discussion">Discussion</h3>
+<p>
+<em>Johan: so the challenge is to 1) select from, say 1 million items, the 100.000 new discovered items since a last given sync timestamp, then 2) create a Bloom filter which include those new items, 3) advertise those fresh items available for sync and 4) transfer the most interesting items</em> ?
+</p>
+<ul><li><em>Giorgos</em>: Yes that's the idea. We create a unique one-time bloom filter per node we sync. I guess we could include all the new discovered items since the last sync but this depends on how many new items we have. 
+</li></ul><p>
+<em>Giorgos</em>: Which data is more important to reach the bootstrapping node first? The most recent or the older?
+</p>
+<hr />
+<h2 id="SyncingAlgorithm2">Syncing Algorithm (2)</h2>
+<p>
+<strong>Sync using Set Reconciliation</strong>
+</p>
+<p>
+Polynomial encoding of sets.  Each peer evaluating the characteristic polynomial of their set at several points and using this information to compute the ratio of the two characteristic polynomials and hence their set differences. Tractable computational complexity and nearly optimal communication complexity . Multiple rounds of communication. The upper bound on the set of differences needs to be known. Exact reconciliation.
+</p>
+<h2 id="Proofofconceptcode1">Proof of concept code (1)</h2>
+<ol><li><a class="ext-link" href="http://ipsit.bu.edu/programs/reconcile/reconcile.tgz"><span class="icon">​</span>Download the proof of concept code</a> provided by the authors in their <a class="ext-link" href="http://ipsit.bu.edu/programs/reconcile/"><span class="icon">​</span>website</a>
+</li><li>Use dos2unix to convert mainfile.cpp and prob_recon_support.cpp
+</li><li>Apply <a class="ext-link" href="https://www.tribler.org/trac/attachment/wiki/IPv8Datasync/reconcile.diff?format=raw"><span class="icon">​</span>the patch</a> provided by Gertjan to compile successfully (Note: for some strange reason it still does not compile on some machines (e.g ubuntu 09.10 - gcc 4.4.1))
+</li><li>Run ./configure &amp;&amp; make
+</li></ol><h2 id="Proofofconceptcode2">Proof of concept code (2)</h2>
+<p>
+There is <a class="ext-link" href="http://nislab.bu.edu/CPISync.html"><span class="icon">​</span>CPISync</a> a program to synchronize Notes database from <a class="missing" href="#">PalmPilot</a> with the computer. <a class="ext-link" href="http://nislab.bu.edu/nislab/projects/cpisync/SyncProj.zip"><span class="icon">​</span>Full source code</a>, <a class="ext-link" href="http://nislab.bu.edu/nislab/projects/cpisync/FinalReport.pdf"><span class="icon">​</span>project report</a> and <a class="ext-link" href="http://ipsit.bu.edu/nislab/BUtech03.pdf"><span class="icon">​</span>research paper</a>.
+</p>
+<h3 id="Links1">Links</h3>
+<ul><li><a class="ext-link" href="https://www.tribler.org/trac/attachment/wiki/IPv8/Set%20reconciliation%20with%20nearly%20optimal%20communication%20complexity.pdf?format=raw"><span class="icon">​</span>Set reconciliation with nearly optimal communication complexity</a> - Yaron Minsky
+</li><li><a class="ext-link" href="https://www.tribler.org/trac/attachment/wiki/IPv8/Practical%20Set%20Reconciliation.pdf?format=raw"><span class="icon">​</span>Practical Set Reconciliation</a> - Yaron Minsky
+</li><li><a class="ext-link" href="http://nislab.bu.edu/CPISync.html"><span class="icon">​</span>CPISync homepage</a> or <a class="ext-link" href="http://ipsit.bu.edu/nislab/projects/cpisync/index.htm"><span class="icon">​</span>CPISync homepage 2</a>
+</li></ul><hr />
+<h2 id="SyncingAlgorithm3">Syncing Algorithm (3)</h2>
+<p>
+<strong> Sync using Approximate Set Reconciliation</strong>
+</p>
+<p>
+Approximate reconciliation. Less computation than exact reconciliation. Single round of communication. Utilizing Merkle tress, Bloom filters and Patricia tries. Combining the best from Bloom filters and Merkle trees, namely quicker searches for small numbers of differences without the complications of managing the tree structures.
+</p>
+<h3 id="Proofofconceptcode3">Proof of concept code</h3>
+<p>
+None
+</p>
+<h3 id="Links2">Links</h3>
+<ul><li><a class="missing attachment">Fast Approximate Reconciliation of Set Differences</a>
+</li></ul><hr />
+<h2 id="SyncingAlgorithm4">Syncing Algorithm (4)</h2>
+<p>
+<strong> Optimized Union of Non-disjoint Distributed Data Sets </strong>
+</p>
+<p>
+Different approach from the 1 to 1 used in the previous algorithms. In this case a node sends a <em>sync</em> signal to many other nodes. The <em>sync</em> receivers communicate privately and decide using special algorithms who is going to send what. The nodes to not have to share all the same items. The transfer is done in a way that bandwidth is utilized at a maximum level. The node requesting the sync does not receive duplicate items from the sync nodes.
+</p>
+<h3 id="Links3">Links</h3>
+<ul><li><a class="missing attachment">Optimized Union of Non-disjoint Distributed Data Sets</a>
+</li></ul><hr />
+<h2 id="SyncingAlgorithm5">Syncing Algorithm (5)</h2>
+<p>
+<strong>Efficient Reconciliation of Unordered Databases</strong>
+</p>
+<p>
+The paper introduces two ways to reconcile unordered databases in peer to peer networks. The one method is an optimization of the other. Basically hosts exchange hashes of their database. If the hashes do not match they split the database in half (or in the median value for the optimized version) and check gain if the halfs match. If the half do not match they split and try again. If the size of the split is &lt;= 1 they exchange the actual values of the database. Algorithms in pseudo-code 3.1 and 3.2 in <a class="missing attachment">the paper</a>
+</p>
+<p>
+This is also an older work of Minsky, the author of <em>practical set reconciliation</em> which uses the polynomial representation of the set
+</p>
+<h3 id="Proofofconceptcode4">Proof of concept code</h3>
+<p>
+None
+</p>
+<h3 id="Links4">Links</h3>
+<ul><li><a class="missing attachment">Efficient Reconciliation of Unordered Databases</a>
+</li></ul><hr />
+<h2 id="Possiblefuturework:Secureandscalablepeerdiscoverytool">Possible future work: Secure and scalable peer discovery tool</h2>
+<p>
+Build database of 100.000+ peers around you
+integral security mechanism of long-term relationships
+for indirect reciprocity and web of trust
+scalability by selecting similar peers with a generic similarity or
+clustering function. Research question: how complex is such a tool,
+how can be reduce this tool to be the most simplistic, yet powerfull.
+How does it behave?
+how can we balance finding similar peers with finding trustworthy peers?
+Does this conflict or can a balance be struck, and how?
+</p>
+<hr />
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

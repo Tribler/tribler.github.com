@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="VirtualCommunities">Virtual Communities</h1>
+<p>
+<em>status: [source:abc/branches/ali/d080620-socialtribler-from-mainbranch-r7940 initial operational code]</em>
+</p>
+<p>
+[ToDo] list <strong>DONE</strong>:
+</p>
+<ul><li>Better friendship invite system: show new incoming &amp; pending requested invites<br />In order to send/receive friend's request, there are three possibilities:
+<ul><li>Phase 1: If one's friend(s) is online, while she is adding her
+</li><li>Phase 2: If one's friend(s) is offline, while she is adding her<br />(Re-try mechanism)
+</li><li>Phase 3: In case, both the parties are offline, then solution would be to save acceptance/rejection of friending at Taste <a class="missing" href="#">Buddies/Friends</a><br />(multiple 3rd party buffering)
+</li></ul></li><li>Keep open TCP connection to friends
+</li><li>Send instant message to friend
+<ul><li>Phase 1: both parties are online
+</li><li>Phase 2: Use re-try and 3rd party buffering mechanism
+</li></ul></li></ul><p>
+For next release <a class="missing" href="#">Jan/Feb</a>:
+</p>
+<ul><li>Add friend V2 after measurement feedback
+</li><li><a class="wiki" href="SocioCast.html">SocioCast</a>: Peer is now online at IPv4+port
+</li><li>Friends news feed; goal of fostering connectedness
+<ul><li>new file/view
+</li><li>new rating
+</li><li>added friend
+</li><li>changed status message
+</li></ul></li><li>Send private messages
+</li></ul><p>
+March+
+</p>
+<ul><li><a class="missing" href="#">CommentCast</a>: attach comments to each swarm; easy message board by extending PEX within a swarm?
+</li><li>Easy import of friends; use easy approach with PermID attachment to Nickname at Server<br />Every friend which uses Tribler already has their PermID already visible at their account info
+<ul><li>MSN (msnlib?)
+</li><li>connect.facebook
+</li><li><a class="missing" href="#">OpenSocial</a> or OpenID
+</li></ul></li><li>Closed group swarms
+</li></ul><p>
+  
+</p>
+<h2 id="Technicaloverviewofmutualfriendship">Technical overview of mutual friendship</h2>
+<p>
+<strong>Logical Overview</strong><br />
+</p>
+<p>
+On start [source:abc/branches/ali/d080620-socialtribler-from-mainbranch-r7940/Tribler/Core/SocialNetwork/FriendsRequestHandler.py FriendsRequestHandler.py] is registered as an Overlay Application. Its main purpose is to deal with friending requests, and its response. For peers, who want to add friends (other peers), either by selecting them from Tribler's "people found" section, or explicitly adding by their details in "add a friend" popup, this function
+friendRequestSend is called. 
+</p>
+<pre class="wiki">def friendRequestSend (self, parent, utility, editfriend = None):
+        """ Called when user adds someone from the person found, or by explicitly adding someone with her credentials
+        It establishes overlay connection with the target peer """
+        #Connection with the target peer is established, with mentioning of call back function
+        self.overlay_bridge.connect(editfriend['permid'], self.friendRequestConnectionEstablishmentCallBack)
+</pre><p>
+For receiving acknowledgment of the connect routine, this function tries to re-connect if an exception arises. On successful connect, it tries to send a friending request to the target peer. The message contains requestee's details, like Nick, IP, Port and Permid. 
+</p>
+<pre class="wiki">def friendRequestConnectionEstablishmentCallBack(self, exc, dns, target_permid, selversion):
+        """ Callback function for the overlay connect function, i.e., friendRequestSendWithOnlyID and
+        friendRequestSend """
+         
+        if exc is not None:
+            #Send connection request every five minutes
+            self.overlay_bridge.add_task(lambda: self.friendRequestSendWithOnlyID(target_permid), 300)
+        # send the message if there was no pending messages; This message contains peer's own information, i.e, nickname, ip and permid
+        if self.lastSentMessage is None:
+            msg = ':Hi:'    
+            text = msg+str(self.mynickname)+':'+str(self.myip)+':'+str(self.myport)+':'+show_permid(self.mypermid)
+        #In case of exception, save this message
+            self.lastSentMessage = FRIENDREQUEST + text
+            self.overlay_bridge.send(target_permid, FRIENDREQUEST + text, self.friendRequestConnectionEstablishedCallBack)
+        # To see if the last message was successfully sent or not; if not, re-try
+        else:
+            self.overlay_bridge.send(target_permid, FRIENDREQUEST + self.lastSentMessage, self.friendRequestConnectionEstablishedCallBack)
+        def friendRequestConnectionEstablishedCallBack(self, exc, peer_permid, other=0):
+        # If an exception arises
+        if exc is not None:
+            #Send connection request every five minutes
+            self.overlay_bridge.add_task(lambda: self.friendRequestSendWithOnlyID(peer_permid), 300)
+        else:
+            self.lastSentMessage = None # On successful connect, make lastMessage as none
+</pre><p>
+For receiving overlay messages, overlay message handler has to be created and registered. The same class [source:abc/branches/ali/d080620-socialtribler-from-mainbranch-r7940/Tribler/Core/SocialNetwork/FriendsRequestHandler.py FriendsRequestHandler.py] is responsible for it. 
+</p>
+<p>
+<a class="missing" href="#">HandleMessage</a> is called by the [source:abc/branches/ali/d080620-socialtribler-from-mainbranch-r7940/Tribler/Core/Overlay/OverlayThreadingBridge.py OverlayThreadingBridge]  on receiving a message for a particular protocol. In this case, it is FRIENDREQUEST protocol. This function does two main things
+-- Display a popup message to a peer to accept/reject a friending request
+-- This response is received by the requestee, and then based on the response, either friend is "approved", or deleted from the friends' list
+</p>
+<p>
+Peers are notified by a pop-up whether their friending request has been approved, or not.
+</p>
+<pre class="wiki">    def handleMessage(self,permid,selversion,message):
+        ''' This is called by the OverlayThreadingBridge to receive incoming messages, which were sent by
+        Overlay Bridge'''
+        pdb = PeerDBHandler.getInstance() # instance of peer db
+        fdb = FriendDBHandler.getInstance() # instance of friend db
+        temp = message.split(':') # split the message into array of string; separated by ':'
+        isFriend = fdb.isFriend(permid) # to see that the following peer is already a friend, or not
+        #variable to store peer's response on friending request
+        approved = ''
+        # Hi being the first element shows that friending request is being received
+        if temp[1] == 'Hi':
+            # See the database if it contains any information of this peer
+            if pdb.hasPeer(permid):
+                if not isFriend: # And if that peer is not already added as a friend, either approved, or unapproved
+                    dial = wx.MessageDialog(None, 'DB YES: Do you want to add 
+'  + temp[2]+ '
+ as you friend?  ', 'Question', 
+                                        wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
+                    returnValue = dial.ShowModal()
+                    approved = ":NO:" 
+                    if returnValue == wx.ID_YES:
+                        approved = ":YES:"
+                        pdb.updatePeer(permid, commit=True, friend = 2)
+                    elif returnValue == wx.ID_NO:
+                        pdb.deletePeer(permid)
+                else: # In case, requestee is already added as friend, just make this requestee as an approved friend
+                    pdb.updatePeer(permid, commit=True, friend = 2)
+                    approved = ":YES:" 
+            # Now this peer had to be locally saved as well, since database doesn't have any record of it
+            else:
+                # Dialogue for asking wheter to approve, or deny the request
+                dial = wx.MessageDialog(None, 'DB NO: Do you want to add 
+'  + temp[2]+ '
+ as you friend?  ', 'Question', 
+                                        wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
+                returnValue = dial.ShowModal()
+                approved = ":NO:"  # By default, set the value to 'No' to friending request
+                # In case of acceptance, save 'YES'
+                if returnValue == wx.ID_YES:
+                    approved = ":YES:"
+                    # text = msg+str(self.mynickname)+':'+str(self.myip)+':'+str(self.myport)+':'+show_permid(self.mypermid)
+                    friend = {'ip':temp[3], 'port':temp[4], 'name':temp[2]}
+                    # Add that peer into the database
+                    pdb.addPeer(permid, friend)
+                    # Update its status to an approved friend
+                    pdb.updatePeer(permid, commit=True, friend = 2)
+                elif returnValue == wx.ID_NO:
+                    # Do nothing when denying a request to the database
+                    print "Do nothing"
+            # Save the last message, i.e., approved to lastSentMessage, so that in case of error, this message
+            # could be resend
+            self.lastSentMessage = approved
+            # send the peer's response to the requestee 
+            self.overlay_bridge.send(permid, FRIENDREQUEST + approved, self.friendRequestConnectionEstablishedCallBack)
+        # On receiving response from a peer of friending request    
+        elif temp[1] == 'YES' or temp[1] == 'NO':
+            approved = temp[1]
+            if approved == "YES":
+                # update this friend's status in the database as "confirmed friend", or "approved friend"
+                dial = wx.MessageDialog(None, 'Hurray! Your request to add has been approved ', 'Information', 
+                                   wx.OK | wx.ICON_INFORMATION)
+                dial.ShowModal() 
+                # Now the status of Friend from 1 to 2 has to be changed, i.e., approved friend
+                pdb.updatePeer(permid, commit=True, friend = 2)
+            else:
+                dial = wx.MessageDialog(None, 'Sorry, your request to add has been denied :( ', 'Information', 
+                                   wx.OK | wx.ICON_INFORMATION)
+                dial.ShowModal()
+                #Remove this peer as a friend, and then update the database
+                pdb.updatePeer(permid, commit=True, friend = 0)
+        if DEBUG:
+            print &gt;&gt; sys.stderr,"FRIENDREQUEST : Got FRIEND REQUEST",len(message)
+        else:
+            if DEBUG:
+                print &gt;&gt; sys.stderr,"FRIENDREQUEST: UNKNOWN REQUEST MESSAGE", ord(t)
+            return False
+</pre><p>
+<strong>Database Overview</strong><br />
+In the database, Friend field of the Peer table is 3 valued now.
+</p>
+<ul><li>0 being not friend
+</li><li>1 being unapproved friend
+</li><li>2 being approved friend
+</li></ul><p>
+<strong>GUI Overview</strong> <br />
+</p>
+<p>
+Also, now the "Friends" section contains another column "<a class="missing" href="#">Approved/Unapproved</a> friend"; more specifically, in the [source:abc/branches/ali/d080620-socialtribler-from-mainbranch-r7940/Tribler/Main/vwxGUI/FriendsItemPanel.py FriendsItemPanel.py], a new column "Is approved friend" is added. Now, the reason is why it's added, actually, all friends are added right away, but only those become "approved" ones which are mutually agreed by the target peers.
+Here is the code snippet of that column
+</p>
+<pre class="wiki">        # Add friend's status
+        self.friendstatus = wx.StaticText(self,-1,"",wx.Point(0,0),wx.Size(130,12), wx.ALIGN_RIGHT | wx.ST_NO_AUTORESIZE )        
+        self.friendstatus.SetBackgroundColour(wx.WHITE)
+        self.friendstatus.SetFont(wx.Font(FS_STATUS,FONTFAMILY,FONTWEIGHT,wx.NORMAL,False,FONTFACE))
+        self.friendstatus.SetForegroundColour(self.triblerGrey)        
+        self.friendstatus.SetMinSize((165,12))
+        self.friendstatus.SetLabel("")
+        self.friendstatus.value = None 
+        self.hSizer.Add(self.friendstatus,0,wx.TOP|wx.EXPAND,4)
+</pre><p>
+For visual feedback, apart from setting this column for each peer, each approved friend looks different toopltip wise as well.
+</p>
+<pre class="wiki">            # To show that the current friend hasn't approved friending request
+            if friendStatusValue == 1:
+                self.friendstatus.SetLabel('unapproved')
+                self.friendstatus.SetToolTipString('Friending request has not been approved')
+                self.friendstatus.value = 1
+            # To show that the current friend has approved friending request
+            elif friendStatusValue == 2:
+                self.friendstatus.SetLabel('approved')
+                self.friendstatus.SetToolTipString('Friending request has been approved')
+                self.friendstatus.value = 2
+</pre><p>
+Also, the colour of the row is different for approved friends
+</p>
+<pre class="wiki">      # For approved friends, make this row as light grey
+      elif self.friendstatus.value == 2:
+                colour = wx.LIGHT_GREY
+</pre><h2 id="FutureIdeas">Future Ideas</h2>
+<ul><li>internal use at Amnesty?
+</li><li>exchange of video material/files in general- group message exchange/boards
+</li><li>Community management
+<ul><li>group management architecture
+</li><li>group leaders
+</li><li>white list?
+</li><li>membership list discovery/management
+</li><li>inject/download/delete rights
+</li></ul></li><li>users always online?
+</li></ul><h2 id="Webresources">Web resources</h2>
+<ul><li><a class="ext-link" href="http://www.danah.org/SNSResearch.html"><span class="icon">​</span>Research on Social Network</a>
+</li><li><a class="ext-link" href="http://nform.ca/publications/social-software-building-block"><span class="icon">​</span>7 elements of social software</a>
+</li><li><a class="ext-link" href="http://babelfish.yahoo.com/translate_url?doit=done&amp;tt=url&amp;intl=1&amp;fr=bf-home&amp;trurl=http%3A%2F%2Fwww.upstream.nl%2Fcomments.php%3Fid%3D521_0_1_0_C&amp;lp=nl_en&amp;btnTrUrl=Translate"><span class="icon">​</span>Talks on social network evolution and features (translated)</a> (<a class="ext-link" href="http://www.upstream.nl/comments.php?id=521_0_1_0_C"><span class="icon">​</span>original in Dutch</a>)
+</li><li><a class="ext-link" href="http://blog.futurestreetconsulting.com/?p=16"><span class="icon">​</span>Trends in human communities</a> and their <a class="ext-link" href="http://blogs.nortel.com/ctoblog/2007/02/02/megatrends-part-1-hyper-connectivity/"><span class="icon">​</span>communication</a> patterns
+</li><li><a class="ext-link" href="http://www.n-e-life.com/uploadedFiles/Expert%20column%20-%20Social%20networking.doc"><span class="icon">​</span>Word document</a> of sites and features
+</li><li><a class="ext-link" href="http://www.madrimasd.org/tic/Seleccion/Downloads_GetFile.aspx?id=8295"><span class="icon">​</span>Television in transition</a>  Social angle
+</li><li><a class="ext-link" href="http://www.accenture.com/NR/rdonlyres/B70007BC-F0C5-4DF8-BD97-109FAF3AD274/0/ChallengeofChange.pdf"><span class="icon">​</span>Content &amp; social trends</a>
+</li></ul><h2 id="Relatedwork">Related work</h2>
+<p>
+<a class="ext-link" href="http://scholar.google.com/scholar?q=social+networks"><span class="icon">​</span>Scholar link</a> <br />
+<a class="ext-link" href="http://scholar.google.com/scholar?hl=en&amp;lr=&amp;q=friends+%7Ep2p"><span class="icon">​</span>P2P links..</a> <br />
+<a class="ext-link" href="http://p2p-fusion.mokk.bme.hu/w/index.php/Social_network"><span class="icon">​</span>Social Network link</a>
+</p>
+<h2 id="Relatedliterature">Related literature</h2>
+<p>
+<strong><a class="missing attachment">Social peer-to-peer for social people</a></strong><br />
+<em>Borch, N.</em><br />
+<em>05: The Intâl Conf. on Internet Technologies and Applications</em><br />
+</p>
+<p>
+<strong><a class="missing attachment">Social Networks in Peer-to-Peer Systems link</a></strong><br />
+<em>Upadrashta, Y. and Vassileva, J. and Grassmann, W.</em><br />
+<em>05: System Sciences, 2005. HICSS'05. Proceedings of the 38th Annual Hawaii International Conference on</em><br />
+</p>
+<p>
+<strong><a class="missing attachment">The EigenTrust Algorithm for Reputation Management in P2P Networks link</a></strong><br />
+<em>Kamvar, S.D. and Schlosser, M.T. and Garcia-Molina, H. </em><br />
+<em>Proceedings of the 12th international conference on World Wide Web </em><br />
+<em>03: ACM Press New York, NY, USA
+</em></p>
+<p>
+<strong><a class="missing attachment">The Dangers of Poorly Connected Peers in Structured P2P Networks and a Solution Based on Incentives</a></strong><br />
+<em>Hartmann, B.O. and Bohm, K. and Khachatryan, A. and Schosser, S.</em><br />
+<em>07: Web Intelligence, IEEE/WIC/ACM International Conference
+</em></p>
+<p>
+<strong><a class="missing attachment">Evaluating similarity measures: a large-scale study in the orkut social network</a></strong><br />
+<em> Spertus, E. and Sahami, M. and Buyukkokten, O. </em><br />
+<em> 05: Conference on Knowledge Discovery in Data, ACM Press New York, NY, USA
+</em></p>
+<p>
+<strong><a class="missing attachment">Social Peer-to-Peer for Resource Discovery</a></strong><br />
+<em>Liu, L. and Antonopoulos, N. and Mackin, S.</em><br />
+<em>07: Parallel, Distributed and Network-Based Processing, 2007. PDP'07. 15th EUROMICRO   
+</em></p>
+<p>
+<strong><a class="missing attachment">Limited reputation sharing in P2P systems</a></strong><br />
+<em>Marti, S. and Garcia-Molina, H.</em><br />
+<em>04: Proceedings of the 5th ACM conference on Electronic commerce, ACM Press New York, NY, USA</em><br />
+</p>
+<p>
+<strong><a class="missing attachment">Foreseer: a novel, locality-aware peer-to-peer system architecture for keyword searches</a> </strong><br />
+<em>Cai, H. and Wang, J.</em><br />
+<em>04: Proceedings of the 5th ACM/IFIP/USENIX international conference on Middleware, Springer</em><br />
+</p>
+<p>
+<strong><a class="missing attachment">Ostra: Leveraging trust to thwart unwanted communication</a> </strong><br />
+<em>Cai, H. and Wang, J.</em><br />
+<em>04: Proceedings of the 5th ACM/IFIP/USENIX international conference on Middleware, Springer</em><br />
+</p>
+<p>
+<strong><a class="wiki" href="BuddyCast.html">An internet-deployed epidemic protocol stack</a></strong><br />
+<em>J.A. Pouwelse, J. Yang, M. Meuploder, D.H.J. Epema, H.J. Sips</em><br />
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

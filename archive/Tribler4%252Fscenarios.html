@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><p>
+tracsecret: tribler
+</p>
+<ul><li>Tribler 4
+<ul><li><a class="wiki" href="Tribler4.html">Tribler 4 Overview</a>
+</li><li><a class="wiki" href="Tribler4%25252Fscenarios.html">Scenarios</a>
+</li><li><a class="wiki" href="Tribler4%25252Ffunctionalities.html">Functionalities</a>
+</li><li><a class="wiki" href="GuiRequirements.html">GUI Requirements</a>
+</li><li><a class="wiki" href="42todo.html">4.2 To do</a>
+</li><li><a class="wiki" href="GuiClientImprovements.html">GUI improvements</a>
+</li><li><a class="wiki" href="GuiDiscussion.html">GUI Discussion</a>
+</li><li><a class="wiki" href="triblerGUI.html">GUI General &gt;</a>
+</li></ul></li></ul><p>
+endsecret
+</p>
+</div></td><td>
+</p>
+<h1 id="Scenarios">Scenarios</h1>
+<ul><li>to be translated in English
+</li></ul><h1 id="START">START</h1>
+<ul><li>Martijn wil iets downloaden/zien met voordelen boven het bekijken op een website  bijvoorbeeld op andere manier helemaal niet beschikbaar, vanwege  hd kwaliteit, o.i.d.)
+</li><li>Martijn download Tribler via tribler.org 
+</li><li>Martijn geeft unieke gebruikersnaam i.c.m. password op bij 1e gebruik.
+</li></ul><h1 id="EERSTESTARTSCHERM">EERSTE (START) SCHERM</h1>
+<ul><li>Martijn verveelt zich, en in plaats van de TV aan te zetten gaat hij achter z'n computer zitten en start Tribler op.
+</li><li>Hij ziet in 1 opslag de meest populaire downloads, wat er net nieuw beschikbaar is en ziet wat zijn vrienden onlangs gekeken hebben. Daarnaast zijn er twee berichten van twee verschillende buddies binnen gekomen, waarin bepaalde torrents aanbevolen worden. Hij opent deze. 
+</li><li>In het onderwerp over voetbal heeft hij vandaag geen zin, de ander klikt hij aan, waarna de download begint. Tribler geeft aan dat het nog 25 minuten duurt voordat deze daadwerkelijk gedownload is. 
+</li><li>Af en toe kijkt Martijn hoever de download al gevorderd is. 
+</li></ul><h1 id="ZOEKEN1âSPECIFIEK">ZOEKEN (1) â SPECIFIEK</h1>
+<ul><li>Martijn start Tribler op.
+</li><li>Martijn zoekt naar de nieuwe clip van DJ Tiesto en voert zoekterm in en bekijkt resultaten.
+</li></ul><h1 id="ZOEKEN2âVAAGIDEE">ZOEKEN (2) â VAAG IDEE</h1>
+<ul><li>Martijn heeft vaag idee wat hij zoekt. Een aantal keywords of een categorie.
+</li><li>Gebuiker vult deze zoektermen in.
+</li><li>Het resultaat wordt weergegeven (als tagcloud?) en Martijn kan of iets aan klikken of verder zoeken op de door hem gekozen term(en). 
+</li></ul><h1 id="VERDERBROWSEN1âNIEUWEFILESENELKAARAANBEVELEN">VERDER BROWSEN (1) â NIEUWE FILES EN ELKAAR AANBEVELEN</h1>
+<ul><li>Martijn is nieuwsgierig naar onlangs geinjecteerde bestanden om te kijken of er iets leuks tussen zit.
+</li><li>Martijn ziet dat er verschillende categorien zijn, maar is nu eigenlijk alleen geintresseerd in video's.
+</li><li>Martijn ziet dat de nieuwste James Bond film beschikbaar is en wil deze graag hebben en klikt deze aan. 
+</li><li>De download start en het systeem geeft aan dat er in het systeem gezocht wordt naar beschikbare bronnen. 
+</li><li>Het systeem geeft aan dat het ook mogelijk is vrienden te vragen om te helpen downloaden (waarom niet automatisch?). 
+</li><li>Martijn klikt erop en krijgt een lijst met vrienden. 1 vriend springt eruit, als zijnde iemand die veel peers/contacten heeft, zodat die het beste kan helpen. 
+</li><li>Martijn klikt deze aan, en krijgt als feedback dat de aanvraag is ingediend. 
+</li><li>De ontvanger van de vraag voelt zich erg belangrijk en zal stijgen in de lijst met 'weldoeners' omdat hij iemand helpt. De download van Martijn zal nu sneller gaan. 
+</li></ul><h1 id="VERDERBROWSEN2-WATBUDDIESKIJKEN">VERDER BROWSEN (2) - WAT BUDDIES KIJKEN</h1>
+<ul><li>Martijn wil wel eens zien wat zijn (taste) buddies de laatste tijd gezien/gedownload hebben. Als er iets leuks tussen zit en de buddy is online zal dit bestand ook sneller gedownload zijn.
+</li><li>Martijn heeft een lijst voor zich van de gedownloade bestanden en bekijkt wat er allemaal tussen staat. 
+</li><li>Omdat de lijst lang is selecteert Martijn een buddy (of group van buddies) waarvan Martijn denkt dat deze films kijkt waar Martijn nu zelf ook zin in heeft. De lijst wordt hierdoor korter en specifieker.
+</li><li>De meeste bestanden kent hij niet, hoewel deze wel hoog scoren. Martijn besluit een stuk of 5 verschillende video downloads te starten om te kijken welke het snelst gaat, en om te zorgen dat hij de volgende keer gelijk wat beschikbaar heeft. 
+</li><li>Na z'n e-mail gecheckt te hebben en een mail gestuurd te hebben checkt hij hoever de verschillende downloads gevorderd zijn. Hij ziet dat 1 erg snel gaat en besluit daarop te wachten. 
+</li><li>Terwijl hij wacht bekijkt hij de lijst met de eerder binnen gekregen downloads. De video over het lokale feest dat helemaal uit de hand liep, was wel erg leuk. Via via heeft hij deze kunnen downloaden. Degene die het heeft opgenomen en bechikbaar heeft gesteld kent hij   een beetje. Hij beveelt deze torrent aan, aan verschillende buddies van hem. 
+</li></ul><h1 id="VERDERBROWSEN3-TOPDOWNLOADS">VERDER BROWSEN (3) - TOP DOWNLOADS</h1>
+<ul><li>Martijn ziet op de eerste pagina een aantal top dowloads van vandaag en bedenkt dat inderdaad wel een leuke aflevering tussen staat.
+</li><li>Hij klikt het aan, waarna de download snel start. Omdat deze zo populair is, download Tribler het bestand ook erg snel. 
+</li><li>Nog geen 5 minuten later kan Martijn kijken naar deze video. 
+</li></ul><h1 id="STREAMING">STREAMING</h1>
+<ul><li>Martijn heeft op omroep.nl gezien dat via tribler voetbal finale te zien is.
+</li><li>Martijn download torrent om live streaming kanaal te zien. 
+</li><li>Martijn start tribler op.
+</li><li>Martijn voegt torrent toe. 
+</li><li>na enkele minuten is de torrent voor de live stream binnen en kan Martijn naar de live stream kijken. 
+</li><li>Martijn beveelt de torrent (en daarme de livestream) aan aan een voetbalvriend (of zijn hele voetbal team die een 'tribler group' vormt). 
+</li></ul>    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

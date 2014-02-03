@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="WikimediaCooperation">Wikimedia Cooperation</h1>
+<p>
+Goal: Test <a class="wiki" href="NextShare.html">NextShare</a>'s <a class="wiki" href="SwarmTransport.html">SwarmTransport</a> for P2P-based media delivery of Wikipedia content.
+</p>
+<h2 id="TODO">TODO</h2>
+<ul><li>Porting to Mac OS:
+<ul><li>Firefox. Riccardo is working on this.
+</li><li>See how to get a new protocol handler in Safari.
+<ul><li>Arno, 2010-04-07: Do we need this next to Firefox for the initial tests?
+</li></ul></li></ul></li><li>XPI signing (i.e., get rid of "Author Unverified" message at install time.
+<ul><li>Arno, 2010-04-07: Optional?
+</li></ul></li><li>Bug: I sometimes get two <a class="missing" href="#">BackgroundProcess</a>.exe's running.
+<ul><li>Arno, 2010-04-07: See if we can reproduce, the <a class="missing" href="#">BackgroundProcess</a> wx code is correct.
+</li><li>Arno, 2010-06-22: If you start <a class="missing" href="#">BackgroundProcess</a>.exe of SP1.0.5 with cmd params you get another instance. On the new M30 branch this doesn't happen.
+</li></ul></li><li>Optimize HTTP seeding:
+<ul><li>Develop a policy of when to use HTTP seeding or when to use P2P network. 
+</li><li>Arno, 2010-04-23: This policy turns out to be hard to define, given the current behaviour of Firefox is to try to download the complete content as fast as possible, rather than at the bitrate+some buffer.
+</li><li>Diego is working on this.
+</li></ul></li><li>Add a JSON interface. 
+<ul><li>Riccardo is working on this
+</li><li>Jan added some code such that "if (typeof swarmTransport != "undefined")" can be used to test for tribe:// presence. JSON should return version #.
+</li></ul></li><li>Figure out a way to look for torrents for a given video.
+<ul><li>Arno, 2010-04-07: Needed in mwEmbed context.
+</li><li>Arno, 2010-04-09: Mailed around 3 options.
+</li><li>Arno, 2010-04-15: Mailed around design for lookup service
+</li><li>Arno, 2010-04-15: Added test of httpseed2tstream() remote JS solution to wikipedia.p2p-next.org.
+</li></ul></li></ul><ul><li>If multiple videos on page and the videos start paused, the <a class="missing" href="#">BackgroundProcess</a>/NSSA will download them all,
+may want to optimize this.
+<ul><li>Arno, 2010-04-13: &lt;video preload="none"&gt; should prevent the browser from accessing the resource. Not yet implemented in most browsers. It is unclear whether &lt;video duration="120.0"&gt; is also valid / works (may need to specify all metadata (=width+height+... too) to allow that?)
+</li></ul></li><li>Check if .xpi downloading and install works (sometimes we just get "Save as" dialog and you need to manually open it.
+</li><li>Edit <a class="ext-link" href="http://wikipedia.p2p-next.org/download/"><span class="icon">​</span>http://wikipedia.p2p-next.org/download/</a> to have a Big Friendly Button.
+</li></ul><h2 id="DONE">DONE</h2>
+<ul><li>Get the ogg index to work:
+<ul><li>Arno, 2010-04-07: this is a Firefox issue, as already established. We answer all HTTP GET Range requests.
+</li></ul></li><li>Create a solution for IE
+<ul><li>Arno, 2010-04-13: We have stripped the <a class="wiki" href="SwarmPlugin.html">SwarmPlugin</a> for IE of all codecs but theora+vobis in ogg.
+</li></ul></li></ul><h2 id="Roadmap">Roadmap</h2>
+<ul><li>April 23rd: 
+<ul><li>Finish TODOs 
+</li><li>Setup example site with HTTP-seeded wikipedia content
+</li></ul></li><li>???:
+<ul><li>Include <a class="wiki" href="SwarmTransport.html">SwarmTransport</a> as option in mwEmbed. Michael?
+</li><li>Run trials
+</li><li><a class="wiki" href="WorkshopProposalDraft.html">WorkshopProposalDraft</a>
+</li></ul></li></ul><h2 id="Code">Code</h2>
+<ul><li>Please download from the P2P-Next test site from now on (Google protection).
+</li><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/trans-release-0.1"><span class="icon">​</span>Source</a>
+</li><li><a class="missing attachment">SwarmTransport 0.2.4 Alpha for Firefox on Win32</a> (tested: WinXP)
+</li><li><a class="missing attachment">SwarmTransport 0.2.4 Alpha for Firefox on Ubuntu</a> (tested: 10.04)
+<ul><li>Before installing the .xpi you need to install dependencies: sudo apt-get install python-m2crypto python-openssl python2.6-wxgtk2.8 python-apsw
+</li></ul></li><li><a class="missing attachment">SwarmPlugin 1.0.3ogg4 Alpha for Internet Explorer</a> (tested: WinXP)
+</li><li>All software is released under <a class="ext-link" href="http://svn.tribler.org/abc/branches/trans-release-0.1/Tribler/ns-LICENSE.txt"><span class="icon">​</span>this license.</a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<strong>Spam Prevention Using Distributed Voting, Experience and Moderation</strong>
+Spam prevention in peer to peer systems is still an open problem. Several studies have quantified the extent to which P2P is polluted and demonstrated that all known methods to prevent spam have been shown to be inadequate. Key to this problem is that a fully decentralized system by definition has no trusted central component, but such a component is often a requirement for integrity and security in general. Prior works based on voting and creation of a web-of-trust have not yet moved beyond the proposal and simulation stage. To the best of our knowledge, we present the first Internet-design file sharing system that provides Spam Prevention using Moderation and Gossiped Voting in a fully decentralized architecture.
+</p>
+<p>
+<strong>Key Aspects</strong>
+</p>
+<ol><li>Experience Function
+</li><li>Voting on Moderators
+</li><li>Constrained Dissemination 
+</li><li>Ranking Relevance 
+</li></ol><p>
+<strong>High(est) level Work Breakdown Structure</strong>
+</p>
+<blockquote>
+<p>
+Work - Date For Completion - Status
+</p>
+</blockquote>
+<ul><li>Get to know simulator - 27/3/2008 - Done
+</li><li>Ballot Box Protocol Simulation - 3/4/2008 - Done
+</li><li>E( ) Function Using <a class="wiki" href="BarterCast.html">BarterCast</a> + Maxflow (Ask Michel) - 10/4/2008 - Michel wasn't here            
+last week so instead I implemented Voxpopuli
+</li><li>Voxpopuli protocol - 17/4/2008 - Done
+</li><li>Ranking Relevance with Maarten - 24/4/2008 - 
+</li><li>User Model - 1/5/2008 -
+</li><li>Experiments - 8/5/2008 - 
+</li><li>Submission - 15/2008 - 
+</li></ul><p>
+<strong>Ideas</strong>
+basically Dave's idea, we can figure how high Bartercast reputation should be for a given population with a given number of malicious peers. Bartercast of course if from Tribler's pov. generally how good the E() function should be...
+</p>
+<p>
+<strong>References</strong>
+</p>
+<ol><li>Gil, Y. and Artz, D., Towards Content Trust of Web Resources, Web Semantics: Science, Services and Agents on the World Wide Web, Volume 5, Issue 4, December 2007, Pages 227-239 
+</li></ol><p>
+<a class="ext-link" href="http://dx.doi.org/10.1016/j.websem.2007.09.005"><span class="icon">​</span>http://dx.doi.org/10.1016/j.websem.2007.09.005</a>
+</p>
+<ol start="2"><li>Sorge, C. and Zitterbart, M., A Reputation-Based System for Confidentiality Modeling in Peer-to-Peer Networks, in K. StÃ¸len et al. (Eds.): iTrust 2006, LNCS 3986, pp. 367â381, 2006.
+</li></ol><ol start="3"><li>Cristiano Castelfranchi, Rino Falcone, and Francesca Marzo, Being Trusted in a Social Network: Trust as Relational Capital, in K. StÃ¸len et al. (Eds.): iTrust 2006, LNCS 3986, pp. 367â381, 2006.
+</li></ol><p>
+Rameez:I think perhaps, and I guess I am being superficial here, we should stick to papers where there is talk of voting, reputation dissemination etc
+</p>
+<ol start="4"><li>Ernesto Damiani, et al. A Reputation Based Approach for Choosing Reliable Resources in Peer-to-Peer Networks. <a class="ext-link" href="http://www.cs.vu.nl/~crispo/teaching/atcs/P2P-R/reputationCCS.pdf"><span class="icon">​</span>http://www.cs.vu.nl/~crispo/teaching/atcs/P2P-R/reputationCCS.pdf</a>
+</li></ol><ol start="5"><li>Sergio Marti and Hector Garcia Molina. Limited Reputation Sharing in P2P Networks 
+</li></ol><p>
+<a class="ext-link" href="http://delivery.acm.org/10.1145/990000/988787/p91-marti.pdf?key1=988787&amp;key2=6001688021&amp;coll=GUIDE&amp;dl=GUIDE&amp;CFID=64914369&amp;CFTOKEN=72415264"><span class="icon">​</span>http://delivery.acm.org/10.1145/990000/988787/p91-marti.pdf?key1=988787&amp;key2=6001688021&amp;coll=GUIDE&amp;dl=GUIDE&amp;CFID=64914369&amp;CFTOKEN=72415264</a>
+</p>
+<p>
+There is some related stuff at the itrust conferences:
+<a class="ext-link" href="http://www.iit.cnr.it/iTrust2006/previousitrust.htm"><span class="icon">​</span>http://www.iit.cnr.it/iTrust2006/previousitrust.htm</a>
+</p>
+<p>
+<em>Rank Aggregation</em>
+</p>
+<p>
+Quick and dirtiest approach using average:
+</p>
+<p>
+<a class="ext-link" href="http://www.cs.rpi.edu/~sibel/SibelAdali/Research/6016E3BC-4DEE-48AA-84DE-4960960D59EC.html"><span class="icon">​</span>http://www.cs.rpi.edu/~sibel/SibelAdali/Research/6016E3BC-4DEE-48AA-84DE-4960960D59EC.html</a>
+</p>
+<p>
+The first paper linked to defines a simple av. ranking agg. for a given top-K, with missing objections. You just take the top-K (say K=10) from each rank list then do an average of each object (moderator in our case) if he object is not present in a list you assume it is in position K+1.
+</p>
+<p>
+This paper describes a method that uses the number of ranked lists the object occurs in as a weight (see definition 3):
+</p>
+<p>
+<a class="ext-link" href="http://citeseer.ist.psu.edu/renda03web.html"><span class="icon">​</span>http://citeseer.ist.psu.edu/renda03web.html</a>
+</p>
+<p>
+This formula however uses a score instead of the rank position.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

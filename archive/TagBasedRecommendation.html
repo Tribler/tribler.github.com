@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TagBasedRecommendation">Tag Based Recommendation</h1>
+<p>
+Online social media have become respected tools for content sharing and relationship maintenance. People create digital identities to distribute videos (<a class="ext-link" href="http://www.youtube.com"><span class="icon">​</span>YouYube</a>) or photos (<a class="ext-link" href="http://www.flickr.com"><span class="icon">​</span>Flickr</a>), share opinions about books (<a class="ext-link" href="http://www.librarything.com"><span class="icon">​</span>Librarything</a>) and movies (<a class="ext-link" href="http://www.imdb.com"><span class="icon">​</span>IMDb</a>), or just maintain contact information of their friends (<a class="ext-link" href="http://www.facebook.com"><span class="icon">​</span>FaceBook</a>). Multiple incentives exist for users who contribute to these social networks, it can however not be denied that the addition of social aspects in online databases has dramatically increased their popularity. The popularity of these collaborative systems has resulted in a substantial increase in user-generated content and user-generated metadata.
+</p>
+<p>
+Indexing of content can occur in many different ways. Traditionally, large collections of content were only manageable using a consistent organization, often using hierarchical storage. With the introduction of ratings and tags in online databases, indexing of content has shifted from these strict hierarchies to subjective categorization. With ratings, users actively index certain content by the quality. Tagging allows users to assign keywords that they consider representative for the topic of the items. The staggering contribution of social network users makes that these new indexing methods result in practical database management tools.
+</p>
+<p>
+Navigation through tags provides an effective way to explore and discover content, while rating information improves the relevance ranking of the tagged items. To initiate the navigation, many current collaborative tagging systems make use of tag clouds, a visual representation, often based on the set of most popular tags. Popularity-based exploration is however limited, since different users may have very different preferences. Also, other ways to initiate browsing can be identified and different incentives exist besides the retrieval of content alone. It is worthwhile investigating how we can represent the userâs preference using the tags and ratings he supplied, and how we can deploy this preference profile to personalize the existing tasks in a collaboratively indexed network. 
+</p>
+<ul><li>[attachment :MC_061019.pdf Some initial ideas] on tag + item based recommendation
+</li></ul><ul><li><a class="missing attachment">Paper presented at FDIA</a> or click <a class="ext-link" href="http://www.bcs.org/server.php?show=ConWebDoc.13781"><span class="icon">​</span>here </a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

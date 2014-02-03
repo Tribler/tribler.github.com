@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><p>
+tracsecret: tribler
+</p>
+<ul><li>Gui General
+<ul><li><a class="wiki" href="GUIconcepts.html">GUI Startpage</a>
+</li><li><a class="wiki" href="triblerGUI.html">GUI General</a>
+</li></ul></li></ul><ul><li>Tribler 5
+<ul><li><a class="wiki" href="Tribler5.html">Tribler 5 Overview</a>
+</li><li><a class="wiki" href="Tribler5%25252FVision.html">Vision</a>
+</li><li><a class="wiki" href="Tribler5%25252Fstructure.html">Development</a>
+<ul><li><a class="wiki" href="Tribler5%25252Fstructure.html">Structure</a>
+</li><li><a class="wiki" href="GuiClientConcepts.html">Concepts</a>
+</li></ul></li><li><a class="wiki" href="Tribler5%25252F50.html">5.0</a>
+<ul><li><a class="wiki" href="Tribler5%25252F50.html">Screenshots</a>
+</li><li><a class="wiki" href="Tribler5%25252F50structure.html">Structure</a>
+</li><li><a class="wiki" href="Tribler5%25252F50interaction.html">Interaction</a>
+</li><li><a class="wiki" href="Tribler5%25252F50todo.html">5.0 Todo</a>
+</li></ul></li></ul></li></ul><ul><li>Links
+<ul><li><a class="wiki" href="TriblerTV.html">Tribler TV</a>
+</li><li><a class="wiki" href="Tribler4.html">Tribler 4</a>
+</li><li><a class="wiki" href="targetGroup.html">Target Group</a>
+</li><li><a class="wiki" href="userResearch.html">User Research</a>
+</li></ul></li></ul><p>
+endsecret
+</p>
+</div></td><td>
+</p>
+<h1 id="Vision">Vision</h1>
+<p>
+Based on what we have learned from the past and our vision on the TV domain we have defined three starting points for the GUI design of the 5.* version. 
+</p>
+<h2 id="Platformforcontentandusers">Platform for content and users</h2>
+<p>
+We see our tribler client as a platform. For example for users and content. This means a more unobtrusive position for Tribler. This has led to a grey-scale colour palette and functionalities that enable users to personalize their profile in a extensive way. 
+</p>
+<h2 id="GUIevolutionaroundusers">GUI evolution around users</h2>
+<p>
+Functionalities in Tribler are growing and with our modular approach developers from outside will be able to add functionalities as well. This means that each user can choose the functionalities that are relevant for its needs, apart from that our client will have a policy to show some functionalities only when a user behaves in a specific way. 
+</p>
+<h2 id="Towardsthemediaplayerparadigm">Towards the media player paradigm</h2>
+<p>
+P2P is growing towards a mature technology that can substitute the server client architecture without the user to notice. This means instant video and audio playback without hick-ups, ending in a user experience where there is no difference for the user between having content available on your computer or in the network. This means that a user's cognitive model of a media player (such as itunes, windows media player, winamp) is very useful to browse to the infinite availability of content in the p2p network. 
+</p>
+<h1 id="Principles">Principles</h1>
+<p>
+Also for this version it is important to stay faithful to our principles of:
+</p>
+<ul><li>functionality: FIND | ENJOY | SHARE (see the <a class="ext-link" href="http://www.tribler.org"><span class="icon">​</span>tribler frontpage</a>).  
+</li><li>experience: EXCELLENT | VIBRANT | INTIMATE (see <a class="wiki" href="CorporateIdentity.html">Corporate Identity</a>)
+</li></ul><h1 id="Note">Note</h1>
+<p>
+For all aspects that are integrated in Tribler it should be proven that they add value to one of the three key functions that Tribler fulfills (find | enjoy | share). However, for some functionalities the relation to these key functions might not be visible at once. These are the aspects that improve either the inner workings of the users' client and/or the whole Tribler network. These incentives should motivate the users to:
+</p>
+<ul><li>open the firewall protection of a users router. 
+</li><li>keep sharing downloaded files
+</li><li>upload as much and as long as possible
+</li><li>...
+</li></ul>    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

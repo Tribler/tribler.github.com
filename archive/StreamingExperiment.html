@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Measurements">Measurements</h1>
+<p>
+Some results will be published <a class="wiki" href="StreamingExperimentResults.html">here</a>.
+</p>
+<h1 id="VideoStreamingoverBitTorrentnetworks">Video Streaming over BitTorrent networks</h1>
+<p>
+The <a class="ext-link" href="http://en.wikipedia.org/wiki/BitTorrent_(protocol)"><span class="icon">​</span>BitTorrent protocol</a> is a popular method for downloading large files, and many tweaks exist to enhance its performance. However, most clients only support downloading, not watching, a video stream using BitTorrent. How to extend BitTorrent such that one client can be used to watch both video-on-demand streams (existing movies) and live video streams (generated real-time)?
+</p>
+<p>
+It turns out that the modifications required to support video-on-demand are minor and remain backward compatible. In fact, we're not the only one supporting video-on-demand in BitTorrent, <a class="ext-link" href="http://www.vuze.com"><span class="icon">​</span>Vuze</a> does the same. However, Vuze requires a server park to serve the videos at a sufficient speed, and we aim to avoid that. The largest 1st generation streaming system (non-Bittorrent), P2PLive <a class="ext-link" href="http://cairo.cs.uiuc.edu/~longvu2/pdf/pplivetechreport.pdf"><span class="icon">​</span>also uses numerous central servers</a>.
+</p>
+<p>
+Live streaming is another matter. The BitTorrent protocol requires the file data to be fixed in size and known beforehand, neither of which holds for live streaming. So the BitTorrent protocol had to be broken, but by keeping the changes minimal, other clients can be easily adapted as well.
+</p>
+<p>
+In both cases, a video player needs to be tied to the BitTorrent client, and specialised download and upload policies are needed to achieve high performance. There is a lot more to it, which I'll describe below by first covering the technical setup, and then an outline of the required modifications to support video streaming in BitTorrent.
+</p>
+<p>
+There's a catch however. We are spoiled with HD-quality movies, but to stream them, you need to have a pretty decent download speed. For example, a two hour movie fitted on a DVD is encoded at 5 Mbit/s. To watch it while downloading, you need a sustained download rate of at least 640 Kbyte/s. That's why our demo streams are encoded at around 0.5 - 1.0 Mbit/s.
+</p>
+<p>
+Disclaimer: Another catch is that SwarmPlayer is complex software, since it combines several large open source projects (VLC, ffmpeg, wxPython, and more) and aims to support Windows, Mac and Linux. As a result, it is impossible to guarantee that the SwarmPlayer will work as expected on all configurations and on any movie format. YMMV.
+</p>
+<h1 id="Setup">Setup</h1>
+<h2 id="VideoonDemandServer">Video on Demand Server</h2>
+<p>
+To set up a VoD server, first create a <tt>torrent</tt> out of your movie:
+</p>
+<pre class="wiki">python createtorrent.py --name weather.avi --duration 4:15 --thumb weather.jpg
+</pre><p>
+The duration of the movie is included to allow clients to determine whether they have the download speed required to watch the video. After all, bitrate = filesize/duration. Other BitTorrent clients will ignore this field. Once the torrent has been created, a seed and a tracker are started.
+</p>
+<h2 id="LiveVideoServer">Live Video Server</h2>
+<p>
+For live video streaming, more is needed. We need a video source, such as a DV camera, webcam, or TV tuner. The raw video requires too much bandwidth, so it needs to be transcoded as well. Common Linux utilies can be used:
+</p>
+<pre class="wiki">BITRATE=512k
+RESOLUTION=360x288
+
+# command to grab and transcode
+CMD="dvgrab -noavc --format raw - |
+  ffmpeg -f dv -i - -f mpegts -vcodec mpeg4 -s $RESOLUTION -b $BITRATE -bt $BITRATE -an -"
+
+# example usage to stream to file -- remove for production
+$CMD &gt; stream.mpegts
+</pre><p>
+Unless you are filming your server room, the camera is likely not attached to the same computer that will offer the stream to the users. So, we have to transport the stream to our source server, and feed it to the SwarmPlayer:
+</p>
+<pre class="wiki">ssh user@source.example.org $CMD |
+  python Tribler/Tools/createlivestream.py --name stream.mpegts
+  --source - --port 8764 --duration 1:00:00 --destdir . --thumb tramsmall.jpg
+</pre><p>
+Additional details are <a class="wiki" href="Tutorials%25252FExampleFeedSetups.html">available in our tutorial</a> section.
+</p>
+<p>
+The duration parameter actually represents the size of the data file we want to emulate. The actual video stream is unbound in duration, and we'll use a rotating sliding window of 15 minutes over the 1:00:00 in which we generate the data in real time. Retaining 15 minutes is actually quite conservative, but allows us to focus on other performance bottlenecks at a minor cost in disk space.
+</p>
+<p>
+The <tt>createlivestream.py</tt> script generates several files:
+</p>
+<ul><li><tt>stream.mpegts.tstream</tt>, which is a torrent-like file to distribute to the clients.
+</li><li><tt>stream.mpegts</tt>, which holds the last 1:00:00 of live video. Only the last 15 minutes are accessed, but we don't zero out invalidated data.
+</li><li><tt>stream.mpegts.sauth</tt>, which contains the private key used to sign the generated data.
+</li></ul><p>
+Furthermore, the script will cut the video stream into pieces and offers them to the users. No additional tracker is needed since an internal one is used automatically.
+</p>
+<h2 id="Clients">Clients</h2>
+<p>
+The user has to download the <tt>torrent</tt> (or <tt>tstream</tt>) file, and feed it to the SwarmPlayer, which will automatically hook in, start downloading and start playing.
+</p>
+<h1 id="Theory">Theory</h1>
+<p>
+In BitTorrent, each client downloads the rarest pieces and uploads to its neighbours in a tit-for-tat-like fashion. This works because all clients need the same data, and do not care about the order in which they receive it. However, in streaming video systems, these assumptions do not always hold. For video-on-demand, the clients need data depending on their position in the video, and all of the clients need the data from beginning to end. For live video streaming, all clients need the same data, but they are only interested in a sliding window of pieces.
+</p>
+<h2 id="Video-on-Demand">Video-on-Demand</h2>
+<p>
+To support video-on-demand, we use the <a class="wiki" href="Give-To-Get.html">Give-to-Get</a> algorithm, described in <a class="ext-link" href="http://www.pds.ewi.tudelft.nl/pubs/papers/mmcn2008.pdf"><span class="icon">​</span>this paper</a>. The mentioned paper compares the performance of Give-to-Get to the original BitTorrent mechanisms. To summarise the essential adjustments:
+</p>
+<ul><li>A peer buffers the start of the video, and starts playback once the download speed is high enough.
+</li><li>Peers pick pieces to download using a strategy which mixes in-order downloading (required for playback) and rarest-first downloading (which increases the availability of rare pieces).
+</li><li>Peers upload to neighbours who upload well to others, instead of using BitTorrent's tit-for-tat-like unchoking mechanism. Since peers will spend most of their bandwidth downloading the video in-order, any pair of two peers A and B will have either A ahead of B or vice versa. If A is ahead of B, A will not be interested in the data downloaded by B. So, tit-for-tat does not really work well.
+</li></ul><h2 id="LiveVideo">Live Video</h2>
+<p>
+Supporting live video is, as mentioned, more complicated. A paper will follow. Some of the things that needed adjusting are:
+</p>
+<ul><li><em>Piece verification:</em> BitTorrent computes hashes of the pieces and includes these in the torrent, making each client able to verify each piece. With live video, this is not possible as the data has not been generated when the tstream file is distributed. To verify the data, we include a public key in the tstream file. Each piece contains a time stamp, piece number and a payload, as well as a signature covering all of these fields. We use <a class="ext-link" href="http://en.wikipedia.org/wiki/Elliptic_Curve_Cryptography"><span class="icon">​</span>elliptic curve cryptography</a>.
+</li><li><em>Sliding window</em>: The BitTorrent core assumes a fixed number of pieces everywhere in the code. To reduce the amount of change necessary, we use a sliding window which rotates over a set of pieces of fixed length, for example a 15 minute window over a 1 hour torrent. Each peer keeps track of the sliding window by looking at the pieces available at its neighbours. Pieces which fall out of the sliding window are discarded and assumed to be discarded by the neighbours as well.
+</li><li><em>Bitrate estimation</em>: Although we order ffmpeg to transcode the video stream to 512kbit/s, the actual video bitrate can be quite different. Each client measures the bitrate by comparing the timestamps included in the pieces in order to predict the speed at which future pieces will need to be downloaded.
+</li><li><em>Frame drop and stall policy</em>: Whether a certain playback position can be maintained depends on the peer's position in the network. Close to the source, a peer can maintain a playback position close to live, but if a peer is further from the source this is not possible. This creates a decision problem when a piece is not downloaded in time. In case of regular piece loss, we need to drop the piece and continue playback. However, if our playback position is not sustainable, the client needs to stall (pause) in order to catch up with its neighbours. The SwarmPlayer stalls if the playback buffer after the missing piece is less than half full. Otherwise, we just drop the piece and continue playback.
+</li><li><em>Small pieces</em>: Since we can only verify a piece once it is fully downloaded, small pieces allow faster verification and thus smoother playback. We use pieces of 32Kbyte instead of the more common sizes of 512Kbyte or larger. The hashes of the pieces are not included in the torrent, so an increase in number of pieces has no effect on the size of the torrent.
+</li></ul><h1 id="Software">Software</h1>
+<p>
+The SwarmPlayer combines our modified BitTorrent client with wxPython for the GUI, VLC for the video playback, ffmpeg for video analysis, as well as several small Python modules. The Python sources can be obtained [source:abc/tags/swarmplayer-1.0.1 here], and our modified version of VLC can be obtained [source:vlc/branches/mainbranch here].
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h2 id="IncentivesforpreventingfreeridinginBittorrentâalotofworkaveryactiveareaofresearch">Incentives for preventing freeriding in Bittorrentâa lot of work, a very active area of research</h2>
+<p>
+Incentives for what? For sharing? But doesnât the Bittorrent protocol already necessitate or at least incentivize sharing. 
+</p>
+<p>
+What do people mean when they use the term freeriding in bittorrent? Two different things, not sure they know. Lack of Fairness and Lack of seeding
+</p>
+<h2 id="LackofFairness:">Lack of Fairness:</h2>
+<p>
+The âproblemâ according to those who deem it to be a problem is that even without cheating Bittorrent is not âfairâ, studies have shown [Bittorrent auction, bitfair etc]. 
+</p>
+<p>
+Meaning what? Basically, faster peers unnecessarily upload to slower peers while getting relatively little in return. 
+</p>
+<p>
+The solution:  Get fast peers to interact more with other faster peers, rather than wasting resources on slower peers. Downside, this would mean that the slower peers download times get even slower
+</p>
+<p>
+Consider the following scenario: Design a protocol in which slower peers contribute more to fast peers. Slow peers then would no longer freeride. Naturally, this would result in slower download speeds for the faster peers. However, no one would be freerding. Would people who have been working on the fairness problem in Bittorrent be satisfied with such an outcome? We assume not.
+</p>
+<p>
+Question: What's wrong with the fact that faster peers, meaning well-off humans with fast connections, end up helping slow peers, meaning relatively not so well-off people with slow connections, at only a little loss in download speed
+</p>
+<p>
+How about ending the debate on fairness in bittorrent once and for all and claim that the so called fairness or freeriding problem in bittorrent doesn't exist. Indeed this has also been claimed by some in the past [Rarest first]. Faster peers help out slower peers, as part of the somewhat egalitarian nature of the protocol. This is what keeps the system going for a diverse number of peers having wide-ranging internet speeds. 
+</p>
+<h2 id="LackofSeeding:">Lack of Seeding:</h2>
+<p>
+This is the second problem. Lack of a seeding incentive leads to a situation where peers perform 'hit and runs' (will explain) and this phenomenon leads to the 'death of torrents'. 
+</p>
+<p>
+It's been observed that in private communities people seed more than in public communities, where strict sharing ratio is enforced [Influence on cooperation in bittorrent communities].  
+</p>
+<p>
+It could be argued this phenomenon is not primarily due to the enforcement of sharing ratios but rather due to the sense of belonging that peers in these communities have, that leads to them behaving more altruistically towards those who they deem to be part of the same group.
+</p>
+<p>
+But we leave that point aside and accept that sharing ratio enforcement leads to more people seeding. 
+</p>
+<p>
+Previous work has been done that seeks to use peers' long term contribution values to modify the unchoking algorithm, where peers with higher reputations (ones who have uploaded more than they have downloaded over long periods) are preferred to be unchoked over peer with lower reputations.  [Bartercast] seeks to use peers' long term contribution values to modify the unchoking algorithm, where peers with higher reputations (ones who have uploaded more than they have downloaded)  are preferred to be unchoked over peers with lower reputations. The idea is that this would incentivize all peers to seed more, in order to build higher reputations. 
+</p>
+<p>
+However, even if slower peers could make up for their lack of speed by seeding for a longer time, they would never be able to keep up with the faster peers, who would easily leave them behind even if they seeded for relatively shorter periods of time, due to the disparity in speed. [Michel is showing that in his forthcoming Supply and Demand paper]
+</p>
+<p>
+As the inventor of the Bittorent protocol, Bram Cohen, has observed, we believe rightly, "enforcement of sharing ratios tilts the balance highly to uploading and peers even if they are willing to upload have a hard time maintaining a good ratio." 
+</p>
+<p>
+The implementation of such a mechanism, would lead to ever increasing speeds for faster peers and slow speeds for slower peers. In fact the system would lead to an out and out rat race. (Traditional economists would love this scenario where unbridled greed and competition leads to what they claim is a better overall system)
+</p>
+<p>
+But why are so many people keen on implementing such mechanisms that would do exactly that. Itâs a thoughtless mapping of work thatâs been done in economics to P2P. But if these economics paradigms work in the real worldâ¦people interacting and making contracts with each otherâ¦shouldnât it work in p2p as well, which is basically the same thing. 
+</p>
+<p>
+Maybe it doesnât work so well in the real world either. Take a look at the mess around!
+</p>
+<p>
+We could try something else! How about rewarding peers not on how fast they are but on how much effort they put in (seeding time etc). This approach comes from the Participatory Economics model developed by Michael Albert and Robin Hahnel [Parecon], where people are remunerated according to their effort and sacrifice rather than talent or capital (in this case Internet Connection). 
+</p>
+<h2 id="ROADMAP:">ROADMAP:</h2>
+<p>
+1)        10-Jan-2009 till 10-May-2009: Do an extensive survey of all the incentive mechanisms that have been proposed for bittorrent. And compare all of them (including normal bittorrent) in terms of fairness and efficiency, where efficiency is the average download times and fairness is the deviation from the average download times. 
+</p>
+<p>
+For models that deal only with a single swarm and basically address the "Lack of Fairness" problem, its easy enough to compare them with a fixed number of slow and fast peers and perhaps not very useful. The main thing that needs to be compared are long term incentive strategies. 
+</p>
+<p>
+2)        June 2009 till Dec 2009: Formulate (and initial design of) the framework needed for implementing Participatory Economics in P2P. 
+</p>
+<p>
+Three of parecon's fundamentals are: balanced job complexes, participatory decision-making, and payment for effort and sacrifice
+</p>
+<p>
+So basically we will try to map these three fundamentals in P2P. The system should self-organize towards achieving this collective goal. 
+</p>
+<p>
+How to reward according to effort; How to design protocols for consensual consumption and production plans (upload/download capactities) among peer groups. How to design protocols for measuring peerâs effort level etc. How to evaluate if our system leads to a productive and fair eco system of swarms. 
+</p>
+<p>
+3)        Implementation: 
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

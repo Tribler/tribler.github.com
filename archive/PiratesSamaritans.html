@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="PiratesandSamaritans">Pirates and Samaritans</h1>
+<p>
+Online cooperation is growing strong on websites such as Wikipedia, Facebook, and Youtube plus
+sharing on an immense scale in Bittorrent. 
+The Tribler team has spend several years measuring and trying to understand online cooperation
+with a particular focus on <em>self-organising communities</em> without central control or a central editor.
+During 1999 to 2009 we conducted numerous measurements of P2P systems and websites featuring collaboration.
+Activities include the <a class="ext-link" href="http://www.google.com/search?q=bittorrent+measurement"><span class="icon">​</span>largest Bittorrent measurement</a> and crawling of Slashdot resulting in a <em><a class="ext-link" href="http://en.wikipedia.org/wiki/Slashdotted"><span class="icon">​</span>reversed Slashdot effect</a></em> (we overloaded them:-)
+</p>
+<h2 id="Onlinecollaborationin1999">Online collaboration in 1999</h2>
+<p>
+Slashdot is one of the earliest examples of online cooperation on a large scale without central oversight.
+Slashdot has been for many years now a very popular source of technology-oriented news.
+The novelty of Slashdot is that the discussion area is moderated by the users themselves.
+This system seems to work reasonably well.
+</p>
+<p>
+Slashdot users have the ability to freely attach <em>news comments</em> to news items. Such comments contain remarks,
+enhancements, and insights on the corresponding news items. Slashdot uses a rating system based on voting and reputation to determine a <em>score</em> for each
+news comment. This score ranges from -1 (inferior) to 5 (insightful). Users are randomly given
+the ability to moderate comments by decreasing (-1) or increasing (+1) scores.
+The initial comment score is 1 for registered users and 0 for anonymous comments.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/PiratesSamaritans/slashdot_moderation_speed.png" width="800px"></a>
+</p>
+<p>
+Many years ago we measured Slashdot moderator responsiveness.
+We analysed for 30 news items which received 4,250 news comments
+subjected to 1,400 moderations. The Figure above shows the average length of the moderation process, from
+insertion until receiving the final score. The initial score of
+almost 80% of the comments never changed. For the others, it took on average
+a mere 37 minutes before insightful comments got their first score increase.
+</p>
+<h2 id="Youtube">Youtube</h2>
+<p>
+In order to understand how people share video clips we studied Youtube.
+We crawled over 5+ million webpages of Youtube, starting in the summer of 2006.
+This crawl contains detailed information on numerous users such as their age, country of origin, last online time, list
+of their favorite video clips, and their Youtube friends.
+The Youtube Figure shows for 592,900 users of Youtube how many friends they have. The horizontal
+axis shows the various users sorted by their number of friends (vertical axis). The leftmost user shown in this picture has 27,716 <tt></tt>friends<em>.
+</em></p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/PiratesSamaritans/youtube_top_friends.png" width="800px"></a>
+</p>
+<h2 id="Triblerweb-of-trust">Tribler web-of-trust</h2>
+<p>
+For over one year now our Tribler client includes technology to
+automatically build a web-of-trust. This trust network is extended every 
+time you successfully download content from another peer.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/PiratesSamaritans/bartercast_clip.png" width="1024px"></a>
+</p>
+<p>
+The graph above shows such a web-of-trust as gathered by an Tribler peer, running the unmodified Tribler software.
+This data was accumulated over a six week period after <a class="wiki" href="BarterCast.html">BarterCast</a> was taken into production within Tribler.
+The 690 nodes in this figure represents peers, the edges content transfers.
+The big central node represents the local gathering peer itself. The 52 edges
+originating from the local peer are due to direct bartering to 52
+Tribler peers within Bittorrent swarms. These 52 direct bartering relations
+are locally observed, all other edges are based on information that is potentially fraudulent.
+Together these edges form a web-of-trust that can be used to estimate
+the <tt></tt>upload reputation<em> of any peer using algorithms such as <a class="missing" href="#">PageRank</a>, <a class="missing" href="#">EigenTrust</a>, and
+<a class="missing" href="#">MaxFlow</a>. Every Tribler peer uses the data from such figures to
+calculate using the <a class="missing" href="#">MaxFlow</a> algorithm if a peer is possibly freeriding.
+The density and the coverage of this Figure is an indication of the strength of this approach.
+</em></p>
+<h2 id="Scientificpublication">Scientific publication</h2>
+<p>
+The <a href="http://www.tribler.org/trac/raw-attachment/wiki/PiratesSamaritans/pirates_and_samaritans.pdf">21 page technical report</a> by Delft University of Technology contains many more details. Similar work was published in the <a class="ext-link" href="http://portal.acm.org/citation.cfm?id=1466235"><span class="icon">​</span>Telecommunications Policy Journal</a>.
+The full paper title is <em>Pirates and Samaritans: A decade of measurements on peer production and their implications for net neutrality and copyright</em>
+</p>
+<p>
+<strong>Abstract</strong>
+</p>
+<p>
+Our study traces the evolution of commons-based peer production by a measurement-based analysis of case studies and discusses the impact of peer production on net neutrality and copyright law. The measurements include websites such as suprnova.org, youtube.com, and facebook.com, and the Peer-to-Peer (P2P) systems Kazaa, Bittorrent, and Tribler. The measurements show the two sides of peer production, the pirate side with free availability of Hollywood movies on these P2P systems and the Samaritan side exhibited by the quick joining of 400,000+ people in a community to organize protests against events in Burma. The telecommunications and content industry are disrupted by this way of peer production. As a consequence, revenues of both industries are likely to suffer in the coming years. On the other hand, innovative P2P systems could win the battle on merit over classical distribution technologies. As a result, a continuation is expected of both legal actions against P2P and possible blocking actions of P2P traffic, violating net neutrality. It is argued that this hinders innovation and causes a large discrepancy between legal and user perspectives. A reform of copyright laws is clearly needed, otherwise they will be unenforceable around 2010.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

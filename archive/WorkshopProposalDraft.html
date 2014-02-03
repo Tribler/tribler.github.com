@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Wikimania2010WorkshopDraft">Wikimania 2010 Workshop Draft</h1>
+<h2 id="Titleofthesubmission">Title of the submission</h2>
+<p>
+Hosting Wikipedia Videos via Peer-to-Peer
+</p>
+<h2 id="Typeofsubmissionworkshoptutorialpanelpresentation">Type of submission (workshop, tutorial, panel, presentation)</h2>
+<p>
+Workshop (with half of the time as presentation of what has been done so far)
+</p>
+<h2 id="Authorofthesubmission">Author of the submission</h2>
+<p>
+Arno Bakker, Riccardo Petrocco, Michael Dale, Jan Gerber, Victor Grishchenko, Diego Rabaioli, Johan Pouwelse
+</p>
+<h2 id="E-mailaddressorusernameifusernamepleaseconfirmemailaddressinSpecial:Preferences">E-mail address or username (if username, please confirm email address in Special:Preferences)</h2>
+<p>
+<a class="mail-link" href="mailto:arno@cs.vu.nl"><span class="icon">​</span>arno@cs.vu.nl</a>, <a class="mail-link" href="mailto:j.a.pouwelse@its.tudelft.nl"><span class="icon">​</span>j.a.pouwelse@its.tudelft.nl</a>
+</p>
+<h2 id="Countryoforigin">Country of origin</h2>
+<p>
+NL/USA/DE
+</p>
+<h2 id="Affiliationifanyorganizationcompanyetc.">Affiliation, if any (organization, company etc.)</h2>
+<p>
+Delft University of Technology, Wikimedia Foundation Inc.
+</p>
+<h2 id="Personalhomepageorblog">Personal homepage or blog</h2>
+<p>
+<a class="ext-link" href="http://wikipedia.p2p-next.org/,http://www.p2p-next.org/"><span class="icon">​</span>http://wikipedia.p2p-next.org/,http://www.p2p-next.org/</a>
+</p>
+<h2 id="Abstractpleaseusenolessthan300wordstodescribeyourproposal">Abstract (please use no less than 300 words to describe your proposal)</h2>
+<p>
+Wikipedia wants to enable users to add video and audio on their Wiki pages. The technical downside is that its bandwidth requirements will increase manifold. How to handle this bandwidth surge? Commercial CDNs are one option, but they have downsides, including the relatively high costs (esp. considering Wikipedia's volumes), the relatively restrictive terms in regard to fair-use and take-downs, content filtering, and user privacy. There is also the question of institutional independence. We therefore started exploring the idea of using peer-to-peer distribution or a community-run CDN for Wikipedia video. 
+</p>
+<p>
+In particular, we explored the <a class="wiki" href="BitTorrent.html">BitTorrent</a>-based peer-to-peer video technology from P2P-Next (a European research project). This open technology is very flexible with respect to how it provides bandwidth (from the users viewing in their browsers to normal HTTP-based hosting). Over the past months Delft University of Technology and Wikimedia have been cooperating to easily integrate P2P-Next into <a class="missing" href="#">MediaWiki</a>. In this workshop we would like to present how P2P-Next could be used for hosting Wikipedia's A/V content. In addition, we would like to have a discussion on using peer-to-peer to build a community-run CDN.
+</p>
+<h2 id="TrackPeopleandCommunityKnowledgeandCollaborationInfrastructure">Track (People and <a class="missing" href="#">Community/Knowledge</a> and <a class="missing" href="#">Collaboration/Infrastructure</a>)</h2>
+<p>
+Infrastructure Track
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

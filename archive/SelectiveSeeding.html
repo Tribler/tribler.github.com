@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="SelectiveSeedingDiscovery">Selective Seeding &amp; Discovery</h1>
+<p>
+<em>Status: [source:abc/branches/boxun/d080620-selectiveseeding-from-main-r7938/Tribler/Policies/SeedingManager.py initial code]</em>
+</p>
+<p>
+Research: Resource allocation to peers based on their degree of 
+contribution to the community with the inclusion of a punishment for freeriders.
+</p>
+<h2 id="SelectiveSeeding">Selective Seeding</h2>
+<p>
+Enable the user to select the seeding policy he/she wants
+for give-2-get and within the limits allowed by tit-4-tat.
+</p>
+<p>
+The default policy setting is to seed to tit-4-tat peers until your 
+sharing ratio in that swarm equals 1.0. Note that it is important in 
+this calculation to keep separate sharing ratio's for tit-4-tat and
+give-2-get peers. Both give-2-get and tit-4-tat peers will be treated 
+equally when the tit-4-tat sharing ratio has not yet reached 1.0.
+After the tit-4-tat ratio has reached 1.0 only give-2-get peers will
+receive bandwidth, thereby boosting the peers bandwidth reputation.
+</p>
+<p>
+After seeding for a hours or a few days to tit-4-tat peers they
+can remain in a swarm for weeks or months to boost their reputation.
+This approach means that an efficient mechanism for discovery of
+give-to-get peers is required which requires little bandwidth.
+</p>
+<p>
+The <em>selective seeding</em> has the following settings: 
+</p>
+<ul><li>tit-4-tat: (Forgets about uploads)
+<ul><li>Seed until UL/DL ratio &gt;= 1.0 (no Bittorrent leeching) <em>default</em> 
+</li><li>Unlimited seeding
+</li><li>Seeding for x day, y minutes
+</li><li>No seeding
+</li></ul></li><li>give-2-get: (Remembers every upload)
+<ul><li>Seed only to peers with UL/DL ratio &gt; 0.8
+</li><li>Unlimited seeding (Boost your reputation) <em>default</em> 
+</li><li>Seeding for x day, y minutes
+</li><li>No seeding
+</li></ul></li></ul><p>
+Implementation:
+</p>
+<p>
+A global seeding manager manages all local seeding managers for seeding downloads. When a download status becomes seeding, the global seeding manager will apply a local seeding manager to the Choker of that download, which is based on the seeding settings. Then the local seeding manager decides if a connection is eligible or not to be unchoked by Choker.
+</p>
+<ul><li>The [source:/abc/branches/boxun/d080620-selectiveseeding-from-main-r7938/Tribler/Policies/SeedingManager.py SeedingManager.py]
+</li><li>The [source:abc/branches/boxun/d080620-selectiveseeding-from-main-r7938/Tribler/Core/BitTornado/BT1/Choker.py Choker.py]
+</li></ul><p>
+Extension in other GUI screens:  <strong>Future work</strong>
+</p>
+<ul><li>Convert bandwidth into reputation<br />
+Link with <a class="wiki" href="CooperativeDownload.html">CooperativeDownload</a>
+<ul><li>Find swarms with active downloading Tribler peers
+</li><li>Use <a class="wiki" href="Swarm_FFFF.html">Swarm_FFFF</a>?
+</li><li>Do partial download of desired pieces
+</li><li>Upload to Tribler peers to boost reputation
+</li></ul></li><li>Link with Meulpolder work on transfer reputation to a friend.
+</li><li>Show that you are seen as a leecher and have bad performance
+<ul><li>Howto inform them of behavior
+</li><li>Howto ensure they have poor performance
+</li><li>Howto enable new users to bootstrap (Whitewashing proof)
+</li><li>Special 1 GByte upload task to enable video-on-demand
+</li></ul></li></ul><h2 id="RelatedWork">Related Work</h2>
+<p>
+<a class="ext-link" href="https://www.cs.washington.edu/homes/arvind/papers/onehop.pdf"><span class="icon">​</span>PDF link</a> <em>One hop Reputations for Peer to Peer File Sharing Workloads</em> to prevent freeriding in Bittorrent.
+</p>
+<h2 id="SelectiveDiscoverySoon">Selective Discovery(Soon)</h2>
+<p>
+G2G seeders/leechers proactively search for other g2g peers in networks.
+</p>
+<p>
+A simple heuristic to include is to give preference to peers which use the listen port
+used by default within Tribler. Whenever such peers are included in tracker or PEX
+replies they take priority. When contacted with PEX, a Tribler peer lists other
+G2G supporting peers in the swarm. This can perhaps be done via PEX 
+<em>parameter=value</em> extensions.
+</p>
+<ul><li>Selection of g2g peers: What should be the proper portion of g2g peers among those selected peers to be connected in PEX messages? Including as many g2g peers as possible, or reserving some seats for t4t peers? If latter, some poor performed g2g peers will be dropped, then g2g score and bartercast may be proper selection criteria. 
+</li></ul><ul><li>Remote g2g peers uploading for long time can be saved locally, and used by local peers in future,
+</li></ul><p>
+The [source:abc/branches/mainbranch/Tribler/Core/DecentralizedTracking/ut_pex.py#L55 added.f field]
+seems to be the proper mechanism to do this within the EXTEND message. 
+It gives can store a single byte of information about each address you exchange with PEX.
+Currently only 3 values are specified. See detaild documentation <a class="ext-link" href="http://trac.transmissionbt.com/browser/trunk/doc/extended-messaging.txt"><span class="icon">​</span>on a the Transmission branch</a>.
+</p>
+<p>
+<a class="missing" href="#">ToDo</a>: find which Bittorrent client are using which fields and claim our own "bit" (e.g. x16) in this added.f which indicates <em>seeding to Give-to-Get supporting peers only</em>.
+With this mechanism we can indicate to other peers what the exact state is of the Give-to-Get peers.
+Obviously, these peers are not PEX-ed or handed out to tit-for-tat peers.
+</p>
+<p>
+Does Tribler support the extended field in PEX for client IDs: <em>v=string, client name and version</em>. (e.g. "Transmission 0.7" or "Tribler 4.1.7")? Can it be used to recognize fellow Give-to-Get supporters?
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

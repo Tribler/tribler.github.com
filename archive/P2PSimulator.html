@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="P2PSimulator">P2P Simulator</h1>
+<p>
+We are designing and implementing a full-scale trace-based P2P Simulator which includes highly detailed aspects of <a class="wiki" href="BitTorrent.html">BitTorrent</a> and Tribler. The goal is to provide a platform on which protocol changes and new ideas can be extensively tested and measured without having to wait for real user-data.
+</p>
+<p>
+The core of the design consists of a detailed <a class="wiki" href="BitTorrent.html">BitTorrent</a> simulator. On top of this, the Tribler overlay is simulated with the <a class="wiki" href="BuddyCast.html">BuddyCast</a> epidemic protocol, <a class="wiki" href="BarterCast.html">BarterCast</a> statistics exchange. Highly advanced mechanisms that make use of these protocols, such as moderation, are being integrated as well.
+</p>
+<p>
+The simulator is built with a trace-based framework. Given a trace of peers (e.g., up/down timestamps + connectability + file requests), a full simulation of the network can be executed. In the future, automatic trace generation will be supported based on given popularity distributions.
+</p>
+<img height="400" src="http://svn.tribler.org/abc/branches/michel/triblersim/docs/diagram.png" />
+<h2 id="Currentlyimplemented">Currently implemented</h2>
+<ul><li><a class="wiki" href="BitTorrent.html">BitTorrent</a> piece-level swarm simulator
+<ul><li>Unchoking + optimistic unchoking
+</li><li>Rarest first piece-picking
+</li><li>Piece + subpiece support
+</li><li>Multiple tracker support
+</li></ul></li><li>Trace-based <a class="wiki" href="BuddyCast.html">BuddyCast</a> support
+<ul><li>Full semantic overlay simulation
+</li><li>Taste exchange
+</li></ul></li><li><a class="wiki" href="BarterCast.html">BarterCast</a> support
+<ul><li>Bandwidth statistics exchange
+</li><li>Maxflow-based reputation system
+</li><li>Sharing-ratio enforcement based on reputation
+</li></ul></li></ul><h2 id="Underimplementation">Under implementation</h2>
+<ul><li>Logging facilities
+</li><li>Documentation
+</li><li>Convenient configuration facilities
+</li><li><a class="wiki" href="ModerationCast.html">ModerationCast</a> integration
+</li><li>Probability-based trace generation
+</li></ul><h2 id="ToDo"><a class="missing" href="#">ToDo</a></h2>
+<p>
+Reduction of memory usage to enable going beyond simulating
+100,000 peers in a semantically clustered network.
+Question: is the Python dictionary the bottleneck?
+</p>
+<h2 id="Datasets">Datasets</h2>
+<p>
+Over the past years we have collected numerous TBytes of P2P systems and web 2.0 sites. These (anonimized) traces provide us with the insight of how real people behave on real systems. 
+Our special interests are software usage, Internet connection capacity, session duration, social networks, taste clustering, group formation, and tagging. We believe our collection constitutes one of the largest accurate non-profit collection of P2P datasets.
+</p>
+<ul><li>SuprNova.org <br />
+Download behavior for 18 months with popularity of files. Includes data on system failures on trackers, web servers, .torrent servers, and load balancers. From early 2003 onwards.
+</li><li>Piratebay.org <br />
+Content availability popularity. Includes early data from 2004.
+</li><li>Filelist.org <br />
+Download behavior of 91745 peers with connectability, Bittorrent client name, download speed, online/offline time, etc.
+</li><li>Youtube.com <br />
+For 750,000+ users we collected their public user profile information, published clips, social network information, and favorite clip information (144GByte of summer 2006; ST3:/data/dataset)
+</li><li>Del.icio.us <br />
+Tagging behavior, taste diversity, and user activity (2.3 GByte; 4311 users)
+</li><li>Flickr.com <br />
+Tagging behavior, taste diversity, and user activity (0.5 GByte)
+</li><li>CiteUlike.org <br />
+Tagging behavior, taste diversity, ratings, and user activity (0.5 GByte; 3592 users)
+</li><li>Librarything.com <br />
+Tagging behavior, ratings, and taste diversity
+</li><li>Vuze.com <br />
+<a class="wiki" href="BitTorrent.html">BitTorrent</a> piece exchange
+</li></ul><p>
+More dataset details:
+</p>
+<ul><li><a class="wiki" href="FilelistMeasurements.html">Jelle dataset</a> (login required)
+</li><li><a class="wiki" href="LogFileAnalysis.html">Steven dataset</a> (login required)
+</li><li><a class="wiki" href="PhoneHome.html">Jan David piece level dataset</a>
+</li><li><a class="wiki" href="DownloadPerformance.html">Razvan private tracker piece level dataset</a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

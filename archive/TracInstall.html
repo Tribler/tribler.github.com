@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TracInstallationGuide">Trac Installation Guide</h1>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+The Trac web-based project management tool is implemented as a CGI- or standalone program. Trac is written in the <a class="ext-link" href="http://www.python.org/"><span class="icon">​</span>Python</a> programming language
+and uses the <a class="ext-link" href="http://www.sqlite.org/"><span class="icon">​</span>SQLite</a> embedded database for persistant storage. For HTML rendering, Trac uses the <a class="ext-link" href="http://www.clearsilver.net/"><span class="icon">​</span>Clearsilver</a> template system.
+</p>
+<h2 id="Requirements">Requirements</h2>
+<p>
+To install Trac, the following software packages must be installed:
+</p>
+<ul><li><a class="ext-link" href="http://www.python.org/"><span class="icon">​</span>Python</a>, version &gt;= 2.1 (&gt;=2.3 recommended).
+<ul><li>Please keep in mind, that for RPM-based systems you will also need python-devel and python-xml packages.
+</li></ul></li><li><a class="ext-link" href="http://subversion.tigris.org/"><span class="icon">​</span>Subversion</a>, version &gt;= 1.0. (&gt;=1.1 recommended)
+</li><li><a class="ext-link" href="http://svnbook.red-bean.com/svnbook-1.1/ch08s02.html#svn-ch-8-sect-2.3"><span class="icon">​</span>Subversion Python bindings</a> (Caveat: Trac uses the <a class="ext-link" href="http://www.swig.org/"><span class="icon">​</span>SWIG</a> bindings included in the Subversion distribution,  <strong>not</strong> the  <a class="ext-link" href="http://pysvn.tigris.org/"><span class="icon">​</span>PySVN</a> package!)
+</li><li><a class="ext-link" href="http://www.sqlite.org/"><span class="icon">​</span>SQLite</a>, version 2.8.x or 3.0.x
+</li><li><a class="ext-link" href="http://pysqlite.sf.net/"><span class="icon">​</span>PySQLite</a>, version &gt;= 0.5 but &lt; 1.1.0 (for SQLite 2.8.x), version &gt;= 1.1.1 (for SQLite 3.0.x) 
+</li><li><a class="ext-link" href="http://clearsilver.net/"><span class="icon">​</span>Clearsilver</a>, version &gt;= 0.9.3
+</li><li><a class="ext-link" href="http://docutils.sourceforge.net/"><span class="icon">​</span>docutils</a>, version &gt;= 0.3.3 (??)
+</li><li>A CGI-capable web server (tested on <a class="ext-link" href="http://httpd.apache.org/"><span class="icon">​</span>Apache</a> )
+</li></ul><h3 id="OptionalPackages">Optional Packages</h3>
+<ul><li><a class="ext-link" href="http://www.modpython.org/"><span class="icon">​</span>mod_python</a> (see <a class="wiki" href="TracModPython.html">TracModPython</a>)
+</li></ul><h2 id="InstallingTrac">Installing Trac</h2>
+<p>
+Like most Python programs, install the Trac python modules by running the following command at the top of the source directory:
+</p>
+<pre class="wiki">$ python ./setup.py install
+</pre><p>
+This will byte-compile the python source code and install it in the <tt>site-packages</tt> directory
+of your python installation. The directories <tt>cgi-bin</tt>, <tt>templates</tt>, <tt>htdocs</tt> and <tt>wiki-default</tt> are all copied to $prefix/share/trac/ . 
+</p>
+<p>
+The script will also install the <a class="wiki" href="TracAdmin.html">trac-admin</a> command-line tool, used to create and maintain <a class="wiki" href="TracEnvironment.html">project environments</a>. 
+</p>
+<p>
+The <a class="wiki" href="TracAdmin.html">trac-admin</a> program is the <em>control center</em> for Trac.
+</p>
+<p>
+<strong>Note:</strong> you'll need root permissions or equivalent for this step.
+</p>
+<p>
+For more information on installing Trac on specific platforms, see the <a class="ext-link" href="http://projects.edgewall.com/trac/wiki/TracInstallPlatforms"><span class="icon">​</span>TracInstallPlatforms</a> page (on the main project web site).
+</p>
+<h3 id="AdvancedUsers">Advanced Users</h3>
+<p>
+To install Trac in a custom location, and view other advanced install options, run:
+</p>
+<pre class="wiki">$ python ./setup.py --help
+</pre><h2 id="CreatingaProjectEnvironment">Creating a Project Environment</h2>
+<p>
+<a class="wiki" href="TracEnvironment.html">TracEnvironment</a> is the backend storage format where Trac stores
+information like wiki pages, tickets, reports, settings, etc.
+An environment consist of a directory containing an SQLite database, 
+human-readable configuration file, log-files and attachments.
+</p>
+<p>
+A new Trac environment is created using <a class="wiki" href="TracAdmin.html">trac-admin</a>, like:
+</p>
+<pre class="wiki">$ trac-admin /path/to/projectenv initenv
+</pre><p>
+<a class="wiki" href="TracAdmin.html">trac-admin</a> will ask you where your subversion repository is located and
+where it can find the trac templates directory (the default value should work for a typical install).
+</p>
+<p>
+<strong>Note:</strong> The web server user will require file system write permission to the environment
+directory and all the files inside. <strong>Remember to set the appropriate permissions.<em>
+</em></strong></p>
+<p>
+The same applies for the subversion repository files (unless using the <a class="ext-link" href="http://svn.collab.net/repos/svn/trunk/notes/fsfs"><span class="icon">​</span>FSFS Subversion backend</a>, something we highly recommend. 
+</p>
+<h2 id="ConfiguringApache">Configuring Apache</h2>
+<p>
+Make "<tt>trac/cgi-bin/trac.cgi</tt>" accessible to your web server at <tt>/cgi-bin/</tt>, either by copying/symlinking or use the "<tt>trac/cgi-bin/</tt>" directory directly.
+</p>
+<p>
+Edit the apache config and add this snippet, filenames edited to match your installation:
+ 
+</p>
+<pre class="wiki">Alias /trac/ "/usr/share/trac/htdocs/" #or where you installed the trac htdocs
+#You have to allow people to read the files in htdocs
+&lt;Directory "/usr/share/trac/htdocs"&gt;
+	Options Indexes MultiViews
+	AllowOverride None
+	Order allow,deny
+	Allow from all
+&lt;/Directory&gt;
+
+
+# Trac need to know where the database is located
+&lt;Location "/cgi-bin/trac.cgi"&gt;
+	SetEnv TRAC_ENV "/path/to/projectenv"
+&lt;/Location&gt;
+
+# You need this to allow users to authenticate
+# trac.htpasswd can be created with 
+# cmd 'htpasswd -c trac.htpasswd' (UNIX)
+# do 'man htpasswd' to see all the options
+&lt;Location "/cgi-bin/trac.cgi/login"&gt;
+	AuthType Basic
+	AuthName "trac"
+	AuthUserFile /somewhere/trac.htpasswd
+	Require valid-user
+&lt;/Location&gt;
+</pre><p>
+<strong>Note:</strong> If Apache complains about the Set<strong><em>'Env line make sure you have the Load</em></strong>'Module for mod_env uncommented (Apache 1.3).
+</p>
+<p>
+<strong>Note:</strong> When creating a new environment, <tt>trac-admin</tt> will print a config snippet customized for your project.
+</p>
+<p>
+<strong>Note:</strong> If you are using <a class="ext-link" href="http://httpd.apache.org/docs/suexec.html"><span class="icon">​</span>Apache suEXEC</a> feature see <a class="ext-link" href="http://projects.edgewall.com/trac/wiki/ApacheSuexec"><span class="icon">​</span>ApacheSuexec</a> (on the project web site).
+</p>
+<h2 id="UsingTrac">Using Trac</h2>
+<p>
+<strong>Congratulations''' You should now have a running Trac installation at:
+</strong></p>
+<p>
+<a class="ext-link" href="http://"><span class="icon">​</span>http://</a>&lt;yourhostname&gt;/cgi-bin/trac.cgi
+</p>
+<p>
+You should be able to browse your subversion repository, create tickets,
+view the timeline and use all the features of Trac.
+</p>
+<p>
+Keep in mind that anonymous users (not logged in) can only access a restricted subset of all Trac features by default. 
+</p>
+<p>
+<strong>Note:</strong> If you don't want long, and relatively ugly, URLs, you can prettify them by changing your Apache config. See <a class="ext-link" href="http://projects.edgewall.com/trac/wiki/TracPrettyUrls"><span class="icon">​</span>TracPrettyUrls</a> (on the project website).
+</p>
+<p>
+Please continue to <a class="wiki" href="TracPermissions.html">TracPermissions</a> to learn how to grant additional privileges to authenticated users.
+</p>
+<p>
+For user documentation, see <a class="wiki" href="TracGuide.html">TracGuide</a>.
+</p>
+<p>
+<em>Enjoy''
+</em></p>
+<p>
+<a class="ext-link" href="http://projects.edgewall.com/trac/wiki/TracTeam"><span class="icon">​</span>The Trac Team</a>
+</p>
+<hr />
+<p>
+See also:  <a class="wiki" href="TracGuide.html">TracGuide</a>, <a class="wiki" href="TracUpgrade.html">TracUpgrade</a>, <a class="wiki" href="TracPermissions.html">TracPermissions</a>, <a class="wiki" href="TracInstallPlatforms.html">TracInstallPlatforms</a>, <a class="wiki" href="TracModPython.html">TracModPython</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

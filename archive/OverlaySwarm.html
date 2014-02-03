@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TheBittorrentOverlaySwarm">The Bittorrent Overlay Swarm</h1>
+<p>
+Peers in <a class="wiki" href="BitTorrent.html">BitTorrent</a> normally only communicate with each other when they are downloading the same file. To facilitate communication outside the context of a particular swarm, we introduce a special overlay swarm of which all Tribler clients are part by default. By designing this communication channel as a <a class="wiki" href="BitTorrent.html">BitTorrent</a> swarm, it can be easily build into existing clients and does not require extra TCP listen ports. The latter implies that no extra configuration of firewalls or Network Address Translators (NATs) is required by the user. 
+</p>
+<p>
+The recommendation and cooperative download extensions both require new <a class="wiki" href="BitTorrent.html">BitTorrent</a>-protocol messages. We implemented a clean method for extending the protocol because our aim is to include more features in the future. Another requirement is being the least invasive in existing implementations. Furthermore, the current <a class="wiki" href="BitTorrent.html">BitTorrent</a> protocol <strong>does not allow</strong> communication outside the context of a swarm, that is, clients can only communicate with clients that are downloading the same file. For our extensions, we must be able to communicate outside the context of a single file swarm. 
+</p>
+<p>
+We therefore created a new virtual swarm that encompasses all peers that are using the system, called the overlay swarm for high-level communication between peers. The swarm to which a peer connection belongs is defined by the infohash field during the initial <a class="wiki" href="BitTorrent.html">BitTorrent</a> handshake. This infohash normally contains the SHA1 hash of the contents of the torrent file. In case of the overlay swarm, the infohash must contain a value of all zeros. The overlay swarm has no central <a class="wiki" href="BitTorrent.html">BitTorrent</a> tracker. A peer that wants, for example, to exchange preference lists with another peer must use the overlay swarm. The peer connects to the other peer's listen socket and uses the zero infohash value in the handshake. If the handshake is successful both parties know that new extension messages can be exchanged. After connecting to a peer on the overlay swarm the peers must run the <a class="wiki" href="PermID.html">challenge/response protocol</a> to exchange and validate their <a class="missing" href="#">PermIDs</a> before any other communication. 
+</p>
+<p>
+By using this non-valid infohash value we remain fully backwards compatible and also are minimally invasive to the <a class="wiki" href="BitTorrent.html">BitTorrent</a> protocol. This overlay can be extended in the future with new messages for <a class="wiki" href="DistributedTracker.html">secure gossip</a>, <a class="wiki" href="BarterCast.html">sharing ratio enforcement</a>, <a class="wiki" href="SocialOverlay.html">social networking</a>, <a class="wiki" href="Buddycast3.html">voting/moderation, reputation management</a>, etc. 
+</p>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/Overlay/SecureOverlay.py"><span class="icon">​</span>The Source Code</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>The current Tribler protocol specification.</a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

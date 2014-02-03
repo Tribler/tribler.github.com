@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h2 id="Swarm2">Swarm<sup>2</sup></h2>
+<p>
+Using a preprocessed filelist.org trace, obtained at <a class="ext-link" href="http://svn.tribler.org/abc/branches/michel/triblersim/trace/connbtuser.log"><span class="icon">​</span>the SVN repo</a>, I (Victor) modeled percolation effects on the graph of all ongoing <a class="wiki" href="BitTorrent.html">BitTorrent</a> connections of all the tracker's swarms.
+Actually, the data is much more coarse grained and has 3 types of records:
+</p>
+<ul><li>peer going online
+</li><li>peer going offline
+</li><li>peer joining some swarm for the first time
+</li></ul><p>
+The log had no indication of peer leaving a swarm while staying online, e.g. by deleting a torrent locally. One possibility was to use full logs (see <a class="wiki" href="FilelistMeasurements.html">FilelistMeasurements</a>). Instead, I accepted some hypotheses:
+</p>
+<ul><li>for a given swarm, the graph of peers and their ongoing connections is connected -- quite a reasonable assumption, <a class="wiki" href="BitTorrent.html">BitTorrent</a> is all about that
+</li><li>peers never leave swarms (the simplifying optimistic hypothesis) or peers keep participating in 5 most recent swarms (less optimistic)
+</li></ul><p>
+The planned result was the diagram for the size of the giant cluster over time (as percentage to the total number of peers online). Actually, it turned unnecessary as ~100% peers belong to the giant cluster at any given moment of time.
+</p>
+<p>
+It is easy to explain. As a peer participates in a swarm, there are likely to be some other peers and one of those peers is likely to participate in two other swarms and that two swarms have tens of peers who participate in tens of third swarms, etc
+</p>
+<p>
+Regarding connectivity of swarms served by different trackers it is natural to conjecture that graph to be also connected as there are peers who download/seed torrents from different trackers, there are multi-tracker torrents, etc.
+</p>
+<p>
+<strong>So, it is possible to consider the whole <a class="wiki" href="BitTorrent.html">BitTorrent</a> network as indeed a connected network, Swarm<sup>2</sup>, a swarm of swarms, not as a number of disconnected swarms.</strong>
+</p>
+<p>
+The code for the simulator is attached. The simulator consumes a special data format produced as follows: 
+</p>
+<pre class="wiki">cat trace/connbtuser.log | ./reformat.pl | sort -n &gt; time-trace.txt
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

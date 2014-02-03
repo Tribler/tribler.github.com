@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><ul><li>Developers Center
+<ul><li><a class="wiki" href="TriblerGettingStarted.html">Getting Started</a>
+<ul><li><a class="wiki" href="TriblerGettingStarted.html">Introduction</a>
+</li><li><a class="wiki" href="TriblerSoftwareProcess.html">Development Process</a>
+</li><li><a class="wiki" href="TriblerSoftwareProcess%25252FReleasing.html">Release Process</a>
+</li><li><a class="wiki" href="tipsTricks.html">Tips &amp; Tricks</a>
+</li></ul></li><li><a class="wiki" href="TriblerArchitecture.html">Architecture</a>
+<ul><li><a class="wiki" href="TriblerArchitecture.html">Overview</a>
+</li><li><a class="wiki" href="DotTriblerFiles.html">Local Storage Structure</a>
+</li></ul></li><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>API</a>
+<ul><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>Tribler Core</a>
+</li><li><a class="wiki" href="TriblerAPIRationale.html">Rationale</a>
+</li></ul></li><li><a class="wiki" href="Tutorials.html">Tutorials</a>
+<ul><li><a class="wiki" href="Tutorials.html">Overview</a>
+</li><li><a class="wiki" href="Tutorials%25252FHelloWorld.html">1. Download Hello world</a>
+</li><li><a class="wiki" href="Tutorials%25252FVideoOnDemand.html">2. Video on Demand</a>
+</li><li><a class="wiki" href="Tutorials%25252FLiveStreaming.html">3. Live Streaming</a>
+</li><li><a class="wiki" href="Tutorials%25252FSeedingTorrents.html">4. Content injection</a>
+</li><li><a class="wiki" href="Tutorials%25252FExampleFeedSetups.html">Example live feed setups</a>
+</li></ul></li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>Protocol specification</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Tools</a>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Source browser</a>
+</li><li>[milestone: Roadmap] 
+</li><li><a href="/timeline">Timeline</a>
+</li><li><a class="ext-link" href="http://forum.tribler.org"><span class="icon">​</span>Forum</a>
+</li></ul></li></ul></li></ul><p>
+   
+</p>
+</div></td><td>
+</p>
+<h1 id="ArchitectureofTribler">Architecture of Tribler</h1>
+<h2 id="ComponentOverviewClickable">Component Overview (Clickable)</h2>
+<p>
+<img src="http://svn.tribler.org/bt2-design/how-tribler-works/trunk/core-arch.png" usemap="#arch.png" />
+
+<map name="arch.png">
+<area shape="RECT" coords=" 53,  33,  680,  71" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Main/tribler.py" />
+<area shape="RECT" coords=" 506,  92,  596,  132" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/Session.py" />
+<area shape="RECT" coords=" 94,  151,  301,  195" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/CacheDB/SqliteCacheDBHandler.py" />
+<area shape="RECT" coords=" 330,  151,  422,  191" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/APIImplementation/ThreadPool.py" />
+<area shape="RECT" coords=" 444,  153,  533,  191" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/APIImplementation/UserCallbackHandler.py" />
+<area shape="RECT" coords=" 571,  152,  662,  191" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/APIImplementation/LaunchManyCore.py" />
+<area shape="RECT" coords=" 52,  223,  99,  262" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/NATFirewall/DialbackMsgHandler.py" />
+<area shape="RECT" coords=" 99,  222,  144,  262" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/SocialNetwork/RemoteQueryMsgHandler.py" />
+<area shape="RECT" coords=" 144,  223,  188,  262" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/Overlay/MetadataHandler.py" />
+<area shape="RECT" coords=" 189,  223,  256,  262" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/BuddyCast/buddycast.py" />
+<area shape="RECT" coords=" 256,  223,  301,  262" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Tribler/Core/SocialNetwork/SocialNetworkMsgHandler.py" />
+<area shape="RECT" coords=" 300,  224,  345,  262" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Tribler/Core/CoopDownload/CoordinatorMessageHandler.py" />
+<area shape="RECT" coords=" 367,  222,  450,  259" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/CacheDB/SqliteCacheDBHandler.py" />
+<area shape="RECT" coords=" 0,  281,  34,  322" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/CacheDB/SqliteCacheDBHandler.py" />
+<area shape="RECT" coords=" 52,  282,  173,  323" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/Overlay/OverlayThreadingBridge.py" />
+<area shape="RECT" coords=" 187,  282,  255,  323" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/Overlay/OverlayApps.py" />
+<area shape="RECT" coords=" 52,  342,  256,  383" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/Overlay/SecureOverlay.py" />
+<area shape="RECT" coords=" 299,  328,  384,  382" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/BitTornado/download_bt1.py" />
+<area shape="RECT" coords=" 408,  343,  476,  381" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/DecentralizedTracking/mainlineDHT.py" />
+<area shape="RECT" coords=" 477,  344,  545,  383" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/BitTornado/BT1/track.py" />
+<area shape="RECT" coords=" 263,  365,  296,  398" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/BitTornado/BT1/StorageWrapper.py" />
+<area shape="RECT" coords=" 52,  403,  545,  442" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/BitTornado/SocketHandler.py" />
+<area shape="RECT" coords=" 545,  403,  611,  442" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/NATFirewall/UPnPThread.py" />
+<area shape="RECT" coords=" 611,  403,  680,  442" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Video/VideoServer.py" />
+<area shape="DEFAULT" nohref="nohref" />
+
+</map>
+
+</p><p>
+<em>Boxes represent classes and arrows represent either "creates" or "calls" relationships. 
+Note that we use the new term Torrent-Share to denote the per-torrent part of the download engine.</em> 
+</p>
+<h3 id="Details">Details</h3>
+<p>
+The following diagrams show the current architecture of Tribler in more detail. The originals can be found in [source:bt2-design/how-tribler-works/trunk svn:/bt2-design/how-tribler-works/trunk]
+</p>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/how-tribler-works/trunk/core-arch.pdf"><span class="icon">​</span>Overall Architecture of the Tribler Core</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/how-tribler-works/trunk/torrentshare.pdf"><span class="icon">​</span>Download Engine</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/how-tribler-works/trunk/vod.pdf"><span class="icon">​</span>Video On Demand</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/how-tribler-works/trunk/arch.pdf"><span class="icon">​</span>Overall Architecture of the Tribler Main client</a> (to be updated)
+</li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/how-tribler-works/trunk/gui.pdf"><span class="icon">​</span>GUI Architecture of the Tribler Main client</a> (to be updated)
+</li></ul><h2 id="ExtenstionstoABCBittorrent">Extenstions to ABC / Bittorrent</h2>
+<p>
+The extensions we made to ABC/Bittorrent are all explained in <a class="wiki" href="TriblerResearchSubjects.html">the research section</a>. See the protocol specification in the left side-bar of this page for a detailed specification.
+</p>
+<h2 id="InnerWorkingsofBittornado">Inner Workings of Bittornado</h2>
+<p>
+To accompany the architecture diagrams there is a detailed description of <a href="/attachment/wiki/TriblerArchitecture/BitTornado-operation-20050916.pdf?format=raw">the inner workings of Bittornado</a>(pdf).
+</p>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="SwarmCacheManager">Swarm Cache Manager</h1>
+<p>
+<em>Status: some working code, 2 years of development ahead</em> (Johan)
+</p>
+<h2 id="Abstract">Abstract</h2>
+<p>
+We propose a method for improving the long term performance of BitTorrent peer-to-peer networks by increasing and refining the contribution of individual nodes.
+</p>
+<p>
+Self organizing systems rely on algorithms with emergent behavior. Current BitTorrent clients use only basic seeding policies, such as seeding until a fixed upload to download ratio is achieved. We propose a system in which the user allocates space for a cache which is automatically managed by the program.
+</p>
+<p>
+Central to our approach is a health function for swarms which indicates reliability and speed. We apply a seeding policy to the cache that takes account of this health function. This way, the program is doing informed seeding and the long tail is better served.
+</p>
+<p>
+This mechanism moves the BitTorrent client towards a YouTube-like "play-and-forget" model in which the user doesn't have to actively manage the hard drive space. It also brings direct benefit to the user by boosting his reputation, if deployed in a system in which such a notion exists (e.g. Tribler using <a class="wiki" href="BarterCast.html">BarterCast</a>).
+</p>
+<h2 id="TheCache">The Cache</h2>
+<p>
+The goal is to increase performance by increasing the quality and quantity of user contribution to the system. For this to happen, we need to ensure that the people always seed and that they seed swarms that need seeding.
+</p>
+<h3 id="AlwaysSeedSomething-Quantity">Always Seed Something - Quantity</h3>
+<p>
+Permanent seeding is achieved through a cache system. When a user clicks "play" on a torrent, the downloads starts a usual in a BitTorrent client. The difference is that the destination directory is not exposed to the user (currently state_dir/swarms_cache_dir) and the GUI doesn't offer any management interface for the torrent (starting, stopping, deleting).
+</p>
+<p>
+We will offer a separate "save" button that takes the torrent out of the cache and puts it under user control.
+</p>
+<h3 id="InformedSeeding-Quality">Informed Seeding - Quality</h3>
+<p>
+If the user is to use a client with such a cache, it has to be driven by algorithms that lead to better performance (this depends on <a class="wiki" href="BarterCast.html">BarterCast</a> rewarding users for their contribution). The algorithms refer to the cache retention policy: what swarms to delete when we run out of space.
+</p>
+<p>
+To make an informed choice, we first need to measure the health of a swarm, i.e. quantify its need for seeding. We then sort the swarms in the cache based on the results and delete the healthiest one.
+</p>
+<p>
+Here are some of the strategies for sorting the cache contents, a.k.a. health functions:
+</p>
+<ul><li>Peer dynamics
+</li></ul><blockquote>
+<blockquote>
+<p>
+(S / L) * (S + L) * (1 / RS) * (1 / RL)
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+S is the number of seeders, L is the number of leechers, RS the rate of departure for seeders, RL the rate of arrival for leechers.
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Availability
+</li></ul><blockquote>
+<blockquote>
+<p>
+min_p(sum_i(Ap(i)))
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+Ap(i) is 1 if piece p is present at peer i.
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Local traffic
+</li></ul><blockquote>
+<blockquote>
+<p>
+1 / Ut
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+Ut is the upload in the last t minutes.
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Global traffic
+</li></ul><blockquote>
+<blockquote>
+<p>
+sum_i(Dt(i)) / N
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+Dt(i) is the download of leecher i in the last t minutes and N is the number of leechers whose speed we measured.
+</p>
+</blockquote>
+</blockquote>
+<p>
+Some of the strategies can also use normalization with respect to file size.
+</p>
+<h3 id="Detectfakeswarms">Detect fake swarms</h3>
+<p>
+This does not refer to detecting fake content.
+</p>
+<h4 id="Trackerreportsfakepeersinpeerlist">Tracker reports fake peers in peer list</h4>
+<p>
+Malicious tracker gathers peer information from regular trackers (just a guess) and uses it to populate its peers list. (What if the peers spam the tracker?)
+</p>
+<h5 id="Statisticsneeded">Statistics needed</h5>
+<ul><li>number of initiated TCP connections (N1)
+</li><li>number of failed TCP handshakes (N2)
+</li><li>number of failed <a class="wiki" href="BitTorrent.html">BitTorrent</a> handshakes (N3)
+</li></ul><h5 id="Criteriaformarkingasfake">Criteria for marking as fake</h5>
+<ul><li>less than 1% of peers are connectable
+</li><li>less than 50% of the connected peers respond to the <a class="wiki" href="BitTorrent.html">BitTorrent</a> handshake
+</li></ul><p>
+What criterion to consider for calculating the percentage? Time, number of peers?
+</p>
+<p>
+What if there are multiple trackers? Is it not better to delete just the polluting tracker? If so, the peers must be analyzed according to source. FUTURE: possible problem with PEX.
+</p>
+<h5 id="Observations">Observations</h5>
+<p>
+<a class="missing" href="#">DownloadState</a> is created by <a class="missing" href="#">DownloadImplementation</a>.network_get_state() with data from <a class="missing" href="#">SingleDownload</a>.get_stats().
+<a class="missing" href="#">SingleDownload</a>.get_stats() calls <a class="missing" href="#">SingleDownload</a>._getstatsfunc() which is actually BT1Download.startStats().
+BT1Download.startStats() calls <a class="missing" href="#">DownloaderFeedback</a>.gather() which uses Statistics.update().
+</p>
+<p>
+<a class="missing" href="#">Tribler/Core/BitTornado</a>/BT1/Statistics only covers Connecter. If we want data about pre-handshake events, we need to add logging to Encoder.
+</p>
+<h4 id="Fakestatisticsinformation">Fake statistics information</h4>
+<p>
+Tracker advertises a high number of peers, but only provides a small number of peers when actual peer list is requested.
+</p>
+<h5 id="Problem">Problem</h5>
+<p>
+The tracker may return less than 50 peers when numwant is missing or 0. How can we detect that it is doing it for malicious reasons?
+</p>
+<h5 id="Observations1">Observations</h5>
+<ul><li>swarm statistics
+</li></ul><blockquote>
+<blockquote>
+<p>
+The complete and incomplete keys are optional. The only mandatory keys in the tracker announce response are interval and peers (BEP 3).
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+libtorrent checks for complete and incomplete but does not take any action when they are missing (<a class="ext-link" href="http://libtorrent.rakshasa.no/browser/trunk/libtorrent/src/tracker/tracker_http.cc#L212"><span class="icon">​</span>http://libtorrent.rakshasa.no/browser/trunk/libtorrent/src/tracker/tracker_http.cc#L212</a>). <a class="missing" href="#">LimeWire</a> does the same (<a class="ext-link" href="https://www.limewire.org/fisheye/browse/limecvs/core/com/limegroup/bittorrent/TrackerResponse.java?r=bittorrent-branch#l101"><span class="icon">​</span>https://www.limewire.org/fisheye/browse/limecvs/core/com/limegroup/bittorrent/TrackerResponse.java?r=bittorrent-branch#l101</a>). tvtorrents does not use these keys.
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+The GUI uses <a class="missing" href="#">TorrentChecking</a> to report total number of peers. <a class="missing" href="#">TorrentChecking</a> uses <a class="missing" href="#">TrackerChecking</a>.trackerChecking().
+</p>
+</blockquote>
+</blockquote>
+<ul><li>peer list
+</li></ul><blockquote>
+<blockquote>
+<p>
+It is not mandatory for the tracker to return 50 peers if it has at least 50 peers. tvtorrents returns less (a variable number, depending on the size of the swarm), even in big swarms.
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+The numwant parameter in announces is optional, so the tracker can not be expected to respect it. tvtorrents does not respect it.
+</p>
+</blockquote>
+</blockquote>
+<h2 id="Code">Code</h2>
+<p>
+See the following SVN branch:<br />
+<a class="ext-link" href="https://svn.tribler.org/abc/branches/mihai/SwarmsCacheManager-from-release-4.5-r10057"><span class="icon">​</span>https://svn.tribler.org/abc/branches/mihai/SwarmsCacheManager-from-release-4.5-r10057</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

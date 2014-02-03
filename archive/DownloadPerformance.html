@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="DownloadPerformance">Download Performance</h1>
+<p>
+The prime performance criteria of a P2P client is the
+speed at which files are downloaded. This area of Tribler 
+research specifically examines the source code to
+improve downloading. 
+</p>
+<p>
+Several other research topics are linked to this 
+activity. All the research topics below relate to
+the Tribler download core. It is imperative that
+these efforts are not hindered.
+</p>
+<ul><li>We will conduct
+<em>several more years</em> of P2P research with Tribler.
+The flexibility of the source code is a prime concern.
+Radical architectural enhancements for the long-term are 
+pursued. Thus it is required that modifications remain easy to make.
+For example, 
+<a class="wiki" href="FullIncentivisation.html">full incentives for all 8 file sharing activities</a>.
+This creates tension with efficiency,
+as Python is easy to modify, but slower then pure C code.
+In a few months we will even 
+<a class="wiki" href="Give-To-Get.html">remove the tit-for-tat and unchoke algorithm</a> when two
+<a class="wiki" href="BarterCast.html">Tribler peers exchange bytes</a>.
+Instead we will keep accurate accounts of exchanged bytes
+and global <a class="wiki" href="triblerGUIBandwidthSharing.html">sharing ratios between Tribler peers</a>.
+</li><li>HTML-page size scalability. We are scaling the Bittorrent protocol for 
+KBytes sized files, meaning it can be used <a class="wiki" href="P2PWebhosting.html">for static-page P2P webhosting</a>.
+</li><li>Fairness. Replacement of the superseeding
+algorithm with <a class="wiki" href="SupervisedTeaming.html">something superior</a>.
+</li><li><a class="wiki" href="CooperativeDownload.html">Donating upload to friends</a>. The Tribler core is
+the only Bittorrent-compatible client which supports this feature.
+</li></ul><p>
+"Currently Tribler 4.0 is a Bittorrent client with a
+secure foundation and pretty interface. However, the
+download speed leaves something to be desired
+and needs to be improved. "
+</p>
+<h2 id="Long-termObjective">Long-term Objective</h2>
+<p>
+Objective: Speed testing confirms that Tribler
+is now <em>the fastest</em> or a fast Bittorrent client :-)
+With the noted exception of 
+<a class="ext-link" href="http://digg.com/tech_news/BitTorrent_Bullies_BitTyrant_and_BitThief"><span class="icon">​</span>clients whom are parasitic</a>.
+</p>
+<h2 id="Project2ideas">Project 2 ideas</h2>
+<p>
+The aim of this project is to create an extensive testing suite for Bittorrent clients. At this point we have created a scripted environment that measures the performance of several bittorrent clients within the same swarm.
+</p>
+<p>
+The Bittorrent clients that we've been testing are:
+</p>
+<ul><li>Bittorent Mainline Client
+</li><li>Bittornado
+</li><li>Transmission
+</li><li>Aria2
+</li><li>Azureus
+</li><li>Tribler
+</li></ul><p>
+The environment setup is:
+</p>
+<ul><li>6 PCs each running a different client
+</li><li>all clients run in the same swarm but with little interraction
+</li><li>a huge swarm
+</li><li>a large file (a DVD or HD movie)
+</li></ul><p>
+We measure:
+</p>
+<ul><li>the evolution of the download speed for each particular client
+</li><li>download time
+</li><li>other aspects based on logging information for each client
+</li></ul><p>
+In order to achieve important results it is important to test a plethora of situations. Based on the above results we can draw conclusions and find out which facilities end up as the most important ones from a performace evaluator's point of view.
+</p>
+<p>
+Key performance indicators?
+</p>
+<ul><li>peer discovery efficiency
+</li><li>piece request management
+</li><li>unchoke strategy
+</li><li>connection management
+</li></ul><p>
+Stay tuned for more information.
+</p>
+<h2 id="Project1results">Project 1 results</h2>
+<ul><li><em>2007-05-04</em> <a class="missing attachment">Initial Project Planning</a>
+</li><li><em>2007-05-04</em> <a class="missing attachment">Measurement Plan</a>
+</li><li><em>2007-05-11</em> Added logging abilities to BT clients.
+</li><li><em>2007-05-27</em> Performance Measuring of Azureus, Tribler and Mainline.
+</li><li><em>2007-05-27</em> Analysis Download Algorithms
+</li></ul><p>
+Phase 1 in progress:
+</p>
+<ul><li>Designing Measurement Tool (10%) <em>(mentioned in Design Phase in <a class="missing attachment">Revised Project Planning</a>)</em>
+</li><li>Implementing Measurement Tool (0%)
+</li></ul><h2 id="Measurementsgraph">Measurements graph</h2>
+<p>
+Plot using the collected log files
+the following properties in time.
+</p>
+<ul><li>Peer discovery (tracker, DHT, PEX)
+</li><li>Tryout of peers (cumulative optimistic unchoke)
+</li><li>Usefullness of peers (total download bandwidth)
+</li></ul><p>
+This provides insight in the: 
+</p>
+<ul><li>peer discovery aggressiveness (tracker interval)
+</li><li>optimistic unchoke strategy
+</li><li>relative total P2P performance 
+</li></ul><p>
+Direction of conclusions :
+</p>
+<ul><li>Smartness of each client 
+<ul><li>Unchoke: random, round robin, etc.
+</li><li>Piece picking
+<ul><li>Endgame 
+</li><li>First piece
+</li></ul></li><li>Neighborhood health / peer discovery (DHT, PEX)
+</li><li>Azureus extra control messages, comments, DHT, and added value
+</li><li>Record and ban client with protocol violations or bad hashes
+</li><li>Others ? ?
+</li></ul></li><li>Efficiency ranking of clients
+</li><li>Best generic algorithms
+</li></ul><p>
+Application graphs
+</p>
+<ul><li>Tribler <a class="ext-link" href="http://bsc.fawo.nl/graphs/tribler.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/tribler.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/tribler.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Mainline bittorrent <a class="ext-link" href="http://bsc.fawo.nl/graphs/mainline.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/mainline.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/mainline.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Azureus <a class="ext-link" href="http://bsc.fawo.nl/graphs/azureus.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/azureus.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/azureus.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Azureus without DHT <a class="ext-link" href="http://bsc.fawo.nl/graphs/azureus_nodht.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/azureus_nodht.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/azureus_nodht.eps"><span class="icon">​</span>Postscript</a>
+</li></ul><p>
+Property graphs
+</p>
+<ul><li>Unique unchokes, unchokes and chokes <a class="ext-link" href="http://bsc.fawo.nl/graphs/chokes_unchokes_unique_unchokes.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/chokes_unchokes_unique_unchokes.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/chokes_unchokes_unique_unchokes.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Unique unchokes <a class="ext-link" href="http://bsc.fawo.nl/graphs/unique_unchokes.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/unique_unchokes.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/unique_unchokes.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Unchokes <a class="ext-link" href="http://bsc.fawo.nl/graphs/unchokes.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/unchokes.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/unchokes.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Chokes <a class="ext-link" href="http://bsc.fawo.nl/graphs/chokes.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/chokes.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/chokes.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Download progress <a class="ext-link" href="http://bsc.fawo.nl/graphs/progress.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/progress.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/progress.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Peers found via the tracker, buddycast or DHT <a class="ext-link" href="http://bsc.fawo.nl/graphs/peers_trackerpeers_dhtpeers.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/peers_trackerpeers_dhtpeers.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/peers_trackerpeers_dhtpeers.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Total peers found <a class="ext-link" href="http://bsc.fawo.nl/graphs/peers.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/peers.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/peers.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Peers found via Buddycast/DHT <a class="ext-link" href="http://bsc.fawo.nl/graphs/dhtpeers.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/dhtpeers.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/dhtpeers.eps"><span class="icon">​</span>Postscript</a>
+</li><li>Peers found via a tracker <a class="ext-link" href="http://bsc.fawo.nl/graphs/trackerpeers.png"><span class="icon">​</span>png</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/trackerpeers.svg"><span class="icon">​</span>svg</a> <a class="ext-link" href="http://bsc.fawo.nl/graphs/trackerpeers.eps"><span class="icon">​</span>Postscript</a>
+</li></ul><p>
+<strong>x-axis in seconds</strong>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

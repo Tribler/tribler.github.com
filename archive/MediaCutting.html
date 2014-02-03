@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="MediaCutting">Media Cutting</h1>
+<h2 id="Introduction">Introduction</h2>
+<p>
+Our approach to cutting video is to use ffmpeg. The justification for this choice is as follows:
+</p>
+<ul><li>Ffmpeg is (at least in theory) multi-platform. So far we got it working successfully under Linux, Windows and Mac. 
+</li><li>... is open source, so we can add functionality and fix bugs ourselves.
+</li><li>... is one of the very few free tools that support multiple video formats (although still does not split all of them well) and are multi-platform at the same time.
+</li><li>... still goes under very active development, so there is a big chance it will at the end support most of the video formats properly.
+</li></ul><table class="wiki">
+<tr><td>Video file extension</td><td>video codec</td><td>audio codec</td><td>Support</td><td>split quality
+</td></tr><tr><td style="text-align: right"> .mp4</td><td>mpeg4</td><td>aac</td><td>yes</td><td>good
+</td></tr><tr><td>.avi</td><td>xvid</td><td>mp3</td><td>yes</td><td>moderate
+</td></tr></table>
+<p>
+<strong>TODO:</strong> Add the rest of the tested formats in the table.
+</p>
+<h2 id="Usingffmpeg">Using ffmpeg</h2>
+<p>
+Spliting media with ffmpeg is quite easy. Below is some simple Python code showing how to do that:
+</p>
+<pre class="wiki">import os
+import string
+
+StartTime=25 # seconds
+StopTime=50  # seconds
+InFile="Johan-Oomen-metadata-partial.mp4"
+ffmpegexe="ffmpeg"
+ResFile="cut_Johan-Oomen-metadata.mp4"
+
+os.system(ffmpegexe + " -y -i " + InFile + " -vcodec copy -acodec copy " + 
+          " -ss " + str(StartTime) + " -t " + str(StopTime-StartTime) + " " + ResFile)
+</pre><p>
+This code, along with ffmpeg and the sample video <a class="missing attachment">are packed in the attached videosplit.zip file</a>. 
+</p>
+<p>
+Ffmpeg can be used for other operations on media (like transcoding) as well. Here are some of the options explained:
+</p>
+<ul><li><strong>-y</strong> overwrites the output file (does not ask for permission if the file exists already)
+</li><li><strong>-i filename</strong> specifies the input file
+</li><li><strong>-vcodec</strong> forces video codec. With <strong>copy</strong> copies the stream without re-encoding.
+</li><li><strong>-acodec</strong> forces audio codec. With <strong>copy</strong> copies the stream without re-encoding.
+</li><li><strong>-ss time</strong> specifies start time offset (in seconds)
+</li><li><strong>-t time</strong> specifies duration time (in seconds)
+</li></ul><p>
+For information about other options run <strong>ffmpeg -h</strong>.
+</p>
+<h2 id="Buildingffmpeg">Building ffmpeg</h2>
+<ul><li><strong>Linux</strong>: Ffmpeg compiles natively under Linux. See the documentation in ffmpeg sources.
+</li><li><strong>Windows</strong>: We build ffmpeg cross-platform on Debian with mingw32. For how-to description see <a class="wiki" href="FfmpegWin.html">FfmpegWin</a>.
+</li><li><strong>Mac</strong>: Ffmpeg compiles natively under Mac OS/X. How to create a Universal Binary is explained in <a class="wiki" href="FfmpegMac.html">FfmpegMac</a>. Download <a class="missing attachment">complete OSX testkit (Universal)</a>
+</li></ul><p>
+With some types of mp4 movies ffmpeg fails if used with the "<em>-acodec copy</em>" option. This is because frame_size of the audio stream is not initialized if multiple stts entries are found present in that stream. The workaround below solves this issue.
+</p>
+<pre class="wiki">--- libavformat/mov.c.orig	2007-05-03 10:32:35.868450428 +0200
++++ libavformat/mov.c	2007-05-07 10:37:24.599577370 +0200
+@@ -1419,7 +1419,7 @@
+             sc-&gt;time_scale= mov-&gt;time_scale;
+         av_set_pts_info(st, 64, sc-&gt;time_rate, sc-&gt;time_scale);
+ 
+-        if (st-&gt;codec-&gt;codec_type == CODEC_TYPE_AUDIO &amp;&amp; sc-&gt;stts_count == 1)
++	if (st-&gt;codec-&gt;codec_type == CODEC_TYPE_AUDIO /*&amp;&amp; sc-&gt;stts_count == 1*/)
+             st-&gt;codec-&gt;frame_size = sc-&gt;stts_data[0].duration;
+ 
+         if(st-&gt;duration != AV_NOPTS_VALUE){
+</pre><h2 id="Temporaryfixforwrongvideoframerateidentificationinmp4videos">Temporary fix for wrong video frame rate identification in mp4 videos</h2>
+<pre class="wiki">--- libavformat/mov.c.orig      2007-05-11 10:32:35.868450428 +0200
++++ libavformat/mov.c   2007-05-16 22:46:13.993701950 +0200
+@@ -959,14 +959,19 @@
+
+     for(i=0; i&lt;entries; i++) {
+         int sample_duration;
++        int sample_duration_round;
+         int sample_count;
+
+         sample_count=get_be32(pb);
+         sample_duration = get_be32(pb);
+         sc-&gt;stts_data[i].count= sample_count;
+         sc-&gt;stts_data[i].duration= sample_duration;
+-
+-        sc-&gt;time_rate= ff_gcd(sc-&gt;time_rate, sample_duration);
++        if (st-&gt;codec-&gt;codec_type == CODEC_TYPE_VIDEO)
++          sample_duration_round = sample_duration - sample_duration%1000;
++        else
++          sample_duration_round = sample_duration;
++
++        sc-&gt;time_rate= ff_gcd(sc-&gt;time_rate, sample_duration_round);
+
+         dprintf(c-&gt;fc, "sample_count=%d, sample_duration=%d
+",sample_count,sample_duration);
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

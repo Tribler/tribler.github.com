@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Introduction">Introduction</h1>
+<p>
+Peer-to-peer sharing of data has become one of the most popular ways of transferring files over the internet but has been mostly restricted to the pc domain. Recently there have been shifts towards other types of devices. One example being aTorrent[8] for android phones. Another being <a class="missing" href="#">SwiftIpad</a>[9] for the iPad. One platform that has remained untouched is the Television, a device that has never changed its purpose since the invention of it. Our goal is bring peer-to-peer to the TV and introduce a new way of viewing content on the TV. With the functionality that libswift offers we are able to make streaming content possible through a completely decentralized system.
+</p>
+<h1 id="LibswiftonaTV">Libswift on a TV</h1>
+<p>
+This article briefly describes the project to get a peer-to-peer application using libswift running on a Samsung D-Series Smart TV with a proof-of-concept application to stream, download and search content with the use of dispersy [1].
+Since the latest LED TV series of Samsung make use of a linux kernel, it is possible to create applications for it.
+In this project, we tested our app on a UE40D7000 Samsung TV [2], which was rooted with tools provided by the SamyGO team [3].
+At the end of this page, we will include a package with everything needed to get the application running on your TV.
+</p>
+<p>
+For now, here is a step by step process to get the application running on your TV. We will be adding screenshots and more info as soon as we can. We are also planning to create an install script to make the whole process a bit easier.
+</p>
+<h1 id="Requiredhardware">Required hardware</h1>
+<ul><li>Any Samsung D-series TV using an armv7 processor with Smart Hub with a firmware &lt;= 1018.0 (needed to get root access with SamyGO tools [3])
+</li></ul><h1 id="Requiredsoftware">Required software</h1>
+<ul><li>git
+</li><li>gcc-toolchain for armv7 [7] (Look for VDLinux-armv7a8-toolchain-lite_20100630 on the website)
+</li><li>Samsung 3.1.1 SDK for D series TV. [4] (Not tested with 3.5 SDK)
+</li></ul><h1 id="HowtorootyourTV">How to root your TV</h1>
+<p>
+If you are absolutely sure that your TV is rootable (check [5]),
+then go ahead and follow the steps on [3] to root your TV.
+</p>
+<p>
+Once the tv is rooted, try opening a shell on the TV via your terminal.
+</p>
+<pre class="wiki">nc &lt;ip_of_tv&gt; 1023
+</pre><h1 id="Installingtheapplication">Installing the application</h1>
+<p>
+Now the TV is rooted, it should be pretty straightforward to install the application with all its dependencies. Just download the install.tar.bz2 file, which can be found in the attachments, and upload it to the TV using ftp. It does not matter where you put it. Unpack it there and rename either the "11_UE_UAxxD6xx0 modules" or the "11_UE_UAxxD7xx0 modules" folder to "modules", depending on the TV model you use. These folders can be found in the install folder. 
+</p>
+<p>
+After renaming the folder, connect to the TV using netcat and open up a shell terminal. Make sure that you have the right privileges to run the install script, which can be found in the install folder. You can add privileges by running "chmod +x ./install.sh". Run the install script, this should move everything to the correct locations and set everything up.
+</p>
+<pre class="wiki">./install.sh
+</pre><p>
+The application can then be run after a reboot. This is tested for the Samsung D6000 and D7000 series, it is possible that this script will not work on other series. If that is the case, it is still possible to install the application manually, for which a guide can be found in the next sections.
+</p>
+<h1 id="Compilingtheapplicationbackend">Compiling the application back end</h1>
+<p>
+Compiling libswift for the TV is pretty straightforward,
+assuming you already grabbed the gcc-toolchain for the TV. Extract the archive with the gcc-toolchain and add the bin path in that folder to the $PATH variable in your .bashrc.
+</p>
+<p>
+example;
+</p>
+<pre class="wiki">export PATH=$PATH:/opt/VDLinux-armv7a8-toolchain-lite_20100630/bin
+</pre><p>
+Clone our github repository:
+</p>
+<pre class="wiki">git clone git://github.com/jettan/swiftarm.git
+</pre><p>
+Add the following exports to your .bashrc in order to get the environment variables right.
+</p>
+<pre class="wiki">export SWIFTARM=&lt;PATH_CLONED&gt;
+export PYTHONOPTIMIZE=yes
+export PYTHONPATH=$PYTHONPATH:&lt;PATH CLONED&gt;/tribler
+</pre><p>
+example:
+</p>
+<pre class="wiki">export SWIFTARM=/home/jettan/Documents/swiftarm
+export PYTHONOPTIMIZE=yes
+export PYTHONPATH=$PYTHONPATH:/home/jettan/Documents/swiftarm/tribler
+</pre><p>
+Now manually add libpython2.6.so and libz.so (see the python_libs attachment) to your toolchain folder in arm-v7a8-linux-gnueabi/lib. Don't forget to source your .bashrc.
+</p>
+<p>
+Now we can compile the application:
+</p>
+<pre class="wiki">cd $SWIFTARM/server/src
+./build arm
+</pre><h1 id="SettinguptheTV">Setting up the TV</h1>
+<p>
+After the TV has been rooted you have a very bare system that can't really do much. To make your life easier, we have prepared a package below with lots of handy tools like bash, lots of missing libraries, and modified init scripts so everything will work as it should.
+Instead of the netcat sh, you will be able to use bash. 
+</p>
+<p>
+This next part is about getting the application onto the TV and is fairly tedious to do it manually.
+</p>
+<p>
+First of all, download your favourite FTP client, we like to stick with nautilus. When using Filezilla, make sure you have binary mode on! Otherwise you are just going to end up with segfaults. Also, make sure your TV's auto-standby function is turned off. There is also a time-out when using FTP and you're not doing anything for a few minutes, so when an error randomly occurs, don't panic and just unmount the FTP filesystem and mount it again.
+</p>
+<h2 id="SettingupFTP">Setting up FTP</h2>
+<p>
+First, connect to the TV via FTP. Figure out what the ip address of your TV is in the internet settings of the TV.
+</p>
+<p>
+The first thing we will copy is the required binaries. Go to the following folder in your TV.
+</p>
+<pre class="wiki">/mtd_down/widgets/user/SamyGO/SamyGO
+</pre><p>
+Replace the entire bin folder with the bin folder in the install folder you downloaded.
+</p>
+<p>
+Next, we will add the .bashrc to make life a little easier.
+Add the .bashrc in the attachments to the following folder.
+</p>
+<pre class="wiki">/mtd_down
+</pre><h2 id="Addingpythonincludes">Adding python includes</h2>
+<p>
+Copy the include folder from the attachment to the following directory
+</p>
+<pre class="wiki">/mtd_down/widgets/user/SamyGO/SamyGO/opt/privateer
+</pre><h2 id="Addinglibraries">Adding libraries</h2>
+<p>
+After this we will be adding the libs folder. These are pretty large files so this may take a while. We will add the attachment ASAP.
+</p>
+<p>
+Copy all the files in lib folder from the attached archive to:
+</p>
+<pre class="wiki">/mtd_down/widgets/user/SamyGO/SamyGO/opt/privateer/lib
+</pre><p>
+Overwrite everything if asked.
+</p>
+<h2 id="Addingiptables">Adding iptables</h2>
+<p>
+Due to some issues with the <a class="missing" href="#">JavaScript</a> side of the app sending RST packets when it shouldn't we also need to add iptables.
+Create a modules folder in the following location.
+</p>
+<pre class="wiki">/mtd_down/widgets/user/SamyGO/SamyGO
+</pre><p>
+Then, copy the module files from the right folder depening on your TV model.
+</p>
+<h2 id="Overwritefirstinitscript">Overwrite first init script</h2>
+<p>
+Now we will overwrite the first init script called 01_01_catch_crap.initâ so that bash is started properly. Overwrite 01_01_catch_crap.initâ with the one in the attachments to the following folder.
+</p>
+<pre class="wiki">/mtd_down/user/widgets/SamyGO/SamyGO/etc/init.d
+</pre><h2 id="Overwritesecondinitscript">Overwrite second init script</h2>
+<p>
+Once this is working we can continue to the next step, adding the second init file, called 02_04_vusb.init, that will start our application. Overwrite it the same way as the previous one.
+</p>
+<pre class="wiki">/mtd_down/user/widgets/SamyGO/SamyGO/etc/init.d
+</pre><h2 id="Addingourapplication">Adding our application</h2>
+<p>
+First we need to add the tribler folder which can be found in
+</p>
+<pre class="wiki">cd $SWIFTARM
+</pre><p>
+Copy the tribler folder to
+</p>
+<pre class="wiki">/mtd_down/widgets/user/SamyGO/SamyGO
+</pre><p>
+It is time to add the application you compiled a little while ago. It is called ws and can be found in...
+</p>
+<pre class="wiki">$SWIFTARM/server/src
+</pre><p>
+Copy the binary ws to...
+</p>
+<pre class="wiki">/mtd_down/widgets/user/SamyGO/SamyGO/tribler
+</pre><p>
+Once this is done reboot the TV and root your TV again by running SamyGO. Bash should be working now with a more friendly environment. Try netcatting to your TV through port 1024 instead of 1023.
+</p>
+<pre class="wiki">nc &lt;ip_of_tv&gt; 1024
+</pre><p>
+You can check whether the application is running by connecting to the TV via netcat.
+It might take a while before it appears.
+</p>
+<pre class="wiki">pstree | grep ws
+</pre><p>
+If it finds a process called ws, it is working. To really check you can go to your browser and go to the following site.
+</p>
+<pre class="wiki">http://&lt;ip_of_tv&gt;:1337/alive
+</pre><p>
+If the word "Alive" is displayed on the page, the application is running.
+</p>
+<h2 id="AddingtheJavaScriptpartoftheapplication">Adding the <a class="missing" href="#">JavaScript</a> part of the application</h2>
+<p>
+All that remains is adding the <a class="missing" href="#">JavaScript</a> part of the application. In the swiftarm folder you downloaded from git there is a folder called swift_p2p_tv. Copy this folder to the following location on the TV.
+</p>
+<pre class="wiki">/mtd_down/widgets/user
+</pre><p>
+Restart your TV and the application should appear on the Smart Hub. Don't forget to run SamyGO again before starting our app.
+</p>
+<p>
+In principle everything should work properly now, if not, make sure you completed all the steps correctly.
+Otherwise, try killing ws and start it on your own.
+</p>
+<pre class="wiki">nc &lt;ip_of_tv&gt; 1024
+killall -9 ws
+cd tribler
+./ws
+</pre><h1 id="ExternalLinks">External Links</h1>
+<ul><li>[1] <a class="ext-link" href="http://www.scribd.com/doc/81170037/Boudewijn-Dispersy-Documentation-DRAFT-2010"><span class="icon">​</span>http://www.scribd.com/doc/81170037/Boudewijn-Dispersy-Documentation-DRAFT-2010</a>
+</li><li>[2] <a class="ext-link" href="http://www.samsung.com/uk/consumer/tv-audio-video/television/led-tv/UE40D7000LUXXU"><span class="icon">​</span>http://www.samsung.com/uk/consumer/tv-audio-video/television/led-tv/UE40D7000LUXXU</a>
+</li><li>[3] <a class="ext-link" href="http://wiki.samygo.tv/index.php5/Rooting_D_series_arm_cpu_models"><span class="icon">​</span>http://wiki.samygo.tv/index.php5/Rooting_D_series_arm_cpu_models</a>
+</li><li>[4] <a class="ext-link" href="https://www.samsungdforum.com/Devtools/Sdkdownload"><span class="icon">​</span>https://www.samsungdforum.com/Devtools/Sdkdownload</a>
+</li><li>[5] <a class="ext-link" href="http://wiki.samygo.tv/index.php5/Compatibility_Table_for_D_series_TVs"><span class="icon">​</span>http://wiki.samygo.tv/index.php5/Compatibility_Table_for_D_series_TVs</a>
+</li><li>[6] <a class="ext-link" href="http://filezilla-project.org/"><span class="icon">​</span>http://filezilla-project.org/</a>
+</li><li>[7] <a class="ext-link" href="http://opensource.samsung.com/index.jsp;jsessionid=7C10A95D34FBC81948BE5B611639A07C"><span class="icon">​</span>http://opensource.samsung.com/index.jsp;jsessionid=7C10A95D34FBC81948BE5B611639A07C</a>
+</li><li>[8] <a class="ext-link" href="http://atorrent.nl.softonic.com/android"><span class="icon">​</span>http://atorrent.nl.softonic.com/android</a>
+</li><li>[9] <a href="http://www.tribler.org/trac/wiki/SwiftIPad">http://www.tribler.org/trac/wiki/SwiftIPad</a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

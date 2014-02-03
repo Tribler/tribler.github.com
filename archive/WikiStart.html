@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td>
+<div style="height:4px"></div> <table width="100%" style="margin-top:5px; border-right:1px solid #ccc; border-left:1px
+solid #ccc; border-top:1px solid #ccc; border-bottom:1px solid #ccc"> <tr> <td valign="top" style="padding:40px 10px 0px 50px; border-right: 0px dotted #ccc"> <a href="/trac/wiki/Download" style="border-style:none"><img src="/images/screenshot.png" width="490" /></a> </td> <td width="350" valign="top" style="background-color:#F2F2F2; padding: 0px 10px 20px
+20px"> <p class="downloadListTop"></p> <p class="downloadList">
+<b>Find</b> </p> <p class="downloadListSub">Integrated keyword search
+(torrents, youtube, liveleak) &amp; browse for newest content, most
+popular, recommended and much more</p> <p class="downloadList">
+<b>Enjoy</b> </p> <p class="downloadListSub">Fast downloading, play
+while downloading, integrated video player</p> <p class="downloadList"> <b>Share</b> </p> <p class="downloadListSub">Find and make friends, find taste
+neighbours</p><br /> <a style="font-size:16px; margin-top:0px; margin-bottom:10px; color:#008e00" href="/trac/wiki/Download">Download Tribler (including for Mac and Ubuntu
+Linux).</a> </td> </tr> <tr> <td> <ul> <li><a href="/Download/">Please try our test build of Tribler 5.0!</a>
+</li> </ul></td> </tr> </table>
+
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

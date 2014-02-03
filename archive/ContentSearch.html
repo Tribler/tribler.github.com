@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="ContentSearch">Content Search</h1>
+<p>
+Status: operational <br />
+</p>
+<p>
+<em>Latest news: As of October 2009 we believe that Tribler includes the fastest known zero-server P2P implementation of keyword search: median response time is: 325 milliseconds. This means that search results in Tribler V5.2 often appear faster on your screen then in Google, Twitter or Youtube. Disclaimer: Tribler V5.2 will be released in Feb 2010 and is currently only available in source code form at svn.tribler.org</em>
+</p>
+<p>
+Finding content is the prime functionality of a P2P system. No matter how fast downloads are, everything starts with finding something interesting.
+Finding content should be as easy as using Google. Ideally, the first search result is exactly what you want and is a fast-downloading healthy swarm. Protection against spam is another key ingredient. If you were not looking for V-i-a-g-r-a or a special home video it should not appear in your search results. In user-generated video communities such as Youtube and Tribler this is a difficult problem. The key requirements of P2P search are thus: fast results, correct results and spam protection. 
+</p>
+<h2 id="Searchspeed">Search speed</h2>
+<p>
+Current median search speed of the latest Tribler Python code is 325 ms. The first search results thus quickly appear on your screen. For several years we have improved the search feature using our own overlay network. Search speed is being improved in every release by using more sophisticated algorithms. In the first years our search network was still small, slow and vulnerable to Tribler-specific spam attacks. The workings of the underlying P2P algorithms are described in various pages on this wiki: <a class="wiki" href="Buddycast3.html">decentralised content discovery</a>, <a class="wiki" href="DecentralizedRecommendation.html">DecentralizedRecommendation</a>, <a class="wiki" href="SimilarityFunction.html">SimilarityFunction</a>, <a class="wiki" href="ClickLog.html">ClickLog</a>, <a class="wiki" href="AdversarialContentSearch.html">AdversarialContentSearch</a> and <a class="wiki" href="Moderation.html">Moderation (in progress)</a>. 
+</p>
+<p>
+To measure our search response time we conducted an experiment using our live search overlay. Using similar keywords that our users use we send queries into the P2P network. We recorded the response time for numerous queries by measuring the time between sending the query request and first incoming results. The graph below shows two lines, one for the old algorithm and the improved approach of 5.2 version. We are very please that now with 95% probability search results arrive within 1 second. Thus we achieved an important milestone: sub-second search in a full self-organising system. 
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/ContentSearch/research_responsetime_325ms_TriblerV5.2_by_Nitin.jpg"></a> <br />
+</p>
+<h2 id="Unboundedscalabilityandsemanticclustering">Unbounded scalability and semantic clustering</h2>
+<p>
+Due to the lack of servers in Tribler architecture we believe our algorithms should be able to scale to many millions of users. This is important aim for the Tribler team as we aim for using Tribler in television hardware. With unbounded scalability every future Internet-connected television can be connected to a single global network. 
+</p>
+<p>
+In the past security, speed and search quality where in conflict. With Tribler we moved to a new generation: semantic clustering and full-replication of swarm info. Semantic clustering means that the peers in the network form connections with peers of similar TV viewing behavior. Or at a technical level: peers which download content with the same info_hash. We also exploit the fact that hard disks of today are big and cheap. We integrate full replication of metadata: every peer in the network stores search info for 50.000 swarms (.torrent files only).
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+The formula above is used to calculate how similar another peer in our overlay is. Assuming that peer <em>u</em> has created a peer-item matrix with received Buddycast messages and its own preference list, the similarity of peer <em>u<sup>'</sup></em> to <em>u</em> is calculated by this formula :
+</p>
+<ul><li>L<sub>i</sub> denotes the list of peers who prefer(i.e. download)item <em>i</em>. <em>c(u)</em>denotes the length of peer <em>u's</em> preference list. Smoothing parameter <em>mu</em> is set to 1 and augment parameter <em>k</em> is set to 100000 in Buddycast3. It's easy to prove that k&gt;<em>sim(u<sup>'</sup>,u)</em>&gt;=0. Furthermore, for a experience peer (i.e. having a number of preferece lists from other peers), 0.5k&gt;<em>sim(u<sup>'</sup>,u)</em>&gt;=0.
+</li><li>|L<sub>i</sub>| denotes the length of the list. It is a reverse-frequency factor. The importance of an item for calculating peer-peer similarity decreases with the frequency of its occurrences in usersâ preference lists. 
+</li><li>Similarity is asymmetric: <em>sim(u<sup>'</sup>,u)</em> is not equal to <em>sim(u,u<sup>'</sup>)</em>.
+</li></ul><h2 id="P2PContentSearchAlgorithms">P2P Content Search Algorithms</h2>
+<p>
+New in upcoming V5.2 are P2P RSS feeds and moderations. Keyword search was the main improvement of V4.1. We had many complaints that the core P2P features of search &amp; download where poor in Tribler V4.0. <a class="wiki" href="ContentSearch.html">ContentSearch</a> improvements :
+</p>
+<ul><li>Decentralised moderation of swarms <em>New in V5.2</em>
+<ul><li>User-generation of metadata
+</li><li>Vote for you favorite moderator
+</li><li>fully implemented in zero-server technology
+</li><li>Hardened against spam attacks
+</li></ul></li><li>P2P RSS feeds <em>New in V5.2</em>
+<ul><li>spread list of approved swarms without big server
+</li><li>seamless translation of server-based RSS into P2P RSS
+</li><li>uses public/private key encryption based on elliptic curve crypto
+</li><li>cryptographic assurances in order to provide untampered feeds
+</li></ul></li><li>Return many results   <em>Done: remote search</em>
+</li><li>Works even after Tribler is just installed <em>Done</em>
+</li><li>Not consume much memory <em>Done</em>
+</li><li>Fast response time <em>325ms, world record</em>
+</li><li>Returns <strong>no</strong> irrelevant results <em>in progress</em>
+</li><li>Partial matches to keywords are not shown <em>done</em>
+</li><li>Always use the <strong>AND</strong> operator when two keywords are provided
+</li><li>Provides clear user feedback, like  <em>TODO</em>
+<ul><li>Searched for <em>silver</em> in 40,000 files
+</li><li>Matches 1 - 20 of 89 for <em>silver</em>
+</li><li>No matches for your query <em>Silver</em> AND <em>man</em>.
+</li></ul></li></ul><p>
+Version V4.0 of Tribler keeps all .torrent information
+in main memory. A Google-like keyword search window will replace
+the <em>browse all</em> feature as the default opening screen 
+For V4.1 we no longer keep all .torrent information in
+main memory. Like many other parts of Tribler this
+info needs to be loaded on-demand. 
+Partial word matches are no longer shown and results with 1 matching keyword of a 2 keyword search are
+also no longer shown (aka default <em>AND</em>). A search of <em>look 2007</em> does not return <em>The.Outlook.2007.HDTV</em>.
+</p>
+<table class="wiki">
+<tr><td>TIME</td><td>ACTION
+</td></tr><tr><td>startup</td><td>list of all keyword of local stored .torrent files is loaded(+popularity); the filenames in a .torrent are ignored for this version
+</td></tr><tr><td>keyword search local</td><td>matching of keywords in main memory
+</td></tr><tr><td>keyword search remote</td><td style="text-align: left">send out search to peers with at least 1000 collected torrents 
+</td></tr><tr><td>result ordering</td><td style="text-align: left">results are ordered by a complex combination of factors: their number of seeders, matching swarm names, matching included filenames in a swarm, plus special bonus for swarms in highly voted moderator channels 
+</td></tr><tr><td>results display</td><td>matching swarms are shown directly after local keyword search is completed
+</td></tr><tr><td>results highlighting</td><td>keywords matches on the torrent name are highlighted in bold, similar to Google
+</td></tr><tr><td>.torrent info loading</td><td>.torrent details such as tracker URL are search in <a class="wiki" href="MegaCache.html">MegaCache</a> <em>after</em> display of results
+</td></tr><tr><td>progressive updates</td><td>incoming results from the network search (Tribler peers + video sites) are inserted in real-time into the results, respecting the result ordering
+</td></tr><tr><td>limited window flickering</td><td>due to the progressive updating, the results screen is constantly re-written. After the remote keyword search is done, the first page of the results screen is sorted and no longer updated. The slower Youtube results are appended.
+</td></tr></table>
+<p>
+Note that even the most basic in information retrieval algorithms are not yet included: <a class="ext-link" href="http://en.wikipedia.org/wiki/Tf-idf"><span class="icon">​</span>Keyword frequency</a>, <a class="ext-link" href="http://www.xapian.org/docs/bm25.html"><span class="icon">​</span>BM25</a> in Tribler.
+</p>
+<p>
+On the V4.1 :
+<em>Enable remote queries of your <a class="wiki" href="MegaCache.html">MegaCache</a></em>
+</p>
+<ul><li>Keyword search returns numerous results directly after install
+</li><li>Bootstrap process does not need to be very agressive
+</li><li>Remote keyword searches are not the main mechnism, only to help non-bootstrapped peers
+</li><li>Thus restrict to 10 keyword searches per random peer over its entire lifetime
+</li><li>Your taste buddies+friends have no restrictions on keyword searches
+</li><li>return maximum 20 alive+unchecked torrent names+details, not bulky hashes
+</li><li>Allow download of 10 .torrents for given keyword per peer over its lifetime
+</li><li>Present a counter to the user of how many .torrent files he can query
+</li><li>Show number of discovered peers and how many .torrent files they have on average 
+</li></ul><p>
+(partly?) Implemented by Arno...
+</p>
+<p>
+For Tribler verion 4.2 :
+</p>
+<p>
+<em>Keyword searches are more powerfull</em>
+</p>
+<ul><li>Buddycast is extended with a field with the last 10 keyword searches
+</li><li>Upon startup the opening screen of Tribler shows hot keywords of other peers
+</li><li>Clicking a hot keyword initiates a keyword search query
+</li><li>Combine the Youtube.com visual gridview with keyword browsing
+</li><li>Show for each hot keyword a few thumbnails
+</li></ul><h2 id="UserInterface">User Interface</h2>
+<p>
+Canceled Tribler user interface design:
+<a class="missing" href="#"></a>
+Mixing user-genrated video results and social network search has proven to be difficult for people to understand.
+</p>
+<h2 id="long-termResearchideas">long-term Research ideas</h2>
+<p>
+Mapping of the user desires with the available content. Craft a iterative cycle of re-search using results feedback. Feedback on keyword search convergence. Real-time search keyword suggestion. pairs of keywords &amp; click-log. Implicit tagging. Adversarial content search.
+</p>
+<h2 id="Usageofclick-logapproachinP2Psearchwithprivacypreservationandsecurity">Usage of click-log approach in P2P search with privacy preservation and security</h2>
+<p>
+Arjen: click-log approach with maximum privacy.  Spam and adversarial behavior is the key challenge of this research. Understanding the trade-off between performance, relevance, scalability, robustness, etc. Exploit the usage of social networks and friends for security &amp; privacy. Use of aggregation to combat privacy leakage. Johan requirements: running experimental code and zero-servers.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

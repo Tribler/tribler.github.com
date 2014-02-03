@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="FreekZindel">Freek Zindel</h1>
+<p>
+Freek Zindel worked on bringing the Tribler technology to our users. Together with <a class="wiki" href="JaccoTaal.html">Jacco Taal</a> he was responsible for maintaining external contacts, public relations, and Tribler business development. 
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/FreekZindel/freek_op_mwenge.jpg" width="250"></a>
+</p>
+<h2 id="ContactFreek">Contact Freek</h2>
+<p>
+Freek Zindel<br />
+<a class="mail-link" href="mailto:f.zindel@tudelft.nl"><span class="icon">​</span>f.zindel@tudelft.nl</a><br />
+</p>
+<h2 id="WhatFreekLikes">What Freek Likes</h2>
+<ul><li>Traveling
+</li><li>Anything technical
+</li><li>Food (making and eating)
+</li><li>Sailing
+</li><li>Diving
+</li></ul><h2 id="WhatFreekDoesntLike">What Freek Doesn't Like</h2>
+<ul><li>Warm <a class="ext-link" href="http://en.wikipedia.org/wiki/Endive"><span class="icon">​</span>Belgian Endive</a>
+</li></ul><h2 id="WhatFreekDoes">What Freek Does</h2>
+<p>
+Besides working on the Tribler project, Freek runs a small company with <a class="wiki" href="JelleRoozenburg.html">Jelle Roozenburg</a> in his spare time.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

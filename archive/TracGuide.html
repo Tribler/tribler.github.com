@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TheTracUserandAdministrationGuide">The Trac User and Administration Guide</h1>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+The <a class="wiki" href="TracGuide.html">TracGuide</a> is meant to serve as a starting point for all documentation regarding Trac usage and development. The guide is a free document, a collaborative effort, and a part of the <a class="ext-link" href="http://projects.edgewall.com/trac/"><span class="icon">​</span>Trac Project</a> itself.
+</p>
+<h2 id="TableofContents">Table of Contents</h2>
+<p>
+Currently available documentation:
+</p>
+<ul><li><a class="wiki" href="TracGuide.html">TracGuide</a> (This page)  -- Documentation starting point.
+<ul><li><a class="wiki" href="TracInstall.html">TracInstall</a> -- How to install and run Trac.
+</li><li><a class="wiki" href="TracUpgrade.html">TracUpgrade</a> -- How to upgrade existing installations.
+</li><li><a class="wiki" href="TracMultipleProjects.html">TracMultipleProjects</a> -- Multiple projects on a single host.
+</li><li><a class="wiki" href="TracAdmin.html">TracAdmin</a> -- Administrating a Trac project.
+</li><li><a class="wiki" href="TracImport.html">TracImport</a> -- Importing tickets from other bug databases.
+</li><li><a class="wiki" href="TracIni.html">TracIni</a> -- Trac configuration file reference. 
+</li><li><a class="wiki" href="TracPermissions.html">TracPermissions</a> -- Access control and permissions.
+</li><li><a class="wiki" href="TracWiki.html">TracWiki</a> -- How to use the built-in Wiki.
+</li><li><a class="wiki" href="TracBrowser.html">TracBrowser</a> -- Browsing source code with Trac.
+</li><li><a class="wiki" href="TracChangeset.html">TracChangeset</a> -- Viewing changes to source code.
+</li><li><a class="wiki" href="TracTickets.html">TracTickets</a> -- Using the issue tracker.
+</li><li><a class="wiki" href="TracReports.html">TracReports</a> -- Writing and using reports.
+</li><li><a class="wiki" href="TracQuery.html">TracQuery</a> -- Executing custom ticket queries.
+</li><li><a class="wiki" href="TracRoadmap.html">TracRoadmap</a> -- The roadmap helps tracking project progress.
+</li><li><a class="wiki" href="TracTimeline.html">TracTimeline</a> -- The timeline provides a historic perspective on a project.
+</li><li><a class="wiki" href="TracLogging.html">TracLogging</a> -- The Trac logging facility.
+</li><li><a class="wiki" href="TracRss.html">TracRss</a> -- RSS content syndication in Trac.
+</li><li><a class="wiki" href="TracNotification.html">TracNotification</a> -- Email notification.
+</li></ul></li></ul><ul><li><a class="ext-link" href="http://projects.edgewall.com/trac/wiki/TracFaq"><span class="icon">​</span>Trac FAQ</a> - A collection of Frequently Asked Questions (on the project website)
+</li></ul><h2 id="SupportandOtherSourcesofInformation">Support and Other Sources of Information</h2>
+<p>
+If you are looking for a good place to ask a question about Trac, look no further than the <a class="ext-link" href="http://projects.edgewall.com/trac/wiki/MailingList"><span class="icon">​</span>MailingList</a>. It provides a friendly environment to discuss openly among Trac users and developers.
+</p>
+<p>
+See also the <a class="wiki" href="TracSupport.html">TracSupport</a> page for more information resources.
+</p>
+<p>
+If you are interested in commercial support, please <a class="ext-link" href="http://www.edgewall.com/contact/"><span class="icon">​</span>contact Edgewall Software</a>.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

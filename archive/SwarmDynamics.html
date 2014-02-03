@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Real-timevisualisationofswarmdynamics">Real-time visualisation of swarm dynamics</h1>
+<p>
+Research question: <em>provide the end-user with insight into
+the health and contributions to Bittorrent content distribution swarms and the ability to self-police
+bandwidth</em>. <a class="ext-link" href="http://en.wikipedia.org/wiki/The_Evolution_of_Cooperation"><span class="icon">​</span>Context and motivation</a>
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmDynamics/Advanced_Prototype_wx.jpg" width="600"></a>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmDynamics/Advanced_Prototype_PyOpenGL.jpg" width="600"></a><br />
+</p>
+<p>
+top level strategies:
+</p>
+<ul><li>1 stunning case study
+</li><li>more user involvement + actions to take
+</li><li>increased understanding and behavioural change to boost performance
+</li><li>entertainment
+</li></ul><p>
+Top level goals
+</p>
+<ul><li><em>Show the bandwidth contributions of peers and give the user full control of upload bandwidth contributions, blocking of peers, and social markers visible to others: Love&amp;Hate</em>. This will generate an emergent self-policing system where users determine the bandwidth allocation policy and the real-time visualiser is an enabling mechanism
+</li><li>Show for each user their bandwidth contribution or leeching for naming&amp;shaming + send <em>bandwidth love</em> &amp; kick-out button
+</li><li><a class="wiki" href="FullIncentivisation.html">Reward good behaviour</a> with a prominent visual placement as to improve performance
+</li><li>show who the most socially connected people are and provide a desire to join
+</li><li>entertainment and social glue: give boring user something to look at + imprint community membership
+</li><li>show something new
+</li><li>network insight
+</li><li>mental model of the economics of swarms: every MByte is contributed by a real person
+</li><li>mental model that bandwidth comes from people
+</li><li>mental model that high performance comes from increased sharing
+</li><li>explain zero-sum game: Alice gave 23 MByte to Bob, Charlie send 30MByte to...
+</li><li>insight into you sharing ratio, sharing reputation, or Internet speed
+</li><li>increase the feeling of connectedness of participants: group formation, shared goals&amp;beliefs
+</li><li>Show user that all bandwidth comes from community members and uploads go to real people
+</li><li>Insight into Internet connection usage, Mbps stats
+</li><li><a class="wiki" href="AdversarialContentSearch.html">voting on real-fake of moderations</a> and moderators from Rameez
+</li></ul><p>
+  
+</p>
+<h2 id="Deploymentideas">Deployment ideas</h2>
+<p>
+Possible extended implementation for deployment 3-4 months before end of thesis
+</p>
+<ul><li>Light-weight display of connected peers stats
+</li><li>Display method is a single spiral shape with fixed even-spaced degrees of separation
+</li><li>What to display
+<ul><li>Default is distance to centre for latency
+</li><li>Default for size is top bandwidth
+</li><li>Default for sorting is by bandwidth ( 1 O'clock position top peers, 11 O'clock lowest peers)
+</li><li>Default for color is T4T vs. G2G peers
+</li></ul></li><li>Which peers to display
+<ul><li>Enable or disable classes of peers in a corner
+</li><li>Default is 80 peers in five classes (all enabled)
+</li><li>Highest Bandwidth T4T, idem for G2G
+</li><li>Lowest latency (close proximity) T4T, idem for G2G
+</li><li>Most uploaded MBytes T4T, idem for G2G
+</li><li>Random peers T4T, idem for G2G
+</li></ul></li><li>Possible action for users to do
+<ul><li>Block peer
+</li><li>Give high priority
+</li></ul></li><li>By default share the network statistics and user actions for research purposes
+<ul><li>Allow user to disable crawling in privacy setting
+</li><li>clear explanation on website
+</li></ul></li><li>Crawl the network for thesis graphs
+<ul><li>rendering performance on their machines (startup+refresh for CPU config)
+</li><li>actual usage by users
+</li></ul></li></ul><ul><li>Advanced inspiration: <a class="ext-link" href="http://www.visualcomplexity.com/vc/project_details.cfm?id=539&amp;index=68&amp;domain=Social%20Networks"><span class="icon">​</span>http://www.visualcomplexity.com/vc/project_details.cfm?id=539&amp;index=68&amp;domain=Social%20Networks</a>
+</li></ul><p>
+<a class="ext-link" href="http://images.google.com/images?q=tag%20cloud%20examples"><span class="icon">​</span>http://images.google.com/images?q=tag%20cloud%20examples</a>
+</p>
+<h3 id="Triblerintegratedprototype">Tribler integrated prototype</h3>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmDynamics/TriblerLive.png" width="600"></a><br />
+</p>
+<p>
+<em>Keep it simple, get in working in the wild</em>
+</p>
+<ul><li>Integrated in Tribler GUI, new "peers" button in red color
+</li><li>Tribler integration, use/expand stats API 
+</li><li>Refresh (including generation and sorting) 150 msecs
+</li><li>Test response time
+</li><li>Keep "header"/search bar of Tribler above visualisation
+</li><li>Devise a better way to scatter the peers in the window
+<ul><li>1st sort by: bandwidth when connected
+</li><li>2nd sort by: last activity of MByte exchange in a swarm when no longer connected
+</li></ul></li><li><strong>two colors</strong>: t4t, Tribler; exactly 25 most recent connected peers each
+<ul><li>Always display 25 + 25 peers with most recent 'last activity'
+</li><li>Mix: t4t upload, t4t downloads, bartercast
+</li></ul></li><li>Total Download stats of both swarm and .torrent files
+</li><li>Use normalised distance: 1Kbyte far, 1GByte close.
+</li><li>Keep info between sessions using storage by PermID (Tribler only)
+</li><li>How to give users more control of their bandwidth using up/down peer voting like <a class="ext-link" href="http://www.reddit.com/r/programming/"><span class="icon">​</span>Reddit</a> 
+</li></ul><h2 id="Thesis">Thesis</h2>
+<ul><li>Introduction (P2P networks, <a class="wiki" href="BitTorrent.html">BitTorrent</a>, Tribler)
+</li><li>Problem description <br />
+See above research question <em>provide the end-user with insight into...</em> plus real-time rendering
+</li><li>Design and implementation <br />
+Design methodology: Continuous prototyping, increase sophistication, learn and plan<br />
+What to display, what stats, how this is done, screenshot, Integration with bartercast 2
+Send bartercast2 message, receive message, parse and store in database,
+link with visualization
+</li><li>Performance <br />
+Response Time of Prototypes and Implementation
+Resources Utilization
+</li><li>Future Work <br />
+Deploy and measure voting behavior
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

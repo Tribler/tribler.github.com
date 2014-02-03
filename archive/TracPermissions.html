@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h2 id="TracPermissions">Trac Permissions</h2>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+Trac uses a simple but flexible permission system to control what users can and can't access.
+</p>
+<p>
+Permission privilegies are managed using the <a class="wiki" href="TracAdmin.html">trac-admin</a> tool.
+</p>
+<p>
+Regular visitors, non-authenticated users, accessing the system are assigned the default 
+role (<em>user</em>) named <tt>anonymous</tt>. 
+Assign permissions to the <tt>anonymous</tt> user to set privilegies for non-authenticated/guest users.
+</p>
+<p>
+In addition to these privileges users can be granted additional individual 
+rights in effect when authenticated and logged into the system.
+</p>
+<h3 id="Availableprivileges">Available privileges</h3>
+<ul><li><tt>TRAC_ADMIN</tt>
+</li><li><tt>LOG_VIEW</tt>
+</li><li><tt>FILE_VIEW</tt>
+</li><li><tt>CHANGESET_VIEW</tt>
+</li><li><tt>BROWSER_VIEW</tt>
+</li><li><tt>TICKET_VIEW, TICKET_CREATE, TICKET_MODIFY, TICKET_ADMIN</tt>
+</li><li><tt>REPORT_VIEW, REPORT_CREATE, REPORT_MODIFY, REPORT_DELETE, REPORT_ADMIN, REPORT_SQL_VIEW</tt>
+</li><li><tt>WIKI_VIEW, WIKI_CREATE, WIKI_MODIFY, WIKI_DELETE, WIKI_ADMIN</tt>
+</li><li><tt>MILESTONE_VIEW, MILESTONE_CREATE, MILESTONE_MODIFY, MILESTONE_DELETE</tt>
+</li><li><tt>ROADMAP_VIEW, ROADMAP_ADMIN</tt>
+</li><li><tt>TIMELINE_VIEW</tt>
+</li><li><tt>SEARCH_VIEW</tt>
+</li><li><tt>CONFIG_VIEW</tt>
+</li></ul><p>
+The <tt>something_ADMIN</tt> privileges are just shortcuts that can be used to grant a user all the <em>something</em> privileges in one go. Having <tt>TRAC_ADMIN</tt>
+is like being <tt>root</tt> on a *NIX system, it will let you do anything you want.
+</p>
+<h3 id="Grantingprivileges">Granting privileges</h3>
+<p>
+Currently the only way to grant privileges to users is by using the
+<tt>trac-admin</tt> script. The current set of privileges can be listed
+with the following command:
+</p>
+<pre class="wiki">  $ trac-admin /path/to/projenv permission list
+</pre><p>
+This command will let the user <em>bob</em> delete reports:
+</p>
+<pre class="wiki">  $ trac-admin /path/to/projenv permission add bob REPORT_DELETE
+</pre><h3 id="Permissiongroups">Permission groups</h3>
+<p>
+Permissions can be grouped together to form roles such as
+<em>developer</em>, <em>admin</em>, etc.
+</p>
+<pre class="wiki">  $ trac-admin /path/to/projenv permission add developer WIKI_ADMIN
+  $ trac-admin /path/to/projenv permission add developer REPORT_ADMIN
+  $ trac-admin /path/to/projenv permission add developer TICKET_MODIFY
+  $ trac-admin /path/to/projenv permission add bob developer
+  $ trac-admin /path/to/projenv permission add john developer
+</pre><h3 id="Defaultpermissions">Default permissions</h3>
+<p>
+Granting privileges to the special user <em>anonymous</em> can be used to control
+what an anonymous user can do before they have logged in.
+</p>
+<p>
+In the same way, privileges granted to the special user <em>authenticated</em> will apply to any authenticated (logged in) user.
+</p>
+<hr />
+<p>
+See also: <a class="wiki" href="TracAdmin.html">TracAdmin</a>, <a class="wiki" href="TracGuide.html">TracGuide</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

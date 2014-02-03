@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BuildingbinariesonMacOSX">Building binaries on Mac OS/X</h1>
+<p>
+Compiling sources into binaries on Mac OS/X, and getting everything right when creating an application bundle (= a <tt>.app</tt> directory which represents an application), there are many details that might frustrate the casual coder or are not that easy to find information about. I've described some of them here, in any order. Use the search function of your browser, etc.
+</p>
+<h2 id="WhichPythonversion">Which Python version</h2>
+<p>
+Several python versions are bugged or behave annoyingly when compiling binaries. For instance, by default, any Universal Binary version of Python will insist on creating fat binaries even if we want to create modules for only the current platform. The build process will fail by lack of dependencies for the other platform. To fix this, set <tt>MACOSX_DEVELOPMENT_TARGET=10.3</tt> to force compiling for OS/X 10.3. However, some Python versions are bugged in the handling of this variable (in <tt>distutils/util.py</tt> around line 110). Since this keeps on changing between versions, I often use Python 2.3 (non-fat, shipped with Mac OS/X) to build the binaries. The only downside is a warning when loading the libraries with Python 2.4/2.5.
+</p>
+<h2 id="Dependencies">Dependencies</h2>
+<ol><li>Be careful not to ship one of the following prefixes for your dependencies, or any other custom installed library that the end user does not have:
+<ol class="loweralpha"><li><tt>/usr/local/</tt>, containing manually installed applications
+</li><li><tt>/opt/local/</tt>, containing applications installed through <tt>MacPorts</tt>
+</li><li><tt>/sw/</tt>, containing applications installed through <tt>Fink</tt>
+</li><li><tt>/Users/</tt>, containing applications installed with some <tt>./configure --prefix=/Users/</tt> script.
+</li></ol></li><li>Dependencies can have the form of <tt>@executable_path/....</tt>, which only makes sense inside an application bundle. <tt>@executable_path</tt> points to <tt>APPNAME.app/Contents/MacOS</tt>. Note that libraries are often installed in <tt>APPNAME.app/Contents/Frameworks</tt>, making the prefix <tt>@executable_path/../Frameworks/</tt> common.
+</li><li>Use the <tt>DYLD_LIBRARY_PATH</tt> environment variable for a colon-seperated list of directories to look for libraries. Ugly when shipping binaries, but handy when debugging or running a checked-out source from the command line. "man dyld" for more information about.
+</li><li>To support older versions of OS/X, set the <tt>MACOSX_DEPLOYMENT_TARGET</tt> environment variable to, for instance, <tt>10.3</tt> when building with gcc or Python.
+</li><li>Use the <tt>lipo</tt> tool with <tt>grep</tt> to see what files are open by the running applications. Useful for checking whether an application really doesn't use the wrong binaries.
+</li></ol><h2 id="Libraryanalysistools">Library analysis tools</h2>
+<p>
+Dynamic libraries come with the <tt>.dylib</tt> extension, or with an <tt>.so</tt> extension if they were badly ported from Linux. Most of the following tools work on executables as well.
+</p>
+<ol><li><tt>otool -L libname.dylib</tt> to view which libraries are required for libname to load. Note that Mac OS/X, unlike Linux, often uses absolute paths. See the dependencies section for more information.
+</li><li><tt>install_name_tool -change old new libname.dylib</tt> changes a dependency from "old" to "new" in libname.dylib. Succeeds whether the dependency is found or not.
+</li><li><tt>strip -x libname.dylib</tt> removes debugging symbols and the like, to save space without changing the functionality. Can save quite a lot.
+</li></ol><p>
+Furthermore, there are tools to work with fat binaries (Universal Binaries). These binaries contain object code for both PPC and i386.
+</p>
+<ol><li><tt>lipo -info libname.dylib</tt> prints which platforms are represented in the binary. Note that some compilation processes insert stubs for one of the platforms. Use <tt>-detailed_info</tt> with lipo to see the respective sizes for ppc and i386.
+</li><li><tt>lipo -thin i386 libname.dylib -output libname-i386.dylib</tt> to extract the i386 object code out of a fat library. Use a similar syntax for ppc. Fails on a non-fat library. Use the [source:abc/branches/mainbranch/Tribler/Player/Build/Mac/smart_lipo_thin smart_lipo_thin] script to be able to thin a file, keeping the same name, and can be run on anything.
+</li><li><tt>lipo -create libname-i386.dylib libname-ppc.dylib -output libname.dylib</tt> to merge two single-platform libraries into an universal library. Use the [source:abc/branches/mainbranch/Tribler/Player/Build/Mac/smart_lipo_thin smart_lipo_merge] script to be able to merge two libraries regardless of whether they happen to have stubs for another architecture.
+</li></ol><h2 id="Diskimagetools">Disk image tools</h2>
+<p>
+Disk images (<tt>.dmg</tt> files) are similar to <tt>.iso</tt> files in that they contain a mountable directory structure within a single container. First, some handy tools:
+</p>
+<ol><li><tt>hdiutil create -srcfolder /dir/containing/contents -format UDRW -scrub -volname "Volume Name" diskimage.dmg</tt> to create a r/w disk image with a certain volume name and contents. UDRW=r/w, UDZO=r/o, UDCO=r/o compressed.
+</li><li><tt>hdiutil attach -readwrite -noverify -noautoopen diskimage.dmg /my/mountpoint</tt> to mount a disk image.
+</li><li><tt>hdiutil detach /my/mountpoint</tt> to unmount a disk image. Can fail if the image is busy.
+</li><li><tt>hdiutil convert diskimage.dmg -format UDZO -imagekey zlib-level=9 -o diskimage-readonly.dmg</tt> to convert an unmounted disk image to a proper read-only one, and to compress it.
+</li><li>To add an EULA, see the EULA section.
+</li></ol><p>
+Note that you might get the error:
+</p>
+<pre class="wiki">
+hdiutil: create failed - Device not configured
+
+</pre><p>
+According to <tt>man hdiutil</tt>, this can be caused by running inside a reattached <tt>screen</tt> session and other detached shells.
+</p>
+<p>
+On a mounted image, you can do the following:
+</p>
+<ol><li><tt>bless --folder /my/mountpoint --openfolder /my/mountpoint</tt> to let the root folder open when the disk image is opened. <tt>bless</tt> controls what happens when the disk image is opened. Some source recommended a <tt>sleep 1</tt> command after <tt>bless</tt> to make sure it completed.
+</li><li><tt>/Developer/Tools/SetFile -a C /my/mountpoint</tt> to enable the use of the volume icon (the icon of the disk image itself). Call the icon <tt>.VolumeIcon.icns</tt> and put it in the root directory. You can edit the icon file with <tt>/Developer/Applications/Utilities/Icon Composer.app</tt>. Make sure to include at least the highest resolution icon since it's really used.
+</li></ol><h2 id="EULA">EULA</h2>
+<p>
+Mac OS/X can present the user with an EULA when the disk image is opened. This EULA is stored in the resource fork of the disk image. Special care is needed, as the EULA has special file format and subversion cannot be used to store resource forks.
+</p>
+<p>
+An example EULA file can be found in the <a class="ext-link" href="ftp://ftp.apple.com/developer/Development_Kits/SLAs_for_UDIFs_1.0.dmg"><span class="icon">​</span>SLA SDK</a> of Apple, and is called <tt>SLAResources</tt>. We'll first extract the EULA from the example file's resource fork:
+</p>
+<pre class="wiki">cp SLAResources/rsrc SLAResources.rsrc
+</pre><p>
+The file <tt>SLAResources.rsrc</tt> can be stored in Subversion. To edit it, use for example <a class="ext-link" href="http://resknife.sourceforge.net/"><span class="icon">​</span>RezKnife</a>.
+</p>
+<p>
+Finally, to attach the EULA to a disk image, the image needs to be unflattened (i.e. data/resource forks restored), but it needs to be flattened again in the end:
+</p>
+<pre class="wiki">hdiutil unflatten Tribler.dmg
+/Developer/Tools/DeRez -useDF SLAResources.rsrc &gt; sla.r
+/Developer/Tools/Rez -a sla.r -o Tribler.dmg
+hdiutil flatten Tribler.dmg
+</pre><p>
+I used this on read-only disk image.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

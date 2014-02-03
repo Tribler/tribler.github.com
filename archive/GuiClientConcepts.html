@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><p>
+tracsecret: tribler
+</p>
+<ul><li>Gui General
+<ul><li><a class="wiki" href="GUIconcepts.html">GUI Startpage</a>
+</li><li><a class="wiki" href="triblerGUI.html">GUI General</a>
+</li></ul></li></ul><ul><li>Tribler 5
+<ul><li><a class="wiki" href="Tribler5.html">Tribler 5 Overview</a>
+</li><li><a class="wiki" href="Tribler5%25252FVision.html">Vision</a>
+</li><li><a class="wiki" href="Tribler5%25252Fstructure.html">Development</a>
+<ul><li><a class="wiki" href="Tribler5%25252Fstructure.html">Structure</a>
+</li><li><a class="wiki" href="GuiClientConcepts.html">Concepts</a>
+</li></ul></li><li><a class="wiki" href="Tribler5%25252F50.html">5.0</a>
+<ul><li><a class="wiki" href="Tribler5%25252F50.html">Screenshots</a>
+</li><li><a class="wiki" href="Tribler5%25252F50structure.html">Structure</a>
+</li><li><a class="wiki" href="Tribler5%25252F50interaction.html">Interaction</a>
+</li><li><a class="wiki" href="Tribler5%25252F50todo.html">5.0 Todo</a>
+</li></ul></li></ul></li></ul><ul><li>Links
+<ul><li><a class="wiki" href="TriblerTV.html">Tribler TV</a>
+</li><li><a class="wiki" href="Tribler4.html">Tribler 4</a>
+</li><li><a class="wiki" href="targetGroup.html">Target Group</a>
+</li><li><a class="wiki" href="userResearch.html">User Research</a>
+</li></ul></li></ul><p>
+endsecret
+</p>
+</div></td><td>
+</p>
+<h1 id="GUIconceptsTribler-PC5">GUI concepts Tribler-PC5</h1>
+<p>
+The new Tribler-PC client will focus on a further integration of <strong>finding - consuming - sharing</strong>. Where Tribler-PC4 was the first step in putting all functionalities in a comprehensible and attractive user interface. Tribler-PC5 will focus on a mature/full grown platform that is excellent in performance, vibrant in its use and intimate in facilitating interaction between users. 
+</p>
+<h1 id="Buttons">Buttons</h1>
+<h3 id="A.Homebutton">A. Home button</h3>
+<div style="text-align:right; Z-INDEX: 1; LEFT: 50%; FLOAT: right">
+</div><p>
+<a class="missing" href="#"></a><br />
+</p>
+
+<p>
+The client has a starting page that will consist of a searchbox (+ category checkboxes) and below that an overview with customisable widgets. 
+</p>
+<p>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</p>
+<p>
+The searchbox and widgets can lead to an overview of files:
+</p>
+<ul><li>popular files (fig.A2)
+</li><li>search result(fig.A3)
+</li><li>new files
+</li><li>... 
+</li></ul><p>
+and users:
+</p>
+<ul><li>online users (fig.A5)
+</li><li>new users
+</li><li>best uploaders
+</li><li>...
+</li></ul><p>
+For both files and users is on selection at the right side a detailed summary available. When clicked on the 'more info' button more extensice information with an extra menu is available 
+</p>
+<ul><li>for files: fig.A4
+</li><li>for users: fig.A6
+</li></ul><p>
+<a class="missing" href="#"></a> fig.A2      
+<a class="missing" href="#"></a> fig.A3   <br /><br />    
+<a class="missing" href="#"></a> fig.A4 
+<a class="missing" href="#"></a> fig.A5   <br /><br />    
+<a class="missing" href="#"></a> fig.A6 
+</p>
+<hr />
+<h3 id="B.Profilebutton">B. Profile button</h3>
+<div style="text-align:right; Z-INDEX: 1; LEFT: 50%; FLOAT: right">
+</div><p>
+<a class="missing" href="#"></a><br />
+</p>
+
+<p>
+At the profile page the user is able to 'connect' and 'auto-sync' his profile to other profiles such as his Facebook account. Further there is an overview of actions and is there a possiblity to add a wall where other users are able to leave a message. 
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</p>
+<hr />
+<h3 id="C.Librarybutton">C. Library button</h3>
+<div style="text-align:right; Z-INDEX: 1; LEFT: 50%; FLOAT: right">
+</div><p>
+<a class="missing" href="#"></a><br />
+</p>
+
+<p>
+Through this button the user has access to his personal library. One can find here his archived content, downloaded/new content and downloads in progress. By clicking on an item its details are displayed at the right. For video and audio content a play button is available. For video the user also has a button for fullscreen view at his disposal. 
+</p>
+<p>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</p>
+<hr />
+<h3 id="D.Subscriptionsbutton">D. Subscriptions button</h3>
+<div style="text-align:right; Z-INDEX: 1; LEFT: 50%; FLOAT: right">
+</div><p>
+<a class="missing" href="#"></a><br />
+</p>
+
+<p>
+The user is able to subscribe on one hand to search services which enable him to get results from this source as well, seamlessly integrated in the other resutlst. On the other hand users are able to subscribe on content and moderations of specific sources. In this way users are always up to date of content and moderations of these sources. 
+</p>
+<p>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</p>
+<hr />
+<h3 id="E.Friendsbutton">E. Friends button</h3>
+<div style="text-align:right; Z-INDEX: 1; LEFT: 50%; FLOAT: right">
+</div><p>
+<a class="missing" href="#"></a><br />
+</p>
+
+<p>
+Friends are peers which were invited by the user to become his friends, or the user was invited by someone else. In the overview is for each friend up to date information available that corresponds with the information about yourself which is shown under the [profile-library-subscription-friends] buttons --&gt; see fig.A6.
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</p>
+<hr />
+<h3 id="F.MessagesSUBbutton">F. Messages SUB button</h3>
+<div style="text-align:right; Z-INDEX: 1; LEFT: 50%; FLOAT: right">
+</div><p>
+<a class="missing" href="#"></a><br />
+</p>
+
+<p>
+Invitations for friendship and  recommendations of friends about content are received at this corner of the client. Here also it is possible to click further. 
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</p>
+<hr />
+<h3 id="ExtraInformation">Extra Information</h3>
+<p>
+Design: <a class="wiki" href="MaartentenBrinke.html">Maarten ten Brinke MsC.</a><br />
+</p>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

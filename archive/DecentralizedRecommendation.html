@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="DecentralizedRecommendation">Decentralized Recommendation</h1>
+<p>
+Tribler forms a semantic P2P overlay to identify related content, facilitate search, and recommend content. Related: <a class="wiki" href="ContentSearch.html">Search</a>, <a class="wiki" href="AdversarialContentSearch.html">Search and spam prevention</a>, <a class="wiki" href="Buddycast3.html">BuddyCast3</a>, <a class="wiki" href="BuddyCast4.html">BuddyCast4</a>, <a class="wiki" href="SimilarityFunction.html">Similarity Function</a>
+</p>
+<p>
+Tribler supports recommendation of content to users by implementing a decentralized recommendation protocol, <a class="wiki" href="Buddycast3.html">Buddycast3</a>. Through its downloads the user builds up a download history of files. By exchanging these download histories with others the user builds a collection of a few hundred or more of such download histories. Tribler's recommender component uses this collection to find peers with high similarity to the user based on their download taste. We call such similar peers taste buddies. The recommender then recommends the files that a user's taste buddies has already seen but the user has not. In other words, Buddycast provides decentralized, user-based collaborative filtering. General overview of 
+<a class="ext-link" href="http://p2p-fusion.mokk.bme.hu/w/index.php/Recommendation"><span class="icon">​</span>recommendation</a>.
+</p>
+<h2 id="Buddycast">Buddycast</h2>
+<p>
+The Buddycast algorithm is based on an epidemic protocol and works as follows. Each peer maintains two lists: (1) its top-N most similar peers along with their current download histories, and (2) a list of random peers it learned about but does not have download histories of. Periodically, a peer connects to either (a) one of its taste buddies to exchange social networks and current download histories (exploitation), or (b) to a new peer, randomly chosen, to exchange this information (exploration). By using both exploitation and exploration, we keep track of what happens at our most similar peers and at the same time ensure that we will find new similar peers if they emerge.
+</p>
+<ul><li>Detailed info on <a class="wiki" href="Buddycast3.html">the latest Buddycast</a> version: V3
+</li><li>Draft ideas on the next Buddycast version: <a class="wiki" href="BuddyCast4.html">V4</a>
+</li><li>The <a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/BuddyCast/buddycast.py"><span class="icon">​</span>source code</a>
+</li><li>The <a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>Tribler protocol specification describing V1,2,3</a>
+</li></ul><p>
+Extensions to Buddycast have been made for <a class="wiki" href="Moderation.html">moderation</a>. Full details are given in a technical report on moderation, voting and vote fraud prevention (<a class="ext-link" href="http://pds.twi.tudelft.nl/reports/2008/PDS-2008-004.pdf"><span class="icon">​</span>PDF file</a>).
+</p>
+<h2 id="Privacy">Privacy</h2>
+<p>
+Within any P2P system there is tension between efficiency of the system and privacy. 
+Within Tribler IP addresses are not shown and every user is referred to by
+a nickname. However, the download history of each nickname is publicly visible
+for exploration and discovery.
+To preserve privacy, the user interface and !Buddycast support the <em>erase</em> from 
+profile functionality. The new !Buddycast4 version will :
+</p>
+<ul><li>Spread a counter with total amount of downloads per nickname
+</li><li>Transmit a maximum of 50 Bittorrent downloads from your download history
+</li><li>When removing a file from your download history, Buddycast will erase it from your profile
+</li><li>Use for efficiency reasons a timestamp when your profile was last changed
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

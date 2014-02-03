@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Give-to-Get">Give-to-Get</h1>
+<p>
+<em>Status: operational code</em>
+</p>
+<p>
+Give-To-Get is the core algorithm for Video-on-Demand and streaming.
+</p>
+<p>
+Measured to work efficiently in a <a class="wiki" href="StreamingExperiment.html">trial with 6000+ participants</a>. (<a class="wiki" href="StreamingExperimentResults.html">experimental results</a>)
+</p>
+<p>
+Centralised solutions for Video-on-Demand (VoD) services, which stream pre-recorded 
+video content to multiple clients who start watching at the moments of their own choosing,
+are not scalable because of the high bandwidth requirements of the central video servers.
+Peer-to-peer (P2P) techniques which let the clients distribute the video content 
+among themselves, can be used to alleviate this problem.
+However, such techniques may introduce the
+problem of free-riding, with some peers in the P2P network not forwarding the video 
+content to others if there is no incentive to do so.
+When the P2P network contains too many free-riders, an increasing number of the 
+well-behaving peers may not achieve high enough download speeds to maintain an 
+acceptable service. 
+</p>
+<p>
+In <a class="missing attachment">this paper</a> we propose Give-to-Get, a P2P VoD algorithm which discourages free-riding
+by letting peers favour uploading to other 
+peers who have proven to be good uploaders.
+As a consequence, free-riders are only tolerated as long as there is spare capacity 
+in the system.
+Our simulations show that even if 20% of the peers are free-riders, Give-to-Get continues to provide good performance to the well-behaving peers. In particular, they show that Give-to-Get performs very well for short videos, which dominate the current VoD traffic on the Internet.
+</p>
+<h2 id="TheAlgorithm">The Algorithm</h2>
+<p>
+While <a class="missing attachment">this paper</a> describes the algorithm in detail, I'll give a sketch of the basic idea.
+</p>
+<h3 id="StartingwithBittorrent">Starting with Bittorrent</h3>
+<p>
+We started with the Bittorrent protocol and modified it to suit our needs and create Give-to-Get. This method makes implementing Give-to-Get easy as one can start with a Bittorrent client. Letting Give-to-Get and <a class="wiki" href="BitTorrent.html">BitTorrent</a> peers interact is quite easy as they share a common base.
+</p>
+<p>
+As in Bittorrent, Give-to-Get divides the video stream into fixed-sized pieces. A peer keeps its neighbours (the other peers it is connected to) informed about which pieces it has, and which neighbours are allowed to request pieces.
+</p>
+<h3 id="PiecePickingpolicy">Piece Picking policy</h3>
+<p>
+The order in which the pieces are requested is important. In Bittorrent, pieces are requested rarest-first, which allows each downloaded piece to be uploaded to many other neighbours. Such a scheme is ideal in a download setting in which a peer only cares about completing the whole download, not in which order. In a streaming setting, a peer actually needs its pieces from start to end, in order. If pieces are requested in order by every peer, many peers will request the same pieces at the same time and will not be able to forward them to each other.
+</p>
+<p>
+So, we use a hybrid between rarest-first and in order. A peer divides the pieces after its current playback position into three sets: high-priority (10 seconds), middle priority (40 seconds), and low priority (the rest). Pieces are requested based on their priority. Within the high-priority set, pieces are requested in-order. In the middle and low priority sets, rarest-first is used. As a result, if a peer has enough bandwidth, it will spend most of its time downloading rarest-first in the middle and low priority sets, but a peer will switch to in-order downloading if it is running out of bandwidth.
+</p>
+<h3 id="Uploadingpolicy">Uploading policy</h3>
+<p>
+In Bittorrent,a system not unlike tit-for-tat is used to promote the uploading of pieces: a peer will allow requests from those neighbours that send data in return. This works in a download setting, since all peers are interested in receiving all pieces at any time. However, in a streaming setting, data will mostly flow in one direction between two peers, One peer is always ahead of the other and is thus interested in different parts of the stream. So, a different incentive is needed for uploading.
+</p>
+<p>
+In Give-to-Get, we promote uploading by having peers provide data to those neighbours that upload the most data to others. This information is gathered by querying the peers that receive data from the neighbours. As the best uploaders will receive the most data from others, peers have an incentive to upload.
+</p>
+<p>
+To avoid peers colluding by claiming that their friends are good uploaders, it is recommendable to assign random neighbours to peers. 
+</p>
+<h2 id="SourceCode">Source Code</h2>
+<p>
+I measured the performance of Give-to-Get using a Discrete Event Simulator, written in C. The simulator and Give-to-Get implementation can be downloaded [source:abc/branches/jandavid/g2gsim here]. Also, Give-to-Get is in the process of being implemented in Tribler, most of which will end up [source:abc/branches/mainbranch/Tribler/Core/Video/ here].
+</p>
+<h1 id="a2ndgenerationGive-to-Get">2nd generation Give-to-Get</h1>
+<p>
+Merge the positive effects of public trackers
+and private trackers with sharing ratio enforcements;
+without the drawbacks.
+</p>
+<p>
+Link the <a class="wiki" href="BarterCast.html">BarterCast</a> rating of a peer in the
+algorithm to divide the upload capacity. Design principles:
+</p>
+<pre class="wiki">Give priority to balanced peers, but do not punish 
+freeriders with bandwidth starvation; let 
+them download four times slower.
+Take into account a mix of previous upload behavior,
+current swarm uploading to others (hearsay feedback), and
+direct upload to yourself.
+</pre><p>
+A significant drawback of <a class="wiki" href="BarterCast.html">BarterCast</a> is that is only provides a <strong>rough</strong>
+estimate of a sharing ratio.
+Each peer is assigned a <strong>ratio class</strong>, according to the
+table below. Peers that are poor sharers or freeride are
+slowed down. Note that new peers have to earn trust and
+are also slowed down. Attacks such as: Bitthief, Bittyrant, or
+ratio faking are thus resolved.
+</p>
+<table class="wiki">
+<tr><td><strong>Ratio Class</strong></td><td><strong>Ratio</strong></td><td><strong>Age of Peer</strong></td><td><strong>Allocated Upload</strong>
+</td></tr><tr><td style="text-align: left"><em>Nice</em>     </td><td style="text-align: left">&gt;0.8, 5MB+ </td><td>1+ days</td><td>maximum 100%
+</td></tr><tr><td style="text-align: left"><em>Poor</em>  </td><td style="text-align: left">unknown, 5KB+ </td><td style="text-align: left">new </td><td>maximum 100%, pre-empted by <em>Nice</em> peers to min. 10%
+</td></tr><tr><td><em>Freerider</em></td><td style="text-align: left">unknown </td><td style="text-align: left">new </td><td>maximum 50%, pre-empted by <em>Nice</em> and <em>Poor</em> peers to min. 5%
+</td></tr></table>
+<p>
+Note that if there are no <em>Nice</em> or <em>Poor</em> peers in a swarm 
+only 50% of the upload capacity of a peer is used. The above
+ratio classes ensure that in the steady state there is an
+incentive to have a good ratio and that your identity is known
+to others (Age&gt;1 day). Most peers are thus in the <em>Nice</em> class
+and are allocated bandwidth according to their behavior in the
+current swarm. The <em>hearsay algorithm</em> is used to allocate
+bandwidth between peers of the same class. 
+</p>
+<p>
+Standard Bittorrent Tit-for-Tat clients have an unknown long-term sharing ratio
+and include no measures to prevent identity spoofing attacks.
+Sharing ratio is even <a class="ext-link" href="http://www.google.com/search?q=upload+faking+%7Ebittorrent"><span class="icon">​</span>easily faked</a>
+due to limitations of the original protocol.
+The Give-To-Get algorithm states therefore that Tit-for-Tat peers cannot enter the <em>Nice</em> class.
+They are positioned in the <em>Poor</em> class when they have
+uploaded at least 5KByte or more to you and marked as a potential
+<em>Freerider</em> in all other cases. 
+The requirements of <em>playing fair</em> to existing Tit-for-Tat peers 
+is implicitly build in into the Give-to-Get algorithm.
+Within a mixed swarm of mostly Tit-for-Tat peers each uptimistic
+unchoke triggers an upgrade of the traffic class and allocation
+of bandwidth. Within a mixed swarm of just a few Tit-for-Tat peers 
+the Give-to-Get peers still give back any consumed bandwidth.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

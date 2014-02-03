@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="ExistingReputationSystems">Existing Reputation Systems</h1>
+<p>
+<a class="wiki" href="ReputationSystem.html">ReputationSystem</a> IPv8, <a class="wiki" href="IncentiveSystems.html">IncentiveSystems</a>
+</p>
+<p>
+<a class="ext-link" href="http://tv.e5.ijs.si/trac/wiki"><span class="icon">​</span>Big wiki with lot of reputation stuff</a>
+</p>
+<p>
+Attach .PDF of reputation paper
+</p>
+<p>
+Perhaps a few line abstract of each paper.
+</p>
+<h2 id="Links">Links</h2>
+<ul><li><a class="ext-link" href="http://www.youtube.com/watch?v=Yn7e0J9m6rE"><span class="icon">​</span>Building Web Reputation Systems</a> by Randy Farmer (Video). Although this talk (and same tittled book) is about the Web and not P2P there are some interesting points on what to do and what no to do when building reputation systems. Discusses reputation on objects that indirectly affect the reputation of persons, how negative reputation is meaningless when you can easily whitewash your identify, how people can exploit bad reputation against good players and how reputation can change the nature of work network and people start doing things to gain reputation instead of behaving normally. <a class="ext-link" href="http://www.buildingreputation.com/"><span class="icon">​</span>Book Blog</a>
+</li></ul><h2 id="Papers">Papers</h2>
+<table class="wiki">
+<tr><td><a class="missing attachment">A survey of attack and defense techniques for reputation systems</a></td><td>Eng Keong Lua et al.
+</td></tr><tr><td><a class="missing attachment">The Eigentrust algorithm for reputation management in P2P networks</a></td><td>Sepandar D. Kamvar et al.
+</td></tr><tr><td><a class="missing attachment">Fighting peer-to-peer SPAM and decoys with object reputation (credence)</a></td><td>Kevin Walsh et al.
+</td></tr><tr><td><a class="missing attachment">Fighting Pollution Dissemination in Peer-to-Peer Networks (Scrubber)</a></td><td>Cristiano Costa et al.
+</td></tr><tr><td><a class="missing attachment">KARMA, A Secure Economic Framework for Peer-to-Peer Resource Sharing</a></td><td>Vivek Vishnumurthy et al.
+</td></tr><tr><td><a class="missing attachment">One hop reputations for peer to peer file sharing workloads</a></td><td>Michael Piatek et al.
+</td></tr><tr><td><a class="missing attachment">A Reputation System for Peer-to-Peer Networks</a></td><td>Minaxi Gupta et al.
+</td></tr><tr><td><a class="missing attachment">Reputation Systems for Fighting Pollution in Peer-to-Peer File Sharing Systems</a></td><td>Cristiano Costa et al.
+</td></tr><tr><td><a class="missing attachment">Robust incentives via multi-level Tit-for-Tat</a></td><td>Qiao Lian et al.
+</td></tr><tr><td><a class="missing attachment">Scrivener, Providing Incentives in Cooperative Content Distribution Systems</a></td><td>Animesh Nandi et al.
+</td></tr><tr><td><a class="missing attachment">CSorcery, Could We Make P2P Content Sharing Systems Robust to Deceivers?</a></td><td>Ennan Zhai et al.
+</td></tr><tr><td><a class="missing attachment">A Multi-dimensional Reputation System Combined with Trust and Incentive Mechanisms in P2P File Sharing Systems</a></td><td style="text-align: right"> Mao Yang et al.
+</td></tr></table>
+<h2 id="Characterizationofexistingreputationsystems">Characterization of existing reputation systems</h2>
+<p>
+Image taken from <a class="missing attachment">A survey of attack and defense techniques for reputation systems</a>
+</p>
+<a href="/trac/attachment/wiki/ExistingReputationSystems/reputation-1.jpg"><img title="Characterization of existing reputation systems" alt="Characterization of existing reputation systems" width="50%" height="50%" src="/trac/raw-attachment/wiki/ExistingReputationSystems/reputation-1.jpg" /></a>
+<p>
+Click image for full size
+</p>
+<h2 id="Theweaknessesofexistingsystemstoknownattackstrategiesandthedefensemechanismsthatthesesystememploy">The weaknesses of existing systems to known attack strategies and the defense mechanisms that these system employ</h2>
+<p>
+Image taken from <a class="missing attachment">A survey of attack and defense techniques for reputation systems</a>
+</p>
+<a href="/trac/attachment/wiki/ExistingReputationSystems/reputation-2.jpg"><img title="The weaknesses of existing systems to known attack strategies and the defense mechanisms that these system employ" alt="The weaknesses of existing systems to known attack strategies and the defense mechanisms that these system employ" width="50%" height="50%" src="/trac/raw-attachment/wiki/ExistingReputationSystems/reputation-2.jpg" /></a>
+<p>
+Click image for full size
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

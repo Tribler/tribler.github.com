@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h2 id="ReadingSeminar"><strong>Reading Seminar</strong></h2>
+<p>
+ 
+</p>
+<p>
+The aim of this research-oriented seminar is twofold: 
+</p>
+<ul><li>Each time somebody presents details of a research paper. The list of the possible paper is below (some classical ones and some of them are recent).
+</li><li>PhD students and post-docs can explain their own research field to the others which is followed by constructive and deep discussion.
+</li></ul><p>
+The idea of this seminar is not new (see [<a class="missing" href="#">TriblerMeetingSchedule</a>]) and it needs huge effort from the interested people to keep it alive. 
+</p>
+<p>
+<br />
+</p>
+<p>
+<strong>List of papers to be presented (please add your own favorit here or put comments why you (do not) like a particular one)</strong>:
+</p>
+<p>
+(Please note that this is now (as 8 Sept, 2008) a random collection of papers...)
+</p>
+<ul><li>design of P2P systems, <a class="ext-link" href="http://web.media.mit.edu/~vyzo/talks/cfp-crn.pdf"><span class="icon">​</span>http://web.media.mit.edu/~vyzo/talks/cfp-crn.pdf</a>
+</li><li>Qin Lv, Pei Cao, Edith Cohen, Kai Li, and Scott Shenker. Search and replication in unstructured peer-to-peer networks. In Proceedings of the 16th ACM International Conference on Supercomputing (ICS'02), 2002.
+</li><li>Matei Ripeanu, Adriana Iamnitchi, and Ian Foster. Mapping the gnutella network. IEEE Internet Computing, 6(1):50â57, 2002.
+</li><li>Lada A. Adamic, Rajan M. Lukose, Amit R. Puniyani, and Bernardo A. Huberman. Search in power-law networks. Physical Review E, 64:046135, 2001.
+</li><li>Patrick  Reynolds and Amin Vahdat. Efficient peer-to-peer keyword searching. In Middleware 2003, volume 2672 of Lecture Notes in Computer Science, pages 21â40. Springer-Verlag, 2003.
+</li><li>Monica Bianchini, Marco Gori, and Franco Scarselli. Inside pagerank. ACM Transactions on Internet Technology, 5(1):92â128, 2005. 
+</li><li>MÃ¡rk Jelasity and Ozalp Babaoglu. T-Man: Gossip-based overlay topology management. In Sven A. Brueckner, Giovanna Di Marzo Serugendo, David Hales, and Franco Zambonelli, editors, Engineering Self-Organising Systems: Third International Workshop (ESOA 2005), Revised Selected Papers, volume 3910 of Lecture Notes in Computer Science, pages 1â15. Springer-Verlag, 2006.
+</li><li>Petar Maymounkov and David MaziÃ¨res, Kademlia: A Peer-to-Peer Information System Based on the XOR Metric, Revised Papers from the First International Workshop on Peer-to-Peer Systems, Lecture Notes In Computer Science; Vol. 2429, p.53 - 65, 2002. 
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TracStorage-TheEnvironment">Trac Storage - The Environment</h1>
+<p>
+Trac uses a directory structure and an embedded <a class="ext-link" href="http://www.sqlite.org/"><span class="icon">​</span>SQLite</a> database as storage.
+</p>
+<h2 id="CreatinganEnvironment">Creating an Environment</h2>
+<p>
+A new Trac environment is created using <a class="wiki" href="TracAdmin.html">trac-admin</a>, like:
+</p>
+<pre class="wiki">$ trac-admin /path/to/projectenv initenv
+</pre><p>
+<a class="wiki" href="TracAdmin.html">trac-admin</a> will ask you where your subversion repository is located and
+where it can find the trac templates directory (the default value should work for a typical install).
+</p>
+<p>
+<strong>Note:</strong> The web server user will require file system write permission to the environment
+directory and all the files inside. <strong>Remember to set the appropriate permissions.<em>
+</em></strong></p>
+<p>
+The same applies for the subversion repository files (unless using the <a class="ext-link" href="http://svn.collab.net/repos/svn/trunk/notes/fsfs"><span class="icon">​</span>FSFS Subversion backend</a>, something we highly recommend. 
+</p>
+<h2 id="DirectoryStructure">Directory Structure</h2>
+<pre class="wiki"> EnvDir
+   |-- README
+   |-- VERSION
+   |-- attachments
+   |   |-- ticket
+   |   `-- wiki
+   |-- conf
+   |   `-- trac.ini
+   |-- db
+   |   `-- trac.db
+   |-- log
+   |   `-- trac.log
+   |-- templates
+   |   |-- site_css.cs
+   |   |-- site_footer.cs
+   |   `-- site_header.cs
+   `-- wiki-macros
+</pre><ul><li><strong>README</strong> - Brief description of the environment.
+</li><li><strong>VERSION</strong> - Contains the environment version identifier.
+</li><li><strong>attachments</strong> - All attached files go in here.
+<ul><li><strong>ticket</strong> - Ticket attachments.
+</li><li><strong>wiki</strong> - Wiki attachments.
+</li></ul></li><li><strong>conf</strong>
+<ul><li><strong>trac.ini</strong> - Main configuration file. See <a class="wiki" href="TracIni.html">TracIni</a>.
+</li></ul></li><li><strong>db</strong>
+<ul><li><strong>trac.db</strong> - SQLite database.
+</li></ul></li><li><strong>templates</strong> - Custom (environment-specific) templates.
+<ul><li><strong>site_css.cs</strong> - Custom CSS stylesheet.
+</li><li><strong>site_footer.cs</strong> - Custom footer.
+</li><li><strong>site_header.cs</strong> - Custom header.
+</li></ul></li><li><strong>wiki-macros</strong> - Environment-specific <a class="wiki" href="WikiMacros.html">WikiMacros</a>.
+</li></ul><hr />
+<p>
+See also: <a class="wiki" href="TracBackup.html">TracBackup</a>, <a class="wiki" href="TracIni.html">TracIni</a>, <a class="wiki" href="TracGuide.html">TracGuide</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

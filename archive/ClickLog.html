@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="ClickLogs:GoalsandResearchquestions">ClickLogs: Goals and Research questions</h1>
+<p>
+How relevant is a document for a given search term? This is the central question when we try to answer a user's search query. In a decentralized setting like when searching torrents, we mainly have to work with metadata like titles: The actual content is not available at search-time, so it cannot be analyzed to better predict relevance. However, user feedback is a precious resource in estimating relevance. Particularly implicit feedback, i.e. feedback which the user provides simply by using a system, can be a great benefit because it can be collected cheaply and at a large scale. This package aims to improve search quality in Triber by collecting and processing a particular kind of implicit feedback: click log data.
+</p>
+<p>
+Click logs contain information about which document was selected after searching for which keyword, and at which position in the result list the selected document was positioned. This data can be used to improve future search result lists; the easiest scenario would be a case in which we assume that for a given keyword, it's always the same torrent that's selected although it's displayed at rank #16. A simple way to improve search results would simply be to always put this torrent on the top of the list for the particular keyword. Of course, such situations will turn out more complicated in reality, and how to optimally address them is one of the questions of this research project.
+</p>
+<p>
+The goals of this project are three-fold:
+</p>
+<ol><li>Improve the search experience for Tribler users by reranking search results using clicklog data.
+</li><li>Explore and compare reranking algorithms using the obtained data.
+</li><li>Gain experience with the dissemination and processing of user-generated metadata; lay foundations for a distributed tagging system.
+</li></ol><h2 id="a1.ImprovementofTriblerSearch">1. Improvement of Tribler Search</h2>
+<p>
+Find what you're looking for, and have a pleasant experience while you're at it - this should be the offer of Tribler's search engine, particularly towards average users which do not want to browse many pages of results or become particularly smart about search terms. The aim of the clicklog approach is to support both search experience and quality:
+</p>
+<h4 id="a1.1.IntegratingrerankingmechanismsintoTriblerSearch">1.1. Integrating reranking mechanisms into Tribler Search</h4>
+<p>
+The main step is to rerank search results based on latent information in the clicklog data, as explained above. 
+</p>
+<h4 id="a1.2.SuggestFeatureusingdatabaseoffrequentkeywords">1.2. "Suggest" Feature using database of frequent keywords</h4>
+<p>
+Another use of clicklog data is a search field offering "auto-complete" or rather "suggest" functionality; while the user it typing, the program offers possible extensions to the already typed letters. 
+</p>
+<h2 id="a2.ExploringRerankingAlgorithms">2. Exploring Reranking Algorithms</h2>
+<p>
+We are aiming to examine the influence of different reranking algorithms / of using reranking at all. Therefore, it is planned to randomly pick a reranking algorithm at search time and save it with the clicklog data. If we can accumulate enough data, we should be able to make a statement about the use of reranking by regarding, in the simplest case, the average position of clicked results; if clicked results are significantly higher for reranked results than for un-reranked results, reranking should be considered successful.
+</p>
+<h2 id="a3.User-GeneratedMeta-Data">3. User-Generated Meta-Data</h2>
+<h4 id="a3.1SpamIssues">3.1 Spam Issues</h4>
+<p>
+Tribler's server-free infrastructure creates a different situation than for most other clicklog applications; normally, clicklog analysis is performed by the owner of a centralized search engine; with Tribler, the only clicks really observed are those of the local user; other clicks are only received via the <a class="wiki" href="BuddyCast.html">BuddyCast</a> protocol. Since these transmissions might be faked, it has to be examined in how far faked clicklogs could be used to, e.g., promote spam, and what counter-measures are appropriate.
+</p>
+<ul><li>A very simple approach for boosting a torrent's search position might be to transmit information about how it was selected for just about any keyword the spammer would like it to be associated with. However, the TfIdf weighting scheme introduced in the previous section counters such an attack because torrent/keyword cooccurrences are linearly weighted by the number of keywords associated with a torrent.
+</li></ul><p>
+How do these issues scale, and which additional counter-measures are required when we are facing explicitly given tags in the future?
+</p>
+<h4 id="a3.2PrivacyIssues">3.2 Privacy Issues</h4>
+<p>
+In the current phase, the goal is to overcome the technical difficulties in distributing and using clicklog data, i.e., a technological one. However, on a conceptual level, we have to ask ourselves under which situations clicklog data might be harmful in terms of privacy, and which countermeasures could be taken. Such questions will be explicitly addressed in a later step of the project. 
+</p>
+<p>
+Contact: Nicolas Neubauer, Neural Information Processing Group, TU Berlin [<a class="mail-link" href="mailto:neubauer@cs.tu-berlin.de"><span class="icon">​</span>neubauer@cs.tu-berlin.de</a>]
+</p>
+<h1 id="ImplementationNotes">Implementation Notes</h1>
+<h2 id="Howtoenablequerylogging">How to enable query logging</h2>
+<p>
+As of rev. 10204, you may enable logging of search keywords by adding sth like
+</p>
+<pre class="wiki">RemoteQueryMsgHandler.getInstance().setLogFile("c:\crawl.txt")
+</pre><p>
+to startAPI in <a class="missing" href="#">Tribler/Main</a>/tribler.py
+</p>
+<h2 id="Clicklogwireprotocol">Clicklog wire protocol</h2>
+<p>
+As of overlay version 8, the preference part of buddycast messages looks like this:
+</p>
+<pre class="wiki">[["hash1", ["linux","ubuntu"], 1, 2], ["hash2", ...], ...]
+</pre><p>
+when it would've looked like this:
+</p>
+<pre class="wiki">["hash1", "hash2", ...]
+</pre><p>
+earlier on.
+</p>
+<p>
+This means that instead of a list of hashes, a list of lists is returned. Each inner list contains the hash, keywords used to find the corresponding torrent, the click position (where 1 is in fact the second position in the list) and the number of the reranking strategy used (here: 2).
+</p>
+<h2 id="Importantmethodsintheclicklogdatalifecycle">Important methods in the clicklog data lifecycle</h2>
+<p>
+The data for this message is first stored in 
+<tt>Core/CacheDB/SqliteCacheDBHandler:MyPreferenceDBHandler.addClicklogToMyPreference</tt>
+</p>
+<p>
+The message itself is created in 
+<tt>Core/CacheDB/SqliteCacheDBHandler:MyPreferenceDBHandler.getRecentLivePrefListWithClicklog</tt>
+</p>
+<p>
+On the passive part, it is digested (as well as pre-OL 8 buddycast data) and converted into a more comfortable dict for further internal processing in
+<tt>Core/CacheDB/buddycast.py:BuddyCastCore.createPreferenceDictionaryList</tt>
+</p>
+<p>
+The resulting data is finally stored in 
+<tt>Core/CacheDB/SqliteCacheDBHandler:PreferenceDBHandler.addPreferences</tt>
+</p>
+<h1 id="OverallTodos">Overall Todos</h1>
+<ol><li>Create database structure to store relevant data (search terms used for and position of own and peers' downloads, from here on "clicklog data") (done)
+</li></ol><ol start="2"><li>Extend interface to store own clicklog data (done)
+</li></ol><ol start="3"><li>Extend <a class="wiki" href="BuddyCast.html">BuddyCast</a> Protocol (done)
+<ul><li>Active: Attach clicklog to each transmitted preference hash 
+</li><li>Passive: Receive and store clicklog data 
+</li></ul></li></ol><ol start="4"><li>Test performance (done)
+<ul><li>simulated data 
+</li></ul></li></ol><ol start="5"><li>Use clicklog data (done)
+<ul><li>AutoComplete in search dialog
+</li><li>Rerank search results 
+</li></ul></li></ol><ol start="6"><li>Track distributed clicklog data (waiting for deployment as of April 2009)
+</li></ol><h1 id="a1.Database">1. Database</h1>
+<ul><li>A note on indices: Maybe I'm a bit too generous with those, but I think we need them unless we want to keep the tables in memory...
+</li><li>Both own and others' search terms are stored in Search. I use a peer_id of 0 for identifying the actual user's entries. 
+</li><li>Torrents are removed from MyPreference when the torrent itself is removed,- this means the corresponding search terms and position info should also be removed? Or might it make sense to keep this info anyway, somewhere else?
+</li></ul><h1 id="a2.Storeclicks">2. Store clicks</h1>
+<ul><li>On starting a download, store now additionally click_position and the currently used reranking strategy into MyPreference. 
+</li><li>Also get the current query terms and store them into Search and Terms 
+</li><li>By the way: By storing clicklogs in Preferences, we're throwing away any clicklog data leading to <a class="wiki" href="YouTube.html">YouTube</a>, as these dont show up there, right? But if I got it right, this is analogous to BuddyCast which works on <a class="missing" href="#">MyPreference</a>, only taking into account torrent downloads, right?
+</li></ul><h1 id="a3.ExtendBuddyCastProtocol">3. Extend <a class="wiki" href="BuddyCast.html">BuddyCast</a> Protocol</h1>
+<p>
+Create and parse an additional data structure passed on with each <a class="wiki" href="BuddyCast.html">BuddyCast</a> transmission.
+This structure contains the clicklog data for the n most current torrent downloads, where n is equal to the number
+of torrents transmitted by BuddyCast in the first place.
+</p>
+<p>
+The constants
+</p>
+<pre class="wiki">MAX_KEYWORDS_STORED = 5
+MAX_KEYWORD_LENGTH = 50
+</pre><p>
+define the maximum number of terms per torrent / chars per terms that are accepted by a client in order to prevent spamming.
+</p>
+<h1 id="a4.Stresstesting">4. Stress testing</h1>
+<p>
+After a number of improvements, time requirements are down to an acceptable size, I believe. See attachments for measurements performed with a dataset of search queries collected earlier on by the Tribler team.
+</p>
+<h1 id="a5.Usingthedata">5. Using the data</h1>
+<h2 id="AutoComplete">AutoComplete</h2>
+<ul><li>performs a simple "like 'x%'" query and proposes the most popular completion of the entered characters by adding them to the text field and marking them
+</li></ul><h2 id="Reranking">Reranking</h2>
+<p>
+Right now, 50% of the time (choosing by hours ;) no reranking takes place, and 50% of the time a simple heuristic is applied: The top and the second entry returned for a search query may be swapped if:
+</p>
+<ul><li>both torrents have at least MIN_SEEN_BEFORE_RERANK [5] clicklog records
+</li><li>the first torrent is less than MAX_POPULAR_RATIO [5] times more popular then the second one 
+</li><li>the second torrent has a higher average position score. Each click gets a "position score" of 1-1/(1+click position)
+</li></ul><p>
+The first two criteria are supposed to prevent reranking from being applied without a proper data basis, whereas the third criterion is the actual reranking criterion: If a torrent is consistently selected in a bad position, we might want to move it up. 
+</p>
+<h3 id="Earlierconsiderationsonreranking">Earlier considerations on reranking</h3>
+<p>
+Different reranking algorithms inlude
+</p>
+<ol><li>No reranking
+</li><li>Rerank by number of cooccurrences
+</li><li>Rerank by TfIdf 
+</li></ol><p>
+Implement heuristics for improving rankings. Very generally, rank documents higher if we know peers found them using the current search terms.
+</p>
+<ul><li>By absolute times found using the current search term by peers, or
+</li><li>By times found using current search terms by peers, normalized by number of peers who have this torrent at all to avoid "Harry Potter phenomena" and discount spam attacks claiming their file to be relevant for any search term
+</li><li>How would position of previous clicks come into play here? Would it? 
+</li><li>Could we use the information about the user search terms here as well? 
+</li></ul><p>
+In order to be able to make any statement about the effect and quality of reranking algorithms, we should swap them randomly (even if we only use one actual reranking strategy, we should swap it with strategy 0, the current, non-existing one). 
+</p>
+<p>
+We could do more elaborate learning if, for a click on position 3, we would also store the non-clicked torrents. I guess this is out of the question traffic-wise..?
+</p>
+<p>
+Code-wise, this means writing alternative implementations of Core.Search.KeywordSearch and pass them on to Core.Search.SearchManager. Preferably, SearchManager would receive a couple of instances to choose from, each with a "getRerankingStrategyID()" or so, choose one at random at every search (while evaluating) and make the choice readable for later logging. 
+</p>
+<h1 id="a6.Trackingthedata">6. Tracking the data</h1>
+<ul><li>Current state: Waiting for 5.0 to be deployed 
+</li><li>There's a lot to be said about 
+<ul><li>which keywords were used for which torrent, 
+</li><li>which keywords were used most frequently (this brings to my attention that the family filter would probably have to check the autocomplete...)
+</li></ul></li><li>Of course, we would like to see if the reranking improves position. This is where the reranking_strategy comes into play. There should be some significant differences in average click position between reranked and non-reranked results (or between the different reranking strategies). Besides the possibility for fancy graphs, this allows for an informed decision which reranking strategy to finally use in a later version of Tribler.
+</li><li>Actually, any analysis we might perform on aggregated clicklog data could also be a funky analysis in the regular Tribler client, performed on the peer data available to the user. Just as a side node.
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

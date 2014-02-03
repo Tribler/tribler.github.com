@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="PythonBindingsBuildHOWTO">Python Bindings Build HOWTO</h1>
+<p>
+For win32
+</p>
+<ol><li>Install cross-compilation environment with mingw32-runtime &gt;= 3.15 (VLC 1.0.0 requires this). E.g. Ubuntu Karmic Alpha 2.
+</li><li>Follow instructions on <a class="wiki" href="BrowserPluginBuildHOWTO.html">wiki:BrowserPluginBuildHOWTO</a>
+<ul><li>Or better use the <a class="ext-link" href="http://svn.tribler.org/vlc/branches/plugin-1.0/p2pnext-win32-setup-from-co.sh"><span class="icon">​</span>p2pnext-win32-setup-from-co.sh script</a>
+</li></ul></li><li>Retrieve python bindings via git as per <a class="wiki" href="VlcUbuntuHowto.html">wiki:VlcUbuntuHowto</a> (intrepid instructions)
+</li><li>Obtain Python 2.5.4 source, extract in build dir.
+</li><li>Remove test for cross-compilation from test %zd printf() format support from configure script.
+</li><li>Configure Python for cross-compile:
+<pre class="wiki">./configure --host=mingw32 --with-gcc=i586-mingw32msvc-gcc --with-cxx=i586-mingw32msvc-g++ --enable-shared --with-threads
+</pre></li><li>Obtain python25.dll for Python 2.5.4 from \windows\system32 after Python 2.5.4 binary installer was run, put in build dir.
+</li><li>Copy bindings to compiled vlc-1.0.0
+</li><li>Run following commands (supposedly the equivalent of running "python setup build build_ext" in Win32 space.
+<pre class="wiki">cd bindings/python
+
+i586-mingw32msvc-gcc -mthreads -fno-strict-aliasing -g -O3 -Wall -Wstrict-prototypes  -I../.. -I./../../include -I/usr/win32/include -I../../../Python-2.5.4 -I../../../Python-2.5.4/Include -c ./vlc_module.c -o ../../bindings/python/./vlc_module.o -D_FILE_OFFSET_BITS=64 -D__USE_UNIX98 -D_LARGEFILE64_SOURCE -D_REENTRANT -D_THREAD_SAFE -D_GNU_SOURCE  -O3 -ffast-math -funroll-loops -mtune=pentium2 -g
+
+i586-mingw32msvc-g++  -Wsign-compare -Wall -mms-bitfields -pipe -shared ../../bindings/python/./vlc_module.o ../../src/.libs/libvlc.dll.a ../../../python25.dll -o ../../bindings/python/vlc.pyd -g -lkernel32 -L/usr/win32/lib -liconv /usr/win32/lib/libintl.a /usr/win32/lib/libiconv.a -lws2_32 -lnetapi32 -lwinmm -mwindows
+</pre></li></ol><ol start="8"><li>Copy created vlc.pyd to a checkout of the source.
+</li><li>Create VLC win32 binary distro:
+<pre class="wiki">cd ../..
+make package-win32-base
+</pre></li></ol><ol start="10"><li>Copy the created vlc-1.0.0 dir as vlc to the checkout.
+</li><li>Run
+<pre class="wiki">cd checkout
+copy vlc\libvlc.dll .
+copy vlc\libvlccore.dll .
+</pre></li></ol><ol start="12"><li>Make sure VLCWrapper does not use --http-reconnect and that plugin-path is set to the checkout\vlc\plugins dir.
+</li></ol><h2 id="ForUbuntu">For Ubuntu</h2>
+<p>
+See <a class="wiki" href="VlcUbuntuHowto.html">VlcUbuntuHowto</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

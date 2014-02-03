@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Intro">Intro</h1>
+<p>
+<em>Warning: The information on this page is not up-to-date, contact Diego or Arno for current info. Up-to-date info on how to use the plugin can be found in <a class="ext-link" href="http://www.p2p-next.org/download.php?id=B822272DA9DE5EA94D5B939E513626A5"><span class="icon">​</span>P2P-Next's D6.5.3 deliverable</a>. It also explains how to build the plugin from scratch (note: described configure flags wrong, see p2pnext-win32-setup-from-co.sh).</em>
+</p>
+<ul><li><em>Binaries: <a class="ext-link" href="http://trial.p2p-next.org"><span class="icon">​</span>at the trial site</a> (visit with diff browsers to get the specific installers).</em>
+</li><li><em>Source: <a class="ext-link" href="http://www.p2p-next.org/download.php?id=BEEB1A671F342789E0D77FAA18EF6878"><span class="icon">​</span>1.0.3 stable</a></em>
+</li></ul><p>
+The SwarmPlayer Browser plug-in (SwarmPlugin) is a media player plug-in for
+Internet Explorer (Firefox and Safari in the next future) based on
+the VLC plug-in. The SwarmPlugin incorporates P2P technology
+(from now on P2P Core or Core) developed by TUDelft University, Vrije Universiteit, and others.
+The advantages of integrating P2P networks and VideoOnDemand (from now
+on VOD) should be known and are not going to be discussed here. This
+document presents the architecture from a general and an in depth
+point of view. Since the current status of the Plug-in is under
+development, I'll give some attention on how to reproduce a building
+and installation environment.
+</p>
+<p>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<em>The classid in this example is incorrect. It should be clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921</em>
+</p>
+<h1 id="Architecture">Architecture</h1>
+<h2 id="Overview">Overview</h2>
+<p>
+As it's possible to see from the following picture, the general
+architecture is composed by two main components:
+</p>
+<ul><li>The Background Process (from now on BG Process or BG)
+</li><li>The Plug-in its-self
+</li></ul><p>
+The BG Process is intended to provide P2P download and streaming
+functionalities to the Plug-in while the Plug-in is responsible for handling
+the playback and the user interaction. It's easy to understand that
+the architecture has been modeled as a client/server architecture
+where the Plug-in is the client and the BG is the server.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/Architecture.png" width="50%"></a>
+</p>
+<h2 id="Plug-inBGProcessinteraction">Plug-in / BG Process interaction</h2>
+<p>
+The BG and the Plug-in communicate through two main channels:
+</p>
+<ul><li>A TCP channel for commands
+</li><li>A HTTP channel for video steaming
+</li></ul><p>
+The TCP connection is used by the plug-in to send requests to the
+BG, and by the BG Process to send commands to the Plug-in. The
+communication protocol is really basic:
+</p>
+<blockquote>
+<p>
+<strong>Plug-in requests:</strong>
+</p>
+</blockquote>
+<ul><li>"PLAY torrent_url.torrent"<br />
+es: "PLAY <a class="ext-link" href="http://www.vuze.com/download/XUGIN6PEJJCQ5777C3WUMMBRFI6HYIHJ.torrent"><span class="icon">​</span>http://www.vuze.com/download/XUGIN6PEJJCQ5777C3WUMMBRFI6HYIHJ.torrent</a>" <br />
+Ask to the BG to download the (video) content contained in the torrent file.
+</li><li>"SHUTDOWN"<br />
+Ask to the BG to shutdown the service (not the server) and close
+command and stream connections (end of the plug-in session).
+</li></ul><blockquote>
+<p>
+<strong>BG Process commands:</strong>
+</p>
+</blockquote>
+<ul><li>"PLAY stream_source" <br />
+es: "PLAY <a class="ext-link" href="http://127.0.0.1:1678"><span class="icon">​</span>http://127.0.0.1:1678</a>" <br />
+This command tells to the Plug-in that the requested video is
+available on the specified stream_source.
+</li><li>"PAUSE"<br />
+This command tells to the Plug-in that the connection speed has
+decreased and the P2P core needs some time for buffering.
+</li><li>"RESUME"<br />
+The buffer is full and the connection speed is good enough
+to start again the playback previously paused.
+</li><li>"SHUTDOWN"<br />
+Acknowledge the Plug-in that the shutdown request has been
+received and performed.
+</li><li>"INFO info_string" <br />
+es: "INFO Buffering 10%"<br />
+This commands tells to the Plug-in that there's a string to display
+in the playback region handled by Vlc.
+</li></ul><p>
+Here is shown an interaction scheme between Plug-in / BG / P2P Core:
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/interaction.png" width="50%"></a>
+</p>
+<h2 id="TheBackgroundProcess">The Background Process</h2>
+<h3 id="Overview1">Overview</h3>
+<p>
+The BG Process is a Windows executable (.exe) build up from python
+sources. As already said it's basically a server providing VOD (and
+P2P) features. The plug-in must be able to launch the BG Process
+in the case the BG is not up yet. After the BG has been launched by
+the first plug-in instance, it should keep serving in background until a manual
+shutdown is performed (through the Systray Icon). The reason to keep
+the BG alive is of course to guarantee seeding time after service
+(video streaming) consumption. Through the systray icon it's possible to
+interact with the BG Process, setting the upload rate limit, monitoring the
+current download status and speed and requesting the BG to shutdown.
+An alternative could be to provide interactivity/monitoring features to the
+BG Process through a web interface.
+</p>
+<h2 id="ThePlug-in">The Plug-in</h2>
+<h3 id="Overview2">Overview</h3>
+<p>
+The Plug-in is an ActiveX control based on the VLC Internet
+Explorer plug-in (vlc-0.9.5). When the browser renders the
+web page and an <tt> &lt;object&gt; </tt> tag is found in the html
+code, the browser loads the plug-in associated to the
+"classid" parameter of that tag. In our case the "classid" is
+"E23FE9C6-778E-49D4-B537-38FCDE4887D8". Further studies
+are needed to understand how to generate and register a new CLASSID
+to be associated to the SwarmPlugin (since the current one is associated
+to the VLC plug-in)
+</p>
+<p>
+As soon as the Plug-in is loaded in the browser, a connection with
+the BG Process is established and the communication between the two
+components starts. If the Plug-in can not connect to the BG Process,
+it tries to launch a new BG instance and to connect again. At this
+point the connection is established and the session between Plug-in
+and BG starts.
+</p>
+<p>
+As already said the communication protocol between the two
+components consists on requests (from Plug-in to BG) and commands
+(from BG to Plug-in). This mechanism is asynchronous, this means
+that after the Plug-in sends a request, commands can be received
+anytime.
+</p>
+<p>
+The interaction between the user and the Plug-in is identical to the
+Vlc plug-in. For details refer to the Vlc documentation:<br />
+<a class="ext-link" href="http://git.videolan.org/?p=vlc.git;a=blob;f=projects/activex/README.TXT"><span class="icon">​</span>http://git.videolan.org/?p=vlc.git;a=blob;f=projects/activex/README.TXT</a> <br />
+<a class="ext-link" href="http://wiki.videolan.org/ActiveX"><span class="icon">​</span>http://wiki.videolan.org/ActiveX</a>
+</p>
+<h3 id="Sources">Sources</h3>
+<p>
+The starting point of the Plug-in development is vlc-0.9.5. The
+source code of the VLC package contains a 'projects/activex' directory where
+the code for building the 'axvlc.dll' is stored. This library is the
+plug-in its self and is the one that is loaded into the browser.
+</p>
+<p>
+The ActiveX control is composed by several files implementing
+different features of an activex control. The 'main' files are
+plugin.h, plugin.cpp. These are the only 2 files patched to let the
+plug-in communicate with the BG Process. The patch consist in adding
+a TriblerControl object to the VLCPlugin class. We are going to see
+what does this means by giving an overview of the few classes
+involved:
+</p>
+<ul><li><strong>VLCPlugin</strong>
+This class implements the IUnknown interface of the ActiveX
+control. The VLCPlugin is responsible for handling the region of
+the web page where the VLC instance is going to draw the video
+playback. This class has been extended by adding a TriblerControl
+and some callback functions to provide the plug-in with P2P features.
+</li></ul><ul><li><strong>TriblerControl</strong>
+This class handles the communication protocol with the BG. Through
+this class is possible to add VOD P2P functionality to any
+software. It's important to introduce two concepts to understand
+the functionalities of the TriblerControl: <br />
+EventCBMap: this is a multimap containing the association between
+the command received from the BG and the callback function to
+perform. <br />
+EventThread: this thread provides an asynchronous mechanism to the
+communication protocol between Plug-in and BG. As soon as a
+command is received, the EventThread looks in the EventCBMap and it
+performs the action associated to the received command (see architecture
+picture).
+</li></ul><h2 id="TheEnvironment">The Environment</h2>
+<h3 id="SVNrepository">SVN repository</h3>
+<p>
+<strong>SwarmPlugin</strong> <br />
+The source code of the VLC patched version can be found <a class="ext-link" href="http://svn.tribler.org/vlc/branches/vlc-0.9.5-win32-swarmplugin-diego-feb2009/"><span class="icon">​</span>here</a>.
+You can find:
+</p>
+<ul><li>vlc-0.9.5/ : patched version of VLC (the plug-in sources are under vlc-0.9.5/projects/activex)
+</li><li>vlc-0.9.5_swarm_plugin.patch : patch file to build the SwarmPlugin out of the original VLC plug-in
+</li><li>vlc_win32_setup.sh : script to create the building environment for compiling the SwarmPlugin (not completely stable)
+</li></ul><p>
+The precompiled binaries can be found in <a class="ext-link" href="http://svn.tribler.org/vlc/tags/vlc-0.9.5-swarmplugin-win32-feb2009/"><span class="icon">​</span>here</a>.
+</p>
+<p>
+<strong>Background Process</strong> <br />
+The source file of the BG Process is <a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Plugin/BackgroundProcess.py"><span class="icon">​</span>this</a> one.
+</p>
+<h3 id="Runtimeenvironment">Runtime environment</h3>
+<p>
+The runtime environment is not completely defined yet. It's
+reasonable to think that the installation path will be something
+like <tt> C:Program FilesSwarmPlugin </tt>
+</p>
+<p>
+it will contain the BGProcess executable and libraries, the Plug-in
+(axvlc.dll) and the Vlc libraries. One registry entry will be
+needed: <br />
+<tt> HKEY_LOCAL_MACHINESoftwareSwarmPlugin </tt> <br />
+<tt> BGProcessPath=C:Path        oBG </tt>
+</p>
+<p>
+this item will contain the path through which the Plug-in can find
+the BGProcess and run it.
+</p>
+<h1 id="Howtobuild">How to build</h1>
+<h2 id="BackgroundProcess">Background Process</h2>
+<p>
+To build the BG Process you have to check out the svn repository: <br />
+<tt> svn co http://svn.tribler.org/abc/branches/mainbranch/</tt>
+</p>
+<p>
+go in the <em>mainbranch</em> directory just created and run on the console: <br />
+<tt> python TriblerPluginBuildWin32setupBGexe.py py2exe </tt>
+</p>
+<p>
+this requires you to have python and the py2exe extension installed.
+Once done, you can find the <em>dist</em> directory containing the BG Process
+executable and libraries.
+</p>
+<h2 id="Plug-in">Plug-in</h2>
+<p>
+As already mentioned, the Plug-in is a patched version
+of the VLC (0.9.5) plug-in. VLC is software native for Linux, so to
+build up a Windows version you'll have to cross-compile from Linux
+to Windows with the Mingw compiler (for example) or alternatively
+use a Cygwin environment.
+</p>
+<p>
+To compile the SwarmPlugin you have to compile the whole VLC source tree. <br />
+<tt> svn co http://svn.tribler.org/vlc/branches/vlc-0.9.5-win32-swarmplugin-diego-feb2009/ </tt> <br />
+You can find the sources under vlc-0.9.5-win32-swarmplugin-diego-feb2009/vlc-0.9.5.
+Compile it as you would compile VLC.
+For details on how to build VLC please refer to the VLC documentation on
+<a class="ext-link" href="http://wiki.videolan.org/Win32Compile"><span class="icon">​</span>How to build VLC for Windows</a>.
+</p>
+<p>
+Since this task may be tricky we provide a script for creating a building environment,
+patching VLC and compile the SwarmPlugin. As already stated the script is vlc_win32_setup.sh
+and the patch file is vlc-0.9.5_swarm_plugin.patch. Create a new directory, place these files
+in it, run the vlc_win32_setup.sh and follow the instructions.
+</p>
+<p>
+Important: this procedure hasn't been tested on
+a clean environment, you may find problems during
+the configuration phase.
+</p>
+<h1 id="Howtoinstall">How to install</h1>
+<p>
+We provide you with a <a class="ext-link" href="http://svn.tribler.org/vlc/tags/vlc-0.9.5-swarmplugin-win32-feb2009/"><span class="icon">​</span>binary package</a>.
+This package contains a vlc.win32.nsi NSIS script to build an autoinstaller.
+Create your autoinstaller and run it. Remember to check the activex plugin as component to install and
+change the destination directory to <tt> C:Program FilesSwarmPlugin </tt> (preferably).
+Place the BG Process you built with the "dist" directory (read "How to build" section) preferably
+under <tt> C:Program FilesSwarmPluginBGProcess </tt>.
+Then create a Windows registry (with regedit) under <tt> HKEY_LOCAL_MACHINESoftwareSwarmPlugin </tt>
+with BGProcessPath as key and the path where you copied the BG Process as value. Example: <br />
+<tt> [HKEY_LOCAL_MACHINESoftwareSwarmPlugin] </tt> <tt> BGProcessPath="C:Program FilesSwarmPluginBGProcessBackgroundProcess.exe" </tt>.<br />
+</p>
+<p>
+Now you can try to open this <a class="ext-link" href="http://svn.tribler.org/abc/branches/diego/d08-09-11-swarmplayer-plugin-from-mainbranch-r8821/Tribler/IEPlugin/example_page.html"><span class="icon">​</span>page</a> with Internet Explorer.
+</p>
+<h1 id="AnInterestingFramework">An Interesting Framework</h1>
+<p>
+As it's possible to understand from the architecture description of
+the Plug-in, the TriblerControl combined with the BG offers a
+simple interface to the P2P core. Such framework would allow
+developers to implement their own VOD software based on torrent/P2P
+technology in a really simple way. Apart from the SwarmPlugin, other
+possible uses could be:
+</p>
+<ul><li>A stand alone swarmplayer
+</li><li>A Windows sidebar VOD widget
+</li><li>P2P LIMO widgets
+</li><li>...
+</li></ul><p>
+To implement such a feature you just have to include the TriblerControl
+in your software in this way:
+</p>
+<pre class="wiki">/* Initialize TriblerControl */
+TriblerControl * triblerControl = new TriblerControl();
+triblerControl-&gt;startup();
+/* Register callback functions */
+triblerControl-&gt;regEventCB&lt; MyClass &gt;( EV_PLAY, &amp;myClassObj, &amp;MyClass::onPlayCmd );
+triblerControl-&gt;regEventCB( EV_PAUSE,  &amp;myStaticFunction );
+</pre><p>
+register your callbacks for every event you want to handle:
+</p>
+<ul><li>EV_PLAY
+</li><li>EV_PAUSE
+</li><li>EV_RESUME
+</li><li>EV_STOP
+</li><li>EV_INFO
+</li></ul><p>
+<a class="missing" href="#"></a>
+</p>
+<h1 id="Todoandopenissuescurrentstatus">Todo and open issues (current status)</h1>
+<ul><li>Perform building environment and building procedure.
+</li><li>Create an installation script.
+</li><li>Extend Systray icon interface and functionality.
+</li></ul><h1 id="Webcontentdownloadaccelerator">Web content download accelerator</h1>
+<p>
+The idea is to merge normal HTTP downloading with P2P.
+The first time a user completes a normal HTTP download, he creates a
+torrent out of it and notifies the tracker. When the second user downloads
+the same resource through HTTP, a P2P plug-in integrated in the web browser
+starts to look for other peers sharing the same content. At this point the resource
+is going to be downloaded both through HTTP and <a class="wiki" href="BitTorrent.html">BitTorrent</a>. A service gives the
+root-hash of the torrent providing a security hash-checking mechanism (see <a class="wiki" href="MerkleHashes.html">MerkleHashes</a> for more details).
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="IPv8:Peer-to-Peeroverlaynetwork">IPv8: Peer-to-Peer overlay network</h1>
+<p>
+<em>In short: a library for networking in 
+distributed applications based on a P2P-overlay which handles IP changes,
+strong identities, trust levels, and neighbourhood graphs.</em>
+</p>
+<h2 id="Overview">Overview</h2>
+<p>
+Problems with the very fabric of The Internet, IPv4, are mounting.
+The approach of IPv6, Mobile IP, and IPSec is hampered by fundamental
+architectural problems. A superior solution is moving the intelligence up to a
+higher layer in the protocol stack and towards the end points.
+</p>
+<p>
+We have the expertise to design and build innovative P2P overlay software.
+Our overlay will <tt></tt>offer a secure network connection to either a known
+person or a specific computer which is robust against eavesdropping,
+man-in-the-middle attacks, peer failure, network failure, packet loss,
+change of IP numbers, network mobility, and blocking by NAT/Firewalls<em>.
+Our solution exposes trust and reputation levels to the networking
+layer to lower the risk of DDOS attacks.
+</em></p>
+<h2 id="Functionality">Functionality</h2>
+<p>
+IPv8 is an P2P overlay network which unlocks more advanced functionality.
+Over the coming 5 years we aim to evolve this technology and offer the following functionality:
+</p>
+<ul><li>Direct, safe, and robust communication between you and any other node
+</li><li>Determine the friendship paths between you and any other node by integrating existing web-based social networks
+</li><li>Estimate the trust level between you and any other node
+</li><li>Exchange of multimedia information of any size or popularity
+</li><li>Transfer of virtual currency (credits) or real money to any other node
+</li></ul><p>
+<a class="missing" href="#">ToDo</a>:
+Also manage internal network addresses, discover
+external network address, connect to peers within subnet
+with internal IP address.
+Expand with NAT/Firewall puncturing, UDP/HTTP encapculation,
+user space TCP rate control, relaying through proxies.
+</p>
+<h2 id="Performanceandawareness">Performance and awareness</h2>
+<p>
+IPv8 also enables a new interface for performance and network awareness.
+Currently every application has to guess the available bandwidth, latency, etc.
+while all this information is availbe in the hidden TCP state.
+Especially for network-dependent applications this can boost effectiveness and efficiency.
+(As nicely described years ago by MIT people in the Daytona paper)
+</p>
+<p>
+TCP manages each stream/connection separately; when working with multiple
+concurrent streams, TCP has issues. As P2P routinely employs numerous connections,
+that issues surface . E.g. <a class="wiki" href="BitTorrent.html">BitTorrent</a> has 4 upload connection slots - otherwise,
+Cohen claims, TCP performance is suboptimal.
+</p>
+<p>
+So, managing all streams by a single control loop may bring some benefits.
+</p>
+<h2 id="Relatedwork">Related work</h2>
+<ul><li><a class="missing attachment">Relates to novel routing ideas</a>
+</li><li><a class="ext-link" href="http://www.citeulike.org/group/538"><span class="icon">​</span>Group of P2P papers</a>
+</li><li><a class="ext-link" href="http://www.google.com/search?q=user+space+tcp+stack"><span class="icon">​</span>User-Space TCP with UDP primitives</a>
+</li><li><a class="ext-link" href="http://scholar.google.com/scholar?q=udp+~traversal"><span class="icon">​</span>Query Google scholar</a>
+</li><li><a class="ext-link" href="http://del.icio.us/synctext/nat_firewall?setcount=100"><span class="icon">​</span>links to NAT doc</a>
+</li><li><a class="ext-link" href="http://del.icio.us/synctext/IPv8"><span class="icon">​</span>IPv8 links</a>
+</li><li><a class="ext-link" href="http://www.mocaedu.com/mt/archives/000140.html"><span class="icon">​</span>Skype</a> is the nearly undocumented state-of-the-art
+</li><li><a class="ext-link" href="http://www.cs.toronto.edu/iptps2008/final/31.pdf"><span class="icon">​</span>Skype</a> reactions to packet loss and bandwidth reduction
+</li><li><a class="ext-link" href="http://www.123marbella.net/downloads/guide-for-network-admins.pdf"><span class="icon">​</span>Cached copy of Skype admin documentation</a>
+</li><li><a class="ext-link" href="http://reports-archive.adm.cs.cmu.edu/anon/anon/usr/ftp/2006/CMU-CS-06-148.pdf"><span class="icon">​</span>Peer discovery, random walk, and trackerless torrents</a>
+</li><li><a class="ext-link" href="http://www.cs.vu.nl/ishare/public/I-Share-R6v1.0.pdf"><span class="icon">​</span>2005 work on NAT with references to generic libraries</a>
+</li><li>Twisted <a class="ext-link" href="http://www.onlamp.com/pub/a/python/2004/01/15/twisted_intro.html"><span class="icon">​</span>into</a> and <a class="ext-link" href="http://twistedmatrix.com/trac/"><span class="icon">​</span>main site</a>
+</li><li><a class="ext-link" href="http://nms.csail.mit.edu/~kandula/data/daytona.pdf"><span class="icon">​</span>Daytona</a> - A User-Level TCP Stack, 2002
+</li></ul><h2 id="Realworldmeasurements">Real world measurements</h2>
+<ul><li><a class="missing" href="#">ToDo</a> add Chineese measurement with x000+ peers
+</li><li><a class="ext-link" href="http://www.brynosaurus.com/pub/net/p2pnat/"><span class="icon">​</span>380 peers measured</a>
+</li><li><a class="ext-link" href="http://nutss.gforge.cis.cornell.edu/pub/imc05-tcpnat/"><span class="icon">​</span>Cornell test with 87 home NAT boxes</a> and technical description
+</li></ul><h2 id="Securityspecific">Security specific</h2>
+<ul><li><a class="ext-link" href="http://code.google.com/p/obstcp/"><span class="icon">​</span>Obfuscated TCP</a> with Linux kernel code
+</li><li><a class="ext-link" href="http://tools.ietf.org/html/draft-ietf-tcpm-tcp-auth-opt-01"><span class="icon">​</span>The TCP Authentication Option</a>
+</li><li><a class="ext-link" href="http://tools.ietf.org/html/draft-ietf-btns-core-06"><span class="icon">​</span>Unauthenticated Mode of IPsec</a>
+</li><li><a class="ext-link" href="http://diswww.mit.edu/bloom-picayune/crypto/128226"><span class="icon">​</span>TCP crypto</a> discussion on MIT mailinglist
+</li></ul><h2 id="STUNSpecific">STUN Specific</h2>
+<ul><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Network_address_translation"><span class="icon">​</span>Details on the different types of NAT</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Stun"><span class="icon">​</span>STUN protocol</a>
+</li><li><a class="ext-link" href="http://code.google.com/p/boogu/"><span class="icon">​</span>Boogu: A python STUN client for getting NAT type, followed RFC 3489</a>
+</li><li><a class="ext-link" href="http://www.google.com/search?q=stun+%7Etraversal"><span class="icon">​</span>Google query</a>
+</li><li><a class="ext-link" href="http://www.google.com/search?q=NAT+Check"><span class="icon">​</span>http://www.google.com/search?q=NAT+Check</a>
+</li><li><a class="ext-link" href="http://www.cs.cornell.edu/projects/stunt/"><span class="icon">​</span>http://www.cs.cornell.edu/projects/stunt/</a>
+</li><li><a class="ext-link" href="http://www.cs.cornell.edu/projects/stunt/firewall-classify-1.0.htm"><span class="icon">​</span>http://www.cs.cornell.edu/projects/stunt/firewall-classify-1.0.htm</a>
+</li><li><a class="ext-link" href="http://midcom-p2p.sourceforge.net/"><span class="icon">​</span>Actual C code</a>
+</li><li><a class="ext-link" href="http://midcom-p2p.cvs.sourceforge.net/midcom-p2p/web/"><span class="icon">​</span>source code</a>
+</li><li><a class="ext-link" href="http://sparrow.ece.cmu.edu/~adrian/projects/natblaster.pdf"><span class="icon">​</span>http://sparrow.ece.cmu.edu/~adrian/projects/natblaster.pdf</a>
+</li><li><a class="ext-link" href="http://nutss.gforge.cis.cornell.edu/pub/imc05-tcpnat.pdf"><span class="icon">​</span>http://nutss.gforge.cis.cornell.edu/pub/imc05-tcpnat.pdf</a>
+</li><li><a class="ext-link" href="http://www.nattraversalserver.com/"><span class="icon">​</span>http://www.nattraversalserver.com/</a>
+</li></ul><h2 id="ICE-InteractiveConnectivityEstablishment">ICE - Interactive Connectivity Establishment</h2>
+<p>
+Uses coordinating servers to enable two NATted peers to talk. 
+Automatically switches to relay techniques when port prediction of symmetric NAT fails.
+</p>
+<ul><li><a class="ext-link" href="http://www.jdrosen.net/papers/draft-rosenberg-sipping-ice-00.html"><span class="icon">​</span>http://www.jdrosen.net/papers/draft-rosenberg-sipping-ice-00.html</a>
+</li><li>[www.ietf.org/proceedings/06nov/slides/mmusic-11.pdf Readable Introduction]
+</li></ul><h2 id="TCPconnectionestablishment">TCP connection establishment</h2>
+<p>
+The aim is to copy the TCP handshake algorithm with the SYN and SYN-ACK packets
+</p>
+<h2 id="SCTP">SCTP</h2>
+<ul><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Stream_Control_Transmission_Protocol"><span class="icon">​</span>wiki</a>
+</li><li><a class="ext-link" href="http://www.sctp.de/sctp-download.html"><span class="icon">​</span>user space lib</a>
+</li></ul><h2 id="Planning">Planning</h2>
+<ul><li>NAT check: every peer runs the STUN protocol in order to find out the kind of NAT (if any) they are behind, as well as their public address (IP and port) <a class="ext-link" href="http://www.tribler.org/browser/abc/branches/mainbranch/Tribler/Core/NATFirewall"><span class="icon">​</span>our code</a>
+</li></ul><ul><li>NAT timeout: every peer has to find out the timeout of their own NAT for UDP connections
+</li></ul><ul><li>UDP hole punching: combining the information above in order to implement UDP hole punching
+</li></ul><p>
+For the NAT check we are using th STUN algorithm:
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<h2 id="P2TP:rate-controlledUDP">P2TP: rate-controlled UDP</h2>
+<pre class="wiki">32 bits per line
++-UDP-----------+---------------+
+| source port   | destination p.|
+| length        | checksum      |
++-P2TP----------+---------------+
+|fl    pckt seq |fl  timestamp  |
++---------------+---------------+ 
+
+Where
+  fl: 2+2=4 bits of flags
+
+    SOP stream open
+	set after receiving a correct returned timestamp
+    LSS packet loss detected
+	set when loss is detected (gap in packet sequence numbers
+	which was not closed for some time)
+	unset when CLR flag is received
+    CLR clear packet loss flag
+	set when LSS flag received
+	unset when LSS flag is cleared
+    YTS returned timestamp
+	set when the second field is occupied by a returned timestamp
+	unset when the second field is occupied by a forward timestamp
+
+	if SOP is unset, the second field always contains a returned
+	timestamp or 0 if no timestamps were received yet; the first
+	field contains forward timestamp as no packet sequence numbers
+	are meaningful before the stream is open
+
+  pckt seq, 30bits: sequential number of the packet (or forward
+        timestamp if SOP=0)
+
+  timestamp, 30 bits: either forward or returned timestamp, used for
+        RTT calculations as well as a lightweight security mechanism
+</pre><p>
+Stream initiation is supposed to work as follows: either one or both peers send out an initial packet having SOP=0, forward timestamp in the first field and 0 in the second field as no peer timestamps were received yet. The forward timestamp is set to local time and "encrypted" using peer-ip-and-port as a key (variation of SYN cookies). I plan to use timestamps, not sequence numbers for lightweight security because... I don't know why. RTT varies by less orders of magnitude than transmission rate, so probably that is a better choice.
+On receiving a SOP=0 datagram, peer's actions depend on whether the returned timestamp looks good. If it is the case, the peer "opens" the stream and sends out a datagram {SOP=1, LSS=0, CLR=1, YTS=1, pckt_seq=i++, timestamp=peer timestamp}; this datagram may already contain some payload as we know that the other end is really responding and not a DDoS victim.
+In the case no returned timestamp is present, the peer sends out {SOP=0, LSS=0, CLR=1, YTS=1, pckt_seq=own timestamp, timestamp=peer timestamp} without any payload.
+</p>
+<p>
+Basically, the algorithm mimics TCP's 3-way handshake except both parties may be initiators, simultaneously. Returning of timestamps has to ensure that the other side is really talking the protocol. Ideally, a peer may send out some data one RTT after the stream is initiated.
+</p>
+<p>
+Packet sequence numbers let the receiver detect gaps resulted from losses. Once loss is indicated, LSS bit is set on. On receiving a packet with LSS bit, the sender adjusts sending rate and starts sending datagrams with CLR bit on until LSS bit is cleared by the other side. (Need to remember the last sequence number for the last state change to ignore packet reordering.)
+During normal data exchange, peers send datagrams with forward (YTS=0) or returned timestamp (YTS=0), depending on conditions.
+</p>
+<p>
+The planned rate control algorithm is a variation of TCP CUBIC.
+</p>
+<p>
+Seemingly, the protocol allows no extensions as every bit is consumed. Still, no data is supposed to reside in SOP=0 datagrams, so we may append some stuff there later to negotiate options/extensions.
+</p>
+<h1 id="Towardsafirstprototype">Towards a first prototype</h1>
+<p>
+Simplify and make concrete decisions.
+</p>
+<h2 id="ProblemdescriptionV2">Problem description V2</h2>
+<p>
+The research challenge is to combine cloud technology with database techniques.
+Can we abstract away IPv4 addresses from applications?
+Can we create make a single superset of various peers relations into a single flexible storage principle?
+Can we store peer relations seperated and policy neutral.
+</p>
+<h2 id="DesignV2">Design V2</h2>
+<p>
+Focus on abstracting away IPv4 addresses into a simple bindings table which is utilised when actual connection is made.
+</p>
+<p>
+Peers_Table
+</p>
+<table class="wiki">
+<tr><td>ID</td><td>Peer PermID
+</td></tr><tr><td>01</td><td> 98f87AA 
+</td></tr></table>
+<p>
+Bindings_Table
+</p>
+<table class="wiki">
+<tr><td>ID</td><td> IPv4 </td><td> port </td><td style="text-align: left">timestamp </td><td> certificate 
+</td></tr></table>
+<p>
+Design for keeping superset of various relations<br />
+Relations_Type_Table
+</p>
+<table class="wiki">
+<tr><td style="text-align: left">REL_ID </td><td> Peer Relation Type 
+</td></tr><tr><td> 0 </td><td> Peer Traffic Exchange 
+</td></tr><tr><td> 1 </td><td> Similar Taste relation 
+</td></tr><tr><td> 2 </td><td> Voted as a moderator 
+</td></tr><tr><td> 3 </td><td> Facebook Friend 
+</td></tr><tr><td> 4 </td><td> n e w 
+</td></tr></table>
+<p>
+Relations_Table
+</p>
+<table class="wiki">
+<tr><td> ID_1 </td><td> ID_2 </td><td> REL_ID </td><td> timestamp </td><td> Relationship_Strength_Factor </td><td> certificate 
+</td></tr></table>
+<p>
+  
+</p>
+<h2 id="Databasesynchronisationalgorithms">Database synchronisation algorithms</h2>
+<p>
+<em>Describe the State of the art for Gossip and DB sync.</em>
+</p>
+<p>
+See <a class="wiki" href="IPv8Datasync.html">IPv8Datasync</a>
+</p>
+<p>
+Key aspect of IPv8 is keeping track of 50k or 1 million peers.
+Research challenge is what database synchronisation algorithm to use.
+</p>
+<p>
+Existing algorithms and approaches:
+</p>
+<ul><li>Epidemic algorithms for replicated database management. Alan Demers, et al. Proc. 6th ACM PODC, Vancouver BC, 1987.
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Gossip_protocol"><span class="icon">​</span>Gossip approach</a>, which differs from database approach
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Data_synchronization#Theoretical_models"><span class="icon">​</span>Data synchronisation</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Bloom_filter"><span class="icon">​</span>Can we use Bloom filters</a> (efficient compression, low error, as Jelle explored years ago)
+</li><li><a class="missing attachment">Set reconciliation with nearly optimal communication complexity</a> - This seems to define our problem exactly
+</li><li><a class="missing attachment">Practical Set Reconciliation - Yaron Minsky</a> - classic sync algorithm
+</li><li><a class="ext-link" href="http://ipsit.bu.edu/programs/reconcile/"><span class="icon">​</span>real sync example code</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Lazy_replication"><span class="icon">​</span>http://en.wikipedia.org/wiki/Lazy_replication</a> Is this field we need?
+</li><li><a class="ext-link" href="http://scholar.google.com/scholar?q=lazy%20replication"><span class="icon">​</span>Scientific articles on lazy replication</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Multi-master_replication"><span class="icon">​</span>http://en.wikipedia.org/wiki/Multi-master_replication</a>
+</li><li><a class="missing attachment">Efficient Reconciliation and Flow Control for Anti-Entropy Protocols</a> - Good problem definition
+</li></ul><p>
+Within a lot of the related work in this area a lot of though and complexity lies in conflict resolution.
+For IPv8 we can explicitly exclude conflict resolution or simplify it to <em>use latest timestamp entry</em>.
+Thus we can fortunately simplify matters and use the <strong>data synchronisation</strong> class of algorithms.
+</p>
+<p>
+Our problem seems different to the prior work. Our key principle is that we operate in a completely untrusted self-organising ecosystem. Thus for each peer we meet we <strong>only</strong> want records which are signed by peers which have a sufficient reputation.
+In the Relations_Table we use the Relationship_Strength_Factor to store the weight of this link in the graph. Using betweenness centrality or any other reputation function we can then calculate the reputation score of each peer. As bandwidth is very scarce in P2P we only want to upload records to a peer when the receiver does not yet have them. This leads us to the following:
+</p>
+<pre class="wiki">
+Research Question: Which architecture supports the exchange of records between
+         two peers which encounter each other in a self-organising system where:
+         the exchanged records both contain previously unknown information and 
+         those records are signed by peers which have a sufficient
+         score in the reputation system.
+
+</pre><table class="wiki">
+<tr><td><a class="missing attachment">Toward the Next Generation of Recommender Systems: A Survey of the State-of-the-Art and Possible Extensions</a></td><td>Adomavicius et al.
+</td></tr></table>
+<h2 id="Planning1">Planning</h2>
+<ul><li>Expand problem description, design and sync algorithms to readable form
+</li><li>Create the Python code for this table
+</li><li>Discuss with Tribler people
+<ul><li>The best implementation method
+</li><li>Data to fill a database with all historical data
+<ul><li><a class="wiki" href="SuperpeerLogs.html">SuperpeerLogs</a> Niels
+</li><li><a class="missing" href="#">SwarmBasedReputationConsensus</a> Rahim ; peer traffic exchange
+</li><li><a class="wiki" href="WikiStart.html"></a> NAT Types Gertjan
+</li><li><a class="wiki" href="ContentSearch.html">ContentSearch</a> Nitin voting pattern
+</li></ul></li></ul></li><li>first prototype where 2 peers sync their data
+</li><li>Implement, test &amp; compare algorithms for sync
+</li></ul><p>
+ 
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

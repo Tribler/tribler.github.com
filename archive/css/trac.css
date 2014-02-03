@@ -1,0 +1,41 @@
+#trac {
+	padding: 140px 30px 20px 30px;
+	margin: 0 0 0 0;
+}
+#trac table td{
+	vertical-align:top;
+}
+#trac a {
+	color: #ff3300; text-decoration: none;
+}
+	#trac a:hover {
+		color: #00bff4;
+	}
+#trac a.missing {
+	color: #000; text-decoration: none;
+}
+	#trac a.missing:hover {
+		color: #00bff4;
+	}
+#trac h1 {
+	margin: 10px 0;
+}
+	#trac h1:first-of-type {
+		margin-top: 0;
+	}
+#trac h2, #trac h3 {
+	margin: 5px 0;
+}
+#trac ul {
+	margin: 0 0 0 20px;
+}
+#trac pre.wiki, #trac pre.literal-block, #trac pre.code, #trac .code pre {
+	background: #f7f7f7;
+	border: 1px solid #d7d7d7;
+	margin: 1em 1.75em;
+	padding: .25em;
+	max-width:850px;
+	
+	overflow: hidden;
+	line-height: 100%;
+}

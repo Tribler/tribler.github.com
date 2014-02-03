@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Swarmsize">Swarm size</h1>
+<p>
+The popularity of content.
+</p>
+<h2 id="Problemdescription">Problem description</h2>
+<blockquote>
+<p>
+Robust method to spread swarm size, popularity, while minimizing the need for peers to ask tracker ( avoiding tracker hammering)
+</p>
+</blockquote>
+<h2 id="Informationathand">Information at hand</h2>
+<p>
+After exchanging of <a class="wiki" href="BuddyCast.html">BuddyCast</a> message, followed by metadata exchange (mentioned in the protocol), each peer has below information that can use to calculate swarm size:
+</p>
+<ul><li>infohash of the torrent
+</li><li>metadada ( the dictionary of the .torrent file)
+</li><li>last_check_time ( from tracker )
+</li><li>number of seeder ( obtained from tracker )
+</li><li>number of leechers (  obtained from tracker)
+</li><li>status ( depending on the tracker replies one of the values "good" , "dead" or "unknown")
+</li></ul><p>
+There is another set of information that is obtained during periodic connections to the tracker: 
+</p>
+<ul><li>Number of seeders.
+</li><li>Number of leechers.
+</li><li>Interval 
+</li><li>min interval.
+</li><li>check_time ( this value is not returned by the tracker, but it is logged by the peer and is used in the <a class="wiki" href="BuddyCast.html">BuddyCast</a> message)
+</li></ul><p>
+Also information from tracker seems to be reliable (may be!!) and easy to get, but the challenge is to ask tracker as less as possible and to have appropriate measure of the swarm size.
+</p>
+<h2 id="ProblemAnalysis">Problem Analysis</h2>
+<p>
+To provide a solution, first we should know, how the swarm size is changed?
+</p>
+<blockquote>
+<p>
+The swarm size is composed of two parts:
+</p>
+</blockquote>
+<ul><li>Number of seeders:
+<ul><li>Increases by one when a peer with complete file joins swarm.
+</li><li>Increases by one when a leecher completes downloading and continues to uploading it.
+</li><li>Decreases by one when a peer with complete file leaves the swarm.
+</li></ul></li></ul><p>
+          
+</p>
+<ul><li>Number of leechers:
+<ul><li>Increases by one when a peer that doesn't have the complete file joins the swarm.
+</li><li>Decreases by one when a peer completes its downloading and changes to seeder.
+</li><li>Decreases by one when a peer leaves the swarm before completing it's downloading.
+</li></ul></li></ul><p>
+          
+ 
+</p>
+<h3 id="Howisthereliabilityofinformationobtainedfromtracker">How is the reliability of information obtained from tracker?</h3>
+<p>
+According to the BT protocol, the tracker should have the most recent info about the swarm size, but in reality it is not. There are some factors that temporarily degrades the accuracy of tracker's informations. For example, If a peer leaves the swarm without informing the tracker (sending stop message) the tracker will have inaccurate info until next check that may happen after <em>interval</em> time units. 
+</p>
+<h3 id="Howisthereliabilityofinformationobtainedthroughgossipmessage">How is the reliability of information obtained through gossip message?</h3>
+<p>
+Without strict security conditions information obtained through gossip protools are not reliable.  For measuring swarm size below issues may arise:
+</p>
+<ul><li>Misreport: A peer may lie about the number of seeders, leechers or its check time. This sort of acts may be done to increase or decease the popularity of a torrent. 
+</li><li>Different values: It is possible that a peer receive different swarm_size values from different peers. This case is more serious when the difference between reported values is high. Ex. 5 and 50. 
+</li><li>Different peers have different reliabilities, ex. friends and FoF are more reliable than others.
+</li></ul><h2 id="Solution">Solution</h2>
+<h3 id="Mainpoints">Main points</h3>
+<p>
+In crowd based popularity measurement systems there are two important trends that should be considered and balanced when policy designing:  
+</p>
+<ul><li>Enough information to make a good measurement.
+</li></ul><blockquote>
+<blockquote>
+<p>
+To make a proper measurement each peer should have access to the appropriate set of required information. In the ideal case the peer can ask tracker to gain latest swarm size but we want to avoid it. 
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Enough robustness to prevent malicious peers from misusing of the strategy and doing what they like.
+</li></ul><blockquote>
+<blockquote>
+<p>
+The policy should have reasonable resistance against malicious actions and misusing. In a gossip based decision system a malicious peer can deviate from the protocol in the following ways:
+</p>
+<blockquote>
+<p>
+1- Sending too many message (pumping). <br />
+2- Sending less frequently than expected. <br />
+3- Sending incorrect values  like swarm size and check time to others. <br />
+</p>
+</blockquote>
+<p>
+In our case, the swarm size info is received through regular <a class="wiki" href="BuddyCast.html">BuddyCast</a> message and we don't want to create and send special message, so the first two issues are not inside our problem's scope. We   
+concentrate on third one.
+</p>
+</blockquote>
+</blockquote>
+<p>
+ 
+</p>
+<p>
+  
+</p>
+<h3 id="SolutionDescription">Solution Description</h3>
+<p>
+At first step, we consider the case that there is no malicious peer in the system and all peers follow the protocol (They send what they know about swarm size without deliberately changing it) and later we can elaborate it.
+</p>
+<p>
+To make a correct measurement each node should keep a log( or popularity table ) of the swarm size info that it has received from others. The Popularity table contain these items:
+</p>
+<ul><li>infohash   ( in implementation we keep torrent_id that is a foreign key to torrent_id in torrent table) 
+</li><li>remote_perm_id  ( in implementation we keep peer_id that is a foreign key to peer_id in peer table) 
+</li><li>num_of_seeders
+</li><li>num_of_leechers
+</li><li>size_calc_age ( the age of the calculated value)
+</li><li>number_of_tribler_sources ( how many of Tribler peers have seen this torrent)
+</li><li>message_receive_time  ( by local time)
+</li></ul><p>
+ 
+</p>
+<p>
+Beside above table each peer has access to this set of info:  
+</p>
+<ul><li>last_check ( tracker checking)
+</li><li>num_seeders ( reported by tracker)
+</li><li>num_leechers ( reported by tracker) 
+</li></ul><p>
+What we do is that, by extending <a class="wiki" href="BuddyCast.html">BuddyCast</a> protocl along with torrents infohash that it sends( fetched from <a class="missing" href="#">MyPreference</a> and Preference list), it sends latest information about swarm size to the receiver. In this implementation it sends
+</p>
+<ul><li>num_seeders
+</li><li>num_leechers
+</li><li>age_of_checking ( time just before sending message minus last torrent checking time).
+</li><li>num_of_tribler_sources_seen ( how many of Tribler clients have seen this torrent).
+</li></ul><p>
+If peer does not have any info about torrent size, not checked yet or rejected by tracker, it send specified
+values that later discarded by receiver.
+</p>
+<blockquote>
+<p>
+In the receiver side, peer processes the message and extracts swarm size info from it. If the sent info be valid, it updates it's Popularity table. In reply to <a class="wiki" href="BuddyCast.html">BuddyCast</a> message it does same and returns extended <a class="wiki" href="BuddyCast.html">BuddyCast</a> message to sender. In this way both sides have access to latest information of the other side.
+</p>
+</blockquote>
+<h3 id="SomeHeuristics">Some Heuristics</h3>
+<p>
+In the case of swarm size measurement some heuristics can be applied:
+</p>
+<ul><li>highly reputed peers are better sources of information.
+</li><li>friends and FoF has higher reliability and their information has higher priority.
+</li></ul><p>
+For the first version we just looking for the most recent value from tracker asked by peer or one of its neighbors. 
+</p>
+<h3 id="Dealingwithtimedifference">Dealing with time difference</h3>
+<p>
+Because peers are not synchronized so direct comparing of peers' tracker checking time is not logical. For example, suppose that P1 and P2 ask tracker for the torrent T1 
+and send ( t1, s1, l1) and  (t2, s2, l2) to peer P0 respectively. Now peer P0 has two sets of information but because peers P1 and P2 have
+different local times, comparing reports and deciding which one is newer is impossible. To resolve this problem, peers send the age of tracker asking. Before sending
+their tracker checking report, they subtract the tracker checking time from their current time and send it along with the message. When a peer receives a record, it logs the message arrival time. At any time
+the age of the report can be find by this formula:
+</p>
+<blockquote>
+<p>
+CURRENT_TIME - MSG_RECEIVE_TIME + REPORT_AGE
+</p>
+</blockquote>
+<p>
+In this way the reports from different peers are comparable and peers can choose the youngest report easily. 
+</p>
+<h3 id="AvoidingSpreadofContamination">Avoiding Spread of Contamination</h3>
+<p>
+To avoid fast spread of contamination we avoid to send second hand information to other peers. It is possible that a peer receive incorrect value from other peer. If peer relay it
+to other peers, in next gossip, after a while that wrong value will be spread in a large group of peers. To avoid this problem, peers just send first hand information, those information that are obtained
+directly from tracker. But peers can use received size reports to show on the GUI, or may be send it in reply to remote search method.
+</p>
+<h3 id="Avoidingofunlimitedtablegrowing">Avoiding of unlimited table growing</h3>
+<p>
+To avoid growing of Popularity table, we put a maximum limit for the number of reports for a specified torrent and reports for a specified torrent from a specified peer. When a new report is obtained and it the number of records exceed the maximum limit, old records are removed from the table. The maximum number of reports for a torrent and also the maximum number of reports for the combination of  torrent and peer are set to 3 and 5 respectively. This values are Global values and can be changed very easily.
+</p>
+<h3 id="Somefingurecalculationjustestimationcorrectvaluesneedsimulation">Some fingure calculation ( just estimation, correct values need simulation)</h3>
+<p>
+In the current version of the Tribler, each node obtains swarm size by asking tracker or metadata request. The interval for asking tracker is 30 seconds. About metadata request, after receive of a BC
+message, the peer selects of the received torrents and ask sender about metadata and swarm size. The interval of the tracker asking and BC message are 30 and 15 seconds respectively. According to the configuration each peer needs to keep track of 5000 torrent. With this assumptions, in the best case , non-overlaping, each peer can update 6 torrents per minute. Four of them using BC message and the other two by asking tracker. We consider the best case that peers use  a round robin method to ask tracker and also they receives different set of torrents in each round of BC. With these assumptions the refresh time is:<br />
+</p>
+<blockquote>
+<p>
+current method: refresh_time = 5000/6 = 833 (min) = 13.88 (hour) <br />
+</p>
+</blockquote>
+<p>
+Now suppose that in each round a peers sends the size of the 50 swarms to another peer. The interval of asking tracker is same, each 30 seconds, and again each peer keeps track of 5000 torrents. We analyze the best case and worst case.<br /> In the best case, in each round each peer receives 50 fresh swarm size info from others and the set of received swarms do not have overlap with each other. with this assumption each peer receives 50 * 4 + 2 swarm size info, so the refresh time of the all swarms will be<br />
+</p>
+<blockquote>
+<p>
+proposed method (best case) : refresh-time=5000/202=24 (min).<br />
+</p>
+</blockquote>
+<p>
+Now suppose the case that the number of swarms is higher than the number of peers and the received swarm sets have overlap with the rate of 0.5( the probability of receiving same torrent in different rounds is 0.5). If there be 2000 peers and 100000 swarms, at least 50 peers will be responsible for a single swarm and each 5000/50=100 can manage 5000 swarms cooperatively. So these 50 peers divide 5000 between themselves and ask tracker,  each one needs to ask for just 100 swarms that it takes 50 minutes. After that they can send swarm info to each other via BC message. Suppose that half of the swarms have overlap so in each round each peer receives 25 new swarm size info from others, 100 per minute. So the refresh time is:<br />
+</p>
+<blockquote>
+<p>
+proposed method (worst case): refresh_time= 50+(5000-50)/100=95 (min)<br />
+</p>
+</blockquote>
+<p>
+Notice that the 50 minutes, before starting gossip protocol, is very pessimistic and nodes does not need to wait for 50 minutes, they can start BC message as soon as they get some swarm size info. But again with these pessimistic assumption the refresh time of the proposed method is much less than the current applied method.
+ 
+</p>
+<h2 id="Implementingoftheproposedsolution">Implementing of the proposed solution</h2>
+<p>
+In the first version we think that all of peers are benevolent and does not send incorrect values to others. With this assumption measuring of the swarm is very easy, the last received
+value is the most correct value. So lets continue with this assumption and complete it later.<br />
+</p>
+<h3 id="AddingPopularitytable">Adding Popularity table</h3>
+<p>
+At first step we need to create a table to keep received swarm size info from different peers. We name this table "Popularity":<br />
+</p>
+<table class="wiki">
+<tr><td style="text-align: left">popularity table 
+</td></tr><tr><td><strong>peer_id(FK)</strong></td><td><strong>torrent_id(FK)</strong></td><td><strong>recv_time</strong></td><td>num_seeders</td><td style="text-align: left">num_leechers </td><td style="text-align: right"> size_calc_age</td><td style="text-align: right"> num_of_tribler_sources
+</td></tr><tr><td style="text-align: left">1 </td><td>26</td><td style="text-align: left">010209 6:33:02 </td><td>15</td><td>20</td><td>1400</td><td>5
+</td></tr></table>
+<ul><li><em>recv_time</em>: Indicates the receive time of the BC message that contains the associated swarm size.
+</li><li><em>size_calc_age</em>: The age of the reported values, calculated before sending message.
+</li><li><em>num_of_tribler_sources</em>: How many of Tribler peers have seen this torrent.
+</li></ul><p>
+ 
+</p>
+<h3 id="UpdatingPopularitytable">Updating Popularity table</h3>
+<p>
+When a new record should be added/removed  to/from the Popularity table:
+</p>
+<ul><li>Add, when a valid report is received through BC message.
+</li><li>Remove, when the number of records exceeds the maximum limit. The oldest record is removed.( by checking recv_time).
+</li></ul><p>
+ 
+</p>
+<h3 id="Sqlscriptsforcreationandalteringtables">Sql scripts for creation and altering tables</h3>
+<pre class="wiki">CREATE TABLE Popularity (
+                         torrent_id INTEGER,
+                         peer_id INTEGER,
+                         msg_receive_time NUMERIC,
+                         size_calc_age NUMERIC,
+                         num_seeders INTEGER DEFAULT 0,
+                         num_leechers INTEGER DEFAULT 0,
+                         num_of_sources INTEGER DEFAULT 0
+                     );
+
+CREATE INDEX Message_receive_time_idx 
+  ON Popularity 
+   (msg_receive_time);
+
+CREATE INDEX Size_calc_age_idx 
+  ON Popularity 
+   (size_calc_age);
+
+CREATE INDEX Number_of_seeders_idx 
+  ON Popularity 
+   (num_seeders);
+
+CREATE INDEX Number_of_leechers_idx 
+  ON Popularity 
+   (num_leechers);
+
+CREATE UNIQUE INDEX Popularity_idx
+  ON Popularity
+   (torrent_id, peer_id, msg_receive_time);
+
+
+</pre><p>
+ 
+</p>
+<h2 id="TrackerdownscenarioJohanspoint">Tracker down scenario (Johan's point)</h2>
+<p>
+When a tracker goes down permanently the desired outcome
+is that after some time all Tribler peers will remove this
+dead .torrent from their hard disk.
+One possible policy is that old popularity info will cause
+a .torrent to be scheduled for deletion.
+</p>
+<ul><li>last_check_time_from_tracker
+</li><li>last_value_from_tracker
+</li></ul><p>
+However, care is taken that coming online after 1 month of
+downtime does not cause deletion of all old .torrents in
+the cache.
+</p>
+<p>
+Rahim: At the current implementation popularity values are not removed otherwise new values be reported, but old values are reliable until a new value be reported.
+</p>
+<h2 id="Testingandevaluation">Testing and evaluation</h2>
+<ul><li>Table creation: <em>Done &amp; TESTED</em>
+</li><li>API for table manipulation: <em>DONE &amp; TESTED</em>
+</li><li>Changing active process to send extended <a class="wiki" href="BuddyCast.html">BuddyCast</a> msg: <em>DONE &amp; TESTED</em>
+</li><li>Changing passive process to handle extended <a class="wiki" href="BuddyCast.html">BuddyCast</a> msg: <em>DONE &amp; TESTED</em>
+</li><li>Swarm size function : <em>DONE &amp; TESTED</em>
+</li></ul><p>
+  
+</p>
+<blockquote>
+<blockquote>
+<p>
+depending on whether it is called to create a BC message or refreshing of the GUI different values are returned. For the first case, last checked value from tracker is returned but for the second case, the most recent value is retuned.( by checking both reported values in popularity table and tracker checking).
+</p>
+</blockquote>
+</blockquote>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

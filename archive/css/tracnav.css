@@ -1,0 +1,84 @@
+/* 
+  Styles for TracNav, the Navigation Bar for Trac
+
+  * Copyright 2005-2006, Bernhard Haumacher (haui at haumacher.de)
+  * Copyright 2005-2008, Thomas Moschny (thomas.moschny at gmx.de)
+
+  $Id: tracnav.css 3270 2008-11-07 15:56:01Z moschny $
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+  USA
+
+  Please visit http://svn.ipd.uka.de/trac/javaparty/wiki/TracNav.
+*/
+
+.wiki-toc.trac-nav {
+ width: 170px;
+ margin-right: 4px;
+ padding-left: 4px; 
+ padding-right: 4px;
+ position: relative;
+ top: 0px;
+ border: none;
+}
+
+.wiki-toc.trac-nav * {
+ color: #000;
+}
+
+.wiki-toc.trac-nav h2 {
+ margin-left: 2px;
+ margin-right: 4ex;
+ margin-top: 0;
+ margin-bottom: 5px;
+ padding-top: 0;
+}
+@media screen {
+ .wiki-toc.trac-nav h2 {
+  display: none;
+ }
+}
+@media print {
+ .wiki-toc.trac-nav {
+  display: none;
+ }
+}
+.wiki-toc.trac-nav h4 {
+ margin: 0;
+ padding: 0; 
+}
+.wiki-toc.trac-nav ul > li:first-child {
+ margin-l: 4ex;
+}
+.wiki-toc.trac-nav .edit {
+ float: right; 
+ position: absolute; 
+ right: 10px; 
+ width: 200px; /* Arno: haxor to get it on the right */
+}
+/* next rule not seen by IE <= IE6 */
+.wiki-toc.trac-nav [class~=edit] {
+ float: none;
+ position: static;
+ text-align: right;
+ height: 0; /* simulate float:right; */
+ top: -3px; /* shift slightly up */
+ right: 0;
+}
+.wiki-toc.trac-nav .edit a {
+ color: blue;
+ border-color: blue;
+ padding-left: 10px;
+}

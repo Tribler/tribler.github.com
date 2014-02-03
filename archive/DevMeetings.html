@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TriblerDev.Meetings">Tribler Dev. Meetings</h1>
+<p>
+Tribler dev. meetings are for raising issues related to tribler development and other tribler related stuff. Dev. meetings should last about one hour giving time to discuss things in a little detail. We will try to e-mail out dates/time/location at least one week before so people can add items to the agenda listed here.
+</p>
+<h2 id="NextTriblerDevMeetingFri.10-07-092pmin9.130">Next Tribler Dev Meeting Fri. 10-07-09 @ 2pm in 9.130</h2>
+<p>
+Please add any items you want to discuss to the agenda and add any comments / issues below.
+</p>
+<h3 id="Agenda:">Agenda:</h3>
+<ul><li>Present some initial work on 2-hop torrent smell distributed tracking (Raynor Vliegendhart)
+</li><li>Brief overview of vod / streaming plugin roadmap (Riccardo Petrocco)
+</li></ul><h3 id="Commentsissues:">Comments / issues:</h3>
+<ul><li>Room 9.130 is booked from 2pm to 3:30pm
+</li></ul><h3 id="Notesofwhathappened:">Notes of what happened:</h3>
+<ul><li>Raynor made a presentation on the current idea behind 2-hop torrent smell, see attached <a class="missing attachment">presentation</a>.
+</li><li>Questions revolved around how many and which peers should be maintained (via PEX) by nodes and passed
+</li><li>Currently a max of 25 peers will be maintained because this is maximum that it is reasonable to pass in a gossip message
+</li><li>Nazareno said that it might be good to order peers by up-time to get reliable nodes
+</li><li>Arno raised the issue of if we can be sure that the peers collected are actually serving content or just PEX'ing themselves 
+</li><li>Riccardo reported back from the recent NY open video conference
+</li><li>He indicated he had made some good contacts there within Mozilla, GStreamer, and VLC communities (among others)
+</li><li>Both VLC and GStreamer projects are interested in tribler plug-in VoD, Streaming integration
+</li><li>Riccardo gave an outline roadmap for this: 1) Simple p2p engine for VoD; 2) Streaming live content + upload detection; 3) New distributed seeding incentives; 4) <a class="wiki" href="BitTorrent.html">BitTorrent</a>-2 / UDP
+</li></ul><hr />
+<h2 id="TriblerDevMeeting16-06-092pmin9.130">Tribler Dev Meeting 16-06-09 @ 2pm in 9.130</h2>
+<p>
+Please add any items you want to discuss to the agenda and add any comments / issues below.
+</p>
+<h3 id="Agenda:1">Agenda:</h3>
+<ul><li>Boxun to introduce group to the Thunder client
+</li><li>Johan to introduce group to the DC++ client
+</li></ul><h3 id="Commentsissues:1">Comments / issues:</h3>
+<ul><li>Room 9.130 is booked from 2pm to 4pm
+</li></ul><h3 id="Notesofwhathappened:1">Notes of what happened:</h3>
+<ul><li>Boxun talked briefly about PPLive, PPStream and Thunder see attached <a class="missing attachment">presentation</a>.
+</li><li>Large numbers of users are claimed but we are not sure how many users they actually have
+</li><li>Content ingestion is generally not possible by normal users
+</li><li>Each of these clients is proprietary and it appears there are centrally maintained servers for content and moderation
+</li><li>Hence these are better seen as "peer-assisted" centralised systems (like BBC iplayer using Akami)
+</li><li>PPLive now has a webplug in
+</li><li>Johan talked about DC++ indicating the way in which hubs can be easily set-up with strict kick-out criteria (like you must share say 100GB of stuff)
+</li><li>Hubs are advertised on various web pages
+</li><li>Is this a kind of group selection?
+</li><li>Could such mechanisms be implemented in a fully decentralised way in tribler?
+</li><li>Agreed next meeting for 2pm on 8th of July
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

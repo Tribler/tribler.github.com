@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TracChangesetModule">Trac Changeset Module</h1>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+Trac has a built-in functionality for visualizing diffs - changes to files.
+</p>
+<h2 id="TheChangesetView">The Changeset View</h2>
+<p>
+When viewing a commited changeset, such as when clicking a changeset
+<a class="wiki" href="TracLinks.html">TracLink</a> or a changeset event-line in the 
+<a class="wiki" href="TracTimeline.html">timeline</a>, Trac will display what changes this current set of patches imposes.
+</p>
+<p>
+The changeset view consists of two parts, the <strong>header</strong> and the <strong>diff view</strong>.
+</p>
+<h3 id="ChangesetHeader">Changeset Header</h3>
+<p>
+The header shows an overview of the whole changeset.
+Here you will find information such as:
+</p>
+<ul><li>Timestamp -- When the changeset was commited
+</li><li>Author -- Who commited the changeset
+</li><li>Message -- A brief description from the author (the commit log message)
+</li><li>Files -- A list of files affected by this changeset
+</li></ul><p>
+In front of each listed file, you'll find  a colored rectangle. The color
+indicates how the file is affected by the changeset.
+ 
+</p>
+<ul><li>Green: Added
+</li><li>Red: Removed
+</li><li>Yellow: Modified
+</li></ul><p>
+The color legend is located below the header as a reminder.
+</p>
+<h3 id="DiffView">Diff View</h3>
+<p>
+Below the header is the main part of the changeset, the diff view. Each file is shown in a separate section, each of which will contain only the regions of the file that are affected by the changeset. There are two different styles of displaying the diffs: <em>inline</em> or <em>side-by-side</em> (you can switch between those styles using the preferences form):
+</p>
+<ul><li>The <em>inline</em> style shows the changed regions of a file underneath eachother. A region removed from the file will be colored red, an added region will be colored green. If a region was modified, the old version is displayed above the new version. Line numbers on the left side indicate the exact position of the change in both the old and the new version of the file.
+</li><li>The <em>side-by-side</em> style shows the old version of the left and the new version on the right (this will typically require more screen width than the inline style.) Added and removed regions will be colored in the same way as with the inline style (green and red, respectively), but modified regions will have a yellow background.
+</li></ul><p>
+In addition, various advanced options are available in the preferences form for adjusting the display of the diffs:
+</p>
+<ul><li>You can set how many lines are displayed before and after every change
+</li><li>You can toggle whether blank lines, case changes and white space changes are ignored, thereby letting you find the functional changes more quickly
+</li></ul><hr />
+<p>
+See also: <a class="wiki" href="TracGuide.html">TracGuide</a>, <a class="wiki" href="TracBrowser.html">TracBrowser</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

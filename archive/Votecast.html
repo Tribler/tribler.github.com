@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="VoteCast"><a class="missing" href="#">VoteCast</a></h1>
+<p>
+<a class="missing" href="#">VoteCast</a> builds on <a class="wiki" href="BuddyCast.html">BuddyCast</a> and <a class="wiki" href="ModerationCast.html">ModerationCast</a>. Through <a class="wiki" href="ModerationCast.html">ModerationCast</a> nodes may inject and propagate metadata bound to a hash of the torrent. Users may vote on a moderator in either a +ve (not fake) or -ve (fake) way or not at all. <a class="wiki" href="ModerationCast.html">ModerationCast</a> uses these votes to determine if to receive or pass on moderations (i.e. metadata associated with a moderator).
+</p>
+<p>
+The task of <a class="missing" href="#">VoteCast</a> is to allow nodes to collect these votes from other peers they encounter (via <a class="wiki" href="BuddyCast.html">BuddyCast</a>) in a local <a class="missing" href="#">BallotBox</a>. This allows peers to determine how popular or unpopular a moderator is by counting votes. This can then be used for relevance ranking after keyword search.
+</p>
+<p>
+Here we discuss the basic <a class="missing" href="#">VoteCast</a> message and data structures.
+</p>
+<h2 id="VoteCastMessage"><a class="missing" href="#">VoteCast</a> Message</h2>
+<p>
+up to 50 records of:
+</p>
+<ul><li>moderator_permID (123 Bytes): moderator to which vote is bound
+</li><li>vote (1 Byte): +ve or -ve vote
+</li></ul><p>
+Note: there is no need to include the permID of the voting node in the message since this is already stored by <a class="wiki" href="BuddyCast.html">BuddyCast</a>.
+</p>
+<p>
+Votes to send (up to 50 max) are selected on a half random (25) / half recent (25) basis identical to the way <a class="wiki" href="ModerationCast.html">ModerationCast</a> implements its selection of moderations.
+</p>
+<p>
+When a peer receives a <a class="missing" href="#">VoteCast</a> message it updates its <a class="missing" href="#">BallotBox</a> table in its local megacache. 
+</p>
+<h2 id="BallotBox"><a class="missing" href="#">BallotBox</a></h2>
+<p>
+Each node maintains a ballotbox table in its local megacache (SQL-light database)
+each record has the following fields:
+</p>
+<ul><li>moderator_permID (123 Bytes)
+</li><li>voter_permID (123 Bytes)
+</li><li>vote (1 bytes)
+</li><li>timestamp-when-received (4 Bytes)
+</li></ul><p>
+stores a maximum of 10,000 records after which the oldest vote is removed when a new vote is added. Max size approx. 2.5M
+</p>
+<p>
+<a class="missing" href="#">BallotBox</a> should be indexed on moderator_permID for efficient calculation of total votes by moderator.
+</p>
+<h2 id="metadataintokeywordsearch">metadata into keyword search</h2>
+<p>
+Keyword searching with moderator name string. Type in a moderator name and get a list of content endorsed by that moderator. Could this be done in keyword search phase? 
+</p>
+<p>
+Also top ten moderator list.
+</p>
+<p>
+This is just the idea of integrating any metadata into the search by adding it to the filename string.
+</p>
+<h2 id="crawlerdata">crawler data</h2>
+<p>
+data to send to supernode periodically:
+</p>
+<ul><li>permID (123 bytes)
+</li><li>entire <a class="missing" href="#">BallotBox</a> (up to max of 200KB but should be much smaller)
+</li><li>moderator-table (without signatures)
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

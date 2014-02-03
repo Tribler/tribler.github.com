@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Introduction">Introduction</h1>
+<p>
+This article details the steps taken in creating the iPad port of the libswift library. Attached to this article is a proof-of-concept application.
+</p>
+<h1 id="Requiredsoftware">Required software</h1>
+<p>
+To build applications for the iPad, the best way is to use a Mac with XCode. You need the (at least) IOS 4 SDK, which will only run on Mac OS X 10.6 (Snow leopard).
+</p>
+<p>
+To retrieve the libswift code, it is easiest to use git for Mac, for which an installer is available <a class="ext-link" href="http://code.google.com/p/git-osx-installer/"><span class="icon">​</span>here</a>.
+</p>
+<h1 id="Compilinglibswift">Compiling libswift</h1>
+<p>
+Applications for the iPad are written in Objective-C, and source files use the extension .m. There also exists a variant called Objective-C++, which allows mixing of Objective-C and C++. Files which are to be compiled as Objective-C++ files should have the extension .mm. Therefore, the first thing to do after creating a new project is to rename any files which will call C++ code (i.e. the libswift code) to have the .mm extension.
+</p>
+<p>
+The next step is to import the libswift source files into the project. Make sure you only import the necessary source files, and not all the tests, documentation, and the .git directory.
+</p>
+<p>
+To call the libswift library, you need to include the swift.h header file. However, this only works correctly if done in a .mm file, or in a header file which is only included by .mm files. Note that libswift uses its own namespace (swift). So either you have to include a "using namespace swift;" line, or prepend libswift symbols with "swift::".
+</p>
+<h1 id="Miscellaneousinfo">Miscellaneous info</h1>
+<p>
+Networking on the iPad can be done with the standard Unix socket API. All calls like socket, sendto, recvfrom, select, getsockname etc. are available.
+</p>
+<p>
+Threading on the iPad does not use the POSIX threading interface, but instead uses an Objective-C based threading (see <a class="ext-link" href="http://icodeblog.com/2010/03/04/iphone-coding-turbo-charging-your-apps-with-nsoperation/"><span class="icon">​</span>this tutorial</a>). One of the things to be careful about is dead-locks (obviously). Using the NSOperation-based threading, it is very easy to create one. When using the performSelectorOnMainThread method, the last argument is whether to wait for completion. This can be used to prevent race conditions, but can easily lead to dead-lock as well. For example, when cancelling a thread and then waiting for all threads to finish (as is done in stopDownload in the proof-of-concept), also trying to wait for completion of the method called on the main thread will cause a dead-lock.
+</p>
+<p>
+When using XCode and the iPhone simulator (which also simulates iPads), standard output and standard error are available in the console (Run -&gt; Console). Any uncaught exceptions are also shown here.
+</p>
+<h1 id="ArnoNotes">Arno Notes</h1>
+<ul><li>Code is on testmac:/Users/tribler/Documents/*
+<ul><li>Backed up in testmac disk image (see 09.160 closet)
+</li><li>Backed up in masai:/home/tribler/SwiftIPadPort-2010
+</li><li>Subversioned by me in <a class="ext-link" href="https://ttuki.vtt.fi/svn/p2p-next/TUD/p2tp/branches/ipad-jan2011"><span class="icon">​</span>https://ttuki.vtt.fi/svn/p2p-next/TUD/p2tp/branches/ipad-jan2011</a>
+</li></ul></li></ul><ul><li>To run:
+<ul><li>Start Xcode from <a class="missing" href="#">/Developer/Applications</a>
+</li><li>Select <a class="missing" href="#">SwiftApp</a> from recent (or ...)
+</li><li>Select Run from Run menu
+</li><li>iPad emulator now starts
+</li></ul></li></ul><ul><li>Which content:
+<ul><li>Default appears to be root hash 66b9644bb01eaad09269354df00172c8a924773b. 
+</li><li>To download this particular video, on mughal run a swift seeder:
+<pre class="wiki">cp /home/gertjan/ScottKim_2008P.mp4 /tmp
+cd /tmp
+/home/gertjan/swift/swift -f ScottKim_2008P.mp4 -l 0.0.0.0:9876
+</pre></li><li>Press Start Download
+</li><li>Video will play automatically after DL (apparently not streaming)
+</li></ul></li></ul><ul><li>Sintel 1024 excerpt (root hash f9cdbb088b3838dad695fd9c7cfe79c73c0035c0):
+<ul><li>Run ./ipad-runseeder.sh from pygmee:/prod/tracker3.p2p-next.org/ipadseed/
+</li></ul></li></ul><ul><li>Successfully tested with H264 and AAC in MP4 container:
+<ul><li><a class="missing" href="#">ScottKim</a>.mp4
+<pre class="wiki">Duration: 00:11:49.84, start: 0.000000, bitrate: 467 kb/s
+    Stream #0.0(und): Video: h264, yuv420p, 432x240 [PAR 1:1 DAR 9:5], 366 kb/s, 29.97 fps, 29.97 tbr, 2997 tbn, 5994 tbc
+    Stream #0.1(eng): Audio: aac, 44100 Hz, mono, s16, 97 kb/s
+</pre></li><li>sintel 1024 excerpt (just took first N frames from <a class="ext-link" href="http://ftp.nluug.nl/graphics/blender/durian/movies/sintel-1024-stereo.mp4"><span class="icon">​</span>original MP4 Stereo version</a>):
+<pre class="wiki">Duration: 00:01:28.83, start: 0.000000, bitrate: 783 kb/s
+    Stream #0.0(und): Video: h264, yuv420p, 1024x436 [PAR 1:1 DAR 256:109], 587 kb/s, 24 fps, 24 tbr, 24 tbn, 48 tbc
+    Stream #0.1(eng): Audio: aac, 48000 Hz, stereo, s16, 190 kb/s
+</pre></li></ul></li></ul><ul><li>Build binary for Device:
+<ul><li><a class="ext-link" href="https://developer.apple.com/library/ios/#documentation/Xcode/Conceptual/iphone_development/128-Managing_Devices_and_Digital_Identities/devices_and_identities.html"><span class="icon">​</span>official guide</a>
+</li><li><a class="ext-link" href="http://mobiforge.com/developing/story/deploying-iphone-apps-real-devices"><span class="icon">​</span>unofficial tutorial</a>
+</li><li>Get developer keys
+</li><li>In Project menu, select Project Settings, then select Build tab
+</li><li>Scroll down to Code Signing and select right identity
+</li><li>(Set to Release build?)
+</li><li>HOWTO: load binary onto device?
+</li></ul></li></ul><ul><li>Redeploy app to Device after provisioning profile expired:
+<ul><li>Build &amp; deploy will fail with "Code Sign error: a valid provisioning profile matching the application's Identifier 'com.companyname.appid' could not be found."
+</li></ul><ol><li>Log into iPhone developer website: <a class="ext-link" href="http://developer.apple.com/"><span class="icon">​</span>http://developer.apple.com/</a>
+</li><li>Then click on "Provisioning Portal" on the right hand sidebar menu (right at the top).
+</li><li>On the next page click "Provisioning" in the left sidebar menu
+</li><li>Then you'll see your provisioning profile/s, and the 'renew' button/s - Press it
+</li><li>Move to different tab
+</li><li>Return to provisioning tab
+</li><li>Press download
+</li><li>Drag file.mobileprovision to Xcode icon (start Xcode first)
+</li><li>In Xcode open Organizer from Window menu.
+</li></ol></li></ul><ol start="10"><li>In "Provisioning Profiles" tab remove old SwarmPlayer3000 (press delete/backspace)
+</li><li>Connect iPad
+</li><li>In Organizer open "Tribler iPad" tab under Devices
+</li><li>Remove SwarmPlayer3000 profile (press delete/backspace)
+</li></ol><p>
+ 
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

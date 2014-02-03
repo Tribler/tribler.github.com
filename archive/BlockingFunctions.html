@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BlockingFunctions">Blocking Functions</h1>
+<p>
+The following functions can cause the current thread to block (i.e. can take seconds or minutes to complete):
+</p>
+<h2 id="Network-related">Network-related</h2>
+<p>
+The following operations can block, because they need to look up a hostname, or retrieve a remote resource. To do non-blocking retrievals, use <tt>select.select</tt> or <tt>socket.setblocking(0)</tt>.
+</p>
+<pre class="wiki">socket.accept
+socket.close
+socket.connect
+socket.getfqdn
+socket.getaddrinfo
+socket.gethostbyname
+socket.gethostbyaddr
+socket.getnameinfo
+socket.getnameinfo_ex
+socket.recv
+socket.recv_into
+socket.recvfrom
+socket.recvfrom_into
+socket.send
+socket.sendall
+socket.sendto
+urllib.urlopen
+urllib.urlretrieve
+</pre><h2 id="File-related">File-related</h2>
+<p>
+The following operations can block, because disk-access can be slow or even across a network. Even writing to stdin/stdout/stderr can block, or reads from another process. <em>Arno says: these should be safe to use as long as your not on a network file system. If we can't use these, things get complicated ;o)</em>
+</p>
+<pre class="wiki">file.close
+file.flush
+file.open
+file.read
+file.readlines
+file.truncate
+file.write
+file.writelines
+file.xreadlines
+os.access
+os.chdir
+os.chmod
+os.chown
+os.close
+os.fchdir
+os.fdopen
+os.fstat
+os.fstatvfs
+os.fsync
+os.ftruncate
+os.listdir
+os.lstat
+os.makedirs
+os.mkdir
+os.mkfifo
+os.mknod
+os.open
+os.read
+os.readlink
+os.remove
+os.removedirs
+os.rename
+os.renames
+os.rmdir
+os.stat
+os.stat_float_times
+os.statvfs
+os.symlink
+os.tempnam
+os.tmpfile
+os.tmpnam
+os.walk
+os.write
+</pre><h2 id="Process-related">Process-related</h2>
+<p>
+The following commands can block because they wait for something to finish (for some, a timeout of zero can be used to avoid blocking):
+</p>
+<pre class="wiki">os.system
+os.wait
+os.wait3
+os.wait4
+os.waitpid
+threading.Thread.join
+</pre><h2 id="Time-related">Time-related</h2>
+<p>
+The following commands can block because they (can) wait for time to pass:
+</p>
+<pre class="wiki">select.select
+time.sleep
+</pre><h2 id="Lock-related">Lock-related</h2>
+<p>
+The following commands can block because they need some (user-created) lock. Some of these can be explicitly set to non-blocking:
+</p>
+<pre class="wiki">thread.allocate_lock.acquire
+threading.BoundedSemaphore.acquire
+threading.Condition.acquire
+threading.Condition.wait
+threading.Event.wait
+threading.Lock.acquire
+threading.RLock.acquire
+threading.Semaphore.acquire
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

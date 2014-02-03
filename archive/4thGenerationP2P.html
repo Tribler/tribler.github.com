@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="a4thGenerationofP2P">4th Generation of P2P</h1>
+<p>
+Before the end of 2012 year we hope to launch software which
+includes 4th generation P2P technology, meaning <em>full self-organisation</em> 
+while offering advanced features such as:
+</p>
+<ul><li>Triple-mode video
+<ul><li>Bittorrent compatible downloads
+</li><li><a class="wiki" href="Give-To-Get.html">Video-on-demand</a>
+</li><li><a class="wiki" href="LiveStreaming.html">Live streaming</a>
+</li></ul></li><li>Scalable keyword <a class="wiki" href="ContentSearch.html">search</a> (<a class="wiki" href="DecentralizedRecommendation.html">personalised</a>)
+</li><li><a class="wiki" href="TagBasedRecommendation.html">Tagging</a>, rating, <a class="wiki" href="Moderation.html">moderation</a>, and <a class="wiki" href="AdversarialContentSearch.html">spam prevention</a>
+</li></ul><p>
+We believe the key aspect of <strong>4G P2P</strong>
+is removing the need for any server: zero-server P2P.
+Without the need for servers it could offer unbounded scalability and
+be used potentially by millions of PCs and Internet-only television sets.
+Crafting an operational system which such a academically pure 
+architecture has proven to be difficult. To date, no research team or start-up company 
+has been able to create a pure P2P system which includes required features
+such as streaming, easy search, and spam prevention.
+</p>
+<p>
+<em>Links: <a class="ext-link" href="http://www.google.com/search?q=4g+p2p"><span class="icon">​</span>4G P2P</a></em>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

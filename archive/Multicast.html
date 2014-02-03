@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Multicastmodule">Multicast module</h1>
+<p>
+The multicast module allows Tribler nodes (Next-share nodes) to automatically discover nodes and communicate on the local network.  Both IPv4 and IPv6 as well as dual-stack operation is supported.
+</p>
+<h2 id="Why">Why?</h2>
+<p>
+The idea is to allow a group of nodes collaborate on a local network to provide the users with a better experience.  For example a user with several computers on his home network would like that all his computers collaborate.  This could be as simple as bulk-data transfers throttling themselves while he watches a live stream.  The nodes should of course also be able to gossip more often if locally available, and should make available files for each other (say stream a video directly).
+</p>
+<h2 id="What">What?</h2>
+<p>
+Allow nodes to send anonymized information about what they are doing (say 'bulk data transfer' or 'live streaming', possibly with some bandwidth estimations or something).  Recipient nodes can then base their own throttling and operations based also on other local nodes.  
+</p>
+<p>
+It would also be possible to make some simple local search, e.g. "what's streaming locally", search for a file (allow direct streaming/download).  Notice that privacy is not going to be implemented in the multicast package for now.
+</p>
+<h2 id="How">How?</h2>
+<p>
+The current implementation has a few main functions:
+</p>
+<ol><li>Node discovery - Let nodes discover each other autonomously on a local network
+</li><li>Node announcements - Announce the node (push style)
+</li><li>Send/receive a variable size list (touple) over local multicast
+</li><li>Multicast ping - measure multicast speeds on the network
+</li><li>All messages should be signed and verified
+</li></ol><p>
+Multiple callback functions can be registered to handle local multicast communication.  The node discovery is performed automatically if allowed by the configuration, or a node discovery callback function can be registered to handle multicast node announcements.
+</p>
+<h2 id="Usage">Usage?</h2>
+<p>
+To mature and expand this code we need a clear and simple application.
+First stage could be to simply expose to the user if other local 
+running instances of <a class="missing" href="#">Tribler/Next</a>-Share are found and allow 1-click friends making.
+</p>
+<p>
+Next step could be:
+</p>
+<ul><li>Network weather sharing (collaborative congestion/throttling detection)
+<ul><li>Measurement local upload speed
+</li><li>Throttle low-priority traffic if another node has high priority traffic
+</li><li>Local sharing or discovery of resources, combined with local data exchange (streaming)
+</li><li>Sharing of upload data to detect congestion or throttling
+</li><li>Combine measurements of 1 or dozens of other people
+</li><li>Show to user the Internet Gateway congestion
+</li></ul></li></ul><p>
+This would be fully in line with P2P-Next 
+<em>task 4.2.1 Network-awareness modeling, probing, and reasoning</em>.
+</p>
+<h2 id="Currentstate">Current state</h2>
+<ul><li>Base implementation is available, with some tests
+</li><li>Code is fairly well documented and gathered in a python module (help multicast)
+</li><li>Code in svn (<a class="ext-link" href="http://svn.tribler.org/software_general/multicast/"><span class="icon">​</span>http://svn.tribler.org/software_general/multicast/</a>)
+</li><li><del>Not integrated with Tribler.  </del> Functional test integration with Tribler.
+<ul><li>Initiates buddycast exchange for locally discovered nodes.
+</li><li>Flags already known nodes as local if discovered locally
+<ul><li>Does not remove the local flag at any point
+</li></ul></li><li><del>Must flag nodes as local internally for additional functionality.</del> Added to peer database as "is_local" flag.
+</li><li>Shows as "local" in green text (in stead of "online") if node is online or in black text if node is local but offline.
+</li><li><del>Perform local multicast search?  Searching does not provide expected results (consistent replies with other local nodes)</del>  Adds a selection of local nodes to queries.
+</li></ul></li><li>Message integrity is not implemented yet - should be based on permid and existing crypto
+</li><li>Must decide if communication should be allowed from all nodes, or just a selected set
+</li></ul><h2 id="Patches">Patches</h2>
+<p>
+As I (Njaal) don't want to check in these patches yet, I've simply attached it here...
+Also check out the multicast module from svn (listed above) and put it under "<a class="missing" href="#">Tribler/Core</a>".
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

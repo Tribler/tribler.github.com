@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Diskimage">Disk image</h1>
+<p>
+This section describes how to create and modify a Mac OS/X <tt>.dmg</tt> file (disk image).
+</p>
+<h2 id="Createconvert">Create/convert</h2>
+<p>
+To create an image <tt>Tribler.dmg</tt> from a source folder <tt>imagecontents/</tt>, use:
+</p>
+<pre class="wiki">hdiutil create -srcfolder imagecontents/ -format UDRW -scrub
+               -volname Tribler Tribler.dmg 
+</pre><p>
+The <tt>UDRW</tt> format allows read/write-access. This allows modifications to the image such as setting the background. Useful formats are:
+</p>
+<ul><li>UDRW: Read/write
+</li><li>UDZO: Read-only
+</li><li>UDCO: Read-only, compressed
+</li></ul><p>
+To convert to a different format, use:
+</p>
+<pre class="wiki">hdiutil convert Tribler.dmg -format UDCO -imagekey zlib-level=9 -o Tribler-readonly.dmg
+</pre><p>
+The <tt>-imagekey zlib-level=9</tt> sets the compression level for UDCO (1=fastest, 9=smallest).
+</p>
+<h2 id="Mountunmount">Mount/unmount</h2>
+<p>
+To mount an image on <tt>build/mnt</tt>, use:
+</p>
+<pre class="wiki">mkdir -p build
+hdiutil attach -readwrite -noverify -noautoopen Tribler.dmg -mountpoint build/mnt
+</pre><p>
+To unmount it, use:
+</p>
+<pre class="wiki">hdiutil detach build/mnt
+</pre><h1 id="EULA">EULA</h1>
+<p>
+Mac OS/X can present the user with an EULA when the disk image is opened. This EULA is stored in the resource fork of the disk image. Special care is needed, as the EULA has special file format and subversion cannot be used to store resource forks.
+</p>
+<p>
+An example EULA file can be found in the <a class="ext-link" href="ftp://ftp.apple.com/developer/Development_Kits/SLAs_for_UDIFs_1.0.dmg"><span class="icon">​</span>SLA SDK</a> of Apple, and is called <tt>SLAResources</tt>. We'll first extract the EULA from the example file's resource fork:
+</p>
+<pre class="wiki">cp SLAResources/rsrc SLAResources.rsrc
+</pre><p>
+The file <tt>SLAResources.rsrc</tt> can be stored in Subversion. To edit it, use for example <a class="ext-link" href="http://resknife.sourceforge.net/"><span class="icon">​</span>RezKnife</a>.
+</p>
+<p>
+Finally, to attach the EULA to a disk image, the image needs to be unflattened (i.e. data/resource forks restored), but it needs to be flattened again in the end:
+</p>
+<pre class="wiki">hdiutil unflatten Tribler.dmg
+/Developer/Tools/DeRez -useDF SLAResources.rsrc &gt; sla.r
+/Developer/Tools/Rez -a sla.r -o Tribler.dmg
+hdiutil flatten Tribler.dmg
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="MeasurementsofNATfirewallcharacteristics">Measurements of NAT/firewall characteristics</h1>
+<h2 id="Introduction">Introduction</h2>
+<p>
+We have conducted a study of different NATs and firewalls existing in the Internet by measuring the Tribler system.
+</p>
+<p>
+Hereby we present the results we obtained from our measurements in the period between 27/10/2008 and 25/11/2008, during which we collected data from a total of about 3500 unique peers.
+</p>
+<h2 id="ConnectionType">Connection Type</h2>
+<p>
+The classification of users' connection type has been done according to STUN <a class="ext-link" href="http://en.wikipedia.org/wiki/Network_address_translation"><span class="icon">​</span>http://en.wikipedia.org/wiki/Network_address_translation</a>, <a class="ext-link" href="http://tools.ietf.org/html/rfc3489"><span class="icon">​</span>http://tools.ietf.org/html/rfc3489</a>.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/NATMeasurements/conn_pie.png" width="500"></a>
+</p>
+<h2 id="GeographicalDistribution">Geographical Distribution</h2>
+<p>
+We have then geo-located the Tribler users involved in our measurements and found out that the connection type distribution has a similar trend in major countries.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/NATMeasurements/conn_pies.png" width="1000"></a>
+</p>
+<h2 id="Timeout">Timeout</h2>
+<p>
+The term <em>timeout</em> refers to the duration of a given mapping in the NAT/firewall when not used for a while  (i.e. after how long a mapping in a NAT/firewall expires if there is no communication going through). This information is especially useful for tuning the frequency of keep-alive packets in NAT traversal techniques.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/NATMeasurements/nat_timeout.png" width="450"></a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

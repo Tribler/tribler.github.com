@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><ul><li>Developers Center
+<ul><li><a class="wiki" href="TriblerGettingStarted.html">Getting Started</a>
+<ul><li><a class="wiki" href="TriblerGettingStarted.html">Introduction</a>
+</li><li><a class="wiki" href="TriblerSoftwareProcess.html">Development Process</a>
+</li><li><a class="wiki" href="TriblerSoftwareProcess%25252FReleasing.html">Release Process</a>
+</li><li><a class="wiki" href="tipsTricks.html">Tips &amp; Tricks</a>
+</li></ul></li><li><a class="wiki" href="TriblerArchitecture.html">Architecture</a>
+<ul><li><a class="wiki" href="TriblerArchitecture.html">Overview</a>
+</li><li><a class="wiki" href="DotTriblerFiles.html">Local Storage Structure</a>
+</li></ul></li><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>API</a>
+<ul><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>Tribler Core</a>
+</li><li><a class="wiki" href="TriblerAPIRationale.html">Rationale</a>
+</li></ul></li><li><a class="wiki" href="Tutorials.html">Tutorials</a>
+<ul><li><a class="wiki" href="Tutorials.html">Overview</a>
+</li><li><a class="wiki" href="Tutorials%25252FHelloWorld.html">1. Download Hello world</a>
+</li><li><a class="wiki" href="Tutorials%25252FVideoOnDemand.html">2. Video on Demand</a>
+</li><li><a class="wiki" href="Tutorials%25252FLiveStreaming.html">3. Live Streaming</a>
+</li><li><a class="wiki" href="Tutorials%25252FSeedingTorrents.html">4. Content injection</a>
+</li><li><a class="wiki" href="Tutorials%25252FExampleFeedSetups.html">Example live feed setups</a>
+</li></ul></li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>Protocol specification</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Tools</a>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Source browser</a>
+</li><li>[milestone: Roadmap] 
+</li><li><a href="/timeline">Timeline</a>
+</li><li><a class="ext-link" href="http://forum.tribler.org"><span class="icon">​</span>Forum</a>
+</li></ul></li></ul></li></ul><p>
+   
+</p>
+</div></td><td>
+</p>
+<h1 id="RationalebehindtheTriblerCoreAPI">Rationale behind the Tribler Core API</h1>
+<p>
+The core API is inspired by the <a class="ext-link" href="http://www.rasterbar.com/products/libtorrent/manual.html"><span class="icon">​</span>libtorrent</a> interface but makes all 
+configurations first-class objects such that they can be independently 
+manipulated (i.e., loaded, saved, set as default). Making configurations first-
+class objects requires special measures because of their dual nature. First, 
+when the download engine or individual download has not yet started, 
+configurations are more or less (key,value) pairs. Second, when the downloads
+have started the configuration represents actual parameters in the download
+engine, and when config parameters are changed one expects that
+the engine's behaviour also changes directly.
+</p>
+<p>
+To support configs as first-class objects we therefore distinguish between 
+startup and runtime configs. A runtime config is associated with the download 
+engine via a Session or Download object. Changing the values of a runtime config
+will alter the behaviour of the download in a thread safe way. 
+</p>
+<h2 id="ThreadSafety">Thread Safety</h2>
+<p>
+All calls to Session, Download and <a class="missing" href="#">DownloadState</a> are thread safe. Startup 
+configs are not thread safe. To prevent concurrency issues, startup 
+configs passed to a <a class="missing" href="#">Session/Download</a> object are first copied and the copy then
+becomes the runtime config. When passing an startup config as argument it may 
+not be modified  concurrently. Runtime configs are thread safe, as just 
+mentioned. Note that changes to runtime configs (i.e., changing upload
+limit) are asynchronous, i.e., they will be scheduled on the network thread
+and thus may or may not be executed when the method returns. In the future,
+should the need arise, errors in changing a runtime config may be reported
+via a callback. 
+</p>
+<h2 id="PersistenceSupport">Persistence Support</h2>
+<p>
+We use the Python pickling mechanism to make objects persistent. We add a
+version number to the state before it is saved. To indicate serializability
+classes inherit from the Serializable interface.  For a Session there is a 
+special checkpointing mechanism. 
+</p>
+<h2 id="SessionObject">Session Object</h2>
+<p>
+At the moment, we use a singleton Session, i.e., there is only one instance
+of the Session class in a process. Theoretically, Session can be a real class 
+with multiple instances. For implementation purposes making it a Singleton is 
+easier, as a lot of our internal stuff are currently singletons (e.g. databases
+and *<a class="missing" href="#">MsgHandler</a>, etc.)
+</p>
+<h2 id="Modifiabilityofparameters">Modifiability of parameters</h2>
+<p>
+Many configuration parameters may be modified at runtime. Some parameters may
+be theoretically modifiable but implementing this behaviour may be too complex.
+For example, changing the destination dir of a download a runtime is possible,
+but complex to implement. The class definitions indicate which parameters are 
+runtime modifiable, and points of attention. 
+</p>
+<p>
+Note that some parameters should be modified with great care. For example.
+the listen = tracker port of a Session can be easily modified, but if the 
+Session had been used to create new torrents that have been distributed to Web
+sites, you cannot simply change the listening port as it means that all torrent 
+files out in the world become invalid.
+</p>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

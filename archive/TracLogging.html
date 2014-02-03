@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TracLogging">Trac Logging</h1>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+Trac supports logging of system messages using the standard <em>logging</em> module part of Python 2.3 and newer.
+</p>
+<p>
+<strong>Note:</strong> If you are using a Python version older than 2.3, the Trac logging mechanism will be silently disabled.
+</p>
+<p>
+Logging is configured in the <tt>[logging]</tt> section in <a class="wiki" href="TracIni.html">trac.ini</a>.
+</p>
+<h2 id="Python2.2Workaround">Python 2.2 Workaround</h2>
+<p>
+If you are using Python 2.2, however, note that the logging package from Python 2.3 works perfectly under 2.2 as well; you can just copy the entire <tt>logging</tt> directory from the Python 2.3 library into the Python 2.2 lib directory. Perhaps not the most elegant solution, but it works.
+</p>
+<h2 id="SupportedLoggingMethods">Supported Logging Methods</h2>
+<ul><li><strong>none</strong> -- Suppress all log messages.
+</li><li><strong>file</strong> -- Log messages to a file, specified with the <em>log_file</em> directive in <a class="wiki" href="TracIni.html">trac.ini</a>. 
+</li><li><strong>stderr</strong> -- Output all log entries to console (<a class="wiki" href="TracStandalone.html">tracd</a> only).
+</li><li><strong>syslog</strong> -- (UNIX) Send messages to local syslogd via named pipe '/dev/log'.
+</li><li><strong>winlog</strong> -- (Windows) Use the system's NT eventlog for Trac logging.
+</li></ul><h2 id="LogLevels">Log Levels</h2>
+<p>
+The level of verbosity of logged messages can be set using the <em>log_level</em> directive in <a class="wiki" href="TracIni.html">trac.ini</a>. The log level defines the minimum level of urgency required for a message to be logged.
+</p>
+<p>
+The levels are:
+</p>
+<ul><li><em>CRITICAL</em> -- Log only the most critical, typically fatal, messages.
+</li><li><em>ERROR</em> -- Request failures, bugs and errors. 
+</li><li><em>WARN</em> -- Warnings, non-interrupting events.
+</li><li><em>INFO</em> -- Diagnostic information, log information about all requests.
+</li><li><em>DEBUG</em> -- Development messages, profiling, etc. Not fit for human consumption.
+</li></ul><hr />
+<p>
+See also: <a class="wiki" href="TracIni.html">TracIni</a>, <a class="wiki" href="TracGuide.html">TracGuide</a>, <a class="wiki" href="TracEnvironment.html">TracEnvironment</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

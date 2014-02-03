@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="P2PWidgets">P2P Widgets</h1>
+<p>
+Goal is to generalise the notion of a plugin, widget, and mashup
+within a zero-server P2P architecture.
+</p>
+<p>
+<em>Status: initial design and [source:abc/branches/boudewijn/widget/Tribler 1st lines] of code</em>
+</p>
+<p>
+Key to !P2PWidgets is the zero-server requirement for the whole
+software directory listing and software distribution plus update process.
+!P2PWidgets have access to four types of information: social network information, 
+web 2.0 information, other running P2PWidget instances, and Bittorrent content.
+Our leading examples are Facebook for their directory listing and rating of widgets,
+Sourceforge which facilitates an active developers community, and Greasemonkey
+which provides a generic mashup solution.
+</p>
+<p>
+In short, evolutionary biology is applied to a software ecosystem.
+</p>
+<p>
+Support for P2P widgets or modules/plug-ins
+</p>
+<ul><li>Define P2P widgets API
+</li><li>Create several P2P widgets as examples
+</li><li>Include a repository of P2P widgets 
+</li><li>Open Source only
+</li></ul><p>
+Combining Web 2.0 with P2P:
+</p>
+<p>
+Expanding the plug-in model towards
+greasemonkey, pipies, widgets...
+User-programmable!
+</p>
+<p>
+P2PWidget architecture:
+</p>
+<ul><li>Storage of MP3/AVI/JPG using <a class="missing" href="#">Bittorrent/Tribler</a>
+</li><li>Communicate across an overlay with equal P2PWidgets
+</li><li>Access to social network
+</li><li>Website integration with Greasemonkey
+</li><li>HTTP/RSS/FTP
+</li></ul><p>
+<a class="ext-link" href="http://azureus.sourceforge.net/plugin_list.php"><span class="icon">​</span>http://azureus.sourceforge.net/plugin_list.php</a>
+<a class="ext-link" href="http://www.facebook.com/apps/"><span class="icon">​</span>http://www.facebook.com/apps/</a> 15000+ apps
+<a class="ext-link" href="http://en.wikipedia.org/wiki/Greasemonkey"><span class="icon">​</span>http://en.wikipedia.org/wiki/Greasemonkey</a>
+<a class="ext-link" href="http://www.lifehack.org/articles/productivity/top-10-greasemonkey-scripts-to-improve-your-productivity.html"><span class="icon">​</span>http://www.lifehack.org/articles/productivity/top-10-greasemonkey-scripts-to-improve-your-productivity.html</a>
+10.000+ scripts:
+<a class="ext-link" href="http://userscripts.org/scripts/show/22639"><span class="icon">​</span>http://userscripts.org/scripts/show/22639</a>
+<a class="ext-link" href="http://pipes.yahoo.com/pipes/pipe.info?_id=7hu75gzd2xGcqdSolfXiAA"><span class="icon">​</span>http://pipes.yahoo.com/pipes/pipe.info?_id=7hu75gzd2xGcqdSolfXiAA</a>
+<a class="ext-link" href="http://www.google.com/ig/directory"><span class="icon">​</span>http://www.google.com/ig/directory</a>
+<a class="ext-link" href="http://news.bbc.co.uk/2/hi/technology/7191264.stm"><span class="icon">​</span>disruptive</a>
+</p>
+<p>
+<em>Screenshot of prototype</em>
+</p>
+<p>
+<a class="missing" href="#"></a>    
+</p>
+<h2 id="Thesis">Thesis</h2>
+<p>
+<strong> Planning </strong>
+</p>
+<table class="wiki">
+<tr><td> <strong>Subject</strong> </td><td> <strong>Deadline</strong>
+</td></tr><tr><td> First prototype of built-infrontpage stats widgets </td><td> Mid januari
+</td></tr><tr><td> First prototype of <a class="missing" href="#">WidgetCast</a> for widget swarm creation/code distribution </td><td> --
+</td></tr><tr><td> Creation of widgets using <a class="missing" href="#">WidgetCast</a> to communicate </td><td> --
+</td></tr></table>
+<p>
+<strong> prototype Runtime Design </strong>
+</p>
+<p>
+Widgets extend the <a class="missing" href="#">TriblerWidget</a> class, which is basically a wx.Panel. They can do whatever they want on the panel.
+</p>
+<p>
+<a class="missing" href="#">WidgetRegistry</a> has a Panel where Widgets can be added, moved and resized. It wraps widgets in a <a class="missing" href="#">WidgetWrapper</a> which creates the titlebar e.d. The registry keeps track of the widget instances.
+</p>
+<p>
+<strong> Widget examples </strong>
+</p>
+<table class="wiki">
+<tr><td> <strong>Widget </strong> </td><td> <strong>Functional requirement</strong> </td><td> <strong>Comments</strong>
+</td></tr></table>
+<table class="wiki">
+<tr><td> <em> Fronpage Stat widgets </em> </td><td> 
+</td></tr></table>
+<table class="wiki">
+<tr><td> Top X most popular torrents </td><td> Read access to TorrentDB
+</td></tr><tr><td> Top X contributors </td><td> Read access to BarterCastDB
+</td></tr><tr><td> Top X similar friends </td><td> Read access to FriendDB, PeerDB
+</td></tr><tr><td> Top X moderators </td><td> Read access ModeratorCastDB
+</td></tr><tr><td> X newest torrents  </td><td> Read access to TorrentDB
+</td></tr></table>
+<table class="wiki">
+<tr><td> <em> Filter widgets </em> </td><td> 
+</td></tr></table>
+<table class="wiki">
+<tr><td> Subscription  </td><td> TorrentDB, storage for subscribes peers </td><td> subscribe to another peer to be alerted when he publishes new content
+</td></tr><tr><td> Filter widget </td><td style="text-align: right"> TorrentDB, storage for filter strings</td><td> Display content that conforms to a filter
+</td></tr></table>
+<table class="wiki">
+<tr><td> <em> Social widgets </em> </td><td> 
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing" href="#">ShoutCast</a> </td><td> Intra-Gossip functionality+local storage </td><td> Show messages other users left
+</td></tr><tr><td> <a class="missing" href="#">FriendChat</a> </td><td> Direct Peer-to-Peer communication, storage for messages, storage for friends  </td><td> Select a friend (or peer) and start chatting
+</td></tr></table>
+<table class="wiki">
+<tr><td> <em> Mashup widgets </em> </td><td> 
+</td></tr></table>
+<table class="wiki">
+<tr><td> Mashup </td><td> <a class="missing" href="#">WidgetCast</a>, access to WEB, storage for content </td><td> Subscribe to RSS feed/website-scrape either from website or generated by a peer. Peers cooperate to disseminate messages
+</td></tr></table>
+<p>
+<strong> Notulen 5 maart </strong>
+</p>
+<p>
+Long term:
+</p>
+<ul><li>Discovery: deep integration
+</li><li>install
+</li><li>display
+</li><li>2-4 examples
+</li><li>API documentation: Widget skeleton, GUI, Tribler API (notifications)
+</li></ul><ul><li><a class="wiki" href="BuddyCast.html">BuddyCast</a>: # unique installs seen, installed
+</li></ul><p>
+<em>Security measures</em>
+</p>
+<ul><li>Torrent Collecting policy:
+</li><li>auto download next widget download: max ( median ( # unique installs seen))
+</li><li>whitelisting
+</li></ul><p>
+<strong> Whitelisting </strong>
+</p>
+<p>
+There are multiple methods of whitelisting. Proposal:
+</p>
+<ul><li>Several peers are trusted "initially"
+</li><li>They create whitelist certificates, saying that "trusted peer x" whitelists "peer y" (with a signature)
+</li><li>format: whitelist{signer: PERM_ID, subject: PERMID, signature: SIGNATURE}
+</li><li>Everybody gossips the certificates and either whitelists the subject (if signer is trusted and signature is verified) or does not 
+</li></ul><p>
+Methods of gossiping:
+</p>
+<ul><li>(easy) include field in buddycast which adds 1-3 random whitelist certificates
+</li><li>(more difficult) include field in "random peers" and "taste buddies" saying whether we have a certificate for them. Other peer then selects a certificate it wants.
+</li></ul><p>
+<strong> Simulation </strong>
+A simulation would be handy to verify several things:
+</p>
+<ul><li>Check whether the distribution of widgets is robust and secure. (Are the real popular widgets downloaded first, even when some peers lie about the 'tribler_sources_seen'. Check various fucntions of ppopularity calculation
+</li><li>Check whether the easy whitelisting method works well..
+</li></ul><p>
+<strong> Papers </strong>
+</p>
+<table class="wiki">
+<tr><td> Name </td><td> Link
+</td></tr><tr><td> Ipoque internet study 2007 </td><td> <a class="ext-link" href="http://www.ipoque.com/userfiles/file/internet_study_2007.pdf"><span class="icon">​</span>http://www.ipoque.com/userfiles/file/internet_study_2007.pdf</a>
+</td></tr></table>
+<h2 id="Researchassignment">Research assignment</h2>
+<p>
+<em>status: finished research assignment by Delft msc student Alain van den Berg</em>
+</p>
+<p>
+<em>report</em>:  <a class="missing attachment">Research Assignment P2PWidgets</a>
+</p>
+<p>
+Draft list of topics to find 20+ scientific publications on P2PWidgets
+</p>
+<ul><li>User-generated code
+</li><li>security and sandboxing 
+</li><li>Deployed widget systems and algorithms (still client/server)
+</li><li>Zero-server Repository of widgets and discovery algorithms
+</li><li>DDoS, Malware and Spyware prevention
+</li><li><a class="ext-link" href="http://pypi.python.org/pypi/RestrictedPython/3.4.2"><span class="icon">​</span>Existing Python framework</a>s
+</li></ul><h2 id="Research">Research</h2>
+<p>
+<strong>Deployed widget systems</strong>
+</p>
+<ul><li>Eclipse (Plugin engine + plugins, Extensions &amp; Extension points)
+</li><li>Google Desktop Gadgets
+</li><li>Youserve (P2P!)
+</li><li>Spamato (List required plugin permissions explicitly)
+</li><li>Facebook apps
+</li><li>Greasemonkey scripts
+</li></ul><p>
+<em>interesting points:</em>
+</p>
+<ul><li>central site to find widgets.
+</li><li>category based
+</li><li>reputation per widget author (Google Desktop Gadgets)
+</li><li>comments (with rating) on widgets
+</li><li>Top Rated, Newest, Most Active widgets...
+</li><li>Documentation about the Widget API! (<a class="wiki" href="P2P%20Wiki.html">P2PWiki</a> ?)
+</li></ul><p>
+<strong>Zero-server Repository</strong>
+</p>
+<p>
+The main goal of a zero-server repository is be able to store widgets without one single server and to be able to find them. For a zero-server widget repository, other aspects play a role, like the ones in a centralized widget repository (Metadata):
+</p>
+<ul><li>Security measures (Reputation system)
+</li><li>reputation system: ratings and comments
+</li><li>categorize widgets (tags) (metadata)
+</li><li>Thus, metadata management
+</li><li>Find updates for widgets
+</li><li>Pollution prevention
+</li></ul><p>
+<em>Update management:</em>
+</p>
+<ul><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Uuid"><span class="icon">​</span>uuids</a> to identify a widget (hash wouldnt work!)
+</li><li>epidemic protocol
+</li></ul><p>
+<em>Storage of comments:</em>
+</p>
+<ul><li>Most current P2P systems use a DHT to store and retrieve comments on torrents/files.
+</li></ul><p>
+<em>Distributed storage:</em>
+</p>
+<ul><li>Project Cassandra (P2P Bigtable)
+</li><li>DHT (e.g. Khashmir) Drawback: only exact matches. Prefix Hash Trees.
+</li><li>Chord
+</li><li>Pastry
+</li><li>Gossiping/epidemic protocols
+</li></ul><p>
+<strong> Security and sandboxing </strong>
+</p>
+<p>
+Without prevention, P2P widgets give easy access to creation of malicious widgets. Normal widget systems have a centralized repository where the widgets are stored for downloading.
+With moderators checking submitted plugins, the plugins which can be downloaded are already checked. 
+</p>
+<p>
+In a P2P Widget repository without security measures, everyone would be able to submit their (malicious) widget and everybody could directly download and use it.
+</p>
+<p>
+<em>Threats</em>
+</p>
+<ul><li>DDoS (Distributed Denial of Service attack)
+</li><li><a class="missing" href="#">Malware/Spyware</a> widgets
+</li></ul><p>
+<em>Prevention:</em>
+</p>
+<ul><li>Code signing
+</li><li>List permissions required and block everything else
+</li><li>Security policies
+</li><li>warn user that it is running 3rd party
+</li><li>Social Sandbox: Reputation system for widgets or authors.
+</li><li>Restrict the scripting language
+</li></ul><p>
+<strong> Restricted execution of widget code </strong>
+</p>
+<p>
+Running widget code in a restricted mode would require things like editing the source code to make sure it doesn't execute malicious things (compile time, like <a class="missing" href="#">RestrictedPython</a>) or interpret the language (Python or another scripting language) and make sure the interpreter doesn't execute malicious code (runtime).
+</p>
+<p>
+Current restricted execution environments are mostly restricting access to for example the file system, sockets, IO components. Another form of restricting the widget is <em>Resource Limitation</em>, which would prevent the widget from taking all CPU, internet access (to be used by a DDoS attack for example)
+</p>
+<p>
+<em> Restrict python:</em>
+</p>
+<ul><li><a class="ext-link" href="http://pypi.python.org/pypi/RestrictedPython/3.4.2"><span class="icon">​</span>Zope's RestrictedPython</a>
+</li><li><a class="ext-link" href="http://codespeak.net/pypy/dist/pypy/doc/home.html"><span class="icon">​</span>PyPy's sandbox execution of RPython</a>
+</li><li><a class="ext-link" href="http://docs.python.org/lib/module-rexec.html"><span class="icon">​</span>Bastion rexec</a>. e.g. Grail uses this deprecated library for its plugins
+</li></ul><p>
+<em> Other scripting languages</em>
+</p>
+<p>
+Other scripting languages would require an interpreter which restricts the language to some sort.
+</p>
+<ul><li>Javascript
+</li><li>Lua
+</li></ul><h2 id="Relatedwork">Related work</h2>
+<h2 id="Deployedwidgetsystemspapers">Deployed widget systems papers</h2>
+<table class="wiki">
+<tr><td style="text-align: right"> <a class="missing attachment">P2P Sharing of Web Applications</a></td><td> R. Bayardo et al </td><td> IBM Research Report RJ10268
+</td></tr><tr><td style="text-align: right"> <a class="missing attachment">Eclipse Technical Overview</a></td><td> Object Institution Inc. </td><td> --
+</td></tr><tr><td style="text-align: right"> <a class="missing attachment">Spamato Plugin Report</a></td><td> Remo Meier </td><td> Semester Project report
+</td></tr></table>
+<h2 id="ZeroServerRepositoryPapers">Zero Server Repository Papers</h2>
+<p>
+<strong>Directory service</strong>
+</p>
+<table class="wiki">
+<tr><td> <a class="missing attachment">A survey of peer-to-peer content distribution technologies</a> </td><td> Stephanos Androutsellis-Theotokis et al </td><td> ACM Comput. Surv.
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing attachment">Survey of Research towards Robust Peer-to-Peer Networks: Search Methods</a> </td><td> John Risson et al </td><td> Tech Report
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing attachment">Dl meets p2p - distributed document retrieval based on classification and content</a> </td><td> Wolf-tilo Balke et al </td><td> In ECDL
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing attachment">PlanetP: using gossiping to build content addressable peer-to-peer information sharing communities</a> </td><td> Cuenca-Acuna et al </td><td> Proc. 12th IEEE International Symposium on High Performance Distributed Computing
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing attachment">Peersearch: Efficient information retrieval in peer-to-peer networks</a> </td><td> Chunqiang Tang et al </td><td> In Proceedings of <a class="missing" href="#">HotNets</a>-I, ACM SIGCOMM
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing attachment">Distributed object location in a dynamic network</a> </td><td> Kirsten Hildrum et al </td><td> SPAA '02: Proceedings of the fourteenth annual ACM symposium on Parallel algorithms and architectures
+</td></tr></table>
+<p>
+<strong>Reputation systems</strong>
+</p>
+<table class="wiki">
+<tr><td> <a class="missing attachment">Trust and Reputation Model in P2P Networks</a> </td><td> Wang et al </td><td> Proc. Third International Conference on Peer-to-Peer Computing (P2P 2003)
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing attachment">Reputation in p2p anonymity systems</a> </td><td> Roger Dingledine </td><td> In Workshop on Economics of Peer-to-Peer Systems
+</td></tr></table>
+<table class="wiki">
+<tr><td style="text-align: left"><a class="missing attachment">The Eigentrust algorithm for reputation management in P2P networks</a> </td><td> Kamvar et al </td><td> 12th WWW conference
+</td></tr></table>
+<table class="wiki">
+<tr><td> <a class="missing attachment">A social mechanism of reputation management in electronic communities</a> </td><td> Bin Yu et al </td><td> In Proceedings of Fourth International Workshop on Cooperative Information Agents
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">On Distributed Rating Systems for Peer-to-Peer Networks</a></td><td> YE TIAN et al </td><td> COMPUTER JOURNAL 2008, VOL 51
+</td></tr></table>
+<table class="wiki">
+<tr><td style="text-align: right"> <a class="missing attachment">PeerTrust: supporting reputation-based trust for peer-to-peer electronic communities</a></td><td> Li Xiong et al </td><td> IEEE Transactions on Knowledge and Data Engineering, 2004, 16
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">The Design of A Distributed Rating Scheme for Peer-to-peer Systems</a></td><td> Debojyoti Dutta  et al </td><td> In Workshop on Economics of Peer-to-Peer Systems
+</td></tr></table>
+<h2 id="SecurityPapers">Security Papers</h2>
+<p>
+<strong>DDoS</strong>
+</p>
+<table class="wiki">
+<tr><td><a class="missing attachment">Exploiting P2P systems for DDoS attacks</a></td><td> Naoum Naoumov et al </td><td> <a class="missing" href="#">InfoScale</a> '06: Proceedings of the 1st international conference on Scalable information systems
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">DDoS Attacks using P2P Networks</a></td><td> Kohli et al </td><td> --
+</td></tr></table>
+<p>
+<strong>Pollution</strong>
+</p>
+<table class="wiki">
+<tr><td><a class="missing attachment">Content Availibility, Pollution and Poisoning</a></td><td> Christin et al </td><td> ACM E-Commerce Conference
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">Pollution in P2P File Sharing Systems</a></td><td> J. Liang et al </td><td> IEEE Infocom
+</td></tr></table>
+<p>
+<strong>Malicious Code</strong>
+</p>
+<table class="wiki">
+<tr><td><a class="missing attachment">Attacking malicious code: a report to the Infosec Research Council</a></td><td> <a class="missing" href="#">McGraw</a>, G. et al </td><td> IEEE Software
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">Mobile code security</a></td><td> Rubin et al </td><td> IEEE Internet Computing
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">Project transprose: Reconciling mobile-code security with execution efficiency</a></td><td> Wolfram Amme et al </td><td> In DARPA Information Survivability Conference and Exposition
+</td></tr></table>
+<p>
+<strong>Proof Carrying code</strong>
+</p>
+<table class="wiki">
+<tr><td><a class="missing attachment">Trust Management and ProofCarrying Code in Secure Mobile-Code Applications</a></td><td> Joan Feigenbaum et al </td><td> In DARPA Workshop on Foundations for Secure Mobile Code Workshop. DARPA
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">Proof-carrying code</a></td><td> George Necula </td><td> POPL '97: Proceedings of the 24th ACM SIGPLAN-SIGACT symposium on Principles of programming languages
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">Research on Proof-Carrying Code on Mobile-Code Security</a></td><td> Peter Lee and George Necula </td><td> Proceedings of the Workshop on Foundations of Mobile Code Security
+</td></tr></table>
+<p>
+<strong>Sandbox model/Security Policies</strong>
+</p>
+<table class="wiki">
+<tr><td><a class="missing attachment">Specifying runtime environments and functionalities of downloadable components under the sandbox model</a></td><td style="text-align: right"> Kaiya, H. and Kaijiri, K.</td><td> Proc. International Symposium on Principles of Software Evolution
+</td></tr></table>
+<table class="wiki">
+<tr><td><a class="missing attachment">Usable Security Policies for Runtime Environments</a></td><td> Almut Herzog et al </td><td> Thesis
+</td></tr></table>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

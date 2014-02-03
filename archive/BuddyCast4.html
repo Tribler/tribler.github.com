@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BuddyCast4">!BuddyCast4</h1>
+<p>
+<em>Status: initial design</em>
+</p>
+<p>
+!BuddyCast4 improves the ability for keyword search by spreading more
+information about recent downloads. <a class="wiki" href="Buddycast3.html">Buddycast3</a> spreads mere the SHA1 hash
+of the most recent 25 downloaded torrents. !BuddyCast4 augments this information 
+with the <em>search keywords</em> used to discover this torrent, the ranking which the
+torrent had in the search results, and the full torrentname of the conducted download.
+With !BuddyCast4 the Tribler Megacache can be bootstrapped more quickly due to the 
+spreading of torrentname and the sophistication of searching is boosted due
+to the availability of {search keywords, search result rank, selected torrent SHA1}
+</p>
+<p>
+!BuddyCast4 improves the distribution of swarm popularity data by including
+recently checked torrent swarm sizes in a message.
+</p>
+<p>
+!BuddyCast4 also enables each peer to build a table of surrounding peers that are special, 
+such as in terms of taste similarity, Internet distance, upload capacity, bandwidth altruism, 
+social distance, experience (age), or reliability.
+We believe that !BuddyCast4 represents the state-of-the-art in operational 
+epidemic or gossip protocols.
+</p>
+<p>
+To efficiently distribute peer information we transmit <em>very</em> extensive peer records
+and store them at each peer. By building a web-of-trust we estimate the truthfulness
+of each peer and use this to build a local view of peer characteristics.
+Note that this local view does not need to be accurate or reliable, as long
+as the majority is honest we converge. As we transmit an extensive peer record we
+only transfer this information once to a peer.
+</p>
+<p>
+Previous BuddyCast implementations where extended by <a class="wiki" href="BarterCast.html">BarterCast</a>, Moderation, and
+<a class="wiki" href="SocioCast.html">SocioCast</a>. However, these where single-purpose ad-hoc extensions.
+Adding more extensions in this fashion is not feasible.
+With !BuddyCast4 we move towards a <em>generic</em> distributed database architecture 
+with epidemic style synchronization. !BuddyCast4 can be further extended with more
+information and complexity.
+</p>
+<h2 id="Designprinciples">Design principles</h2>
+<p>
+!BuddyCast4 is designed to balance complexity, state, and security.
+</p>
+<p>
+An important design decision is how we deal with peers that are not connectable.
+Do we gossip information about peers which cannot be validated?
+For security reasons this should not be possible or do we allow
+the usage of friends as proxies?
+</p>
+<p>
+Due to the extend of the information we require binairy
+encoding. Thus fixed order of fields and efficient (B)encoding.
+</p>
+<h2 id="Protocol">Protocol</h2>
+<p>
+A !BuddyCast4 message contains of information on 16 peers.
+Those peers are selected from the peer cache on the
+basis of their properties in terms of taste similarity, latency, etc.
+Only the top peers for a given property are included, for instance,
+the top most similar peers and the peers with the smallest Internet distance.
+The following list shows the complete breakdown for all peers.
+</p>
+<p>
+<a class="missing" href="#">ToDo</a>: what is the overhead for the establishment of an overlay connection?
+This determines the optimal exchange per connection (roughly 1 KByte or 4 KByte)
+</p>
+<table class="wiki">
+<tr><td style="text-align: left">Top peers    </td><td> Amount 
+</td></tr><tr><td style="text-align: left">Taste similarity </td><td>5
+</td></tr><tr><td style="text-align: left">Bartered bytes   </td><td>5
+</td></tr><tr><td>Social network distance</td><td>2
+</td></tr><tr><td>Internet distance</td><td>1
+</td></tr><tr><td style="text-align: left">Max upload speed </td><td>1
+</td></tr><tr><td style="text-align: left">Moderator        </td><td>1
+</td></tr><tr><td style="text-align: left">Random peers     </td><td>1
+</td></tr><tr><td style="text-align: left">Total            </td><td>16 Peers
+</td></tr></table>
+<p>
+For each of those 16 <em>special</em> peers we include the following
+information in a !BuddyCast4 message.
+</p>
+<table class="wiki">
+<tr><td style="text-align: left">Field                 </td><td style="text-align: left">Size in Bytes </td><td style="text-align: right"> Remarks
+</td></tr><tr><td style="text-align: left">PermID                </td><td style="text-align: left">82 
+</td></tr><tr><td style="text-align: left">IP address                </td><td style="text-align: left">4 
+</td></tr><tr><td style="text-align: left">Port number                </td><td style="text-align: left">2 
+</td></tr><tr><td style="text-align: left">Connectable (boolean)        </td><td style="text-align: left">1 
+</td></tr><tr><td style="text-align: left">Similarity                </td><td style="text-align: left">2 
+</td></tr><tr><td>Last seen (seconds ago)</td><td style="text-align: left">2 
+</td></tr><tr><td>Internet distance (ms)</td><td style="text-align: left">2 </td><td> Measured at the application layer 
+</td></tr><tr><td>Max speed from peer (Kbps)</td><td style="text-align: left">2 </td><td> Use measurements period of several seconds 
+</td></tr><tr><td style="text-align: left">Total from this peer (KBytes) </td><td style="text-align: left">4 </td><td> Zero if have not obtained any bytes from this peers 
+</td></tr><tr><td style="text-align: left">Total towards peer (KBytes) </td><td style="text-align: left">4 </td><td> Zero if have send any bytes to this peers 
+</td></tr><tr><td>Social network distance (hops)</td><td style="text-align: left">1 </td><td style="text-align: right"> Zero if there is no indirect relation through friends, foaf
+</td></tr><tr><td style="text-align: left">Max_flow (KBytes)        </td><td style="text-align: left">2 
+</td></tr><tr><td style="text-align: left">Total                 </td><td>120+ Bytes
+</td></tr></table>
+<p>
+In order not to transfer information multiple times we maintain a 
+database of what information has been sent to which peer.
+Timestamps are used to keep track of the last timepoint of synchronization
+with each peer. The delta since each timepoint is stored in the
+database and can be send to a peer.
+</p>
+<p>
+After we contact a peer for the first time we send topmost similar peer 1 &amp; 2.
+In the next Buddycast interval we include most similar peer 3 &amp; 4, etc.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="PeerLocality">Peer Locality</h1>
+<p>
+Locate which ISP and which IP subnet nodes are in and prioritize traffic to these "closer" nodes.
+</p>
+<h2 id="Why">Why?</h2>
+<p>
+Intra-ISP traffic is much cheaper for ISPs, making it possible to both limit the economical impact of the distribution platform and possibly provide better speeds for users (by putting less strain on the back-bone infrastructure).
+</p>
+<h2 id="What">What?</h2>
+<p>
+Let nodes discover which IP block and ISP they are part of.  This information should then be spread to other nodes.  This can be done in two ways:
+</p>
+<ol><li>Register in a DHT both under IP block and ISP ID
+</li><li>Add this information to the buddycast protocol to gossip about it
+</li></ol><h2 id="How">How?</h2>
+<p>
+Based on globally available WHOIS information, the external IP address of a node is resolved to the IP address block and registered ISP information.  Note that nodes will only resolve themselves first time they're on a new IP address (or at least not often), so this should not put unnecessary strain on any servers.
+</p>
+<p>
+When node information has been discovered (using either gossip, DHT or a combination), nodes can be preferred by the swarming protocol (modify bartercast?).  This means that as long as there is nothing to loose for the client, it will "play nice" with ISPs.  If there is not enough capacity available, or if nodes are very few within a network, swarming will be performed as usual.
+</p>
+<p>
+If the WHOIS information is bad for some ISPs, this should only have an effect on the ISP itself.  If we can test and show that this works properly, ISPs would benefit from updating and maintaining WHOIS information.
+</p>
+<h2 id="Currentstate">Current state</h2>
+<ul><li>WHOIS database resolves have been implemented.  Should work for any IP address (does a two-step resolve if outside of the US).
+</li><li>No integration with Tribler has been done yet
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

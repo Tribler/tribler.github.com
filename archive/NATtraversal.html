@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="NATandFirewallTraversal">NAT and Firewall Traversal</h1>
+<p>
+<em>In short: the ability for peers to set up connections to other peers located behind NATs and Firewalls.</em>
+</p>
+<h2 id="Overview">Overview</h2>
+<p>
+With the increasing shortage of IP-address space and rising security concerns, more and more users will access the Internet from behind a Network Address Translator (NAT) or firewall. We have investigated various techniques and tricks to be able to interact with these peers as if they were directly connected to the Internet. Implementing these techniques in Tribler will significantly enhance performance, since it will allow the swarm to tap into previously unavailable resources. These traversal techniques will become a feature of <a class="wiki" href="IPv8.html">IPv8</a>.
+</p>
+<p>
+Initially this was explored in <a class="missing attachment">remko_1035363_Onderzoekstaak_-_Final_Version.pdf</a>. Further research is detailed below.
+</p>
+<h2 id="Directconnections">Direct connections</h2>
+<p>
+In order to optimize performance, it is preferable if each peer could setup a direct connection to every other peer in the swarm. However in practice it turns out that it is not always possible. The actual situation depends on the way the peers are connected to the internet. Simplified, there can be 3 situations:
+</p>
+<ol><li>Both peers are connected directly to the internet. Both peers can setup a direct connection to each other.
+<pre class="wiki">    +---+                      +---+
+    | A |-----((Internet))-----| B |
+    +---+                      +---+
+</pre></li><li>One peer is located behind a NAT/firewall, the other is connected directly to the internet. Only peer A is able to set up a connection to B, the reverse is not possible.
+<pre class="wiki">             NAT/fw
+              +-+
+    +---+     | |                  +---+
+    | A |-----| |---((Internet))---| B |
+    +---+     | |                  +---+
+              +-+
+</pre></li><li>Both peers are located behind a NAT/firewall. Neither peer can setup a connection to the other peer.
+<pre class="wiki">             NAT/fw               NAT/fw     
+              +-+                  +-+       
+    +---+     | |                  | |     +---+
+    | A |-----| |---((Internet))---| |-----| B |
+    +---+     | |                  | |     +---+
+              +-+                  +-+
+</pre></li></ol><p>
+NOTE: it is possible for a peer to be connected to the internet through a cascade of multiple NAT/fw's.
+</p>
+<p>
+In order to setup connections to peers located behind a NAT/firewall, various solutions have been implemented in NAT/firewalls:
+</p>
+<ol><li>The ability to set up static rules to allow for incoming connections to peers located behind the NAT/fw. This requires user intervention in the NAT/fw.
+</li><li>UPnP Gateway could be implemented. Using UPnP forwarding rules can be set up on a NAT/fw to allow incoming connections towards the peer.
+</li><li>Using Application Layer Gateways (ALGs) in de NAT/firewall to allow incoming connections to pass through.
+</li></ol><p>
+However the availability of these solutions our outside the control of the Tribler application. Instead we will explore a different solution which is based on the concept of holepunching. Holepunching manipulates the behavior of NAT/firewall to setup a direct connection. This concept is explored in the next section.
+</p>
+<h2 id="TCPandUDPholepunching">TCP and UDP holepunching</h2>
+<p>
+In order to set up connections across NAT/firewalls, TCP and UDP holepunching can be used. The current research is focuses on UDP holepunching.
+</p>
+<h2 id="Connectionsteps">Connection steps</h2>
+<ol><li>Identify peer connectivity to internet
+</li><li>Connect to other peer using a relay connection
+</li><li>Exchange connectivity information
+</li><li>Use a connection setup strategy to setup a connection.
+</li></ol><h3 id="Datafromresearch">Data from research</h3>
+<p>
+The implementation will result in various data points.
+</p>
+<ul><li>Overview of types of NATs seen by Tribler.
+</li><li>The effectiveness of port prediction.
+</li><li>The effectiveness of various connection setup strategies that employ holy punching techniques.
+</li></ul><h2 id="Implementationdetails">Implementation details</h2>
+<h2 id="Relayarchitectureandprotocol">Relay architecture and protocol</h2>
+<p>
+To simplify NAT traversal our approach is to first establish a TCP control channel.
+This temporary control channel is relayed through a <em>conveyance peer</em> which coordinates
+the UDP puncturing and conducts error handling.
+We assume each NATed peer to be connected by TCP to a number of conveyance peers.
+Key to connecting to a peer is therefore finding one of their active conveyance peers.
+It is a feature of <a class="wiki" href="IPv8.html">IPv8</a> to discover these.
+</p>
+<p>
+This first phase in the NAT puncturing process requires a few new messages.
+Three peers are involved: Alice, Bob, and Charlie the Conveyance peer.
+</p>
+<ul><li>Set-up relay connection request (A to C)
+</li><li>Set-up relay connection indication (C to B)
+</li><li>Set-up relay connection accept (B to C)
+</li><li>Set-up relay connection completed (C to A)
+</li><li>Set-up relay data exchange (From A/B to B/A via C)
+</li><li>Set-up relay connection auto-termination
+</li></ul><p>
+Using this relayed TCP control channel peers A and B establish a direct connection.
+For simplicity and security the relay is only valid for a limited number of minutes and KBytes
+after that it terminates.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

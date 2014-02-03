@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Closedswarms">Closed swarms</h1>
+<p>
+Moved to <a class="ext-link" href="http://trac.p2p-next.org/wiki/ClosedSwarms"><span class="icon">​</span>http://trac.p2p-next.org/wiki/ClosedSwarms</a> as it's a part of the P2P-Next project.
+</p>
+<p>
+<em>status: initial idea</em>
+</p>
+<p>
+To share content only with friends.
+</p>
+<h2 id="Scenario">Scenario</h2>
+<p>
+A user creates or compiles a collection of torrents, which he wants to share with a closed group of friends.  He wants that his friends must explicitly re-distribute it, thus breaking the trust between the users.
+</p>
+<p>
+A content provider allows access to registered (paying?) users to an RSS feed of torrents.  Included in the model is that the users provide their upload bandwidth to other registered users.  Any leaks of content should not affect (limit) the service provided by the content provider to the registered users.
+</p>
+<h2 id="Whatisit">What is it?</h2>
+<p>
+A closed swarm will limit access to uplinks to authorized nodes.  In the scenario of the closed group, content will not implicitly leak, even if Tribler (or other compatible clients) leak torrent files (e.g. through gossip protocols).  This cannot be enforced by trackers either, due to trackerless fallback.
+</p>
+<p>
+In the scenario of the content provider, a closed swarm means that any leakage will either improve, or not affect their service.  If a leak is "external" (a new torrent is made), there will be no impact on the service of well-behaving nodes.  If a leak is "internal", meaning that some nodes do not enforce authorization checks, they will improve the performance of the well-behaving nodes, as they will seed to them as well.
+</p>
+<h2 id="How">How?</h2>
+<p>
+Closed swarms is a way to limit access to resources based on node's ability to prove they should have access.  The basic idea is to add a key to a torrent and require an "access certificate" before any data is sent to another node.  The "Access certificate" should contain a user public key (could be the permID, but that might have privacy implications) of the authorized node, and be signed by the torrent key.  The requesting node must also sign the request in order for the node to prove it actually knows the key.  Notice that no PKI is required, as the torrent embeds the key itself.  A key could also be re-used for multiple torrents, for example for a season of a TV show or the private productions of a prosumer.  The certificate would be a result of a manual addition (add friend to closed group), a user login or a payment transaction with a content distributor.  Also note that the protocol should be planned in detail and verified, or an existing protocol could be used if applicable.
+</p>
+<h2 id="Loopholes">Loopholes</h2>
+<p>
+Closed swarms is not DRM, nor does it plan to be (DRM is evil).  Closed swarms makes leakage explicit, meaning that a user must actively leak the content (run patched code or make a new torrent).  At the same time, the best service (most speed) will be available to the complying (members) of the closed swarm.  This is due to the fact that if non-complying nodes are present, there will be more seeds for the complying nodes than for the non-complying ones.
+</p>
+<h2 id="Bootstrapping">Boot strapping</h2>
+<p>
+A closed swarm should be started by a verified client, e.g. a seeder controlled by the content producer themselves.  If this is the case, the reasoning in the paragraph above holds.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

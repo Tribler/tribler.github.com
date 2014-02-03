@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Statistics:VideoOnDemand">Statistics: Video On Demand</h1>
+<p>
+We have two differens sources for our Video On Demand (VOD) statistics. First, we have the <a class="wiki" href="Crawler.html">Crawler</a> that uses a pulling mechanism to gather information from Tribler peers. Second, we have a reporter that uses a pushing mechanism to deliver the same information from <a class="wiki" href="SwarmPlayer.html">SwarmPlayer</a> clients. Both mechanism's are described briefly below. Finally we give an example of the statistics that we gather.
+</p>
+<h2 id="Crawler">Crawler</h2>
+<p>
+The <a class="wiki" href="Crawler.html">Crawler</a> uses the <a class="wiki" href="OverlaySwarm.html">OverlaySwarm</a> to find Tribler peers. When a peer is found it is asked to give the VOD statistics that it has gathered so far. After a successfull request for statistics either the Crawler or the peer will reconnect to its counterpart periodically so new statictics can be delivered.
+</p>
+<p>
+The Crawler stucture allows for multiple Crawler processes to crawl for the same information. To avoid duplicate requests to be send, each Tribler peer records the last time a Crawler request was recived. Based on a desired frequency, given in each Crawler request, a peer can decide to delay the transmission of statistics. 
+</p>
+<h2 id="Swarmplayer">Swarmplayer</h2>
+<p>
+The <a class="wiki" href="SwarmPlayer.html">SwarmPlayer</a> continuously gathers statistics and reports them periodically (currently 60 seconds) to one of the available servers (reporter1.tribler.org through reporter9.tribler.org). Currently all reporterX.tribler.org urls point to the same machine, however, we can spread the load when needed by changing the dns record.
+</p>
+<p>
+After each report is received the clients are given a new reporting frequency. If required this will allow us to reduce the load on the servers even more. In the worst case scenario we can even disable reporting.
+</p>
+<h2 id="Gatheredstatistics">Gathered statistics</h2>
+<p>
+The following example shows the static information that we record for
+each attempted playback:
+</p>
+<pre class="wiki">- num_pieces: 1088                      // number of pieces
+- nat: Port Restricted Cone Firewall    // detected nat / firewall
+- piece_size: 262144                    // size of one piecec, in bytes
+- bitrate: 131072                       // video bitrate, from ffmpeg
+- timestamp: 1242289138.45              // server side timestamp of
+                                        // (latest) report
+</pre><p>
+To measure the user playback experience we gather the following events. Note that each event is accompanied with the timestamp when it occured:
+</p>
+<ul><li>started download
+</li><li>started playback
+</li><li>paused playback
+</li><li>resumed playback
+</li><li>downloaded a high-priority piece
+</li><li>downloaded a non high-priority piece
+</li></ul><p>
+Because each event contains a timestamp we can reconstuct the playback progress, download speed, and possible reasons for failures (unavailable piece versus not enough available bandwith).
+</p>
+<p>
+The example below is generated from 1101 events and is divided in lines where each line contains events in 60 second 'bins'. Although we can change the bin size to anything we want (since we collect timestamps with millisecond accuracy).
+</p>
+<p>
+Line 1 shows a prebuffer (<tt>s</tt>) and playback (<tt>P</tt>) state where <tt>65</tt> high-priority pieces were downloaded at a rate or <tt>1.1</tt> piece per second, or in terms of bandwith: <tt>277.3</tt> kilobytes per second. It also shows the same information for the non-high priority pieces.
+</p>
+<p>
+Line 2 though 7 shows only the playback state, indicating that playback continued without stalling.
+</p>
+<p>
+Line 8 and 10 both show a pause during playback. By examaning the events in more detail (which we can because we have the events) we can make educated guesses as to the reasons for the stall, although it will mostly come down to a lack of available bandwidth.
+</p>
+<pre class="wiki"> 1. sP  high.65      1.1/s    277.3kb/s   non-high.26      0.4/s    110.9kb/s
+ 2.  P  high.9       0.1/s     38.4kb/s   non-high.83      1.4/s    354.1kb/s
+ 3.  P  high.90      1.5/s    384.0kb/s   non-high.4       0.1/s     17.1kb/s
+ 4.  P  high.89      1.5/s    379.7kb/s   non-high.3       0.1/s     12.8kb/s
+ 5.  P  high.86      1.4/s    366.9kb/s   non-high.4       0.1/s     17.1kb/s
+ 6.  P  high.91      1.5/s    388.3kb/s   non-high.0       0.0/s      0.0kb/s
+ 7.  P  high.92      1.5/s    392.5kb/s   non-high.0       0.0/s      0.0kb/s
+ 8. sP  high.88      1.5/s    375.5kb/s   non-high.4       0.1/s     17.1kb/s
+ 9.  P  high.92      1.5/s    392.5kb/s   non-high.0       0.0/s      0.0kb/s
+10. sP  high.91      1.5/s    388.3kb/s   non-high.0       0.0/s      0.0kb/s
+11.  P  high.92      1.5/s    392.5kb/s   non-high.0       0.0/s      0.0kb/s
+12. Ps  high.54      0.9/s    230.4kb/s   non-high.25      0.4/s    106.7kb/s
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

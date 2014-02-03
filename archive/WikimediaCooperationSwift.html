@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="WikimediaCooperation:Swift">Wikimedia Cooperation: Swift</h1>
+<h2 id="TrialWebsite">Trial Website</h2>
+<ul><li>Please visit <a class="ext-link" href="http://swarmplayer.p2p-next.org/3000/"><span class="icon">​</span>http://swarmplayer.p2p-next.org/3000/</a> for rc3 software and test links.
+</li></ul><p>
+ 
+</p>
+<h2 id="TODO">TODO</h2>
+<ul><li>Expand mwEmbed such that:
+<pre class="wiki">if (typeof tswiftTransport != 'undefined')
+{
+         // contact url2torrent.p2p-next.org
+         // generate &lt;video&gt; &lt;source&gt; element based on 'swift' key
+         // in JSON reply
+}
+if (typeof swarmTransport != 'undefined')
+{
+         // contact normal url2torrent, etc.
+}
+</pre></li></ul><ul><li>Autoseed more?
+</li><li>More permanent solution to 99% bug = fuzzy len.
+</li><li>Good quality video of Swift-on-Android
+</li><li>Good quality video of Swift-on-iPad
+</li><li>Update 3000 website with Swift enabled Sintel Wikipedia page.
+</li><li>Watch seeder.log growth
+</li></ul><p>
+(* Report bug: upload.wikipedia.org returns 200 on invalid Range request (&gt; actual content-length), not 416)
+</p>
+<h2 id="KnownIssues">Known Issues</h2>
+<ul><li>Seeking is currently not supported. The Swift HTTP gateway presently doesn't handle/accept HTTP range requests. Video controls do allow seeking, but that doesn't work well. Seeking without range requests not properly supported in FF? I also cannot find a way to disable seek at the GUI for the default firefox controls :-(
+</li></ul><h2 id="DONE">DONE</h2>
+<ul><li>HTTP fallback implemented in XPI's <a class="missing" href="#">JavaScript</a>: 
+<ul><li>Fallback to 2nd &lt;source&gt; if swift.exe no start or no data (swift exits). 
+</li><li>Fallback to HTTP URL if swift.exe delivered data.  
+</li></ul></li><li>Setup own url2torrent on <a class="ext-link" href="http://url2torrent.p2p-next.org"><span class="icon">​</span>http://url2torrent.p2p-next.org</a> that generates tswift:// URLs in 'swift' response field.
+</li><li>Made trial code independent of normal <a class="wiki" href="SwarmPlayer.html">SwarmPlayer</a>, i.e. tswift:// and <a class="mail-link" href="mailto:tswift@p2p-next.org"><span class="icon">​</span>tswift@p2p-next.org</a>
+</li><li>Fix for Linux not commencing playback (=rc2)
+</li><li>swift.exe as Windows app, not Console
+</li><li>Turn off autoswiftization for other videos, or set failover time to shorter (currently 5 s)
+</li><li>Logging Mac version
+</li></ul><h2 id="Software">Software</h2>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/trial-m36/Tribler/Transport"><span class="icon">​</span>.xpi code</a>
+</li><li><a class="ext-link" href="https://ttuki.vtt.fi/svn/p2p-next/TUD/next-share/branches/arno-swiftbackend-trial-m36/Next-Share/TUD/swift-r1501"><span class="icon">​</span>Arno's swift code</a> (this is currently in the closed project repos, open stuff via www.libswift.org.)
+</li><li><a class="ext-link" href="http://svn.tribler.org/url2torrent/branches/u2t-trial-m36"><span class="icon">​</span>url2torrent code tweaked for trial</a>  
+</li></ul><ul><li>Please visit <a class="ext-link" href="http://swarmplayer.p2p-next.org/3000/"><span class="icon">​</span>http://swarmplayer.p2p-next.org/3000/</a> for binaries.
+</li></ul><p>
+   
+</p>
+<h1 id="OLD">OLD</h1>
+<h2 id="Testpages">Test pages</h2>
+<ul><li>Visit <a class="ext-link" href="http://wikipedia.p2p-next.org/swift/sintel.html"><span class="icon">​</span>http://wikipedia.p2p-next.org/swift/sintel.html</a> for an end-to-end test using url2torrent.p2p-next.org. (<em>updated not to autogenerate a new page, just inline a new video element</em>)
+</li><li><a class="ext-link" href="http://wikipedia.p2p-next.org/swift/weather.html"><span class="icon">​</span>Classic BBC weather man</a>
+</li><li><a class="ext-link" href="http://wikipedia.p2p-next.org/swift/330.html"><span class="icon">​</span>Episode from "330 Squadron" from NRT</a>
+</li><li><a class="ext-link" href="http://wikipedia.p2p-next.org/swift/sintel-2k.html"><span class="icon">​</span>Sintel 2K</a> (buggy, swift stalls on first play)
+</li></ul><h2 id="Links">Links</h2>
+<ul><li><a class="ext-link" href="https://trac.p2p-next.org/wiki/M36Trial"><span class="icon">​</span>P2P-Next internal page on M36 trial</a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

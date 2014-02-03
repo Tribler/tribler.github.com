@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Optionforinteractivity:MHEG">Option for interactivity: MHEG</h1>
+<p>
+Early 2009 we need to start the implementation of
+a exploratory prototype of interactivity.
+Only very primitive features such as text overlays and
+click-through navigation need to be supported.
+</p>
+<p>
+An interesting option for Tribler interactivity is <a class="ext-link" href="http://www.mheg.org"><span class="icon">​</span>MHEG</a>.
+Adding interactivity to flat video files is also
+<a class="ext-link" href="http://osflash.org/open_source_flash_projects"><span class="icon">​</span>possible with Flash</a> and <a class="ext-link" href="http://wxwebkit.wxcommunity.com/pmwiki/"><span class="icon">​</span>webkit</a>.
+SMIL seems to have insufficient stable code and following.
+</p>
+<h2 id="MHEG">MHEG</h2>
+<p>
+MHEG seems to be rather limited for interactivity, but has proven itself and 
+running code is available. The key drawback is the lack of a mature <a class="ext-link" href="http://www.google.com/search?q=mheg+authoring"><span class="icon">​</span>authoring tool</a>.
+</p>
+<p>
+<a class="ext-link" href="http://www.cs.cf.ac.uk/Dave/Multimedia/node312.html#SECTION043612300000000000000"><span class="icon">​</span>Example code from 2001</a> is available which gives you an indication of the light-weight nature of MHEG which runs on cheap CPU constrained devices such as TVs and settop boxes. This technology is <a class="ext-link" href="http://www.bbc.co.uk/digital/tv/tv_interactive.shtml"><span class="icon">​</span>deployed</a> in the UK and NZ.<br />
+The most mature MHEG implementation lib seems this <a class="ext-link" href="http://freemheg.cvs.sourceforge.net"><span class="icon">​</span>SF.Net project</a>.
+The <strong>MythTV</strong> <a class="ext-link" href="http://svn.mythtv.org/trac/browser/trunk/mythtv/libs/libmythfreemheg"><span class="icon">​</span>implementation of MHEG</a> is probably a good starting point for experimentation with <a class="ext-link" href="http://svn.mythtv.org/trac/browser/trunk/mythtv/libs/libmythtv/interactivetv.h"><span class="icon">​</span>interactivity</a>.
+There is also a <a class="ext-link" href="http://code.google.com/p/mheg-dotnet/"><span class="icon">​</span>.net implementation</a> in C#.
+[Perhaps there is support in the <a class="ext-link" href="http://www.dsp-worx.de/?n=11"><span class="icon">​</span>DVB reference code</a>.
+<a class="ext-link" href="http://www.digitalspy.co.uk/forums/showthread.php?t=796507"><span class="icon">​</span>in-depth discussion on DVB-s and MHEG code</a> with various liks that are usefull.
+</p>
+<p>
+One option to explore is to move FreeMHEG inside VLC as a plugin where it is close to the mixing of text (subtitles), video, and audio. Another option is invoking FreeMHEG after VLC is done, but how does this work with <a class="missing" href="#">WxWidgets</a>?
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

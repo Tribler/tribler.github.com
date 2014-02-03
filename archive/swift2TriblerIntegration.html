@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="swifttoTriblerIntegration"><em>swift</em> to Tribler Integration</h1>
+<p>
+The goal of this work was to build a first implementation of the integration of the novel <em><a class="ext-link" href="http://www.libswift.org"><span class="icon">​</span>swift</a></em> protocol into the current Tribler <a class="wiki" href="BitTorrent.html">BitTorrent</a> client. Thanks to this new development, Tribler should be able to use the new transport protocol and obtain data from the <em>swift</em> swarms.
+</p>
+<p>
+To understand the concepts behind this work, the reader should be familiar with the regular <a class="wiki" href="BitTorrent.html">BitTorrent</a> operation (especially Piece Picking techniques used in Tribler) and know in detail the concepts behind the <em>swift</em> protocol (such as <a class="ext-link" href="https://www.tribler.org/trac/wiki/BinMaps"><span class="icon">​</span>Binmaps</a>, <a class="ext-link" href="http://tools.ietf.org/html/draft-ietf-ledbat-congestion-01"><span class="icon">​</span>LEDBAT</a>, <a class="ext-link" href="https://www.tribler.org/trac/wiki/MerkleHashes"><span class="icon">​</span>Merkle Hash Trees</a> and the messages of the protocol).
+</p>
+<p>
+This page is intended to be an extended abstract of the whole report. For further and detailed information, please refer to the attached PDF report.
+</p>
+<p>
+The code of the implemented modules (/tribler), the modifications done in Libswift (/swift) and the documentation (/doc) can be found on <a class="ext-link" href="http://svn.tribler.org/abc/branches/guillem/"><span class="icon">​</span>http://svn.tribler.org/abc/branches/guillem/</a>.
+</p>
+<h1 id="ProblemDescription">Problem Description</h1>
+<p>
+Several issues need to be faced when building the protocol integration into Tribler. Once the implementation is working and testing several scenarios, some questions could be answered.
+</p>
+<h2 id="Bandwidthusage">Bandwidth usage</h2>
+<p>
+Thanks to the use of the new congestion control algorithm (LEDBAT) Tribler should be able to use all the upload bandwidth without disturbing the user. Due to its design, LEDBAT always yields to other connections, so it is not possible to prioritise its transfers in front of other TCP transfers (which controversially would go against its main design principle).
+</p>
+<p>
+Discover how LEDBAT behaves when sharing the link with legacy <a class="wiki" href="BitTorrent.html">BitTorrent</a> TCP transfers. UDP transfers should back off in front of others, but it would be interesting to discover if LEDBAT efficiently uses the remaining bandwidth. In this case, <em>swift</em> would work as a transfer boost, increasing the overall available bandwidth.
+</p>
+<h2 id="Piecetranslation">Piece translation</h2>
+<p>
+Difference in piece sizes between <a class="wiki" href="BitTorrent.html">BitTorrent</a> transfers and <em>swift</em> bin system is also an issue to solve when joining both protocols. <em>swift</em> data bins are 1 KByte long, while <a class="wiki" href="BitTorrent.html">BitTorrent</a> uses variable size pieces, split in 16 KBytes chunks.
+</p>
+<p>
+A piece retrieval coordination mechanism must be designed in order to correctly coordinate both protocols, so the same client can obtain and share all parts of the file from and to both swarms at the same time.
+</p>
+<h2 id="Multi-protocolpieceretrievaltechniques">Multi-protocol piece retrieval techniques</h2>
+<p>
+Considering <a class="wiki" href="BitTorrent.html">BitTorrent</a> and <em>swift</em> were independently designed, each protocol has its own features and its operation mode. The idea for this first integration is to keep <a class="wiki" href="BitTorrent.html">BitTorrent</a> as the main transfer protocol, so <em>swift</em> needs to adapt to the <a class="wiki" href="BitTorrent.html">BitTorrent</a> operation.
+</p>
+<p>
+Taking into account the constraints of libswift about bin requesting from external tools, several piece retrieval mechanisms could be used when running Tribler and libswift:
+</p>
+<ul><li><strong>Opportunistic piece retrieval:</strong> request only one piece from the <em>swift</em> swarm at a time, as if the whole swarm was only one <a class="wiki" href="BitTorrent.html">BitTorrent</a> peer. This is the simpler approach but probably the obtained performance would be very low.
+</li><li><strong>Bulk data retrieval:</strong> request several pieces to the <em>swift</em> swarm, so libswift can work on a longer set of bins to acquire. This approach requires higher control over the peding pieces, but would lead to much better performance. The operation of this mode could be definetely limited by the libswift external requesting mechanism.
+</li></ul><h1 id="DesignandImplementation">Design and Implementation</h1>
+<p>
+The current Tribler client is a <a class="wiki" href="BitTorrent.html">BitTorrent</a>-based P2P client, with the added feature of using web servers as data source. The goal of this work is to add <em>swift</em> as another supported protocol in Tribler, so data could be obtained from and seeded to <em>swift</em> swarms. 
+</p>
+<p>
+Instead of writing a new full implementation of the <em>swift</em> protocol in Python and use it in Tribler, integrating the current libswift implementation seemed to be a much more feasible choice: reuse a solid and already-working software with better performance because of the C++ compiled code.
+</p>
+<h2 id="CPythonwrapping">C++ Python wrapping</h2>
+<p>
+The first open issue to face when integrating libswift into the Tribler client was how to join its Python implementation with C++ libswift's implementation. The most suitable procedure here was to wrap the C++ <em>swift</em> implementation and make it accessible for the Python Tribler's code, as if it was another simple Python module.
+</p>
+<p>
+Building Python bindings directly using the CPython API is a complex and tedious process, since small changes in the implementation could mean rewriting the whole binding. Moreover, debugging errors is not a trivial job in this case. However, several initiatives exist to make this work lighter: they provide tools to generate the needed bindings and modules from a new small piece of code. The considered tools and their little descriptions are listed in one of the appendixes in the report.
+</p>
+<p>
+<a class="ext-link" href="http://www.swig.org"><span class="icon">​</span>SWIG</a> and <a class="ext-link" href="http://www.boost.org/doc/libs/1_43_0/libs/python/doc/index.html"><span class="icon">​</span>Boost.Python</a> seemed to be the most convenient options for libswift. Though its promised better C++ interfacing, its focus on providing access to all other Boost libraries dismissed Boost.Python as the chosen tool for this case. SWIG became the natural choice, thanks to its simplicity but its good enough C++ integration and performance.
+</p>
+<p>
+Data type management in SWIG is quite simple as long as basic types are used. Since <em>swift</em> implementation declared some non-standard data types in the API, an extra wrapping over the original API was needed. This extra layer declares the same methods the original libswift's API, but using standard or well-known C data types, and adapts the information to perfectly fit into the original methods.
+</p>
+<p>
+The basic data type methods are then exposed to SWIG, using ANSI C/C++ declarations and special SWIG directives to describe the target methods and the desired result module. From this file, SWIG generates a C/C++ file containing all the wrapper code and Python file describing the new module itself. The C/C++ wrapper file must then be compiled with all other needed code files and linked as a shared library for Unix operating systems or a DLL for Windows environment.
+</p>
+<h3 id="SWIGscript">SWIG script</h3>
+<div class="code"><pre>%module swift
+%{
+#include"pswift.h"
+%}
+
+%apply int { int8_t }
+%apply unsigned int { uint8_t }
+%apply int { int16_t }
+%apply unsigned int { uint16_t }
+%apply int { int32_t }
+%apply unsigned int { uint32_t }
+%apply long long { int64_t }
+%apply unsigned long long { uint64_t }
+
+%include"pswift.h"
+
+%{
+#include "swift.h"
+
+PyObject* python_callback = 0;
+
+void api_callback(int transfer, bin64_t bin) {
+        PyObject *arglist;
+        PyObject *result;
+        PyGILState_STATE gstate;
+
+        if (!PyCallable_Check(python_callback)) {
+                PyErr_SetString(PyExc_TypeError, "Python callback must be callable");
+                return;
+        }
+        arglist = Py_BuildValue("(il)", transfer, bin.v);
+
+        gstate = PyGILState_Ensure();
+
+        result = PyEval_CallObject(python_callback, arglist);
+
+        Py_XDECREF(arglist);
+        Py_XDECREF(result);
+
+        PyGILState_Release(gstate);
+}
+
+void AddProgressCallback(int transfer, uint8_t agg, PyObject *pyfunc) {
+        python_callback = pyfunc;
+        swift::AddProgressCallback(transfer,api_callback, agg);
+        Py_INCREF(pyfunc);
+}
+
+void RemoveProgressCallback(int transfer,PyObject *pyfunc) {
+        python_callback = pyfunc;
+        swift::RemoveProgressCallback(transfer,api_callback);
+        Py_INCREF(pyfunc);
+}
+%}
+
+void AddProgressCallback(int transfer,uint8_t agg, PyObject*);
+void RemoveProgressCallback (int transfer,PyObject*);
+</pre></div><h3 id="CPythonWrapperAPI">C++ Python Wrapper API</h3>
+<div class="code"><pre>#include&lt;stdint.h&gt;
+/*
+ * Binds a socket to the specified ip:port
+ * @param address as "ip:port" string
+ * @return socket descriptor
+ */
+int Listen(const char* address);
+
+/*
+ * Run send/receive loop for the specified amount of time
+ * @param running time
+ */
+void Loop(int64_t time);
+
+/* 
+ * Closes the specified socket. If no socket
+ * specified, all open sockets are closed
+ * @param sockdesc socket descriptor
+ */
+void Shutdown(int sockdesc=-1);
+
+/*
+ * Opens the file with the given name
+ * @param filename as "file.extension" string
+ * @param hash in hex string
+ * @return file descriptor
+ */
+int Open(const char* filename, const char* hash="");
+
+/*me
+ * Calculate the Root Hash of the specified file 
+ * (identified by its file descriptor)
+ * @param fd file descriptor
+ */
+const char* RootMerkleHash(int fd);
+
+/*
+ * Closes the file identified by its file
+ * descriptor
+ * @param fd file descriptor
+ */
+void Close(int fd);
+
+/*
+ * Add a possible peer which participates in a given
+ * transmission
+ * @param filename as "file.extension" string
+ * @param hash in hex string
+ */
+void AddPeer(const char* address, const char* hash="");
+
+/*
+ * Sets the contact information for a tracker peer
+ * @param address as "ip:port" string
+ */
+void SetTracker(const char* address);
+
+/*
+ * Size of the file in bytes, 0 if unknown
+ * @param fd file descriptor
+ * @return bytes
+ */
+uint64_t Size(int fd);
+
+/*
+ * Amount of retrieved and verified data
+ * @return bytes
+ */
+uint64_t Complete(int fd);
+
+/*
+ * Returns if a file transfer is completed or not
+ * @param fd file descriptor
+ * @return boolean
+ */
+bool IsComplete(int fd);
+
+/*
+ * Checks the number of bytes that are complete sequentially,
+ * starting from the beginning of the file until the first 
+ * not-yet-retrieved packet
+ * @param fd file descriptor identifier
+ * @return bytes
+ */
+uint64_t SeqComplete(int fd);
+
+/*
+ * Initialize library parameters
+ * @param logging activates the debug logging
+ */
+void Init();
+
+/*
+ * Notify about externally acquired data ranges
+ * @param transfer file descriptor identifier
+ * @param layer of the binmap tree
+ * @param offset in the layer of the tree
+ */
+void ExternallyRetrieved (int transfer, uint8_t layer, uint64_t offset);
+
+/*
+ * Limit the scope of the piece picker
+ * @param transfer file descriptor identifier
+ * @param layer of the binmap tree
+ * @param offset in the layer of the tree
+ */
+void LimitPiecePickerRange(int transfer, uint8_t layer, uint64_t offset);
+
+/*
+ * Check if a certain bin is filled or not
+ * @param transfer file descriptor identifier
+ * @param layer of the binmap tree
+ * @param offset in the layer of the tree
+ * @return boolean
+ */
+bool isBinFilled(int transfer, uint8_t layer, uint64_t offset);
+
+/*
+ * Check if a certain bin is within another one
+ * @param received higher level binmap
+ * @param target_layer of the binmap to check if its within
+ * @param target_offset in the layer of the tree of the binmap to check if its within
+ * @return boolean
+ */
+bool isBinWithin(uint64_t received, uint8_t target_layer, uint64_t target_offset);
+</pre></div><h2 id="LibswiftintegrationintoTribler">Libswift integration into Tribler</h2>
+<p>
+In order to able Tribler to use the new multiparty transport protocol, some integration with the present <a class="wiki" href="BitTorrent.html">BitTorrent</a> Download Manager module was needed. The complete solution here would be to design and implement a new <em>swift</em> download manager which was aware of all <em>swift</em> internal matters and worked in coordination with the current <a class="wiki" href="BitTorrent.html">BitTorrent</a> Download Manager. However, the immaturity of libswift implementation and specially the idea of abstracting the network as a single data cloud (hiding peer management, piece retrieval and transfer management to the application layer) discouraged this choice.
+</p>
+<p>
+As a first approach of <em>swift</em> integration in Tribler, the HTTP Downloader could be taken as a model. In this case, a new <em>swift</em> Downloader must be designed, making the <em>swift</em> swarm to be considered a single <a class="wiki" href="BitTorrent.html">BitTorrent</a> peer acting as a leecher for the Tribler <a class="missing" href="#">PiecePicker</a>. The novel module should interact with the regular <a class="wiki" href="BitTorrent.html">BitTorrent</a>'s piece picker operation and translate the <a class="wiki" href="BitTorrent.html">BitTorrent</a> piece requests to <em>swift</em> operation.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/design1.png"></a>
+</p>
+<p>
+High-level module schema, presenting the intended interaction between all of the involved one. Red color indicates the new components designed to integrate <em>swift</em> as a transport protocol for Tribler.
+</p>
+<h3 id="swiftmetadatain.torrentfiles"><em>swift</em> metadata in .torrent files</h3>
+<p>
+Add the root hash and the default tracker for a swarm into the .torrent file: add a <em>swift</em> dictionary, containing the root hash and a list of trackers and known peers addresses.
+</p>
+<h3 id="TheswiftDownloadermodule">The <em>swift</em> Downloader module</h3>
+<p>
+The <em>swift</em> Downloader module would use the libswift library through the Python wrapping module described earlier. However, in this case libswift should not acquire all data bins linearly but only acquire the bins corresponding to the <a class="wiki" href="BitTorrent.html">BitTorrent</a> pieces ordered by the Tribler <a class="missing" href="#">PiecePicker</a>.
+</p>
+<h4 id="Piecemanagement">Piece management</h4>
+<p>
+First, two considerations:
+</p>
+<ul><li><a class="wiki" href="BitTorrent.html">BitTorrent</a> piece length will be always regarded as a power of 2, so they can be easily converted to <em>swift</em> bins, as one of the pieces corresponds to a branch of the tree identified by a bin from layer N.
+</li><li>Only .torrents describing a single file would be managed. As a first implementation, this would keep things simpler and would make easier all the piece management.
+</li></ul><p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/btpieces_2_swiftbins.png"></a>
+</p>
+<p>
+<a class="wiki" href="BitTorrent.html">BitTorrent</a> pieces to <em>swift</em> bins. Assuming 4 KBytes <a class="wiki" href="BitTorrent.html">BitTorrent</a> pieces, each layer 2 bin would stand for a whole <a class="wiki" href="BitTorrent.html">BitTorrent</a> piece: in the diagram, bin 3 would stand for <a class="wiki" href="BitTorrent.html">BitTorrent</a> piece 0 and bin 11 for piece 1.
+</p>
+<p>
+The novel module should then determine which bins should be acquired from the <em>swift</em> swarm to fulfill the <a class="missing" href="#">PiecePicker</a> requests. The easiest procedure here seems to determine which layer of the tree stands for full <a class="wiki" href="BitTorrent.html">BitTorrent</a> pieces and then use the piece index as the offset using the layer-and-offset bin notation.
+</p>
+<h4 id="Piecestorage">Piece storage</h4>
+<p>
+All the obtained pieces should be written to and read from the file described in the .torrent and stored on the disk. While Tribler uses an <a class="missing" href="#">StorageWrapper</a> to perform all disk-related tasks, libswift writes and read all the obtained bins directly to or from the file.
+</p>
+<p>
+When using the Python wrapper, the library runs inside the same process as the Python interpreter. Thus, libswift and Tribler can access to the same file as long as they work in separate areas of the file.
+</p>
+<p>
+To make the <a class="missing" href="#">StorageWrapper</a> notice about the parts of the file already written by libswift, a new method was written. This method only sets up the <em>swift</em> written parts of the file to be real data, hash check and other <a class="wiki" href="BitTorrent.html">BitTorrent</a> specific operations are omitted.
+</p>
+<h4 id="Piecenotification">Piece notification</h4>
+<p>
+The module should coordinate the operation of both protocols by notifying each other about the progresses done on the other swarm.
+</p>
+<p>
+It notifies the Tribler <a class="missing" href="#">PiecePicker</a> which pieces are available to be obtained from the <em>swift</em> swarm. With this information, the <a class="missing" href="#">PiecePicker</a> can better determine which pieces to retrieve first. This information is maintained by libswift in a binary tree for each remote peer contacted, so some method was needed to obtain it in a way the <a class="missing" href="#">PiecePicker</a> understood it.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/binmaps_or_and_2bitmap.png"></a>
+</p>
+<p>
+Binmap combination and collapse. Assuming binary trees representing the status of remote peers to be the ones shown in (a), (b) and (c), the result of applying an OR operation to all trees would be the one in (d). If <a class="wiki" href="BitTorrent.html">BitTorrent</a> pieces were 4 KBytes, reading the tree to layer 3 would result in the bit string <strong>1001</strong>.
+</p>
+<p>
+The module also notifies libswift about which pieces were already acquired by external means. Therefore, libswift should notify remote peers the corresponding bins were already acquired and can transfer them. Again, the layer-and-offset notation can be used.
+</p>
+<p>
+A little modification was done on the Tribler <a class="missing" href="#">StorageWrapper</a> module to execute this action every time a piece is acquired. In both cases, hash checking and data corruption should not be an issue because each piece of software perform independent data integrity checks (even though different techniques are used).
+</p>
+<h4 id="Threadingintegration">Threading integration</h4>
+<p>
+Some constraints limited the operation of the <em>swift</em> integration module:
+</p>
+<ul><li>Python interpreter single thread execution (the GIL limits the execution)
+</li><li>Tribler's Network Thread running (almost) all the time to manage <a class="wiki" href="BitTorrent.html">BitTorrent</a> operation
+</li><li>No Python pseudo-multi-threading operation when executing C++ code
+</li><li>New thread required to run libswift (calling swift::Loop constantly)
+</li></ul><p>
+To assure all libswift related tasks were run in the Libswift Thread, a task scheduler mechanism was implemented. All other threads can add a task to execute by this thread and they are stored on a queue. The queued tasks are executed every time the thread is run. Together with a similar feature of the Network Thread, this becomes a communication mechanism between both threads.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/thread_interaction.png"></a>
+</p>
+<h4 id="Pieceretrievaltechniques">Piece retrieval techniques</h4>
+<p>
+Tribler includes several piece picker algorithms for <a class="wiki" href="BitTorrent.html">BitTorrent</a>, intended to be used in several cases, which work basically following the rarest-first principle, introducing some weight to certain pieces when running on delay or order sensitive cases.
+</p>
+<p>
+The first approach was to make the <em>swift</em> Downloader work as a <a class="wiki" href="BitTorrent.html">BitTorrent</a> Downloader, requesting the <a class="missing" href="#">PiecePicker</a> for a single piece index and setting the corresponding bin range in the libswift limiter as the only active one. However, the constraints of the time-based libswift execution created an issue: if the limited range corresponing to a full <a class="wiki" href="BitTorrent.html">BitTorrent</a> piece is small and can be acquired in little time, neither libswift nor <a class="wiki" href="BitTorrent.html">BitTorrent</a> will download more data until the Network Thread runs again and so the <a class="wiki" href="BitTorrent.html">BitTorrent</a> dowloaders.
+</p>
+<h1 id="ExperimentsandResults">Experiments and Results</h1>
+<p>
+The goal of these tests was to evaluate the operation of the new solution and the performance obtained when combining <em>swift</em> and <a class="wiki" href="BitTorrent.html">BitTorrent</a> under different conditions.
+</p>
+<h2 id="Testingtoolsandprocedures">Testing tools and procedures</h2>
+<p>
+Description of the tools and procedures used to run the experiments.
+</p>
+<h3 id="SimpleBitTorrenttrackerandseeder">Simple <a class="wiki" href="BitTorrent.html">BitTorrent</a> tracker and seeder</h3>
+<p>
+Starting a <a class="wiki" href="BitTorrent.html">BitTorrent</a> tracker and seeder with Tribler is quite simple using the already developed tool <em>dirtrackerseeder</em>.
+</p>
+<p>
+This script reads a directory looking for .torrent files, which then are offered in a <a class="wiki" href="BitTorrent.html">BitTorrent</a> tracker and seeded as a regular <a class="wiki" href="BitTorrent.html">BitTorrent</a> seeder. Data files must be also present in the same directory.
+</p>
+<h3 id="Loggingfeatures">Logging features</h3>
+<p>
+The measured variable in the experiments will be the instant download rate reached by each protocol. The easiest way to measure this is to save a timestamp and the number of incoming bytes each time a full <a class="wiki" href="BitTorrent.html">BitTorrent</a> is acquired.
+</p>
+<p>
+<a class="ext-link" href="http://docs.python.org/library/logging.html"><span class="icon">​</span>Pyhton logging tools</a> were used to add to the <em>swift</em> Downloader module the feature of saving a file with the timestamp and the piece size for both protocols. From that information, it is easy to calculate the instant bandwidth and the accumulate mean bandwidth, the information shown in the following experiment results.
+</p>
+<h3 id="Bandwidthestimation">Bandwidth estimation</h3>
+<p>
+The bandwidth used by each protocol can be easily estimated from the logged timestamps and the <a class="wiki" href="BitTorrent.html">BitTorrent</a> piece size in bytes. The instant bandwidth is obtained dividing the amount of obtained data since the last timestamp by the difference between the current and the previous timestamp. The mean is obtained by dividing all the obtained data by the time since the beggining of the module operation.
+</p>
+<h2 id="Operationassessment">Operation assessment</h2>
+<p>
+Assess the correct operation of the implemented integration, making sure the piece retrieval and the protocol coordination worked as expected.
+</p>
+<p>
+The scenario used to run this test was composed by one server acting as a tracker and seeder for <a class="wiki" href="BitTorrent.html">BitTorrent</a> and another server acting as a tracker/seeder for <em>swift</em>. The expected result was <a class="wiki" href="BitTorrent.html">BitTorrent</a> downloading data at a fixed rate and libswift obtaining also some data.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test1m_result.png"></a>
+</p>
+<p>
+Assessment results. As expected, <a class="wiki" href="BitTorrent.html">BitTorrent</a> only downloaded at the limited rate of 8 Mbps, but <em>swift</em> bandwidth (around 2.5 Mbps) indicates some pieces were obtained from the <em>swift</em> swarm.
+</p>
+<p>
+With the obtained results and after checking the integrity of the obtained file, it can be stated than the implemented integration of libswift into the Tribler code works in terms of piece retrieval and acquiring coordination.
+</p>
+<h2 id="Performancemeasurement">Performance measurement</h2>
+<p>
+After making sure the protocol coordination worked fine, the performance of the implementation needed to be assessed. To do so, the same scenario described earlier was used.
+</p>
+<p>
+The procedure here was to test the solution under different rate conditions. Therefore, the same test was run in 3 more situations: running Tribler with the <a class="wiki" href="BitTorrent.html">BitTorrent</a> rate unlimited; the rate limited to 40 Mbps and to 2 Mbps.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/testunlimited_result.png"></a>
+</p>
+<p>
+Bandwidth evolution when <a class="wiki" href="BitTorrent.html">BitTorrent</a> not limited. As shown, <a class="wiki" href="BitTorrent.html">BitTorrent</a> works close the the link limit and <em>swift</em> uses only around 2.5 Mbps.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test5m_result.png"></a>
+</p>
+<p>
+Bandwidth evolution when <a class="wiki" href="BitTorrent.html">BitTorrent</a> limited to 40 Mbps. <a class="wiki" href="BitTorrent.html">BitTorrent</a> works only at around 40 Mbps but <em>swift</em> keeps using only around 2.5 Mbps.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test250k_result.png"></a>
+</p>
+<p>
+Bandwidth evolution when <a class="wiki" href="BitTorrent.html">BitTorrent</a> limited to 2 Mbps. Again, while <a class="wiki" href="BitTorrent.html">BitTorrent</a> uses only 2 Mbps (so the link is almost empty), <em>swift</em> again only uses around 2.5 Mbps.
+</p>
+<p>
+After running all the experiments and considering also the results obtained in the operation assessment, it can be clearly stated that the maximum download rate obtained from the <em>swift</em> swarm when using the built software was around 2.5 Mbps, independently of the traffic present in the network link.
+</p>
+<p>
+Although the obtained results were not promising, this work pretended to be a first approach to protocol integration. The reasons most likely to be behind of this low performance are the time based operation used when integrating the newly created thread with the Tribler Network Thread and the single-piece requesting mechanism used to interact with libswift.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

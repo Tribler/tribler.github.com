@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="MerkleHashes">Merkle Hashes</h1>
+<p>
+When you use a P2P system to download software, photographs, or other content, you want that content to be correct. Using Bittorrent you can download content from various peers, each of which could possibly corrupt this content. Normally, information in the torrent file prevents corruption, but this approach has two problems:
+</p>
+<ul><li>A .torrent file contains a hash of every block in the file set being distributed. Because of the resulting size of the torrent files, Web servers hosting popular or many torrents sometimes get overloaded.
+</li><li>Many (large) torrents use large piece sizes to keep the torrent small. Large piece sizes cause slow starts for new clients as they first have to obtain a e.g. 2 MB piece in its entirety (to check its hash) before they are allowed to exchange it for new data with others.
+</li></ul><p>
+Tribler solves these problems by constructing a hash tree of the content and using just the root hash as data integrity protection in the torrent file. The simple root hash value also allows for smaller piece sizes to be used. A common form of hash trees is the Merkle hash tree, hence the name.
+</p>
+<p>
+We have chosen a minimalistic design that does not affect the existing <a class="wiki" href="BitTorrent.html">BitTorrent</a> protocol and clients very much. The design is backwards compatible in the sense that clients supporting the Simple Merkle Hash extension can still be made to process regular torrent files easily.
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+From the content we construct as hash tree as follows. Given a piece size, we calculate the hashes of all the pieces in the file set. Next, we create a binary tree of sufficient height. Sufficient height means that the lowest level in the tree has enough nodes to hold all piece hashes in the set. We place all piece hashes in the tree, starting at the left-most leaf. The remaining leaves in the tree are assigned a hash value of 0. Finally, we calculate the hash values of the higher levels in the tree, by concatenating the hash values of the two children (again left to right) and computing the hash of that aggregate. This process ends in a hash value for the root node, which we call the root hash.
+</p>
+<h2 id="Merkletree">Merkle tree</h2>
+<p>
+The root hash along with the total size of the file set and the piece size are now the only information in the system that needs to come from a trusted source. A client that has only the root hash of a file set can check any piece as follows. It first calculates the hash of the piece it received. Along with this piece it should have received the hashes of the piece's sibling and of its <em>uncles</em>, that is the sibling Y of its parent X, and the uncle of that Y until the root is reached. Using this information the client recalculates the root hash of the tree, and compares it to the root hash it received from the trusted source. 
+</p>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/Merkle/merkle.py"><span class="icon">​</span>The Python Source Code</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>The current Tribler protocol specification.</a>
+</li></ul><p>
+<em>a follow-up: <a class="wiki" href="SerpinskyNumbering.html">SerpinskyNumbering</a></em>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

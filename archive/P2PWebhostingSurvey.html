@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="ASurveyonPeer-to-PeerWebHosting">A Survey on Peer-to-Peer Web Hosting</h1>
+<p>
+"A Survey on Peer-to-Peer Web Hosting" is a report on existing peer-to-peer
+web hosting systems. Author: Fabian van der Werf.
+</p>
+<h3 id="Abstract">Abstract</h3>
+<p>
+This report is an overview and analysis of current peer-to-peer web hosting systems
+and techniques. The systems are analyzed with respect to three different
+aspects. First, the content and storage mechanisms of the web hosting systems are
+explained. Most systems are either structured or unstructured networks, while there
+are a few systems with a hybrid network. Both types, structured and unstructured,
+can provide keyword search and replica management, for unstructured networks
+this is done automatically. Structured networks have to manage these features actively,
+but have the advantage of bounded lookups. Second, the issues of decentralization,
+scalability, and resilience are discussed. Generally, peer-homogeneous
+systems provide the best scalability and resilience, because these systems are selfscaling,
+and a node failure causes only the resources donated by that node to be
+no longer available. Finally, the goals and environments for which the systems
+are designed are discussed. Most systems have as a goal either server alleviation
+or latency reduction. Additionally, some systems provide facilities for untrusted
+environments, for dealing with high churn, for handling DHCP, or for firewalls.
+</p>
+<h3 id="Papers">Papers</h3>
+<p>
+These are some of the papers that are discussed in the research task.
+</p>
+<p>
+<strong><a class="missing" href="#">A Churn-Resistant Peer-to-Peer Web Caching System</a></strong><br />
+<em>Prakash Linga, Indranil Gupta, and Ken Birman</em><br />
+<em>SSRS '03: Proceedings of the 2003 ACM workshop on Survivable and self-regenerative systems</em>
+</p>
+<p>
+<strong><a class="missing" href="#">A Lightweight, Robust P2P System to Handle Flash Crowds</a></strong><br />
+<em>Angelos Stavrou, Dan Rubenstein, Sambit Sahu</em><br />
+<em>Proceedings of the 10th IEEE International Conference on Network Protocols (ICNP'02)</em>
+</p>
+<p>
+<strong><a class="missing" href="#">BuddyWeb: A P2P-Based Collaborative Web Caching System</a></strong><br />
+<em><a class="missing" href="#">XiaoYu</a> Wang, <a class="missing" href="#">WeeSiong</a> Ng, <a class="missing" href="#">BengChing</a> Ooi, Kian-Lee Tan, <a class="missing" href="#">AoYing</a> Zhou</em><br />
+<em>Networking 2002 Workshops, LNCS 2376</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Cache Digests</a></strong><br />
+<em>Alex Rousskov</em><br />
+<em>Computer Networks and ISDN Systems, 30(22-23):2155-2168</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Caching the Web with OceanStore</a></strong><br />
+<em>Patrick R. Eaton</em><br />
+<em>Technical Report UCB/CSD-02-1212, Berkeley, Berkeley, CA, USA, 2002</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Incrementally improving lookup latency in distributed hash tables systems</a></strong><br />
+<em>Hui Zhang, Ashish Goel, Ramesh Govindan</em><br />
+<em>Proceedings of the 2003 ACM SIGMETRICS international conference on Measurement and modeling of computer systems (SIGMETRICSâ03)</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Make it fresh, make it quick: searching a network of personal webservers</a></strong> <br />
+<em>Mayank Bawa and Roberto J. Bayardo, Jr. and Sridhar Rajagopalan and Eugene J. Shekita</em><br />
+<em>WWW '03: Proceedings of the 12th international conference on World Wide Web</em>
+</p>
+<p>
+<strong><a class="missing" href="#">On the scale and performance of cooperative Web proxy Caching</a></strong><br />
+<em>Alec Wolman and M. Voelker and Nitin Sharma and Neal Cardwell and Anna Karlin and Henry M. Levy</em><br />
+<em>SOSP '99: Proceedings of the seventeenth ACM symposium on Operating systems principles</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Peer-to-Peer Caching Schemes to Address Flashing Crowds</a></strong><br />
+<em>Tyron Stading, Petros Maniatis, Mary Baker</em><br />
+<em>IPTPS '02: 1st International Peer To Peer Systems Workshop</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Peer-to-Peer Web Caching: Hype or Reality?</a></strong><br />
+<em>Yonggen Mao, Zhaoming Zhu, Weisong Shi</em><br />
+<em>Proceedings of the Tenth International Conference on Parallel and Distributed Systems (ICPADSâ04)</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Replication for Web Hosting Systems</a></strong><br />
+<em>Swaminathan Sivasubramanian, Michal Szymaniak, Guillaume Pierre, and Maarten van Steen</em><br />
+<em>ACM Comput. Surv., 36(3):291-334, 2004</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Squirrel: A decentralized peer-to-peer web cache</a></strong><br />
+<em>Sitaram Iyer, Antony Rowstron, Peter Druschel</em><br />
+<em>PODC '02: Proceedings of the twenty-first annual symposium on Principles of distributed computing</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Summary Cache: A Scalable Wide-Area Web Cache Sharing Protocol</a></strong><br />
+<em>Li Fan, Pei Cao, Jussara Almeida, and Andrei Z. Broder</em><br />
+<em>IEEE/ACM Trans. Netw., 8(3):281-293, 2000</em>
+</p>
+<p>
+<strong><a class="missing" href="#">Towards a Peer2Peer World-Wide-Web for the Broadband-enabled User Community</a></strong><br />
+<em>Constantine Mantratzis, Mehmet Orgun<br />
+</em>Proceedings of the 2004 ACM workshop on Next-generation residential broadband challenges<em>
+</em></p>
+<p>
+<strong><a class="missing" href="#">Tuxedo: A Peer-to-Peer Caching System</a></strong><br />
+<em>W. Shi, K. Shah, Y. Mao, V. Chaudhary</em><br />
+<em>PDPTA '03: Proceedings of the 2003 International Conference on Parallel and Distributed Processing Techniques and Applications</em>
+</p>
+<p>
+<strong><a class="missing" href="#">YouServ: A Web-Hosting and Content Sharing Tool for the Masses</a></strong><br />
+<em>Roberto J. Bayardo Jr. and Rakesh Agrawal and Daniel Gruhl and Amit Somani</em><br />
+<em>WWW '02: Proceedings of the 11th international conference on World Wide Web</em>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><ul><li>Developers Center
+<ul><li><a class="wiki" href="TriblerGettingStarted.html">Getting Started</a>
+<ul><li><a class="wiki" href="TriblerGettingStarted.html">Introduction</a>
+</li><li><a class="wiki" href="TriblerSoftwareProcess.html">Development Process</a>
+</li><li><a class="wiki" href="TriblerSoftwareProcess%25252FReleasing.html">Release Process</a>
+</li><li><a class="wiki" href="tipsTricks.html">Tips &amp; Tricks</a>
+</li></ul></li><li><a class="wiki" href="TriblerArchitecture.html">Architecture</a>
+<ul><li><a class="wiki" href="TriblerArchitecture.html">Overview</a>
+</li><li><a class="wiki" href="DotTriblerFiles.html">Local Storage Structure</a>
+</li></ul></li><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>API</a>
+<ul><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>Tribler Core</a>
+</li><li><a class="wiki" href="TriblerAPIRationale.html">Rationale</a>
+</li></ul></li><li><a class="wiki" href="Tutorials.html">Tutorials</a>
+<ul><li><a class="wiki" href="Tutorials.html">Overview</a>
+</li><li><a class="wiki" href="Tutorials%25252FHelloWorld.html">1. Download Hello world</a>
+</li><li><a class="wiki" href="Tutorials%25252FVideoOnDemand.html">2. Video on Demand</a>
+</li><li><a class="wiki" href="Tutorials%25252FLiveStreaming.html">3. Live Streaming</a>
+</li><li><a class="wiki" href="Tutorials%25252FSeedingTorrents.html">4. Content injection</a>
+</li><li><a class="wiki" href="Tutorials%25252FExampleFeedSetups.html">Example live feed setups</a>
+</li></ul></li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>Protocol specification</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Tools</a>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Source browser</a>
+</li><li>[milestone: Roadmap] 
+</li><li><a href="/timeline">Timeline</a>
+</li><li><a class="ext-link" href="http://forum.tribler.org"><span class="icon">​</span>Forum</a>
+</li></ul></li></ul></li></ul><p>
+   
+</p>
+</div></td><td>
+</p>
+<h1 id="LocalstoragestructureTribler4.5">Local storage structure Tribler &lt; 4.5</h1>
+<p>
+Tribler stores its per-user data in a per-user directory.
+On Windows this is:
+</p>
+<p>
+C:Documents and <a class="missing" href="#">SettingsUserApplication</a> Data.Tribler
+</p>
+<p>
+where "User" should be replaced by your own user name (for version 3.3.x replace .Tribler with .ABC). To locate this directory, you may have to enable "Show hidden files and folders" in the "Tools / Folder Options / View" menu of the Windows explorer. On Linux the directory is $HOME/.Tribler.
+</p>
+<p>
+This directory contains the following files and directories:
+</p>
+<p>
+bsddb:
+</p>
+<blockquote>
+<p>
+Database files
+</p>
+</blockquote>
+<p>
+datacache:
+</p>
+<blockquote>
+<p>
+Contains files with some status information about an open torrent. In particular,
+their priority and disabled files. The last concept is AFAIK never used in the GUI.
+</p>
+</blockquote>
+<blockquote>
+<p>
+Note: Currently btlaunchmany saves download state in ~/.Tribler/datacache.
+BT1Download saves <a class="missing" href="#">FileSelector</a> which pickles Storage, <a class="missing" href="#">StorageWrapper</a>
+and stuff. This is passed to <a class="missing" href="#">ConfigDir</a> via writeTorrentData which then
+saves it in ~/.Tribler/datacache
+</p>
+</blockquote>
+<p>
+icons:
+</p>
+<blockquote>
+<p>
+Contains the mugshots for the friends and some depracated standard icons (*.ico)
+</p>
+</blockquote>
+<p>
+piececache:
+</p>
+<blockquote>
+<p>
+Directory for temporarily storing downloaded pieces?
+</p>
+</blockquote>
+<p>
+torrent:
+</p>
+<blockquote>
+<p>
+Directory with torrent files that have been downloaded by the user.
+</p>
+</blockquote>
+<p>
+torrent2:
+</p>
+<blockquote>
+<p>
+Directory with torrent files that have been received from peers as part of
+Buddycast, our decentralized recommendation system.
+</p>
+</blockquote>
+<p>
+torrentcache:
+</p>
+<blockquote>
+<p>
+Unused?
+</p>
+</blockquote>
+<p>
+torrentinfo:
+</p>
+<blockquote>
+<p>
+Contains a file for each torrent currently open in Tribler and their status.
+This is where Tribler saves the status of its open torrents at shutdown.
+</p>
+</blockquote>
+<p>
+abc.conf:
+</p>
+<blockquote>
+<p>
+Tribler config file. 
+</p>
+</blockquote>
+<p>
+ec.pem:
+</p>
+<blockquote>
+<p>
+Private key of the Tribler used, needed to identity himself.
+</p>
+</blockquote>
+<p>
+ecpub.pem:
+</p>
+<blockquote>
+<p>
+Public key of the Tribler used in PEM format. This public key is the user's PermID.
+</p>
+</blockquote>
+<p>
+friends.txt:
+</p>
+<blockquote>
+<p>
+A file containing the info about the user's friends. We write this file at 
+shutdown as a backup for the information in the database. This is because
+establishing friendship relations requires some work and the database often
+got corrupted in earlier Tribler versions.
+</p>
+</blockquote>
+<p>
+torrent.list:
+</p>
+<blockquote>
+<p>
+The list of currently open torrents in Tribler, as written at shutdown time.
+</p>
+</blockquote>
+<p>
+torrent.list.backup?:
+</p>
+<blockquote>
+<p>
+Backups of the open-torrents list
+</p>
+</blockquote>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="index.html"><img src="../img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="#">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h3 id="a2Augstatus">2 Aug status</h3>
+<ul><li>WORK: <a class="ext-link" href="http://wiki.qemu.org/KVM"><span class="icon">​</span>http://wiki.qemu.org/KVM</a> + <a class="ext-link" href="http://flashlight-vnc.sourceforge.net"><span class="icon">​</span>Flashlight VNC</a>
+</li><li>VNC working <a class="ext-link" href="http://mturk2"><span class="icon">​</span>http://mturk2</a>. <em>hidden</em> test.html
+</li><li>MTurk test in sandbox 
+</li></ul><h3 id="a12Julystatus">12 July status</h3>
+<ul><li><a class="missing" href="#">FlashLight</a> semi-work (no mouse/keyboard)
+</li><li>NoVNC works (performance low, occasional screen pixel mess)
+</li><li>QEmu/KVM as backend (works)
+</li><li>Virtualbox, vmware, xen (<a class="missing" href="#">ToDo</a>)
+</li></ul><h1 id="CrowdsourcingforGUItesting">Crowdsourcing for GUI testing</h1>
+<p>
+Research angle:
+</p>
+<blockquote>
+<p>
+<strong>Facilitating weekly automated human software testing for $40 per week</strong>
+</p>
+</blockquote>
+<p>
+Advantages:
+</p>
+<ul><li>Automated
+</li><li>Robustness
+</li><li>Cheap
+</li></ul><p>
+Human side:
+</p>
+<ul><li>Can software testing exploit crowdsourcing?
+</li><li>10 workers test software for 30minutes (0.5 x $4/hour x 20people = $40)
+</li><li>worker job completion
+</li><li>Worker attention span
+</li><li>do workers read screen instructions?
+</li><li>Returning weekly mturkers?
+</li><li>How much to pay them
+</li><li>Reputation of weekly returning MTurkers (Martha)
+</li></ul><p>
+Technology:
+</p>
+<ul><li>MTurkers use any browser
+</li><li>MTurkers do not have HTML5 probably
+</li><li>Mouse lag (always latency)
+</li><li>VNC, phpvirtualbox, Flash, <a class="missing" href="#">JavaScript</a>
+</li><li>Fraud detection
+<ul><li>check if task was completed (downloaded file, etc)
+</li><li>multiple workers, consistency
+</li></ul></li><li>crash capture and logging
+</li><li>Multiplatform GUI testing (lot of engineering)
+</li></ul><p>
+Approach:
+</p>
+<ul><li>Try to get a first MTurk test by 15 June
+</li><li>Test out various browser solutions
+</li></ul><p>
+GOAL: Webpage with results of 5-10 different tests which are automagically MTurked weekly. Each test is green when all testers reported success, yellow if one MTurker encoutered a problem and red in other cases. Every test is clickable and shows for all MTurkers the complete log files of their work. Plus complete screen capture video of their screen/application activity during test. Tests:
+</p>
+<ul><li>click on network buzz keyword and start download
+</li><li>keyword search without suggest and start download
+</li><li>keyword search suggest after typing "2011 " and start download
+</li><li>Pauze and resume download
+</li><li>subscribe channels
+</li><li>Conduct tests with both empty megacache and 50k items megacache
+</li></ul><p>
+Additional tasks:
+</p>
+<ul><li><a class="missing" href="#">ToDo</a>: family filter disabled, prevent users conduct both A and B test by making it a single HIT on MTurk
+</li><li>Find success rate for various formulations
+<ul><li>"try to find out how to add something to your channel"
+</li><li>"Locate the channel button and add something to Your Channel"
+</li><li>"3rd formulation"
+</li><li>A) try to understand the channel concept in Tribler B) discover where "your channel" is located C) add something to your channel
+</li></ul></li><li>Find success rate for various formulations
+<ul><li>" try to download a single file from a swarm
+</li><li>"search for "blue suitcase", goto files tab, select the file "vodo.nfo", click the "download selected only button".
+</li></ul></li><li>A/B testing. Create two variants of Tribler and test success rate/task completion time.
+<ul><li>Search with and without the bundeling feature
+</li><li>A: bundeling turned off/disabled 
+</li><li>B: bundeling turned on 
+</li><li>Training search queries: "blue suitcase" (simple:one result), "TED Bill Gates", "big buck bunny"
+</li><li>A/B search tasks: "Ubuntu  11.04", "Pioneer One" episode 2, "Sintel", "the yes men fix the world", 
+</li><li>Measure task completion time+evolution over queries (from init, till start time of download!), variance within test population, 95percent significance?
+</li><li>Conclude: inconclusive if this feature is good or not, but we've demonstrated that MTurk can be used for this sort of tasks
+</li><li>NULL hypothesis: reject that it does not work. Benchmarking against classical method.
+</li></ul></li></ul><h1 id="GUIusabilitytesting">GUI usability testing</h1>
+<p>
+HYPOTHESIS: Both experienced and novice users of P2P technology don't read anything in the GUI
+</p>
+<p>
+Tools: task completion time, replay the capture of user mouse-clicks + moves + GUI.
+</p>
+<p>
+Danger1: task completion time noise: they are doing other background tasks; cancel measurements with non-moving mouse.
+</p>
+<p>
+Test0: do they understand the search results page<br />
+Test1: do they click/understand the frontpage tags<br />
+Test2: do they spot the second+third column for bundeling results<br />
+Test3: Do they notice with bundeling that the first hit represents a sample? (they don't read the <em>more</em>)<br />
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>
