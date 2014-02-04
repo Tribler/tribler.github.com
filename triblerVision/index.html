@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TheTriblervision">The Tribler vision</h1>
+<p>
+The main idea of P2P technology is that users pool resources to create a service. Because users donate resources, the content distribution infrastructure is very cost-effective. Consumers are now beginning to use the Internet to buy content, for example, music from Apple iTunes. In the UK, the BBC uses a Bittorrent-like file-sharing system for TV program downloads. Wikipedia volunteers created an encyclopedia without authoritative, central editors. The Skype Voice Over IP software uses P2P to reduce the cost of Internet telephony and became a market leader in just a few months. P2P is now the 'killer application' of the Internet. Figures based on actual backbone measurements show that P2P is the main Internet traffic component. Astonishingly, over 60% of all Internet traffic is now P2P. 
+</p>
+<p>
+Unfortunately, P2P is currently used mainly for the illegal spreading of copyrighted files. We believe that P2P is the future of content distribution and will mature from the current 'wild west' into a respectable business solution. We focus on the technical problems of P2P, and aspects of business models such as payments and advertisements are outside our scope. Many authors have argued that P2P will create new business opportunities, for example, P.E. Geller, Kwok et al., and L.Lessig. Spreading specialized content to only a small audience, such as video recordings of local concerts, soccer matches, and city council meetings, will suddenly become feasible due to the low cost of using P2P over the Internet. 
+</p>
+<p>
+With Tribler, we are creating software for video file sharing that has a basic understanding of human friendships, of user tastes in content, and of Internet connectivity between users.
+Tribler is based on Bittorrent.
+The Bittorrent protocol designed by Bram Cohen works great and currently dominates the traffic on the Internet backbone, but it lacks many features that may be very useful. We are improving this protocol with over a dozen people with such features which go way beyond the original. We are extending the code from the ABC project. 
+Note that we are not officially connected with the original author of Bittorrent.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h2 id="GlobalOptimisationProblemsinP2PNetworks">Global Optimisation Problems in P2P Networks</h2>
+<p>
+This page aims to collect different global optimisation problems arising in peer-to-peer networks. 
+</p>
+<p>
+Global optimisation is, generally speaking, the task of finding the absolutely best value
+of a (usually) nonlinear function under given constraints.
+</p>
+<p>
+<strong>Neighbor-selection strategy</strong>
+</p>
+<p>
+The paper 
+</p>
+<p>
+S.G.M.Koo, K.Kannan and C.S.G.Lee: On neighbor-selection strategy in hybrid peer-to-peer networks.
+Future Generation Computer Systems 22 (2006) 732-741
+</p>
+<p>
+discusses the problem of neighbor-selection (NS) which is the process where one or more entities in the P2P network police the system and determines the "neighbors", the other peers that they will connect to for obtaining and/or distributing the content, for each peer. The NS process has great influence on the network efficiency. 
+The related problem, which appers in the paper cited above, is to maximise the disjointness of content from peer i to peer j (which means the collection of content pieces that peer i has but peer j does not, or in another interpretation, means the pieces that peer i can upload to peer j). The proposed solution is to maximise the number of content pieces each peer can contribute to its neighbors by determining the connections between the peers. Using mathematical formalism this leads to a constrained integer programming formalism. The paper applies genetic algorithm to solve the problem. 
+</p>
+<p>
+Two quesions:
+</p>
+<ul><li>(Not so important:) Can we use better algorithms to solve the problem?
+</li><li>(More important:) The problem statement above is in networks with tracker server. Can we formulate the similar problem in a server-free network?
+</li></ul><p>
+Other paper on this topic is
+</p>
+<p>
+S.Sun, A.Abraham, G.Zhang, H.Liu: A Particle Swarm Optimization Algorithm for Neighbor Selection in Peer-to-Peer Networks
+</p>
+<p>
+which, as the title says, aims to solve the same problem using a different algorith. Of course, the authors conclude their paper as PSO is better that GA based on 3(!) test examples and using a kind-of-standard set up of the two different algorithms.
+</p>
+<p>
+Yet another paper 
+</p>
+<p>
+A.Abraham, B.Yue, C.Xian: Multi-objective Peer-to-Peer Neighbor-Selection Strategy Using Genetic Algorithm
+</p>
+<p>
+formulates the problem as before, but with an additional objective function, the downloading cost to improve the overall throughput of the system, which is to be minimized. 
+</p>
+<hr />
+<p>
+<strong>Efficient Content Replication</strong>
+</p>
+<p>
+The paper
+</p>
+<p>
+C.Cervellera, L.Caviglione: Optimization of a peer-to-peer system for efficient content replication,
+EJOR (2008) in press
+</p>
+<p>
+discusses a formal framework for the optimization of the overall performance of the p2p content replication.
+It takes advantage of the presence of the tracker and proposes an optimisation procedure from the point of view
+of this centralized component. The evolution of a swarm is characterized with a discrete-time system, where decisions are
+taken by the tracker at the beginning of each temporal stage. The paper proposes a myopic optimisation approach (i.e. given any  partial solution, assign another value that improves the objective the most (algorithms that produce solutions based on myopic optimization are called  greedy algorithms).).
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

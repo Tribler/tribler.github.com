@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="WikipediaTestSep2010">Wikipedia Test Sep 2010</h1>
+<p>
+Please install <a class="wiki" href="/SwarmPlayer">SwarmPlayer</a> from <a class="ext-link" href="http://swarmplayer.p2p-next.org"><span class="icon">​</span>http://swarmplayer.p2p-next.org</a> and then find a new (=not listed below) Wikipedia page with a video on it,
+and play the video using the <a class="wiki" href="/SwarmPlayer">SwarmPlayer</a>. To do that you must add <strong>?withJS=MediaWiki:MwEmbed.js</strong> to the URL, e.g. <a class="ext-link" href="http://en.wikipedia.org/wiki/Polar_bear?withJS=MediaWiki:MwEmbed.js"><span class="icon">​</span>http://en.wikipedia.org/wiki/Polar_bear?withJS=MediaWiki:MwEmbed.js</a>. Alternatively, if you have a Wikipedia account, you can  enable âmwEmbed supportâ in <a class="missing" href="#">Preferences/Gadgets</a>. There is a visual check if this worked: if so, there is a big play button in the middle of the video (and the <a class="missing" href="#">SwarmEngine</a> should appear in the systray).
+</p>
+<p>
+The idea is to build a long list of pages, so when you found your unique page, add it here:
+</p>
+<h2 id="Shortlistpublictesting">Short list (public testing)</h2>
+<ul><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Polar_bear?withJS=MediaWiki:MwEmbed.js#Population_and_distribution"><span class="icon">​</span>http://en.wikipedia.org/wiki/Polar_bear?withJS=MediaWiki:MwEmbed.js#Population_and_distribution</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Tacoma_Narrows_Bridge_%281940%29?withJS=MediaWiki:MwEmbed.js#Film_of_collapse"><span class="icon">​</span>http://en.wikipedia.org/wiki/Tacoma_Narrows_Bridge_%281940%29?withJS=MediaWiki:MwEmbed.js#Film_of_collapse</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Cnidaria?withJS=MediaWiki:MwEmbed.js#Locomotion"><span class="icon">​</span>http://en.wikipedia.org/wiki/Cnidaria?withJS=MediaWiki:MwEmbed.js#Locomotion</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Ogg?withJS=MediaWiki:MwEmbed.js#File_format"><span class="icon">​</span>http://en.wikipedia.org/wiki/Ogg?withJS=MediaWiki:MwEmbed.js#File_format</a>
+</li></ul><h2 id="Longlistinternaltesting">Long list (internal testing)</h2>
+<ul><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Fireworks?withJS=MediaWiki:MwEmbed.js"><span class="icon">​</span>http://en.wikipedia.org/wiki/Fireworks?withJS=MediaWiki:MwEmbed.js</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Anguis_fragilis?withJS=MediaWiki:MwEmbed.js#Taxonomy"><span class="icon">​</span>http://en.wikipedia.org/wiki/Anguis_fragilis?withJS=MediaWiki:MwEmbed.js#Taxonomy</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Andromeda_Galaxy?withJS=MediaWiki:MwEmbed.js#Structure"><span class="icon">​</span>http://en.wikipedia.org/wiki/Andromeda_Galaxy?withJS=MediaWiki:MwEmbed.js#Structure</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Netherlands?withJS=MediaWiki:MwEmbed.js#Culture"><span class="icon">​</span>http://en.wikipedia.org/wiki/Netherlands?withJS=MediaWiki:MwEmbed.js#Culture</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Basque_dance?withJS=MediaWiki:MwEmbed.js"><span class="icon">​</span>http://en.wikipedia.org/wiki/Basque_dance?withJS=MediaWiki:MwEmbed.js</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Craig_Field?withJS=MediaWiki:MwEmbed.js#Personal_life"><span class="icon">​</span>http://en.wikipedia.org/wiki/Craig_Field?withJS=MediaWiki:MwEmbed.js#Personal_life</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Swine_influenza?withJS=MediaWiki:MwEmbed.js#In_humans"><span class="icon">​</span>http://en.wikipedia.org/wiki/Swine_influenza?withJS=MediaWiki:MwEmbed.js#In_humans</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Chroma_key?withJS=MediaWiki:MwEmbed.js#Use_in_virtual_set_technology"><span class="icon">​</span>http://en.wikipedia.org/wiki/Chroma_key?withJS=MediaWiki:MwEmbed.js#Use_in_virtual_set_technology</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Folgers?withJS=MediaWiki:MwEmbed.js#Advertising_the_brand"><span class="icon">​</span>http://en.wikipedia.org/wiki/Folgers?withJS=MediaWiki:MwEmbed.js#Advertising_the_brand</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Ordnance_QF_25_pounder?withJS=MediaWiki:MwEmbed.js#Service_With_Other_Nations"><span class="icon">​</span>http://en.wikipedia.org/wiki/Ordnance_QF_25_pounder?withJS=MediaWiki:MwEmbed.js#Service_With_Other_Nations</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Mexican_jumping_bean?withJS=MediaWiki:MwEmbed.js#Life_cycle"><span class="icon">​</span>http://en.wikipedia.org/wiki/Mexican_jumping_bean?withJS=MediaWiki:MwEmbed.js#Life_cycle</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Dead_Horse_Point_State_Park?withJS=MediaWiki:MwEmbed.js"><span class="icon">​</span>http://en.wikipedia.org/wiki/Dead_Horse_Point_State_Park?withJS=MediaWiki:MwEmbed.js</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Sarychev_Peak?withJS=MediaWiki:MwEmbed.js#2009_Eruption"><span class="icon">​</span>http://en.wikipedia.org/wiki/Sarychev_Peak?withJS=MediaWiki:MwEmbed.js#2009_Eruption</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Ariane_5?withJS=MediaWiki:MwEmbed.js#Notable_launches"><span class="icon">​</span>http://en.wikipedia.org/wiki/Ariane_5?withJS=MediaWiki:MwEmbed.js#Notable_launches</a>
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Lyman-alpha_blob?withJS=MediaWiki:MwEmbed.js"><span class="icon">​</span>http://en.wikipedia.org/wiki/Lyman-alpha_blob?withJS=MediaWiki:MwEmbed.js</a>
+</li></ul><h2 id="Lesssuited">Less suited</h2>
+<ul><li><a class="ext-link" href="http://en.wikipedia.org/wiki/File:President_Obama_nominates_Elena_Kagan_for_Supreme_Court.ogv?withJS=MediaWiki:MwEmbed.js"><span class="icon">​</span>http://en.wikipedia.org/wiki/File:President_Obama_nominates_Elena_Kagan_for_Supreme_Court.ogv?withJS=MediaWiki:MwEmbed.js</a> 
+</li><li><a class="ext-link" href="http://en.wikipedia.org/wiki/Table_football?withJS=MediaWiki:MwEmbed.js"><span class="icon">​</span>http://en.wikipedia.org/wiki/Table_football?withJS=MediaWiki:MwEmbed.js</a> (bitrate of 5Mb/s!! huge quality (720p) badly encoded on a 28 sec.)
+</li><li>&lt;Your page here&gt;
+</li></ul><p>
+Please report bugs to arno+riccardo.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

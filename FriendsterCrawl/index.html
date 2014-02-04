@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="CrawloftheFriendstersocialnetwork">Crawl of the Friendster social network</h1>
+<p>
+During my master thesis research, I did a web crawl of the <a class="ext-link" href="http://www.friendster.com"><span class="icon">​</span>Friendster</a> social network. 
+</p>
+<h2 id="Dataformat">Data format</h2>
+<p>
+It's a gzipped relations text file with on each line:
+</p>
+<pre class="wiki">
+[user-id1],,[username1]-&gt;[user_id2],,[username2]
+
+</pre><p>
+This means that user1 with user_id1 and username1 has user2 as friend (an edge between user1 and user2). The friendster graph has been crawled by storing directed relations. This means that both user1-&gt;user2 and user2-&gt;user1 may be in de relations file.
+</p>
+<h2 id="Generalinformation">General information</h2>
+<p>
+Further information about the crawl:
+</p>
+<ul><li>Site: www.friendster.com
+</li><li>Relations(directed): 28 million
+</li><li>Bootstrap user: 9646373 username: Joy
+</li><li>Begin crawl date: Thu Nov 17 15:13:31 2005
+</li><li>End crawl date: Wed Dec  7 15:55:05 2005
+</li></ul><h2 id="Usingthedata">Using the data</h2>
+<p>
+If you like to use the crawl data, please contact <a class="wiki" href="/JelleRoozenburg">me</a> or the Tribler team.
+</p>
+<ul><li>Link to the crawl data: <a class="ext-link" href="http://svn.tribler.org/software_general/crawler/friendster_data/friendster_crawl_v12.gz"><span class="icon">​</span>Friendster crawl data</a>
+</li></ul><h2 id="Reference">Reference</h2>
+<p>
+If you have used the data in any publication, please refer to my Research assigment (unpublished):
+</p>
+<ol class="upperalpha" start="10"><li>Roozenburg. A literature survey on bloom filters. Research<br />
+</li></ol><p>
+Assignment, November 2005.
+</p>
+<ul><li>BIB:
+<pre class="wiki">@UnPublished{ bloomfilter_jelle,
+ author =       {J. Roozenburg},
+ title =        {A literature survey on Bloom filters},
+ school =       {Delft University of Technology},
+ year =         2005,
+ address =      {Delft, NL},
+ month =        {November},
+ note =         {Research Assignment}
+}
+</pre></li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="SecurePermanentPeerIdentifiers">Secure, Permanent Peer Identifiers</h1>
+<p>
+When you meet another peer in a Bittorrent swarm there is no security mechanism. 
+It is trivial to spoof the identity of another peer. We have designed an open standard for
+this problem and have an operational reference implementation.
+</p>
+<p>
+At present, <a class="wiki" href="/BitTorrent">BitTorrent</a> does not require strong authentication of peers, as peer-to-peer interactions are transient and shortlived and security stems from the digests in the trusted torrent file. We want to establish longer term relationships between peers and introduce a number of privileged operations which should only be available to friends. We therefore extended the Bittorrent protocol with secure, permanent peer identifiers called PermIDs. We assume a PermID maps to a single IP address and port number and is initially also used to identify users. The mapping of PermID to IP address is controlled by the owner of the PermID (a user). Initially we primarily use PermIDs for authentication of friends in cooperative downloads. For more details on identities in general, please read <a class="ext-link" href="http://p2p-fusion.mokk.bme.hu/w/index.php/Identification"><span class="icon">​</span>this</a>.
+</p>
+<h2 id="Implementation">Implementation</h2>
+<p>
+We use public-key cryptography and give each peer a public/private keypair, where the public key will act as the PermID. <a class="ext-link" href="http://en.wikipedia.org/wiki/Elliptic_curve_cryptography"><span class="icon">​</span>Elliptic Curve-based public key cryptography</a> is used because it provides stronger protection using small keys than e.g. RSA-based algorithms. Having small PermIDs is useful to allow caching of large numbers of (PermID,IP) pairs.
+</p>
+<p>
+Our implementation of ECDSA signatures and ECDH key agreement was accepted inside  <a class="ext-link" href="http://mail.python.org/pipermail/python-list/2006-July/391849.html"><span class="icon">​</span>M2Crypto V0.16 and support in OpenSSL 0.9.8+</a>. These security foundation are used in Python to prevent peer-spoofing. A fundamental weakness in all other Bittorrent clients. For more information, see:
+</p>
+<ul><li>The <a class="ext-link" href="http://svn.osafoundation.org/m2crypto/trunk/M2Crypto/EC.py"><span class="icon">​</span>current M2Crypto source code.</a>
+</li><li>The <a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>current Tribler protocol specification.</a>
+</li></ul><h2 id="ToDoprivacyenhancement"><a class="missing" href="#">ToDo</a> privacy enhancement</h2>
+<p>
+In principle users can own multiple PermIDs, and in fact can generate new ones without any practical limit, as generating a new address requires relatively little computing, simply equivalent to generating a public/private key pair, and requires no contact with any nodes of the network. Creating single-purpose/single-use addresses helps preserve a user's anonymity.
+</p>
+<p>
+Our architecture is designed for decent privacy, but supporting multiple PermIDs requires quite a bit of engineering effort. This is high on our <a class="missing" href="#">ToDo</a> list.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

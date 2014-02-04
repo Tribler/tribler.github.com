@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="PortingTriblertoMacOSX">Porting Tribler to Mac OS/X</h1>
+<p>
+<em>This page may be outdated. See <a class="wiki" href="/MacBuildFromScratch">MacBuildFromScratch</a></em>
+</p>
+<p>
+This page contains the steps that were required to port Tribler to Mac OS/X. 
+</p>
+<p>
+See also <a class="wiki" href="/UniversalBinaryHowto">UniversalBinaryHowto</a> for making an Universal Binary. See also <a class="wiki" href="/VlcMacHowto">VlcMacHowto</a> for how to build VLC including Python bindings on Mac OS/X.
+</p>
+<h2 id="Prerequisites">Prerequisites</h2>
+<p>
+To do this, you'll need:
+</p>
+<ul><li>SWIG (for instance, through Fink)
+</li><li>an SVN client that understands https. I'll assume its installed in /usr/local/bin.
+</li><li>Python 2.4 already installed.
+</li><li>wxPython &gt;= 2.6 UNICODE for Python 2.4 already installed (<a class="ext-link" href="http://www.wxpython.org/"><span class="icon">​</span>http://www.wxpython.org/</a>)
+</li><li>Maybe: Growl python bindings (see <a class="wiki" href="/Growl">wiki:Growl</a>).
+</li></ul><h2 id="Downloadsomestuff">Download some stuff</h2>
+<p>
+First, pull the Tribler source from SVN, and chdir to it:
+</p>
+<pre class="wiki">  /usr/local/bin/svn co http://svn.tribler.org/abc/tags/tribler-3.3.6 tribler-3.3.6
+  cd tribler-3.3.6
+</pre><p>
+Tribler needs a modified M2Crypto library, which in turn requires OpenSSL. As the OpenSSL that ships with Mac OS/X is too old (0.9.7), we need to download a newer version at <a class="ext-link" href="http://www.openssl.org/source/"><span class="icon">​</span>http://www.openssl.org/source/</a>. Get at least version 0.9.8, and unpack it somewhere:
+</p>
+<pre class="wiki">  wget http://www.openssl.org/source/openssl-0.9.8e.tar.gz
+  tar xfz openssl-0.9.8e.tar.gz
+</pre><p>
+Next, pull the modified M2Crypto source from SVN:
+</p>
+<pre class="wiki">  /usr/local/bin/svn co http://svn.tribler.org/m2crypto/branches/main m2crypto
+</pre><p>
+Alternatively, you can use the <a class="ext-link" href="http://wiki.osafoundation.org/Projects/MeTooCrypto"><span class="icon">​</span>official M2Crypto</a> release
+starting with 0.16. You'll need to edit <tt>setup.py</tt> such that it statically links OpenSSL's <tt>libssl.a</tt>
+and <tt>libcrypto.a</tt>.
+</p>
+<h2 id="CompileOpenSSLandM2Crypto">Compile OpenSSL and M2Crypto</h2>
+<p>
+First, we compile OpenSSL:
+</p>
+<pre class="wiki">  cd openssl
+  ./config
+  make
+  cd ..
+</pre><p>
+For Intel Mac, it seems that the "shared" flag is needed if config fails.
+</p>
+<p>
+Next, we compile M2Crypto:
+</p>
+<pre class="wiki">  cd m2crypto
+  python setup.py build
+  cd ..
+</pre><p>
+Newer versions of Python include bsddb. If not available, set it up:
+</p>
+<pre class="wiki">  wget http://downloads.sleepycat.com/db-4.4.20.tar.gz
+  tar xfz db-4.4.20.tar.gz
+  mv db-4.4.20 db
+
+  cd db/build_unix
+  ../dist/configure
+  make
+  cd ../..
+
+  wget http://surfnet.dl.sourceforge.net/sourceforge/pybsddb/bsddb3-4.4.2.tar.gz
+  tar xfz bsddb3-4.4.2.tar.gz
+  mv bsddb3-4.4.2 bsddb3
+
+  cd bsddb3
+  python setup.py --berkeley-db-libdir=../db/build_unix/ --berkeley-db-incdir=../db/build_unix
+       --berkeley-db=../db/build_unix/.libs/ build
+</pre><h2 id="Runit">Run it</h2>
+<p>
+You can run Tribler by typing:
+</p>
+<pre class="wiki">  LIBDIR=`ls m2crypto/build/ | grep "lib."`
+  export PYTHONPATH=m2crypto/build/$LIBDIR/:bsddb3/build/$LIBDIR/
+  pythonw abc.py
+</pre><p>
+(You should have only one lib directory in m2crypto/build/).
+</p>
+<h2 id="Createasetupscript">Create a setup script</h2>
+<p>
+To create an application bundle Tribler.app, I use the bundlebuilder extension to python. I prefer it over the more recent py2app as bundlebuilder allows me to ship libraries along *and* force them to be used before the ones installed on the user's system.
+</p>
+<p>
+Anyway, <tt>setuptriblermac.py</tt> contains the most recent setup script. Run the following command to build build/Tribler.app:
+</p>
+<pre class="wiki">  python setuptriblermac.py build
+</pre><p>
+If all goes well, a disk image is available as <tt>Tribler.dmg</tt>. You, however, may need to edit <tt>setuptriblermac.py</tt>, e.g. if you've installed
+a newer version of wxPython than 2.6.
+</p>
+<h1 id="Requiredpatches">Required patches</h1>
+<p>
+Tribler needed patching on the following:
+</p>
+<ul><li>struct.pack/struct.unpack needed an explicit little-endian specifier.
+</li><li>mailto: urls should not encode the body= parameter.
+</li><li>files opened through the webbrowser should start with <a class="ext-link" href="file://"><span class="icon">​</span>file://</a>.
+</li><li>the 'About' action needed the specific id of wx.ID_ABOUT. 
+</li></ul><h2 id="Issues">Issues</h2>
+<ul><li>FIXED: 'Open file' dialog boxes seem to fail.
+</li><li>FIXED: The 'invite friends' feature doesn't work well in combination with Thunderbird: the message contains %20's instead of spaces, etc.
+</li><li>FIXED: 'About box' in application menu does not work.
+</li><li>FIXED: Not encountering peers.
+</li><li>'Seeding options' and 'Timeouts' in Preferences have too narrow dropdown selection boxes.
+</li></ul><h1 id="TipsandTricks">Tips and Tricks</h1>
+<h2 id="Linkingwiththerightlibs">Linking with the right libs</h2>
+<p>
+When shipping an application on Mac OS/X, you must make sure you don't link to unshipped libraries which aren't part of a default Mac install. This can happen if you installed libraries system-wide, and subsequently link Tribler dynamically against those. Shipping the libraries doesn't help, since Mac OS/X (or gcc) includes absolute links to the installed libraries.
+</p>
+<p>
+There are two ways of detecting whether this is happening:
+</p>
+<ol><li>Once Tribler is running, check the output of <tt>lsof | grep Tribler</tt> to see if there are any system-wide libraries loaded which should have been shipped instead.
+</li><li>On a per library basis, lets take <tt>__m2crypto.so</tt> as an example, which is a custom library linked against libssl and libcrypto, of which a too low version ships with Mac OS/X. <tt>otool -L __m2crypto.so</tt> gives
+<pre class="wiki">/usr/lib/libssl.0.9.8.dylib (compatibility version 0.9.8, current version 0.9.8)
+/usr/lib/libcrypto.0.9.8.dylib (compatibility version 0.9.8, current version 0.9.8)
+/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 71.1.4)
+</pre>of which only <tt>libSystem</tt> is a default Mac lib. By the way, linking against the wrong Python is no problem since Python 2.4 is shipped with Tribler and by definition already loaded when any libraries are loaded by an <tt>import</tt> statement. So the following is correct as well:
+<pre class="wiki">/Library/Frameworks/Python.framework/Versions/2.4/Python (compatibility version 2.4.0, current version 2.4.0)
+/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 88.1.5)
+</pre></li></ol><p>
+There are also two ways of fixing this problem:
+</p>
+<ol><li>Link your custom library against static (<tt>.a</tt>) versions of the installed libs.
+</li><li>Ship the installed lib as well, and modify the reference in the custom library. The reference can be modified with <tt>install_name_tool -change</tt>. Be warned, the new reference cannot be longer than the old one.
+</li></ol></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

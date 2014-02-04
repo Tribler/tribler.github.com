@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Automaticsoftwareupgrades">Automatic software upgrades</h1>
+<p>
+We have detected from crawls of the Tribler network
+most of our users never upgrade Tribler. The majority
+of our users are still using 3.6.0 and 3.7.0,
+software that is over a year old. As of Nov. 2007 
+less than 5% use the latest V4.1
+</p>
+<p>
+A study found by Fabian given an insightfull look 
+into the upgrade incentive problem, <a class="ext-link" href="http://cohesion.rice.edu/engineering/computerscience/TR/TR_Download.cfm?SDID=231"><span class="icon">​</span>page 25 only</a>.
+<em>We find that half of users are running software less
+than three months old. Unfortunately, a third of Azureus 
+users run software more than 6 months old despite an 
+auto-update mechanism. Furthermore, about 5% of <a class="missing" href="#">BitComet</a>
+users are running code over 18 months old. Clearly, no update 
+can be expected to be universally adopted in a short timeframe.</em>
+</p>
+<p>
+Upgrading and installing patches is a universal problem
+in computer science, therefore it will take us time to fix
+it. The auto-update mechanism should work similar to
+the nice Firefox approach. Here is our ideal implementation :
+</p>
+<ul><li>Tribler developers test a Beta internally
+</li><li>When Arno declares it stable it is deployed to our 50+ testers
+</li><li>If deemed ready for release it is put on website
+</li><li>When no issues are detected after at least 2 weeks we start the auto-upgrade
+<ul><li>We hard-code in every Tribler peer a "software superpeer PermID"
+</li><li>The <a class="wiki" href="/BuddyCast">BuddyCast</a> profile of the software superpeer always contains the swarm with the latest downloads.
+</li><li>While running <a class="wiki" href="/BuddyCast">BuddyCast</a> a new release is automatically detected, for relevant OS.
+</li><li>The software is automatically downloaded at low priority
+</li><li>Upon next startup a single window appears, title "Software upgrade to Tribler V4.4"
+</li><li>Pop-up Window text proposal :
+<pre class="wiki">  '''Software upgrade to Tribler V4.4'''
+  The Peer-to-Peer network is upgraded.
+  The latest Tribler version has been downloaded is ready.
+     [ ] Launch old version, get less performance
+                     [ OK ]
+</pre></li><li>Without any additional GUI questions the latest
+version installs and starts (Similar to Firefox).
+</li><li>Users can select the <em>launch old version</em> checkbox
+<ul><li>This is shown as a simple <em>[ ]</em> checkbox
+</li><li>This pop-up will show only once
+</li><li>Users have to decline only once
+</li><li>A pop-up appears again only if an ever newer version is available
+</li></ul></li></ul></li></ul><h2 id="Comments">Comments</h2>
+<p>
+<em>Arno:</em> People may have problems with being forced to upgrade. IMHO they stick with an old version for a 
+reason, e.g. because it works fine for them. I'd rather provide a strong incentive for them to upgrade.
+Not obvious what that would be, apart from always saying "new version fixes major security bug" ;o)
+</p>
+<p>
+<em>Jan David:</em> One feature I liked in other software is the 'A new version is available. Install / Skip / Later', after which "install" downloads and installs and asks for a restart, "skip" will not bug about this new version and "later" will ask me again next time. Full control, no hassle.
+</p>
+<p>
+Threatening with worse performance is likely going to infuriate or alienate users. I would be pissed if my performance would be 'downgraded' even though I did not do anything. You can only boast about better performance with the new client, and -only- if its true. Most updates are bug fixes or new features, not extra performance on current features.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

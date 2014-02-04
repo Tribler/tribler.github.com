@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="ComparisonwithotherP2Psoftware">Comparison with other P2P software</h1>
+<p>
+<a class="ext-link" href="http://mashable.com/2007/06/18/33-ways-to-watch-free-tv-online"><span class="icon">​</span>Review of online TV</a> offerings
+</p>
+<h2 id="Joost">Joost</h2>
+<p>
+Joost is made by the team which was also behind Kazaa and Skype
+For an analysis of Joost both the technology and the history of this team are important.
+</p>
+<p>
+Kazaa and Skype are both for-profit initiatives that defined the state-of-the-art of P2P at the time. However, <a class="ext-link" href="http://www.google.com/search?q=kazaa+spyware"><span class="icon">​</span>Kazaa was bundled with spyware</a> and <a class="ext-link" href="http://www.google.com/search?q=kazaa+amazon+links+%7Espyware"><span class="icon">​</span>also took the referal credit for sales on Amazon.com</a>. Skype was sold for <a class="ext-link" href="http://www.google.com/search?q=skype+sale+ebay"><span class="icon">​</span>$2.6 billion in up-front cash and eBay stock</a>.
+</p>
+<p>
+The business model behind Joost is likely another takeover. Joost is inserting advertisements between programs to obtain reveneus using proprietairy software. At the technology level; <a class="ext-link" href="http://flickr.com/photos/colmmacc/329222743/in/set-72157594430427394/"><span class="icon">​</span>Joost still</a> requires <a class="ext-link" href="http://www.joost.com/blog/2006/12/"><span class="icon">​</span>central servers</a> to offer Video on Demand and only supports a single bitrate. The P2P protocol is fixed at 720Kbps H264 encoding and is architecturaly constraint. It is expected that the Joost architecture will not scale to HDTV-like bitrates. The interface of Joost is very simple and elegant, their key selling point.
+</p>
+<h2 id="Babelgum">Babelgum</h2>
+<p>
+<em>What Babelgum lacks right now is a compelling differentiator â it needs to offer better content, better features or better technology than Joost and any other upstarts if it wants to win, from </em><a class="ext-link" href="http://newteevee.com/2007/01/17/hey-joost-have-some-babelgum/"><span class="icon">​</span>a review by Jackson West</a>
+</p>
+<h2 id="AzureuswithZudeo.com">Azureus with Zudeo.com</h2>
+<p>
+They combine central servers for the metadata with a Java based front-end for
+Bittorrent.
+</p>
+<p>
+You can link directly to their clips : <a class="ext-link" href="http://www.zudeo.com/az-web/details/7HFGQJZOOIGCI7QG4RUH2FQNGLPNO77S.html"><span class="icon">​</span>Mars Exploration, Part One: TERRA</a>
+This clips has an online preview you can directly link to 
+<a class="ext-link" href="http://static2.azureusplatform.com/assets/298/36892/2622/7HFGQJZOOIGCI7QG4RUH2FQNGLPNO77S.jpg"><span class="icon">​</span>7HFGQJZOOIGCI7QG4RUH2FQNGLPNO77S.jpg</a>
+:
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+and a .torrent file with the similar name :
+<a class="ext-link" href="http://www.zudeo.com/az-web/download/7HFGQJZOOIGCI7QG4RUH2FQNGLPNO77S.torrent"><span class="icon">​</span>7HFGQJZOOIGCI7QG4RUH2FQNGLPNO77S.torrent</a>
+</p>
+<p>
+Some cool magic is that this .torrent file contains a thumbnail picture !
+The format of the <em>Thumbnail</em> field in the .torrent is simply binairy formated as JPEG image data, JFIF standard 1.02
+The Thumbnail has 24bit color depth, resolution of 171 x 96, and a size of 2751 Bytes.
+The other .torrent content :
+</p>
+<pre class="wiki">
+metainfo file.: 7HFGQJZOOIGCI7QG4RUH2FQNGLPNO77S.torrent
+info hash.....: f9ca68272e720c247e06e4687d160d32ded77ff2
+file name.....: 104_Mars_Podcast_Part_One_TERRA2.wmv
+file size.....: 130468913 (1990 * 65536 + 52273)
+announce url..: http://tracker02.azureusplatform.com:10000/announce
+
+</pre><p>
+When downloading this file the speed goes to 9Mbps in 5 seconds. This is due to the existance of
+a few dedicated seeders. which are in the screenshot below:
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+When resolving the above seeders using DNS we find that a few dedicated seeders are used 
+from the Azuereus people themselves.
+</p>
+<pre class="wiki">
+81.19.18.115  seed02.azureusplatform.com
+81.19.18.114  seed01.azureusplatform.com
+209.34.83.144 209-34-83-144.ood.opsource.net
+209.34.83.140 209-34-83-140.ood.opsource.net
+209.34.83.143 209-34-83-143.ood.opsource.net
+81.57.29.49   inv75-1-81-57-29-49.fbx.proxad.net
+80.203.44.163 163.80-203-44.nextgentel.com
+
+</pre><p>
+We conclude that a few dedicated seeder which send chuncks in the first seconds really ease the problems of <a class="wiki" href="/VideoOnDemand">P2P Video on Demand</a>.
+</p>
+<h2 id="Miro">Miro</h2>
+<p>
+Earlier "Democyracy player" <a class="ext-link" href="http://www.getmiro.com/"><span class="icon">​</span>RSS Video Aggregator</a> using <a class="wiki" href="/BitTorrent">BitTorrent</a> for transport (likely also http if so specified in the RSS).  Very nice GUI,  based around "Channels", which are RSS feeds.  Channels are divided into different types of content, as well as "most popular", "new" etc.  Video player is embedded, making the user experience good.  Lot of suggestions for stuff to watch, quite a lot of high resolution content.  Also has search capabilities.  Will also suggest "if you like this channel, you might like ...".  Memory consumption seems improved since "Democracy player".  Knows about which episodes you've watched, auto-downloads and deletes.  Remembers play positions if you want to resume watching an episode.  Annoyance:  "Auto-download" downloads newest first, while it should have been the oldest first (or at least configurable) pr channel.
+</p>
+<h2 id="Foxtorrent">Foxtorrent</h2>
+<p>
+Simple plugin with claimed streaming support
+<a class="ext-link" href="http://torrentfreak.com/images/foxtorrentlarge.jpg"><span class="icon">​</span>http://torrentfreak.com/images/foxtorrentlarge.jpg</a>
+</p>
+<h2 id="Peerple">Peerple</h2>
+<p>
+<a class="ext-link" href="http://www.peerple.net"><span class="icon">​</span>Research project</a> from INRIA, France.
+An Open Source file sharing client for direct friends sharing 
+being worked on by two people.
+</p>
+<h2 id="Wipeer">Wipeer</h2>
+<p>
+<a class="ext-link" href="http://www.wipeer.com/about_us.html"><span class="icon">​</span>Research project</a> from Technion, Israel.
+A closed source ad-hoc sharing client for LAN file sharing and
+multiplayer gaming.
+</p>
+<h2 id="Crossflux">Crossflux</h2>
+<p>
+<a class="ext-link" href="http://www.crossflux.org/"><span class="icon">​</span>Research project</a> from University of Neuchatel, Switserland.
+An Open Source micro P2P file sharing client of only 6 lines of code.
+Now aiming to exploit MDC technology for video streaming.
+</p>
+<h2 id="VoDwebsites">VoD websites</h2>
+<p>
+<a class="ext-link" href="http://www.tv-links.co.uk"><span class="icon">​</span>Websites</a> where similar to Youtube the
+user can upload. The wikipedia-like user moderation is key
+to keeping the experience clear &amp; fast.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

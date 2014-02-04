@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TracLinks">Trac Links</h1>
+<p>
+As you might have guessed, <a class="wiki" href="/TracLinks">TracLinks</a> are a very fundamental feature of Trac.
+</p>
+<p>
+They allow hyperlinking between Trac entities (tickets, reports, changesets, Wiki
+pages, milestones and source files) from anywhere <a class="wiki" href="/WikiFormatting">WikiFormatting</a> is used.
+</p>
+<p>
+<a class="wiki" href="/TracLinks">TracLinks</a> are generally of the form <strong>item:id</strong> (where <em>id</em> represents the
+number, name or path of the item) though some frequently used kinds of items
+also have short-hand, alternative, notations. 
+</p>
+<p>
+Some examples:
+</p>
+<ul><li>Tickets: <strong>#1</strong> or <strong>ticket:1</strong>
+</li><li>Reports: <strong>!{1}</strong> or <strong>report:1</strong>
+</li><li>Changesets: <strong>![1]</strong> or <strong>changeset:1</strong>
+</li><li>Wiki pages: <strong><a class="wiki" href="/CamelCase">CamelCase</a></strong> or <strong>wiki:CamelCase</strong>
+</li><li>Milestones: <strong>milestone:1.0</strong>
+</li><li>Files: <strong>source:trunk/COPYING</strong>
+</li></ul><p>
+Display:
+</p>
+<ul><li>Tickets: <a class="missing ticket">#1</a> or <a class="missing ticket">ticket:1</a>
+</li><li>Reports: {1} or report:1
+</li><li>Changesets: [1] or changeset:1
+</li><li>Wiki pages: <a class="wiki" href="/CamelCase">CamelCase</a> or <a class="wiki" href="/CamelCase">wiki:CamelCase</a>
+</li><li>Milestones: milestone:1.0
+</li><li>Files: source:trunk/COPYING
+</li></ul><p>
+<strong>Note:</strong> The <a class="wiki" href="/CamelCase">wiki:CamelCase</a> form is rarely used, but it can be convenient to refer to
+pages whose names do not follow <a class="wiki" href="/WikiPageNames">WikiPageNames</a> rules, i.e., single words,
+non-alphabetic characters, etc.
+</p>
+<p>
+Trac links using the full (non-shorthand) notation can also be given a custom
+link title like this:
+</p>
+<pre class="wiki">[ticket:1 This is a link to ticket number one].
+</pre><p>
+Display:
+</p>
+<p>
+<a class="missing ticket">This is a link to ticket number one</a>.
+</p>
+<p>
+It might seem a simple enough concept at a glance, but actually allows quite a complex network of information.
+</p>
+<p>
+In practice though, it's very intuitive and simple to use, and we've found the "link trail" extremely helpful to better understand what's
+happening in a project or why a particular change was made.
+</p>
+<h2 id="source:links">source: links</h2>
+<p>
+The default behavior for a source:/some/path link is to open the directory browser if the path points
+to a directory and otherwise open the log view. It's also possible to link directly to a specific
+revision of a file like this: source:/some/file#123 or like this to link to the latest revision:
+source:/some/file#latest.
+</p>
+<h2 id="WheretouseTracLinks">Where to use <a class="wiki" href="/TracLinks">TracLinks</a></h2>
+<p>
+You can use <a class="wiki" href="/TracLinks">TracLinks</a> in:
+</p>
+<ul><li>Source code (Subversion) commit messages
+</li><li>Wiki pages
+</li><li>Full descriptions for tickets, reports and milestones
+</li></ul><p>
+and any other text fields explicitly marked as supporting <a class="wiki" href="/WikiFormatting">WikiFormatting</a>.
+</p>
+<h2 id="EscapingTracLinks">Escaping <a class="wiki" href="/TracLinks">TracLinks</a></h2>
+<p>
+To prevent parsing of a TracLink, you can escape it by preceding it with a '!' (exclamation mark).
+</p>
+<pre class="wiki"> !NoLinkHere.
+ ![42] is not a link either.
+</pre><p>
+Display:
+</p>
+<blockquote>
+<p>
+NoLinkHere.
+![42] is not a link either.
+</p>
+</blockquote>
+<hr />
+<p>
+See also: <a class="wiki" href="/WikiFormatting">WikiFormatting</a>, <a class="wiki" href="/TracWiki">TracWiki</a>
+ 
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

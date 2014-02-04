@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="HTTPandP2Pdownloadmerge">HTTP and P2P download merge</h1>
+<p>
+This document describes a methodology for merging HTTP download with
+P2P download.
+</p>
+<h2 id="Intro">Intro</h2>
+<p>
+With the increase in the connection speed, web content increases in size. For popular web content distributors this means that the delivery infrastructure has to be able to satisfy a large number of users and a (sometimes) huge outgoing bandwidth. At this time the <a class="wiki" href="/BitTorrent">BitTorrent</a> protocol is succeeding in the file-sharing world due to its capability to be highly scalable in environments with a large number of users. The idea is to support the HTTP protocol with the <a class="wiki" href="/BitTorrent">BitTorrent</a> protocol in the task of retrieving popular and large size web content.
+</p>
+<h2 id="Why">Why</h2>
+<p>
+There are many advantages using this download strategy:
+</p>
+<h3 id="Serverloadreduction">Server load reduction</h3>
+<p>
+This is one of the most significant benefits that the P2P-HTTP combination
+would bring. The more clients try to download the same resource, the more
+peers are available to share content and the less data needs to be retrieved from
+the web server.
+</p>
+<h3 id="Increaseddownloadperformance">Increased download performance</h3>
+<p>
+If the userâs download bandwidth is higher than the server upload bandwidth,
+then the user can add the P2P download speed to the HTTP one.
+Lets consider an example on which the server bandwidth limit is 200 KB/s and
+the P2P download bandwidth is 400 KB/s (pretty common values). Hence the
+total speed that is possible to achieve in this case it is 600 KB/s, 3 times faster
+than the server bandwidth limit.
+In general the total download speed cannot be lower than the HTTP one.
+</p>
+<h3 id="Lowcostpublication">Low cost publication</h3>
+<p>
+As it has been explained in the first point, by adopting this download strategy,
+the server load would be extremely reduced, therefore it is no more necessary
+to have expensive server infrastructures to deliver large content.
+Therefore, low-cost publishing is possible. Setting up a video or large content
+delivery system is just a matter of delegating the task of distributing the large
+content to the P2P network and delegating the task of providing just the web
+page and the content access key to the web server.
+</p>
+<h3 id="Easyconfiguration">Easy configuration</h3>
+<p>
+Server configuration requires minimalistic changes such as limiting the upload bandwidth to the desired value, if that is considered necessary. Once this
+limit is set, all the excess bandwidth requested by users is compensated automatically by the P2P network. In general, no server adaptation is required and
+backward compatibility is guaranteed for servers and clients.
+</p>
+<h3 id="Zero-delayP2Pvideostreaming">Zero-delay P2P video streaming</h3>
+<p>
+As Tribler demonstrates, the <a class="wiki" href="/BitTorrent">BitTorrent</a> protocol can also be used for
+video streaming. The weak point in P2P video streaming is the video
+playback startup time, because discovering and getting download bandwidth
+from other peers introduces a large delay. By implementing our new architecture, the playback of a video could start as soon as the web server gives the
+stream, while the torrent engine is still in the swarm discovery phase (looking for peers in the swarm). Once the <a class="wiki" href="/BitTorrent">BitTorrent</a> bandwidth is fast enough,
+the web server can be offloaded. This example highlights the âbest of both
+worldsâ quality of this approach: the responsiveness of HTTP and the load
+distribution of P2P.
+</p>
+<h3 id="Backwardcompatibility">Backward compatibility</h3>
+<p>
+This technique does not need any support on the server side. This also means
+that clients unaware of the P2P support can still access the web server in the
+conventional way. This would lead to an easy and fast adoption of this download strategy without relevant impacts.
+</p>
+<h2 id="Solutions">Solutions</h2>
+<p>
+The techniques on which the final solution is based are: <strong>Merkle Hashes</strong>, <strong>DHT</strong>, <strong>HTTP Seeding</strong>.
+</p>
+<h3 id="Requesttranslation">Request translation</h3>
+<p>
+Exploiting the Web Seeding technique to retrieve HTTP content implies that the
+web server is considered as a peer by the <a class="wiki" href="/BitTorrent">BitTorrent</a> engine, translating <a class="wiki" href="/BitTorrent">BitTorrent</a>
+protocol requests into HTTP requests. The server responses are then parsed and the
+content retrieved is merged with that of <a class="wiki" href="/BitTorrent">BitTorrent</a>. Following is how the <a class="wiki" href="/BitTorrent">BitTorrent</a>
+request message is translated into a HTTP request:
+<a class="wiki" href="/BitTorrent">BitTorrent</a> request message:
+</p>
+<pre class="wiki">&lt;len=0013&gt;&lt;id=6&gt;&lt;INDEX&gt;&lt;BEGIN&gt;&lt;LENGTH&gt;
+</pre><p>
+HTTP request message:
+</p>
+<pre class="wiki">GET /content file HTTP/1.1
+Host: web server address
+Range: bytes=start_byte - end_byte
+</pre><p>
+with:
+</p>
+<pre class="wiki">start_byte = ( INDEX * piece_size ) + BEGIN
+end_byte = start_byte + LENGTH
+</pre><h3 id="Swarmdiscovery">Swarm discovery</h3>
+<p>
+Since the only input we have is the URL of the web resource to download, the
+input key for the DHT query will be the SHA1 hash of the file content URL. This
+hash will be used also during the handshake step, to start the connection with other
+peers.
+Since the info-hash used by the HTTP2P client for announcing to the DHT is different from the conventional <a class="wiki" href="/BitTorrent">BitTorrent</a> one, the swarms created by the two clients for the same content file will be different. This also means that the clients using the HTTP2P protocol extension will have to set a specific bit in the handshake
+extension-bytes to avoid protocol-message conflicts during the download.
+</p>
+<p>
+<a class="wiki" href="/BitTorrent">BitTorrent</a> handshake message:
+</p>
+<pre class="wiki">&lt;19&gt;&lt;"BitTorrent protocol"&gt;&lt;conventional extensions&gt;&lt;info hash&gt;&lt;peer id&gt;
+</pre><p>
+HTTP2P handshake message:
+</p>
+<pre class="wiki">&lt;19&gt;&lt;"BitTorrent protocol"&gt;&lt;HTTP2P extension&gt;&lt;SHA1(URL)&gt;&lt;peer id&gt;
+</pre><h3 id="Securityandpollutionprevention">Security and pollution prevention</h3>
+<p>
+The base block of security is the technique of Merkle hashes. In the absence of a
+torrent file providing the piece hashes, the hashes will be traded among the peers
+in the swarm. However, unlike Merkle hashes technique, there is no trusted root
+hash against which the received piece messages can be checked. The lack of a
+trustworthy root hash is the biggest problem to face to guarantee content integrity.
+Preventing content pollution, derived by fake block attacks, is not possible without
+a technique that ensures security over such a network. This thesis proposes the
+Pollution prevention algorithm as the solution to this dilemma (Described in Thesis
+Document)
+</p>
+<h2 id="How">How</h2>
+<h3 id="Desiredbehavior">Desired behavior</h3>
+<p>
+An ideal solution for our system should not impose any change on the server side
+and operate transparently for the user. The user does not need to have any knowledge about the system he is using; hybrid download should happen as when normally browsing the Web. At most, the user is required to decide whether to enable
+the P2P support or not. User friendliness is usually the main target when designing
+user interfaces. For this reason, the UI has been reduced to the minimum in the
+design of HTTP2P. Right-click on the link to download, click on Hybrid download
+from the menu panel, is the only interaction with the system required.
+The layer of complexity, involving the way the content is retrieved, should be
+invisible to the user and to the web server. In the background, the system will start
+the HTTP download, announce itself to the DHT, join the swarm (if any), and start
+trading pieces of the content file with other peers; all of these steps must not require
+the user interaction or server changes.
+These requirements lead to the design of two main components: a minimalist
+browser plug-in, that has the only responsability of grabbing the user selected URL
+link, and a Background process, responsible for turning the URL received from the
+plug-in into a file on the disk.
+</p>
+<h3 id="Thesteps">The steps</h3>
+<ul><li>The user, who wants to download a file, clicks the link embedded in the web page.
+</li><li>The browser plug-in grabs the click event and sends the URL of the download to the Background process (BG).
+</li><li>The BG parses the URL received from the browser plug-in and starts the HTTP download.
+</li><li>The BG computes the SHA1 hash of the URL. This value represents the swarm ID.
+</li><li>The BG performs a DHT query with the swarm ID as key parameter to search for a swarm distributing the same file retrieved from the web server.
+<ul><li>If the swarm does not exist, the file will be retrieve entirely from HTTP.
+</li><li>At download completion, the BG computes the Merkle tree out of the downloaded file and announces to the DHT.
+</li></ul></li><li>The BG starts the connection with the peers in the same swarm.
+</li><li>The BG starts trading pieces retrieved from HTTP with other peers by sending and receiving Merkle piece messages.
+</li><li>Along with each piece message, the hashes of the Merkle tree are received. The Merkle tree is built out of the hashes received from other peers and the hashes computed from the HTTP retrieved content.
+</li><li>The integrity of the received content is performed by the Pollution prevention module included in the BG.
+</li><li>The download completes.
+</li></ul><p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/HTTP2PDownload/Procedure_steps.png" width="70%"></a>
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/HTTP2PDownload/Architecture_Internal_View.png" width="70%"></a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

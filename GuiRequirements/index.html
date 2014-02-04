@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><p>
+tracsecret: tribler
+</p>
+<ul><li>Tribler 4
+<ul><li><a class="wiki" href="/Tribler4">Tribler 4 Overview</a>
+</li><li><a class="missing" href="#">Scenarios</a>
+</li><li><a class="missing" href="#">Functionalities</a>
+</li><li><a class="wiki" href="/GuiRequirements">GUI Requirements</a>
+</li><li><a class="wiki" href="/42todo">4.2 To do</a>
+</li><li><a class="wiki" href="/GuiClientImprovements">GUI improvements</a>
+</li><li><a class="wiki" href="/GuiDiscussion">GUI Discussion</a>
+</li><li><a class="wiki" href="/triblerGUI">GUI General &gt;</a>
+</li></ul></li></ul><p>
+endsecret
+</p>
+</div></td><td>
+</p>
+<h1 id="GUI4.0Requirements">GUI 4.0 Requirements</h1>
+<p>
+The design for Tribler 4.0 has been made in high detail. Many of the functionality of this GUI however, are not yet implemented in the Tribler core. This document has the purpose of listing the complete set of functionality/protocols that have to work before <a class="wiki" href="/MaartentenBrinke">MaartentenBrinke</a> and <a class="wiki" href="/JelleRoozenburg">JelleRoozenburg</a> can implement the currently designed 4.0 GUI and all its functionality.
+</p>
+<p>
+The following functionality is not yet implemented in Tribler 3.6.0:
+</p>
+<ul><li>torrent metadata
+</li><li>user metadata
+</li><li>friends import
+</li><li>torrent import
+</li><li>torrent RSS feed 
+</li><li>to a friend recommendation 
+</li><li>tagging and tag-based recommendation
+</li><li>rating and rate-based recommendation 
+</li><li>commenting 
+</li><li>people and torrent search
+</li><li>embedded video player
+</li><li>P2PWebhosting
+</li></ul><hr />
+<h2 id="Torrentmetadata">Torrent metadata</h2>
+<p>
+In the GUI torrent metadata includes:
+</p>
+<ul><li>rating + number of raters
+</li><li>description
+</li><li>media details: video length/quality/resolution
+</li><li>ETA of download/VoD
+</li><li>clean title
+</li><li>thumbnail
+</li></ul><p>
+These metadata have to be supported.
+</p>
+<h2 id="Usermetadata">User metadata</h2>
+<p>
+In the GUI user metadata includes:
+</p>
+<ul><li>social wellness of friends
+</li><li>friends-of-friends
+</li><li>favorite tags
+</li><li>thumbnail
+</li></ul><p>
+These metadata will probably be implemented by <a class="wiki" href="/ArnoBakker">ArnoBakker</a> 's social network implementation.
+</p>
+<h2 id="Friendsimport">Friends import</h2>
+<p>
+It should be easy to find friends on the Tribler network and add them. A basic GUI design has been made for this. <a class="wiki" href="/ArnoBakker">ArnoBakker</a> 's social network implementation will facilitate this.
+</p>
+<h2 id="Torrentimport">Torrent import</h2>
+<p>
+It would be a big improvement if users could easily seed new content through Tribler. The 4.0 version of Tribler includes only a screen to create a torrent (with self configured tracker) and inject it in your preference list.
+</p>
+<h2 id="TorrentRSSfeed">Torrent RSS feed</h2>
+<p>
+The user is able to subscribe to rss-torrent feeds of content providers/users. Subscribing can be done by:
+</p>
+<ul><li>clicking a link in the tribler client
+</li><li>copy-paste an URL in tribler
+</li><li>clicking a link in an ordinary browser
+</li></ul><h2 id="Toafriendrecommendation">To a friend recommendation</h2>
+<p>
+Having friends becomes valuable if you can communicate with them. A first step is sending content recommendations to them. You right click on for example a video, and you press 'recommend to friend'. In a pop-up window you select a friend and add a note. When pressed on send, your friend will receive a recommendation. 
+</p>
+<h2 id="Taggingandtag-basedrecommendation">Tagging and tag-based recommendation</h2>
+<p>
+In the 4.0 GUI tagging is incorporated on the field of users, content and relations between the two groups. We need functionality to recommend both content and users based on a clicked tag. Probably a tagcloud-screen will be implemented.
+</p>
+<h2 id="Ratingandrate-basedrecommendation">Rating and rate-based recommendation</h2>
+<p>
+Next to tagging people can be facilitated in rating their content to show their preferences and order their library.
+</p>
+<h2 id="Commenting">Commenting</h2>
+<p>
+Enabling the user to comment content they have downloaded.
+</p>
+<h2 id="Peopleandtorrentsearch">People and torrent search</h2>
+<p>
+Users must be able to search torrents and users. This functionality is not yet implemented.
+</p>
+<h2 id="Embeddedvideoplayer">Embedded video player</h2>
+<p>
+Tribler 4.0 supports embedded video playing. This has to be included in Tribler core functionality.
+</p>
+<h2 id="P2PWebhosting">P2PWebhosting</h2>
+<p>
+Browsing through Youtube, Flickr and Wikipedia content. See <a class="wiki" href="/P2PWebhosting">P2PWebhosting</a> for more details.
+</p>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

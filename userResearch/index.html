@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Userresearch">User research</h1>
+<p>
+On going user research activities:
+</p>
+<ul><li><a class="missing" href="#">Target group analysis</a>
+</li><li><a class="missing" href="#">Context mapping</a>
+</li><li><a class="missing" href="#">Usability testing</a>
+</li></ul><p>
+The results of our user research are used for:
+</p>
+<ul><li><a class="wiki" href="/GUIconcepts">GUIconcepts</a>: User Interface concepts for PC and TV client
+</li></ul><h1 id="Targetgroup">Target group</h1>
+<p>
+Our target group segmentation is based on the 'Technology adaption lifecycle'. 
+</p>
+<p>
+more info: <a class="wiki" href="/targetGroup">target group</a>
+</p>
+<h1 id="Contextmapping">Context mapping</h1>
+<p>
+Through context mapping studies we become more and more aware of user's experience, emotion, the situation of product use, and social and cultural influences. We do this in several domains:
+</p>
+<ul><li><strong>PC software domain:</strong> what other software/websites are Tribler users using next to Tribler and how can they be better matched to each other (other P2P software, other TV software, other Social network software, etc.).
+</li><li><strong>The home domain:</strong> what other hardware products do Tribler users use (mobile phone, <a class="missing" href="#">SettopBox</a>, gameconsoles, etc). 
+</li><li><strong>The social domain:</strong> how do media intertwine with a persons life (how does a person consume media, what role does it play in everyday life, etc.).
+</li></ul><p>
+The results give us a deeper insight in people's life and should give a framework in which ideas can be developed. 
+</p>
+<h1 id="Usabilitytesting">Usability testing</h1>
+<p>
+Concepts that have proven their use for current Tribler users and viable new ones can be implemented in Tribler products. Important is to test these new functionalities on usability and user experience before it is officially released to the mass. 
+</p>
+<h3 id="UsabilitytestingTribler5.0">Usability testing Tribler 5.0</h3>
+<p>
+Two teams of 6 nearly graduated master students have performed usability tests on an early Tribler 5.0 version. They presented their work and and provided a report on their test results in April 2008). These two reports are digitally available:
+</p>
+<ul><li><a class="missing attachment">Report team C4 - Usability Testing And Redesign</a>
+</li><li><a class="missing attachment">Report team C2 - Usability Testing And Redesign</a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

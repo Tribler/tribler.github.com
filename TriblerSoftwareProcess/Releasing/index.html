@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="ReleasingProcess">Releasing Process</h1>
+<p>
+<div class="wiki-toc trac-nav"><ul><li>Developers Center
+<ul><li><a class="wiki" href="/TriblerGettingStarted">Getting Started</a>
+<ul><li><a class="wiki" href="/TriblerGettingStarted">Introduction</a>
+</li><li><a class="wiki" href="/TriblerSoftwareProcess">Development Process</a>
+</li><li><a class="missing" href="#">Release Process</a>
+</li><li><a class="wiki" href="/tipsTricks">Tips &amp; Tricks</a>
+</li></ul></li><li><a class="wiki" href="/TriblerArchitecture">Architecture</a>
+<ul><li><a class="wiki" href="/TriblerArchitecture">Overview</a>
+</li><li><a class="wiki" href="/DotTriblerFiles">Local Storage Structure</a>
+</li></ul></li><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>API</a>
+<ul><li><a class="ext-link" href="http://www.tribler.org/api/"><span class="icon">​</span>Tribler Core</a>
+</li><li><a class="wiki" href="/TriblerAPIRationale">Rationale</a>
+</li></ul></li><li><a class="wiki" href="/Tutorials">Tutorials</a>
+<ul><li><a class="wiki" href="/Tutorials">Overview</a>
+</li><li><a class="missing" href="#">1. Download Hello world</a>
+</li><li><a class="missing" href="#">2. Video on Demand</a>
+</li><li><a class="missing" href="#">3. Live Streaming</a>
+</li><li><a class="missing" href="#">4. Content injection</a>
+</li><li><a class="missing" href="#">Example live feed setups</a>
+</li></ul></li><li><a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/proto-spec-current.pdf"><span class="icon">​</span>Protocol specification</a>
+</li><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Tools</a>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch"><span class="icon">​</span>Source browser</a>
+</li><li>[milestone: Roadmap] 
+</li><li><a href="/timeline">Timeline</a>
+</li><li><a class="ext-link" href="http://forum.tribler.org"><span class="icon">​</span>Forum</a>
+</li></ul></li></ul></li></ul><p>
+   
+</p>
+</div></td><td>
+</p>
+<h2 id="Versioningscheme">Versioning scheme</h2>
+<p>
+We follow a three number versioning scheme:
+</p>
+<blockquote>
+<p>
+&lt;Major version&gt;:&lt;Minor version&gt;:&lt;bugfix&gt;
+</p>
+</blockquote>
+<p>
+For new releases we first do a release candidate
+</p>
+<p>
+f.i.
+</p>
+<blockquote>
+<p>
+4.2rc1,
+4.2rc2,
+etc
+</p>
+</blockquote>
+<p>
+After the release is considered stable we release version 4.2 and the next bugfix will then be called 4.2.1
+</p>
+<h2 id="ReleaseCandidates">Release Candidates</h2>
+<p>
+A release candidate is made available to the community via our forum. Hopefully we get feedback so that we can improve our software in a faster way.
+</p>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="SimilarityFunction">Similarity Function</h1>
+<p>
+<em>Status: <a class="ext-link" href="http://svn.tribler.org/abc/branches/mainbranch/Tribler/Core/BuddyCast/similarity.py"><span class="icon">​</span>deployed code</a></em>
+</p>
+<p>
+The similarity function is part of the system for fast keyword search. Every Tribler peer keeps open 10 overlay connections to peers with the highest similarity. This results in an P2P overlay which based on content semantics, or a semantic overlay. 
+</p>
+<p>
+An example of a semantic overlay is shown here:
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"></a><br />
+In which Peer 1 and 3 are connected, because they are interested in Animals. Peer 2 and 3, because of Programming. But no connection exists between Peer 1 and 2, because they do not have overlapping interests. The similarity function in Tribler thus offers semantic clustering and scalability.
+</p>
+<hr />
+<h2 id="Peer-PeerSimilarity">Peer-Peer Similarity</h2>
+<p>
+In the overlay peers exchange information regarding their download history. Using this information a User x Item matrix is constucted.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"></a><br />
+A row in the User x Item matrix represent the preference list of a peer. When a peer has downloaded an item, this is represented by a 1.
+</p>
+<p>
+Using the User x Item matrix, similarity can be calculated by formula (1):
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"></a><br />
+</p>
+<ul><li>M<sub>10</sub>, denotes the number of items User 1 downloaded, but User 2 did not.
+</li><li>M<sub>01</sub>, denotes the number of items User 2 downloaded, but User 1 did not.
+</li><li>M<sub>11</sub>, denotes the number of items both users downloaded.
+</li><li>L, denotes a preference for users with profiles of at least this length. Users which have a shorter profile (downloaded less items) are discounted. In Tribler, L is set to 40.
+</li></ul><p>
+  
+This function is based upon the Cosine similarity function, the only change is in the notation. Because of Tribler using boolean ratings (downloaded a file yes/no), the function can be rewritten to only comparing the number of items which are/are not overlapping. The profilelength boost was implemented because during research it was shown that the normal Cosine function has a preference to users with small profiles, which are less usefull when discovering new items.
+</p>
+<hr />
+<h2 id="PeerRecommendation">Peer Recommendation</h2>
+<p>
+Peer recommendation has two utilities in Tribler:
+</p>
+<ul><li>Select the most similar peer as the target of a Buddycast message. After every 15sec, the client sends a <a class="wiki" href="/BuddyCast">BuddyCast</a> message to either the most similar connectable peer or a random one according to a ratio (the ratio is set to 1 in Buddycast3). Addtionally, each peer will not be sent more than one Buddycast message in a time window (the time window  is set to 4 hours in Buddycast3).
+</li><li>Put the top-10 taste buddies in the Buddycast message. 
+</li></ul><hr />
+<h2 id="SimilarityUpdating">Similarity Updating</h2>
+<ul><li>When the client starts, the similarity of each peer-peer pair is updated (Full-Update).
+</li><li>When a user changes his/her preference list (i.e. downloading a new item), similarity between all users can change thus again a Full-Update is run. 
+</li><li>When a peer receives a new Buddycast message, only the peer-peer similarity to the sender is updated (Single-Update). For the taste buddies and random peers in the message, the peer picks out the ones of which it has no preference list and then updates the indirect peer-peer similarity with them by formula (3). Note that the indirect peer-peer similarity is stored as negtive value in order to be distinct with the direct one. (REALLY?)<br />
+</li></ul><p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"></a>
+</p>
+<hr />
+<h2 id="TorrentRelevance">Torrent Relevance</h2>
+<p>
+Using the similarities between peers, torrent relevancies can be calculated. Whenever a <a class="wiki" href="/BuddyCast">BuddyCast</a> message is received a torrent is selected to be collected by the meta-data handler. This torrent should be the torrent most interresting to the peer.
+By using the top-50 most similar peers and their items, a relevancy can be calculated for all items by simply using the sum of all similarities for the items the peer which has sent the <a class="wiki" href="/BuddyCast">BuddyCast</a> message has.
+</p>
+<p>
+If the peer has no particular relevant items, the most popular item is selected as determined by the number of peers which have downloaded it according to a peers own local <a class="wiki" href="/MegaCache">MegaCache</a>.
+</p>
+<hr />
+<h1 id="Research">Research</h1>
+<p>
+The Similarity function as described above is a result of a master thesis research done by Niels Zeilemaker. During this research the following research question was aswered: <em>Find a similarity function from which an efficient P2P topology for keyword search emerges</em>. 
+</p>
+<h2 id="LiteratureResearch">Literature Research</h2>
+<p>
+<a class="missing attachment">Literature Research: Optimizing Peer-to-Peer Keyword Search using Collaborative Filtering</a>
+</p>
+<p>
+A document created in preparation for the Master Thesis Research consisting of 40-50 Pages and 5-7 Chapters.
+</p>
+<p>
+Research includes
+</p>
+<ul><li>Current state of P2P search strategies.
+</li><li>Current state of Similarity functions, both memory and model-based.
+</li><li>Methods used to evaluate performance of Similarity functions.
+</li><li>Problem applying existing Similarity functions to Distributed Environment.
+</li></ul><p>
+In total 31 references used:
+</p>
+<table class="wiki">
+<tr><td>[attachment"Toward the Next Generation of Recommender Systems A Survey of the State-of-the-Art and Possible Extensions.pdf?format=raw" Toward the Next Generation of Recommender Systems: A Survey of the State-of-the-Art and Possible Extensions]</td><td>IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING, VOL. 17, NO. 6, JUNE 2005</td><td>Adomavicius et al.
+</td></tr><tr><td><a class="missing attachment">Incorporating Contextual Information in Recommender Systems Using a Multidimensional Approach </a></td><td style="text-align: left">Department of Information &amp; Decision Sciences Carlson School of Management University of Minnesota </td><td>Adomavicius et al.
+</td></tr><tr><td><a class="missing attachment">Content-Based, Collaborative Recommondation</a></td><td>COMMUNICATIONS OF THE ACM March 1997/Vol. 40, No. 3</td><td>Balabanovic et al.
+</td></tr><tr><td><a class="missing attachment">Empirical Analysis of Predictive Algorithms for Collaborative Filtering</a></td><td>Microsoft Research</td><td>Breese et al.
+</td></tr><tr><td><a class="missing attachment">Eigentaste: A Constant Time Collaborative Filtering Algorithm</a></td><td>IEOR and EECS Departments University of California, Berkeley</td><td>Goldberg et al.
+</td></tr><tr><td><a class="missing attachment">Combining Collaborative Filtering with Personal Agents for Better Recommendations</a></td><td><a class="missing" href="#">GroupLens</a> Research Group</td><td>Good et al.
+</td></tr><tr><td><a class="missing attachment">An Empirical Analysis of Design Choices in Neighborhood-Based Collaborative Filtering Algorithms</a></td><td>Department of Computer Science, Oregon State University</td><td>Herlocker et al.
+</td></tr><tr><td><a class="missing attachment">The EigenTrust Algorithm for Reputation Management in P2P Networks</a></td><td>CIKM '01: Proceedings of the tenth international conference on Information and knowledge management</td><td>Kamvar et al.
+</td></tr><tr><td><a class="missing attachment">Evaluation of Item-Based Top-N Recommendation Algorithms</a></td><td>University of Minnesota</td><td>Karypis et al.
+</td></tr><tr><td><a class="missing attachment">Pollution in p2p file sharing systems</a></td><td>IEEE INFOCOM</td><td>Liang et al.
+</td></tr><tr><td><a class="missing attachment">Search Performance Analysis in Peer-to-Peer Networks</a></td><td>Dept. of Electrical Eng. National Taiwan University, Taipei, Taiwan</td><td>Lin et al.
+</td></tr><tr><td><a class="missing attachment">Amazon.com Recommendations</a></td><td>Amazon.com</td><td>Linden et al.
+</td></tr><tr><td><a class="missing attachment">Content-Boosted Collaborative Filtering for Improved Recommendations</a></td><td>Proceedings of the Eighteenth National Conference on Artificial Intelligence(AAAI-2002)</td><td>Melville et al.
+</td></tr><tr><td><a class="missing attachment">PocketLens: Toward a Personal Recommender System</a></td><td>University of Minnesota</td><td>Miller et al.
+</td></tr><tr><td><a class="missing attachment">Passive Profiling from Server Logs in an Online Recruitement Enviroment</a></td><td>Proceedings of IJCAI Workshop on Intelligent Techniques for Web Personalization (ITWP2001)</td><td>Rafter et al.
+</td></tr><tr><td><a class="missing attachment">Peer-to-Peer Architecture Case Study: Gnutella Network</a></td><td>Department of Computer Science The University of Chicago</td><td>Ripeanu et al.
+</td></tr><tr><td><a class="missing attachment">Survey or research toward robust p2p networks search methods</a></td><td>Comput. Netw. 50(17)</td><td>Risson et al.
+</td></tr><tr><td><a class="missing attachment">Percolation search in power law networks: Making unstructured peer-to-peer networks scalable</a></td><td>Proceedings of IEEE P2P04</td><td>Sarshar et al.
+</td></tr><tr><td><a class="missing attachment">Item-Based Collaborative Filtering Recommendation Algorithms</a></td><td><a class="missing" href="#">GroupLens</a> Research Group</td><td>Sarwar et al.
+</td></tr><tr><td><a class="missing attachment">E-commerce recommendation applications</a></td><td>Data Min. Knowl. Discov.</td><td>Schafer et al.
+</td></tr><tr><td><a class="missing attachment">Internet study 2007</a></td><td><a class="ext-link" href="http://www.ipoque.com"><span class="icon">​</span>http://www.ipoque.com</a></td><td>Schulze et al.
+</td></tr><tr><td><a class="missing attachment">Personalized Recommendation in Social Tagging Systems using Hierarchical Clustering</a></td><td><a class="missing" href="#">RecSys</a> '08: Proceedings of the 2008 ACM conference on Recommender Systems</td><td>Shepitsen et al.
+</td></tr><tr><td><a class="missing attachment">Load reducing in the kad p2p system</a></td><td>Fifth International Workshop on Databases, Information Systems and Peer-to-Peer Computing (DBISP2P, 2007)</td><td>Steiner et al.
+</td></tr><tr><td><a class="missing attachment">Improving lookup performance over a widely-deployed dht</a></td><td>IEEE International Conference on Computer Communications INFOCOM 2006</td><td>Stutzbach et al.
+</td></tr><tr><td><a class="missing attachment">Adaptive Web Search Based on User Profile Constructed without Any Effort from Users</a></td><td>Proceedings of the 13th international conference on World Wide Web</td><td>Sugiyama et al.
+</td></tr><tr><td><a class="missing attachment">Clustering methods for collaborative filtering</a></td><td>AAAI Press, 1998</td><td>Ungar et al.
+</td></tr><tr><td><a class="missing attachment">Unifying User-based and Item-based Collaborative Filtering Approaches by Similarity Fusion</a></td><td>Faculty of Electrical Engineering, Mathematics and Computer Science, Delft University of Technology</td><td>Wang et al.
+</td></tr><tr><td><a class="missing attachment">A User-Item Relevance Model for Log-Based Collaborative Filtering</a></td><td>Faculty of Electrical Engineering, Mathematics and Computer Science, Delft University of Technology</td><td>Wang et al.
+</td></tr></table>
+<h2 id="Dataset">Dataset</h2>
+<p>
+During the research a dataset was created by parsing superpeer logs in order to get insight into availible data (See <a class="wiki" href="/SuperpeerLogs">SuperpeerLogs</a>). 
+</p>
+<p>
+From this dataset a subset was created using the top-50000 users with the most downloaded files. This subset has 252.469 items and 50.000 users. Using tf-idf 31.906 items were assigned to a category. This helps evaluating the performance of more complex similarity functions and was done manually. First using the tf/idf the more frequent terms were discovered. Which were used to create a list of categories. All items matching all or a combination of the terms of a category where written to a file. These files were then checked manually and incorrect items were removed/disabled.
+</p>
+<h2 id="EvaluationofCandidateFunctions">Evaluation of Candidate Functions</h2>
+<p>
+Using the dataset, then several well known similarity functions were evaluated. Due to the unique circumstances in a P2P enviroment (a huge amount of items, resulting in a very sparse dataset 0.99993), time was invested in trying to reduce the sparsity of the dataset.
+</p>
+<p>
+A method which resulted in a improvement of the recommendations and thus the similarity between users, uses the swarmnames of items to find similar ones. These additional psuedo-ratings then allow for overlap and thus reduce the sparsity.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"></a><br />
+This more complex similarity function is called ItemItem(Levenshtein) and is not yet implemented in Tribler.
+The final thesis report can be downloaded <a class="missing attachment">here</a>.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

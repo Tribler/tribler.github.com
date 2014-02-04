@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="UnicodeSupportinTrac">Unicode Support in Trac</h1>
+<p>
+Trac stores all text using UTF-8 encoding, including text in tickets and wiki pages. 
+</p>
+<p>
+As such, it supports most (all?) commonly used character encodings.
+</p>
+<h2 id="Examples">Examples</h2>
+<h3 id="Swedish">Swedish</h3>
+<p>
+<em>RÃ¤ven raskar Ã¶ver isen med luva pÃ¥.</em>
+</p>
+<h3 id="FranÃais">FranÃ§ais</h3>
+<p>
+<em>Il est possible d'Ã©crire en FranÃ§ais : Ã , Ã§, Ã», ...</em>
+</p>
+<h3 id="Icelandic">Icelandic</h3>
+<p>
+<em>Ãvar sagÃ°i viÃ° Ã¶mmu sÃ­na: SjÃ¡Ã°u hvaÃ° Ã©g er stÃ³r''
+</em></p>
+<h3 id="Japanese">Japanese</h3>
+<p>
+<em>æ¼¢å­ ã²ãããª ã«ã¿ã«ã ï¾ï¾ï½¶ï½¸ï½¶ï¾
+</em>
+</p>
+<h3 id="Chinese">Chinese</h3>
+<p>
+Traditional: <em>ç¹é«ä¸­æ, è¨±åèæè²</em>; Simplified: <em>ç®ä½ä¸­æï¼è®¸åçä¼è²</em>
+</p>
+<h3 id="Korean">Korean</h3>
+<p>
+<em>ì´ë²ìë íê¸ë¡ ì¨ë³´ê² ìµëë¤. ì ë³´ì´ëì?</em>
+</p>
+<h3 id="Russian">Russian</h3>
+<p>
+ÐÑÐ¾Ð²ÐµÑÐºÐ° Ð ÑÑÑÐºÐ¾Ð³Ð¾ ÑÐ·ÑÐºÐ°: ÐºÐ°Ð¶ÐµÑÑÑ ÑÐ°Ð±Ð¾ÑÐ°ÐµÑ...
+</p>
+<h3 id="Bulgarian">Bulgarian</h3>
+<p>
+ÐÑÐ»Ð³Ð°ÑÑÐºÐ¸ÑÑ ÐµÐ·Ð¸Ðº ÑÐ°Ð±Ð¾ÑÐ¸ Ð»Ð¸?
+</p>
+<h3 id="Greek">Greek</h3>
+<p>
+ÎÎ±ÎºÎ¬ÏÎ¹ Î½Î± Î­ÏÏÎµÏÎµ ÏÏÎ¿ ÎºÎ±Î¹ Debian box Î¼Î¿Ï
+... Bug <a class="missing ticket">#495</a>
+</p>
+<h3 id="Spanish">Spanish</h3>
+<p>
+Esto es un pequeÃ±o texto en EspaÃ±ol, ahora una con acentÃ³
+</p>
+<h3 id="Hebrew">Hebrew</h3>
+<p>
+×× × ×××× ××××× ××××××ª ××× ×× ××××§ ××
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

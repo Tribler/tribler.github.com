@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="P2PMediaspace">P2P Mediaspace</h1>
+<h2 id="Introduction">Introduction</h2>
+<p>
+The P2P Mediaspace in the P2P Fusion platform is responsible for the actual transfer and management of large pieces of content (most importantly audio and video). The other parts of the P2P Fusion software use the API of the P2P Mediaspace to perform tasks such as injecting files, downloading files, and acquiring status information about running downloads. The P2P Mediaspace is based on the Tribler P2P Core, which in turn is based on the <a class="wiki" href="/BitTorrent">BitTorrent</a> protocol, a well-known protocol for P2P file transfers based on piece-wise exchange of content. The Tribler core extends the functionality of <a class="wiki" href="/BitTorrent">BitTorrent</a> to make it more generic, more secure, more reliable, and more flexible for use in other applications. The P2P Mediaspace API tailors the Tribler core for specific use in the P2P Fusion platform. In the following sections we will give an overview of <a class="wiki" href="/BitTorrent">BitTorrent</a> and of the P2P Mediaspace API.  Furthermore, for developers interested in the low-level networking details, we will also provide an overview of the Tribler core and its architecture.
+</p>
+<h2 id="BitTorrent"><a class="wiki" href="/BitTorrent">BitTorrent</a></h2>
+<p>
+<a class="wiki" href="/BitTorrent">BitTorrent</a> has an interesting design that enables each individual downloader to maximize his own download rate and locks out users who do not contribute to the system. A peer wishing to download a particular file through <a class="wiki" href="/BitTorrent">BitTorrent</a> first needs to obtain a torrent metafile for the file from, for example, a Web site or RSS news feed, or via the P2P Fusion platform. The metafile gives the peer the address of a tracker for the file and checksums to verify downloaded parts of the file. The peer then contacts the tracker to obtain a list of peers currently involved in downloading the file, implying they have pieces of the file to share. Next, the peer contacts a random peer to obtain a first piece of the file itself. With this piece in hand, the peer starts to contact other peers in the list to see if they will trade its piece for another part of the file. If so, the contacted peer sends a few blocks of the negotiated piece, and continues to do so as long as the other does the same. This tit-for-tat mechanism automatically locks out peers who are unwilling to upload themselves. By monitoring the download rate obtained from its current set of peers and randomly trying other peers to see if faster peers are available, a user can maximize its download rate. By always selecting a rare part of the file from the pieces on offer, a peer ensures it always has a piece of the file that other peers are interested in. These policies for piece selection and bandwidth trading lead to a balanced economy with suppliers meeting demand and achieving their own goal (fast download) at the same time. Once the peer has obtained the complete file it will become a seeder and altruistically provide pieces to other peers without any return. The set of all peers currently actively exchanging pieces of the file is called the file's swarm. More detailed information about the <a class="wiki" href="/BitTorrent">BitTorrent</a> protocol and a full specification are available on various websites, e.g., <a class="ext-link" href="http://www.bittorrent.org"><span class="icon">​</span>http://www.bittorrent.org</a>, <a class="ext-link" href="http://wiki.theory.org/BitTorrentSpecification"><span class="icon">​</span>http://wiki.theory.org/BitTorrentSpecification</a>.
+</p>
+<h2 id="TheP2PMediaspaceAPI">The P2P Mediaspace API</h2>
+<p>
+We will give an overview of the P2P Mediaspace API that is available for P2P Fusion developers. We assume that torrent-files (â.torrentâ) are used as unique identifiers of physical files in the P2P network. A torrent-file can represent a single file or a directory tree containing multiple files. Torrent-files are in essence just small files with metadata, and can be easily included in the metadata that is managed by the Semantic Overlay. The P2P core maintains a list of torrents that contains all the torrents added but not removed. This represents all the files that the Fusion application is âaware ofâ locally and at a P2P network level.
+</p>
+<p>
+The API has a strong resemblance in functionality to the common UI controls of a P2P client. Important differences are that torrent-files will be created automatically upon injecting content, and that it should be possible to download parts of (some) movies using time codes. Instead of the user controlling a torrent-based application, it will be the Fusion application and Semantic Overlay that call the appropriate functions. A user doesnât have to know anything about torrent files. From the user perspective, these activities happen âunder the hoodâ. 
+</p>
+<h2 id="APIv3">API v3</h2>
+<p>
+The full API for version 3 is as follows:
+</p>
+<pre class="wiki">__init__(cache_dir, status_update_interval, read_cache)
+   """Creates a new P2P Mediaspace class instance, which maintains all 
+   content that is downloaded and/or shared. Optionally, a cache directory 
+   on disk can be scanned on startup to automatically add torrents to the mediaspace.
+
+setDefaultCallback(callBackFunction)
+   """A callback function can be provided to which status updates are pushed 
+   periodically. This allows flexible use of status information in other parts of 
+   the Fusion software.
+
+state_callback(download_state)
+   """The actual retrieval of the various status parameters (infohash, name, 
+   status, progress), which are passed on to the callBackFunction.
+
+get_active_infohashes()
+   """Returns a list of infohashes of content that is currently active
+   (= downloading or seeding).
+
+get_infohash(torrent)
+   """Returns the infohash of a specific torrent.
+
+refresh()
+   """Loads all torrents in the cache and makes them active. It 
+   stops the activity of removed torrents.
+
+restart_session()
+   """Deactivates and activates all torrents.
+
+activate_torrent(torrent_path, destination_path)
+   """Activates a torrent that was added before; if the content does 
+   not yet exist on disk, it starts the download; if the content was 
+   already partially downloaded, it continues the download; if the 
+   content is fully downloaded, it starts to seed it.
+
+deactivate_torrent(torrent_path, remove_content)
+   """Stops downloading/seeding of the given torrent. Optionally 
+   content can be removed.
+
+get_file(torrent_path, torrent_name, torrent, callBackFunction, destination_path,
+              start_sec, end_sec)
+   """Adds a given torrent (obtained from the outside) to the 
+   mediaspace, and activates it, leading to its download from the 
+   network. A callBackFunction can be given.
+
+put_file(tracker_url, file_path, torrent_path, callBackFunction, destination_path)
+   """Injects a file into the network; a torrent will be created, added 
+   to the mediaspace, and activated; the content will be seeded to the network. 
+
+get_status(infohash)
+   """Retrieves the status information for a specific infohash.
+
+remove_file(torrent, infohash, remove_content)
+   """Removes the file(s) associated with the given torrent from the 
+   mediaspace and (optionally) from the cache.
+
+empty_cache()
+   """Removes all files and torrents from the mediaspace and the cache.
+
+exists(infohash)
+   """Checks whether content with the given infohash is available in the mediaspace.
+
+view_content(infohash)
+   """Returns the file(s) contained in the torrent associated with the given infohash.
+
+   """cut_movie(in_file, out_file, start_time, stop_time)
+   Cuts a given movie from a given start_time to a given stop_time. Afterwards,
+   the segment can be injected in the network using put_file. 
+</pre><h2 id="Remoteclipping">Remote clipping</h2>
+<p>
+As of now, the P2P Mediaspace offers full functionality for partial downloading of audio/video content. Since this functionality was finished slightly later than the Fusion release of May 2009, the higher layer components do not yet make use of it. However, this is very easy and straightforward for future developers to do. The main P2P Mediaspace interface to fusion, to be found in mediaspace3/mediaspace.py (extensively discussed in earlier deliverables), has traditionally enabled the downloading of files with the function get_file(). The remote clipping code has by now been integrated in the Tribler core, and is available via two new parameters of get_file(), namely start_sec and end_sec. Hence, integrating partial downloading in Fusion components will be merely a matter of providing the start and end times (in seconds) of the requested piece of content. These times can for example be included in metadata which is exchanged in other layers of Fusion. 
+</p>
+<h2 id="HowToRun">How To Run</h2>
+<p>
+In order to run it on mac, m2crypto and berkley db libraries are needed. Check <a class="wiki" href="/TriblerMacPort">TriblerMacPort page</a> on how to install them.
+</p>
+<p>
+If they are installed, the PYTHONPATH must be set:
+</p>
+<pre class="wiki">LIB=lib.macosx-10.4-fat-2.4
+export PYTHONPATH=m2crypto/build/$LIB/:bsddb3/build/$LIB/
+</pre><p>
+For the API to run, these directories must be present in the same parent directory where [source:abc/branches/lucian/p2p_mediaspace.py p2p_mediaspace.py] is checked out:
+</p>
+<ul><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/lucian/tribler/"><span class="icon">​</span>tribler</a> - the tribler p2p client
+</li><li><a class="ext-link" href="http://svn.tribler.org/abc/branches/lucian/mediacutting"><span class="icon">​</span>mediacutting</a> - ffmpeg binaries 
+</li></ul><p>
+In order to test the functionalities of API enter in the command line:
+</p>
+<pre class="wiki">$ python p2p_mediaspace.py
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

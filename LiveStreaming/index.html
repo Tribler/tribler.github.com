@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="LiveStreaming">Live Streaming</h1>
+<p>
+<a class="wiki" href="/LiveStreaming">LiveStreaming</a>: everybody in the swarm is viewing the same content at the same time. 
+Comparable to television channels or a webcam feed. Supported in Tribler as of July 2008, see <a class="wiki" href="/SwarmPlayer">SwarmPlayer</a>
+</p>
+<h2 id="Planningbeforeendof2008">Planning before end of 2008</h2>
+<ul><li>Operational <a class="wiki" href="/Give-To-Get">Give-To-Get</a>: core P2P video engine
+</li><li><a class="wiki" href="/BarterCast">BarterCast</a>: link with sharing ratio enforcement
+</li><li><a class="wiki" href="/SelectiveSeeding">SelectiveSeeding</a>: seeding policy
+</li><li><a class="missing" href="#">visualize</a> your current score
+<ul><li>Status and howto improve it
+</li><li>Allies + ratio and history
+</li><li>Recent helped peers
+</li><li>Pretty view of swarm, give-to-get connections
+</li></ul></li></ul><h2 id="Give-To-Get">Give-To-Get</h2>
+<ul><li>assume some peers are malicious, but the majority follows protocol
+</li><li>unchoke best neighbours
+</li><li>based on recent behaviour (forwarded bytes in last 10 seconds)
+</li><li>optimistic unchoke (every 20 seconds):
+<ul><li>kick worst 4th unchoked neighbour (whom is not locked for ratio repay)
+</li><li>fill neighbourhood with:
+<ul><li>33% best supertrust peer (has best sharing ratio)
+</li><li>33% if any: with you have debt (worst ratio to you)
+</li><li>33% random
+</li></ul></li></ul></li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

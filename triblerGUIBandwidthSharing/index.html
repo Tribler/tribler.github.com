@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BandwidthSharing">Bandwidth Sharing</h1>
+<p>
+The goal is to vizualize the good and bad 
+behavior of other peers plus provide insight 
+into your own goodness or badness. The focus is to stimulate
+seeding and giving away of bandwidth instead of
+leeching on others.
+</p>
+<p>
+The underlying technical issues is that
+watching television in real-time requires
+people to contribute. Thus seed several files and
+remain online for a long duration.
+</p>
+<p>
+A possible course of action is that you have to
+<strong>earn</strong> the right to do Video on Demand.
+</p>
+<p>
+<a class="ext-link" href="http://www.cs.vu.nl/ishare/public/I-Share-P22v1.0.pdf"><span class="icon">​</span>Paper by Jenneke on Trust and sharing in P2P</a>
+</p>
+<h2 id="SupertrustV1">!Supertrust V1</h2>
+<p>
+Use the history of <strong>direct</strong> dealings with other peers
+to estimate trust levels. The source of
+information for this is the peercache.<br />
+[source:publications/supertrust/supertrust.tex Draft of article on Supertrust]
+</p>
+<h2 id="Peercache">Peercache</h2>
+<ul><li>Number of !MBytes uploaded / downloaded
+</li><li>Similarity of profiles
+</li><li>Age of peer
+</li><li>number of encounters (connections)
+</li><li>Number of .torrent files exchanged
+</li></ul><p>
+[source:software_general/pydbgui/pydbgui.py Show the content of Peercache]
+</p>
+<h2 id="SupertrustV2">!Supertrust V2</h2>
+<p>
+Share goodness and badness with others.
+Build a trust network of similar peers, friends, and barter buddies.
+Previous barter actions can be regarded as a trust graph (e.g. 1GByte of trust).
+</p>
+<p>
+You - 4GB -b- 2GB - Other<br />
+You - 2GB -c- 5GB - Other
+</p>
+<h2 id="Timeline">Timeline</h2>
+<p>
+The Supertrust V1 relies on [milestone:4.0.0 Release 4.0 of Tribler] and
+</p>
+<p>
+The Supertrust V2 relies on [milestone:5.0.0 Release 5.0 of Tribler].
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

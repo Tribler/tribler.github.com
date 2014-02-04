@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><ul><li>Jobs
+<ul><li><a class="wiki" href="/Jobs">Introduction</a>
+</li></ul></li></ul><ul><li>Master Assignments
+<ul><li><a class="wiki" href="/MasterThesisAtTribler">Master Thesis</a>
+</li></ul></li></ul><ul><li>Student Assistants
+<ul><li><a class="missing" href="#">Testers</a>
+</li></ul></li></ul></div></td><td>
+</p>
+<h1 id="MScthesisassignmentsinTribler">MSc thesis assignments in Tribler</h1>
+<p>
+Please contact Tribler coordinator Dr. J.A. Pouwelse on the 7th floor of EWI or via email.
+</p>
+<p>
+Disclaimer: this is just a list to show what we are about. Please drop by for a brainstorm session to identify an assignment that you really like.
+</p>
+<p>
+We are a group conducting experimental P2P research. All members of the Tribler team
+have at some point to show that their algorithms work, what their performance is, and
+how they can be improved. All possible tasks expand the existing work or ongoing research 
+with operational Python code. 
+</p>
+<h1 id="Newtopicsfor2014:anonymityandcybercurrency">New topics for 2014: anonymity and cybercurrency</h1>
+<p>
+Tribler now includes experimental code for anonymous streaming. The <a class="ext-link" href="https://gitweb.torproject.org/torspec.git?a=blob_plain;hb=HEAD;f=control-spec.txt"><span class="icon">​</span>TOR specification</a> is partially implemented and we are working towards an <a class="ext-link" href="https://github.com/Tribler/tribler/issues/119"><span class="icon">​</span>anonymous streaming test</a>. There is room for several master students to expand upon this  work, see <a class="ext-link" href="https://github.com/Devristo/tribler/blob/devel/Tribler/community/anontunnel/ProxyCommunity.py#L85"><span class="icon">​</span>their Python code</a>.
+</p>
+<ul><li>Create an Youtube clone which is anonymous and uses P2P. Create a hidden service for Bittorrent-like seeding and streaming which offers Youtube-like interface and speed. Specific focus is on reducing startup latency: all videos should start playing within 1-2 seconds. This extreme level of performance can be obtained with aggressive pre-fetching and opportunistic caching. For example, after a users issues a keyword search, all matching swarms are displayed and the P2P client starts already contacting these swarm in parallel. When the P2P client is idle it actively seeks out the popular content, matching the user interest and downloads roughly the first minute of that content, further accelerating the user experience. Users can optionally set their <em>acceleration cache</em> to 10 to 250 GByte.
+</li><li>Integrate Elliptic curve Ed25519 inside our anonymity protocol. This curve is not yet used in TOR, but they want to move beyond their old RSA 1024-bit security this curve <a class="ext-link" href="https://gitweb.torproject.org/torspec.git/blob/HEAD:/proposals/220-ecc-id-keys.txt"><span class="icon">​</span>also</a>. So within your thesis assignment you can overtake TOR in this aspect.
+</li></ul><p>
+<a class="ext-link" href="http://news.bbc.co.uk/2/hi/6971904.stm"><span class="icon">​</span>Already five years</a> ago the <a class="ext-link" href="http://www.sciencedaily.com/releases/2007/08/070829102054.htm"><span class="icon">​</span>Tribler team was working</a> on cybercurrency <a class="ext-link" href="http://news.harvard.edu/gazette/story/2007/08/creating-a-computer-currency/"><span class="icon">​</span>together with Harvard</a>. Then Bitcoin came along and our early <a class="ext-link" href="http://www.pds.ewi.tudelft.nl/~victor/bitcoin.html"><span class="icon">​</span>analysis</a> of this shows the downsides.
+</p>
+<ul><li>Create a credit mining application. Tribler now includes code for credit mining. Your task is to create an easy to use, zero-configuration application which earns credits as quickly as possible. Your code scans all available Bittorrent swarms and evaluates their investment potential. The default is to use all available hard-disk space minus, say, 5 GB of free space.
+</li><li>Design and implement micropayments. You can earn credits by running seedboxes and transfers earned credits to friends and other people. A wallet and money transfer app needs to be created. Throw away keys and anonymous credit mixing services will be offered.
+</li></ul><p>
+Security and performance are critical when doing anonymity. We have the following ideas to work on.
+</p>
+<ul><li>Create a secure <em>master swarm discovery channel</em> community. Channels in Tribler are used to discover a collection of Bittorrent swarms, to prevent fake content and reduce spam. Boost the discovery of swarms investment opportunities and metadata channels
+</li><li>Improve the channel scalability and robustness. Tens of thousands of swarm should be downloaded in mere seconds. 
+</li><li>Create a <em>DHT discovery community</em> to discover and join a swarm within 1-2 seconds. Essential feature is to make this NAT-compatible by using the neighbor-invite primitive.
+</li></ul><h1 id="Possibletopics">Possible topics</h1>
+<ul><li>SwarmMusic: P2P music app on the iPhone+iPad+Android. Our <a class="ext-link" href="http://libswift.org/"><span class="icon">​</span>Libswift UDP-based P2P engine</a> is now running on embedded devices. You are responsible for creating an easy to use portable and free music app. The goal is to get your app listed in the Apple store and the Google market. Key functionality is sharing you music collection using libswift and downloading a few new songs automagically every hour/minute. This <em>song cache</em> can be either just a few minutes in size or contain enough music for a day of playback. The existing <a class="wiki" href="/SimilarityFunction">SimilarityFunction</a> algorithms can be used to offer a type of personalised radio.
+</li><li><em>for computer engineering students only:</em> Reconfigurable processor for Internet acceleration. Within this project you will use Ï-VEX to improve Internet performance. Ï-VEX is an <a class="ext-link" href="http://code.google.com/p/r-vex/"><span class="icon">​</span>open source reconfigurable</a> and extensible Very-Long Instruction Word (VLIW) processor. From a purely engineering level, your assignment is to: take C++ code, compile this for FPGA usage and optimize the code. Internet performance can be improved with a reconfigurable and extensible processor by turning it into a "caching router". Seedboxes and CDN content hosting boxes are essential for providing a good Youtube or Bittorrent experience. Using ISP-level caches has proven to improve cost-efficiency of the Internet in general. Content-centric networking is emerging as a field which can make all (multimedia) Internet traffic suitable for caching. <a class="ext-link" href="http://conferences.sigcomm.org/sigcomm/2011/papers/icn/p44.pdf"><span class="icon">​</span>background paper</a>. Delft has developed an <a class="ext-link" href="https://datatracker.ietf.org/doc/draft-ietf-ppsp-peer-protocol/"><span class="icon">​</span>upcoming IETF Internet standard around P2P video streaming</a> which is fully based on the <a class="ext-link" href="http://www.pds.ewi.tudelft.nl/fileadmin/pds/reports/2011/PDS-2011-006.pdf"><span class="icon">​</span>content-centric networking paradigm</a>. This <a class="ext-link" href="https://github.com/triblerteam/libswift"><span class="icon">​</span>Open Source P2P engine has been tested</a> and running in the cloud. <em>Your challenge</em> is to try to improve the cost-efficiency of a general purpose implementation using a mix of FPGA or softcore based hardware. What makes this project unique is that in parallel to this task we are creating a cybercurrency, project "bandwidth as a currency". The billion dollar CDN market revolves around bandwidth and fast downloads. Our medium-term goal is to transform the closed CDN market with a cybercurrency and our open IETF standard. Within this context your Ï-VEX processor can be compared to <a class="ext-link" href="https://bitcointalk.org/index.php?topic=37904.0"><span class="icon">​</span>FPGA-based Bitcoin mining hardware</a>.
+</li><li>TV of the future using a mediaplayer. Our <a class="ext-link" href="http://libswift.org/"><span class="icon">​</span>Libswift UDP-based P2P engine</a> is now running on embedded devices. Create the television of the future by porting Libswift to the <a class="ext-link" href="http://en.wikipedia.org/wiki/Networked_Media_Tank"><span class="icon">​</span>NetworkMediaTank Media Player</a> line of boxes. Key for an embedded box are the resource constraints and quick responsiveness (think DirectFB. By building upon existing work you need to move P2P from searching in filenames towards navigating tags clouds and thumbnail previews; using a remote control interface. Several hardware boxes <a class="ext-link" href="http://www.google.com/search?q=HD+Digitech+HDX-BD1"><span class="icon">​</span>will be available</a> for software development. It is <a class="ext-link" href="http://www.networkedmediatank.com/wiki/index.php/Quick_Format_and_NMT_Apps_Install"><span class="icon">​</span>shown here</a> how easy software development is.
+</li><li>New programming language for P2P. Design and implement language extensions for Python which enables the programmer to use P2P primitives more easily. For instance, reputations, signed certificates, peer discovery, metadata, content downloads and message exchange should be investigated. Where possible and desirable support is added in the language, similar to network sockets and file access. Goal is cleaner code which is less prone to bugs.
+</li><li>Multimedia communities in Tribler. Private Bittorrent communities are very popular due to their superior download performance and lack of spam. These communities are kept clean by moderators, but still rely on a single central server. Private Bittorrent communities lack the ease-of-use and do not the rich interactivity of multimedia communities in Facebook and Youtube. Your job is to moved private Bittorrent communities beyond mere sharing of files. Be the first to implement certain technology in P2P such as collaborative tagging, retro-active subtitling, thumbnail indexes, friend sharing, friend notification and message boards.
+</li><li>Improve P2P search results by removing duplicate swarms and improving precision/recall. Improve P2P search algorithms to find more relevant content, improve the search result ranking and filter duplicates. A problem in Bittorrent is that numerous swarms exist with the same video or audio content. Such duplicates degrade system performance because it fragments swarms into smaller ones. For some popular items such as <a class="ext-link" href="http://isohunt.com/torrents/?ihq=ubuntu"><span class="icon">​</span>Ubuntu swarms</a> 100+ duplicate swarms exist. Your mission is to solve this problem by identification of duplicates using filenames and file sizes.
+</li><li>Real-time cell phone democracy: use live video streaming of cell phones to obtain insight of what is happening. Several volunteers continuously record an event with their cell phone camera and stream it using P2P to potentially millions of viewers. Cell phone democracy can give real-time insight on-the-ground during protests, disasters or other matters. Every viewer would be able to see several live video feeds in a 2x2 or 4x4 matrix of an event.
+</li><li>Create a real-time text/video/audio edit and sharing tool scalable to millions of users by using P2P technology to create a blend of <a class="ext-link" href="http://www.codingmonkeys.de/subethaedit"><span class="icon">​</span>SubEthaEdit</a>, <a class="ext-link" href="http://lifehacker.com/5370738/google-wave-first-look"><span class="icon">​</span>Google.Wave</a>, and Twitter. <em>hardcore researchers only</em>
+</li><li>Software engineering excellence and stability: system testing, test code coverage, structural bug hunting. Ensure our P2P multimedia engine is stable for <em>years</em> and suitable for standardisation in HTML5 and DVB and Television inclusion. Move beyond unit testing. Cooperation of P2P team with software engineering department, Dr. Martin Pinzger.
+</li><li>Extend HTML5 with deep integration of our Tribler P2P engine in Firefox. The new HTML5 video element <a class="ext-link" href="http://arstechnica.com/open-source/news/2007/08/firefox-gets-experimental-support-for-the-video-element.ars"><span class="icon">​</span>supported in Firefox</a> would then be able to download using P2P by expanding our <a class="wiki" href="/BrowserPlugin">BrowserPlugin</a>. This mean a web page can contain both server-based pictures and video and swarm-based multimedia content.
+</li><li>The task is to build a proof-of-principle blogging tool which merges the best of Bittorrent with the web, called BittBlogg. Key is that BittBlogg uses a zero-server P2P architecture to download HTML and publish content. BittBlogg can read both existing blogs on central web servers and Bittorrent-based blogs using simple <a class="wiki" href="/P2PWebhosting">screen scraping techniques</a> and P2P downloads. BittBlogg consists only of three screens, main keyword search page (like Google frontpage), search results, and actual blog posts. A first prototype would use the simple <a class="ext-link" href="http://www.ibm.com/developerworks/opensource/library/l-wxpython/"><span class="icon">​</span>WxHTML</a> function to display the blog posts. A more advanced prototype would use the <a class="ext-link" href="http://wxwebkit.wxcommunity.com/"><span class="icon">​</span>Webkit lib</a> to render HTML, load pictures, and execute JavaScript.
+</li><li>Create a stunning real-time visualisation of Bittorrent swarm dynamic <a class="ext-link" href="http://labs.digg.com/swarm/"><span class="icon">​</span>such as Digg example</a> <a class="ext-link" href="http://www.visualcomplexity.com/vc/index.cfm?domain=Social%20Networks"><span class="icon">​</span>other examples</a>
+</li><li><a class="wiki" href="/P2PWidgets">P2P Widgets:</a> The Internet is your Operating System and provides you the code to execute
+</li><li><a class="wiki" href="/Moderation">Live playlists</a> which download Bittorrent content on-demand
+</li><li>Craft a P2P Radio by generalizing the <a class="wiki" href="/VideoOnDemand">Video-on-Demand features</a> and expanding with Last.fm functionality
+</li><li>Scientific document search and publications e.g. uses Tribler to discover .pdf files and supports keyword search with a simple interface such as <a class="ext-link" href="http://scholar.google.com/"><span class="icon">​</span>http://scholar.google.com/</a>, <a class="ext-link" href="http://citeseer.ist.psu.edu"><span class="icon">​</span>http://citeseer.ist.psu.edu</a>, and the richer <a class="ext-link" href="http://www.citeUlike.org"><span class="icon">​</span>http://www.citeUlike.org</a>.
+</li><li>Privacy-by-Design: Make Tribler blatantly unstoppable. Run Tribler from a <a class="ext-link" href="http://www.pendrivelinux.com/"><span class="icon">​</span>USB stick</a> with <a class="ext-link" href="http://www.linuxjournal.com/article/7743"><span class="icon">​</span>crypto</a> and modify Tribler to transfer Bittorrent messages only inside HTTP GET image.jpg requests plus <a class="ext-link" href="http://slashdot.org/features/01/05/03/2043244.shtml"><span class="icon">​</span>stenography</a>.
+</li><li><a class="ext-link" href="http://www.firefoxfacts.com/2007/09/04/firefox-and-bittorrent/"><span class="icon">​</span>Numerous attempts</a> have been made to use P2P to enhance web browsing. The task is to generalize our <a class="wiki" href="/P2PWebhosting">running code</a> for acceleration of Web 2.0 multimedia content towards any URL. This is done by linking browser caches with P2P and clustering various URLs into a single Bittorrent swarm. For this the Tribler software must be linked inside a browser plug-in.
+</li><li>Chat integration using Jabber and XMPP to strengthen the social network features. The challenge is to craft a zero-server implementation by making the central chat server redundant. Enable Tribler client to talk to <a class="ext-link" href="http://www.p2p-blog.com/item-917.html"><span class="icon">​</span>the other client supporting chat</a>. Existing XMPP Python code: <a class="ext-link" href="http://xmpppy.sourceforge.net/"><span class="icon">​</span>here1</a>, <a class="ext-link" href="http://pyxmpp.jajcus.net/"><span class="icon">​</span>here2</a>, and <a class="ext-link" href="http://code.google.com/p/sleekxmpp/"><span class="icon">​</span>here3</a>.
+</li><li>Effective and scalable real-time recommendation. The overlay network of Tribler is founded on the concept of user similarity. The currently implemented function is too computationally expensive and does not perform well because of sparse data. Can you develop a fast, scalable and function method to derive the similarity between Tribler peers and the available content? <a class="missing attachment">Similarity Project</a>
+</li><li>Expanding the <a class="wiki" href="/P2PSimulator">P2PSimulator</a> with ideas such as emperical datasets, novel algorithms, tagging, etc.
+</li><li>P2P <a class="missing" href="#">GeoWidget</a>: create a generic module for P2P map reading by P2P caching of Google Maps. Uses <a class="wiki" href="/P2PWidgets">P2PWidgets</a> as the application framework. Usefull for offline map reading on mobile nomadic devices (iPhone, G1, ..) and as a building block for other widgets using maps.
+</li><li>Automatic Debugging of Tribler software<br /> Software pervades in every aspect of our society. A sharp contrast to the potential blessings of this development is the looming software complexity crisis. At present, complex systems already require millions of lines of code. It is becoming apparent that under the current traditional IT paradigms this huge complexity makes it impossible to deliver software that provides system capability, correctness, and availability, at any reasonable cost. Moreover, there will not be enough skilled IT professionals to design, test, debug, install, configure, operate, diagnose, and maintain such complex systems, assuming such tasks will stay within human ability to begin with. A good example is software debugging of complex software, where a huge amount of resources are spent to uncover defects. A novel approach to software debugging is to use software fault localization (SFL) tools that aid the developer in finding the root-causes of failures. Although SFL is still in its infancy, recent results have shown its great promise as a technique to automatically track down software bugs, providing the developer with a list of the software localtions that are suspect. The aim of the MS project is to assess the value of SFL for the Tribler software stack. Tasks involve automatically instrumenting the software stack, running the stack with known faults thus obtaining profile data, analyzing the profile data using SFL algorithms to see if the faults can be localized, and analyzing the reasons behind the measured debugging performance.
+</li></ul><h1 id="Planningandadditionalinformation">Planning and additional information</h1>
+<p>
+More information: <a class="ext-link" href="http://www.ewi.tudelft.nl/live/pagina.jsp?id=b41b0676-1267-4d12-a404-50bfe1cf71af"><span class="icon">​</span>TUDelft info page</a>
+</p>
+<p>
+As Tribler is an experimental research group an msc thesis project usually follows this pattern:
+detailing of a new idea or problem description, detailed design of a novel solution/algorithm, implementation and performance evaluation. Generic planning for a 9 month timeline:
+</p>
+<pre class="wiki">  Month 1  One page problem description read all relevant literature (seperate literature study?)
+           This text will grow and be included in the final thesis
+  Month 2  Development of possible solutions
+  Month 3  Details of possible solution or perhaps proof-of-principle prototype
+  Month 4  Several pages with final architecture and design
+           This text should be in a suitable format as a thesis chapter
+  Month 5  Development of a prototype and determine which performance graphs can be generated
+  Month 6  Development of a prototype and initial writing of implementation thesis chapter
+  Month 7  Performance measurements
+  Month 8  Expand thesis + detailed measurements
+  Month 9  Final thesis writing
+
+</pre><p>
+Literature research project planning (in Dutch)
+</p>
+<pre class="wiki">Mogelijke Onderzoekstaak planning
+
+Wk_0 Kick-off meeting orientatie Afstuderen:
+ Student geeft cijferlijst van behaalde vakken;
+ Docent stelt 3 verschillende opdrachten voor;
+Wk_1 Focus meeting:
+ Student geeft gemotiveerde keuze voor 1 opdracht en
+ start literatuur onderzoek;
+ Docent geeft meer vakinghoudelijke informatie
+Wk_3 Onderwerp afbakening:
+ Student overlegt een lijst met gevonden literatuur;
+ Docent bepaalt of het onderwerp te breed of te smal is.
+Wk_5 Draft literatuurlijst:
+ Student heeft uitgebreide literatuurlijst gevonden en gelezen;
+ Docent geeft feedback over taxonomie en prioriteiten.
+Wk_7 Draft literatuur classificatie:
+ Student heeft complete literatuur ingedeelt en weet wat de
+ onopgeloste problemen zijn;
+ Docent geeft feedback en vertaling naar hoofstukken.
+Wk_9 Draft van onderzoeksverslag
+ Student overlegt een compleet literatuurverslag en
+ "research challenges" sectie;
+ Docent geeft feedback en verbeterpunten
+Wk_10 Inleveren onderzoeksverslag
+ Student levert verslag in en geeft aan welk
+ gevonden probleem intressant is voor afstuderen;
+ Docent evalueert de afgelopen 10 weken.
+</pre>    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

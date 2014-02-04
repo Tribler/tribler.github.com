@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TheTracRoadmap">The Trac Roadmap</h1>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+The roadmap provides a view on the <a class="wiki" href="/TracTickets">ticket system</a> that helps planning and managing the future development of a project.
+</p>
+<h2 id="TheRoadmapView">The Roadmap View</h2>
+<p>
+Basically, the roadmap is just a list of future milestones. You can add a description to milestones (using <a class="wiki" href="/WikiFormatting">WikiFormatting</a>) describing main objectives, for example. In addition, tickets targeted for a milestone are aggregated, and the ratio between active and resolved tickets is displayed as a milestone progress bar.
+</p>
+<h2 id="TheMilestoneView">The Milestone View</h2>
+<p>
+It is possible to drill down into this simple statistic by viewing the individual milestone pages. By default, the active/resolved ratio will be grouped and displayed by component. You can also regroup the status by other criteria, such as ticket owner or severity. Ticket numbers are linked to <a class="wiki" href="/TracQuery">custom queries</a> listing corresponding tickets.
+</p>
+<h2 id="RoadmapAdministration">Roadmap Administration</h2>
+<p>
+It is possible to add, modify and remove milestones using either <a class="wiki" href="/TracAdmin">TracAdmin</a> or the web interface. 
+</p>
+<p>
+<strong>Note:</strong> Milestone descriptions can currently only be edited from the web interface. With appropriate permissions, you'll see links below the main navigation bar to manage milestones.
+</p>
+<h2 id="iCalendarSupport">iCalendar Support</h2>
+<p>
+The Roadmap supports the <a class="ext-link" href="http://www.ietf.org/rfc/rfc2445.txt"><span class="icon">​</span>iCalendar</a> format to keep track of planned milestones and related tickets from your favorite calendar software. Calendar applications supporting the iCalendar specification include <a class="ext-link" href="http://www.apple.com/ical/"><span class="icon">​</span>Apple iCal</a> for Mac OS X and the cross-platform <a class="ext-link" href="http://www.mozilla.org/projects/calendar/"><span class="icon">​</span>Mozilla Calendar</a>. 
+</p>
+<p>
+To subscribe to the roadmap, copy the iCalendar link from the roadmap (found at the bottom of the page) and choose the "Subscribe to remote calendar" action (or similar), and insert the URL just copied.
+</p>
+<p>
+<strong>Note:</strong> For tickets to be included in the calendar (as TO-DO items), you need to be authenticated when copying the link. You will only see tickets assigned to yourself, and associated with a milestone.
+</p>
+<hr />
+<p>
+See also: <a class="wiki" href="/TracTickets">TracTickets</a>, <a class="wiki" href="/TracReports">TracReports</a>, <a class="wiki" href="/TracQuery">TracQuery</a>, <a class="wiki" href="/TracGuide">TracGuide</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

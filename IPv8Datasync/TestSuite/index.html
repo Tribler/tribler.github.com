@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="IPv8DatasyncTestSuite">IPv8 Datasync Test Suite</h1>
+<p>
+Introduction and manual to the mighty <a class="wiki" href="/IPv8Datasync">IPv8Datasync</a> Test Suite.
+</p>
+<ul><li>Get the code from <a class="ext-link" href="http://svn.tribler.org/abc/branches/giorgos/datasync/"><span class="icon">​</span>http://svn.tribler.org/abc/branches/giorgos/datasync/</a>
+</li></ul><h2 id="Quickstartguidetothegalaxy">Quick start guide to the galaxy</h2>
+<p>
+Run
+</p>
+<ul><li>./testbench2.py --numberofclients 3
+</li></ul><p>
+And see them synchronize! Check the testbench2.py section of this page for details
+</p>
+<h2 id="Listofprogramsinthesuite">List of programs in the suite</h2>
+<h4 id="createdb.py">createdb.py</h4>
+<p>
+createdb.py creates a database with IPv8 entries as defined in ipv8model.py. You can create databases of predefined size (with --size) and similar to a percentage with another database (--similarity, --similar-db). You can run the script with --help to get a full list of the supported functionality. All the test need of course to have databases to synchronize, so createdb.py is a important part of the test suite.
+</p>
+<p>
+Example run:
+</p>
+<ul><li>./createdb.py --size=1000 --output /tmp/server.sql
+<ul><li>Will create a database /tmp/server.sql with 1000 random entries.
+</li></ul></li><li>./createdb.py --size=500 --similar-db /tmp/server.py --similarity 0.5 /tmp/client.sql
+<ul><li>Will create a database /tmp/client.sql with 250 entries copied from /tmp/server.sql and 250 random entries
+</li></ul></li></ul><p>
+Note: Generation of data can take a long of time. Prefer values up to 50K entries
+</p>
+<h4 id="comparedb.py">comparedb.py</h4>
+<p>
+comparedb.py will take two databases and compare the rows of the IPv8 table as defined in the ipv8model.py. Will output the size of each database, the number of similar entries and the ratio of their similarity. Will also report if an entry exists multiple times in a database.
+</p>
+<p>
+Example run:
+</p>
+<ul><li>./comparedb.py /tmp/server.sql /tmp/client.sql
+</li></ul><p>
+Note: Comparison of databases can take a long time. Be patient.
+</p>
+<h4 id="server.py">server.py</h4>
+<p>
+server.py implements a server node for client to connect to and get database updates. Implements the Tribler Server Protocol as define in Ipv8Datasync.
+</p>
+<p>
+Example run:
+</p>
+<ul><li>./createdb.py --size=1000 --output /tmp/server.sql
+</li><li>./server.py --dbfile=/tmp/server.sql --ip 127.0.0.1
+</li></ul><p>
+Note: The program will run endlessly and can be terminated with ctrl-C. 
+</p>
+<h4 id="client.py">client.py</h4>
+<p>
+client.py implements a client node which connects to a server and gets database updates. Implements the Tribler Client Protocol as define in Ipv8Datasync.
+</p>
+<p>
+Example run:
+</p>
+<ul><li>./createdb.py --size=1000 --output /tmp/client.sql
+</li><li>./client.py --dbfile=/tmp/client.sql --server 127.0.0.1 --ip 127.0.0.2
+</li></ul><p>
+Note: The program will run endlessly and can be terminated with ctrl-C. 
+</p>
+<h4 id="node.py">node.py</h4>
+<p>
+node.py implements a fully working node, acting both as client and server. 
+</p>
+<p>
+Example run:
+</p>
+<ul><li>./createdb.py --size=1000 --output /tmp/node.sql
+</li><li>./node.py --dbfile /tmp/node.sql --ip 127.0.0.1 --iprange 1-5
+</li></ul><p>
+ 
+Will bind to 127.0.0.1 and try to connect to hosts 127.0.0.2 - 127.0.0.5 
+</p>
+<h4 id="testbench2.py">testbench2.py</h4>
+<p>
+testbench2.py is an automated tool to test node synchronization. Will create --numberofclients databases and a node for each database and you can see them synchronize!
+</p>
+<p>
+Example run:
+</p>
+<ul><li>./testbench2.py --numberofclients 5
+</li></ul><p>
+Output:
+The output is the machine output from client.py. For each succesfull sync you get a line with the following format
+</p>
+<table class="wiki">
+<tr><td>IP of the node</td><td>Round</td><td>TYPE</td><td>Connected to</td><td>Bloom filter entries</td><td style="text-align: right"> Bloom filter size</td><td> Rows received </td><td> Data received </td><td> Data Sent </td><td>Entries in the local db after sync
+</td></tr><tr><td>127.0.0.1</td><td>1</td><td>SYNC</td><td>127.0.0.2</td><td>498</td><td>817</td><td>100</td><td>19984</td><td>832</td><td>600
+</td></tr></table>
+<p>
+You can parse the output with parser.py
+</p>
+<h4 id="parser.py">parser.py</h4>
+<p>
+parser.py will parse the output of testbench2.py and create a series of PDF files with visual represantation of the connections and status of the node databases per round. Helps you understand and debug the system
+</p>
+<p>
+Example run:
+</p>
+<ul><li>./testbench2.py --numberofclient 3 | tee testing.out
+</li><li>./parser.py testing.out
+</li></ul><p>
+Will create PDFs named 1.pdf, 2.pdf, ..., &lt;lastround&gt;.pdf in /tmp . Each PDF represents a round
+Work in progress.
+</p>
+<h4 id="testbench.py">testbench.py</h4>
+<h4 id="stats-parser.py">stats-parser.py</h4>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

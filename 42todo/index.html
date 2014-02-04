@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><p>
+tracsecret: tribler
+</p>
+<ul><li>Tribler 4
+<ul><li><a class="wiki" href="/Tribler4">Tribler 4 Overview</a>
+</li><li><a class="missing" href="#">Scenarios</a>
+</li><li><a class="missing" href="#">Functionalities</a>
+</li><li><a class="wiki" href="/GuiRequirements">GUI Requirements</a>
+</li><li><a class="wiki" href="/42todo">4.2 To do</a>
+</li><li><a class="wiki" href="/GuiClientImprovements">GUI improvements</a>
+</li><li><a class="wiki" href="/GuiDiscussion">GUI Discussion</a>
+</li><li><a class="wiki" href="/triblerGUI">GUI General &gt;</a>
+</li></ul></li></ul><p>
+endsecret
+</p>
+</div></td><td>
+</p>
+<h1 id="TriblerV4.2TODO">Tribler V4.2 TODO</h1>
+<h2 id="MAINCLIENT">MAIN CLIENT</h2>
+<ul><li>See all ARNOCOMMENT+LAYERVIOLATION issues
+</li></ul><ul><li>Let all code use Tribler.Core.API as sole import.
+</li></ul><ul><li>Migrate to using Core:
+</li></ul><ul><li>Check current usages of Session already added.
+</li></ul><ul><li>Replace all actionhandler references.
+</li></ul><ul><li>When adding torrents via a RSS subscription the <a class="missing" href="#">TorrentSource</a> id2src in the DB is not
+updated. When using RSS a new <a class="missing" href="#">TorrentSource</a> record is created, apparently the self.id2src is not updated as well.
+</li></ul><ul><li>Reimplement search without torrentManager / peerManager
+</li></ul><ul><li>Click on peer to get details gives error: adjust code to set Similar files / other files to new DB.
+</li></ul><ul><li>Reimplement logic behind Download booster and Play ASAP buttons
+</li></ul><h2 id="Core">Core</h2>
+<h3 id="LowPriority">Low Priority</h3>
+<ul><li>Reimplement selected_files with existing 'priority' field
+</li></ul><ul><li>*Config: some values will be runtime modifiable, others may be as well but hard to implement, e.g. destdir or VOD.
+</li></ul><blockquote>
+<blockquote>
+<p>
+SOL: We throw exceptions when it is not runtime modifiable, and 
+document for each method which currently is. TODO: determine which and 
+document.
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Test VOD quick startup with multi-file torrent. <a class="missing" href="#">PiecePicker</a>.am_I_complete is about whole file. This causes complete files in multi-file torrents to be played via HTTP instead of from file. Thus .movs won't play at all.
+</li></ul><blockquote>
+<blockquote>
+<p>
+TODO
+</p>
+</blockquote>
+</blockquote>
+<p>
+        
+</p>
+<ul><li>VOD: Check why prebuf pieces not obtained and implement rerequest of pieces if needed.
+</li></ul><blockquote>
+<blockquote>
+<p>
+See PiecePickerVOD: self.outstanding, need to tweak further, especially
+for "wild" torrents (i.e., not supported by publisher via seeders)
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Determine what are fatal errors for a tracker and move to DLSTATUS_STOPPED_ON_ERROR if they occur. Currently all tracker errors are put in log messages, and the download does not change status.
+</li></ul><blockquote>
+<blockquote>
+<p>
+TODO
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Write unit tests for API
+</li></ul><blockquote>
+<blockquote>
+<p>
+TODO. Arno: Pioneer may do this as part of standardization effort.
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Allow VOD when first part of file hashchecked? For faster start of playback
+</li></ul><blockquote>
+<blockquote>
+<p>
+TODO
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Adjust <a class="wiki" href="/VideoOnDemand">VideoOnDemand</a>, such that when the download speed is &lt; bitrate, but a large part of the video is already in, i.e. prebuffer+20 secs (or even just the 20 sec prebuffer) that it already starts to play, hoping we'll catch up the bitrate in that period.
+</li></ul><blockquote>
+<blockquote>
+<p>
+TODO
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Allow user seeking: i.e., allow user to set hi/mid/low priority set to some point in the future.
+</li></ul><h2 id="Player">Player</h2>
+<ul><li><a class="wiki" href="/SwarmPlayer">SwarmPlayer</a>'s <a class="missing" href="#">VideoPlayer</a> still reads old config to determine int/ext player. I modified it, but it needs to be cleaned up.
+</li></ul><ul><li>Search for TEMPARNO tags to see if stuff needs fixing.
+</li></ul><blockquote>
+<blockquote>
+<p>
+Arno: mostly done. See <a class="missing" href="#">VideoPlayer</a> about EXTENSIONS
+</p>
+</blockquote>
+</blockquote>
+<p>
+     
+</p>
+<ul><li>Replace ffmpeg.exe and VLC with newer version
+</li></ul><p>
+    
+</p>
+<ul><li>Implement the HTTP seeding variant that does not require server-support (<a class="missing" href="#">GetRight</a> style)
+</li></ul><h2 id="SQLLITE">SQLLITE</h2>
+<ul><li>Get rid off torrentManager and peerManager, such that there is no large-scale in-memory caching.
+</li></ul><p>
+    
+</p>
+<ul><li>Make sure that <a class="missing" href="#">RemoteQueryMsgHandler</a> uses SQLlite and not <a class="missing" href="#">TorrentDataManager</a>. 
+</li></ul><blockquote>
+<blockquote>
+<p>
+Remote query to 4.1. works, and starting a download from a remote hit.
+Also 4.2. returns hits to 4.1 using SQLite.
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Document all *DBHandler classes' methods.
+</li></ul><ul><li>Get rid of MyPermID, MyIP and <a class="missing" href="#">MyPeerInfo</a> from SQLite MyDBHandler
+</li></ul><blockquote>
+<blockquote>
+<p>
+Also: why is there an index on <a class="missing" href="#">MyInfo</a>, if it just contains
+1 entry.
+</p>
+</blockquote>
+</blockquote>
+<p>
+           
+</p>
+<ul><li>Install pysqlite2 / switch to Python 2.5 &lt;-- Good idea to do now. Switch to latest M2Crypto, OpenSSL, wxWidgets
+</li></ul><ul><li>BartercastDBHandler is not implemented. getInstance() returns None
+</li></ul><hr />
+<h1 id="OLDPAGE">OLD PAGE</h1>
+<p>
+For press exposure we can only have 1 simple messagge for <em>whats new?</em>
+The spin for this release is: <em>P2P goes 2.0 with wiki-style edits of tags and subtitles</em>.
+A simple moderation algorithm using <a class="wiki" href="/ModerationCast">ModerationCast</a> will be used
+to distribute this rich metadata. Subscriptions and blocking will be used
+to control spam. 
+</p>
+<p>
+Arno: Do you really see a market for subtitle adding?
+</p>
+<p>
+An crucial shift for Tribler is that we address the 
+<strong>swarm duplication</strong> problem. Over 100+ swarms exist with the 
+same video content for popular items. To deliver true Video on Demand we need to 
+solve that problem. Ideally all Tribler peers always join the same &amp; fastest 
+swarm for an item. Tribler peers now only meet very infrequently in
+swarms ensuring that both give-to-get and <a class="wiki" href="/BarterCast">BarterCast</a> work inefficiently.
+</p>
+<p>
+With <a class="wiki" href="/ModerationCast">ModerationCast</a> we can begin by making 1 swarm more equal then others
+with the same content.
+</p>
+<h3 id="ImprovingSocialNetworks">Improving Social Networks</h3>
+<p>
+  
+</p>
+<ul><li>Always keep TCP connection with friends
+</li></ul><ul><li>Friend invitation
+<ul><li>Remote person search to find your friends. Search on more profile details (city, email, country, phone)
+</li><li>Send friends-invitation with invitation-text (like linked-in).
+</li><li>Design and think about: showing of friendships of persons/friends.
+</li><li>Display incoming requests for friendship (when both online)
+</li><li>Track the status of a friendship request (pending/waiting delivery, delivered, accepted)
+</li></ul></li></ul><ul><li>Simple instance message (max. 250 chars)
+</li></ul><ul><li>Knowing friend's status: online/ready for boosting/currently helping etc.
+</li></ul><ul><li>Friend's recommendation on items
+<ul><li>Unlimited searches in your megacache
+</li><li>Unlimited download of .torrent files from search results
+</li><li>Auto-booster: Use all idle online friends when downloading (automatically enabled)
+</li></ul></li></ul><p>
+  
+</p>
+<h3 id="KeepingCommunicationStatusforBuddyCast">Keeping Communication Status for <a class="wiki" href="/BuddyCast">BuddyCast</a></h3>
+<blockquote>
+<p>
+Each peer keeps the history of communication with other peers. When connected with a contacted peer again, avoid including redundant information in the message.
+</p>
+</blockquote>
+<ul><li>Data structure and database support
+</li></ul><ul><li>Record communication history
+</li></ul><ul><li>Check history and decide the content in message
+</li></ul><blockquote>
+<blockquote>
+<p>
+Arno: I think this is a wrong optimization that is not worth the effort as the majority of bandwidth consumed by the overlay swarm is not by buddycast messages, but by torrents, i.e. METADATA messages.
+</p>
+</blockquote>
+</blockquote>
+<h3 id="OtherTasks">Other Tasks</h3>
+<ul><li>Privacy issue in <a class="wiki" href="/BuddyCast">BuddyCast</a>
+</li></ul><blockquote>
+<blockquote>
+<p>
+Arno: Which is?
+</p>
+</blockquote>
+</blockquote>
+<ul><li>Easy User Feedback
+<ul><li>Easy submission of bugs on SF.net from pull-down menu in Tribler
+</li><li>Direct access to SF.net from pull-down menu in Tribler
+</li></ul></li></ul><ul><li>Megacache is easy to find, but protected against deletion
+<ul><li>Split between <a class="wiki" href="/MegaCache">MegaCache</a>? and bulky torrent2 directory
+</li><li>Discovered_torrents are a read-only directory within tribler_downloads dir
+</li><li>The uninstaller deletes all discovered torrents and Berkeley DB files, except PermID and mypreferences.db
+</li></ul></li></ul><p>
+    
+</p>
+<ul><li>Arno: Integrated video player?
+</li></ul>    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

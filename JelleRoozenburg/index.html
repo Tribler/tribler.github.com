@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="JelleRoozenburg">Jelle Roozenburg</h1>
+<p>
+ir. Jelle Roozenburg was working as a developer for the <a class="missing" href="#">TriblerValorisation</a> project.
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+During development of the Tribler 3.6, 4.0 and 4.1 releases, I've been working on the <a class="wiki" href="/triblerGUI">graphical user interface</a>. Currently, I'm also doing various other programming tasks for the Swarm Player and Tribler Client.
+</p>
+<h2 id="Bloomfiltersassecureandefficientdatastructure">Bloom filters as secure and efficient data structure</h2>
+<p>
+I spend my research assignment reading about Bloom filters. A Bloom filter is a structure that resembles a hash-table, but only stores what elements are included, not the contents of these elements. Using Bloom filters, one can efficiently find the differences between to collections. For instance when two people on the internet both have a collection of files, the missing files can be exchanged without using much bandwidth. 
+More information about Bloom filters can be found in my research assignment report or <a class="ext-link" href="http://www.cs.jhu.edu/~fabian/courses/CS600.624/slides/bloomslides.pdf"><span class="icon">​</span>here</a>.
+</p>
+<ul><li>My research assignment report: <a class="missing attachment">Research assignment.pdf</a>
+</li></ul><h2 id="Mastersthesisresearch">Master's thesis research</h2>
+<p>
+I finished my Computer Science study by a master thesis research in the Tribler group. For my research I did detailed measurements to <a class="wiki" href="/BitTorrent">BitTorrent</a> swarms on the [Filelist.org] community. From these data, I designed and implemented a distributed swarm discovery protocol called <a class="missing" href="#">Little bird</a>. The Little Bird protocol cooperates with the <a class="wiki" href="/BuddyCast">BuddyCast</a> protocol to find the swarm of a certain content element. When initial online/connectible peers are found, this group exchanges swarm information in a reasonable secure fashion.
+</p>
+<ul><li>Master's thesis report: <a class="missing attachment">MSc_Thesic_final_jroozenburg.pdf</a>
+</li><li>Master's thesis presentation: <a class="missing attachment">Presentation.ppt</a>
+</li></ul><h2 id="Sparetimeactivities">Spare time activities</h2>
+<p>
+In my spare time I like:
+</p>
+<ul><li>Running (see the photo taken during the Amsterdam half marathon <a class="ext-link" href="http://www.ingamsterdammarathon.nl"><span class="icon">​</span>http://www.ingamsterdammarathon.nl</a>)
+</li><li>Working on the Aanmelder - eenvoudig evenementen organiseren -  <a class="ext-link" href="http://www.aanmelder.nl"><span class="icon">​</span>http://www.aanmelder.nl</a> invitation and subscription service, together with <a class="wiki" href="/FreekZindel">Freek Zindel</a>, also working for the <a class="wiki" href="/TriblerGettingStarted">Tribler project</a>.
+</li><li>Playing the piano in a band called Nooduitgang (english: emergency exit) <a class="ext-link" href="http://www.nooduitgang.info"><span class="icon">​</span>http://www.nooduitgang.info</a>)
+</li></ul><h2 id="Contactinformation">Contact information</h2>
+<p>
+I can be reached:
+</p>
+<ul><li><a class="wiki" href="/Contact">Computer science faculty</a>, Room: 9.030
+</li><li>Telephone: (015-2)782427
+</li><li>email: <a class="mail-link" href="mailto:j.roozenburg@tudelft.nl"><span class="icon">​</span>j.roozenburg@tudelft.nl</a>
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

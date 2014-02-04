@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BuildingVLCanditsPythonbindingsonMacOSX">Building VLC and its Python bindings on Mac OS/X</h1>
+<p>
+This page contains information on how to get the VLC python bindings to compile on Mac OS/X, and how to get video output in a wxPython control.
+</p>
+<p>
+External hints:
+</p>
+<ul><li>Building VLC: <a class="ext-link" href="http://wiki.videolan.org/OSXCompile"><span class="icon">​</span>http://wiki.videolan.org/OSXCompile</a>
+</li><li>Building Python bindings: <a class="ext-link" href="http://wiki.videolan.org/Python_bindings"><span class="icon">​</span>http://wiki.videolan.org/Python_bindings</a>
+</li></ul><h1 id="Prerequisites">Prerequisites</h1>
+<p>
+The VLC team claims some software is required (<a class="ext-link" href="http://wiki.videolan.org/OSXCompile"><span class="icon">​</span>http://wiki.videolan.org/OSXCompile</a>):
+</p>
+<ul><li><a class="missing" href="#">MacPorts</a> (or Fink) for:
+<ul><li>autoconf
+</li><li>automake
+</li><li>libgcrypt
+</li><li>pkgconfig
+</li></ul></li></ul><ul><li>Make sure above programs are in your PATH before the versions shipped with OS/X. Use for instance <tt>which autoconf</tt> to check this.
+</li></ul><ul><li>If Fink is present, disable it (To disable Fink comment the line: #source /sw/bin/init.csh in your .cshrc file or . /sw/bin/init.csh in your .bashrc file in your home-directory.)
+</li></ul><h1 id="BuildingandinstallingVLC">Building and installing VLC</h1>
+<p>
+Now, we will pull the latest VLC sources from Subversion and compile them. The following was tested on VLC revision 20151. Several patches will be needed to obtain the desired behaviour, and changes in subversion may require changes in the patches as well. See also source:/abc/branches/jelle/guiVWX_3.6/mac/Makefile.
+</p>
+<p>
+Anyway, we will checkout the source into a directory called vlc-trunk, and build the libraries into a directory called vlc-trunk/install-root. First, we do a lot of compiling, and will apply the patch attached to this wiki page and at source:/abc/branches/jelle/guiVWX_3.6/mac/vlc-macosx.patch.
+</p>
+<pre class="wiki">svn checkout svn://svn.videolan.org/vlc/trunk vlc-trunk
+cd vlc-trunk
+export VLCDIR=`pwd`
+
+# build supporting packages
+cd extras/contrib
+./bootstrap
+make src
+cd ../..
+
+# build VLC
+./bootstrap
+./configure --enable-debug --disable-x11 --disable-xvideo --disable-glx --enable-sdl --enable-mad --enable-libdvbpsi --enable-a52 --disable-dvdplay --enable-dvdnav --enable-dvdread --enable-ffmpeg --enable-faad --enable-flac --enable-vorbis --enable-speex --enable-theora --enable-ogg --enable-shout --enable-cddb --disable-cddax --enable-vcdx --disable-skins --disable-skins2 --disable-wxwidgets --enable-freetype --enable-fribidi --disable-caca --enable-live555 --enable-dca --enable-goom --enable-modplug --enable-gnutls --enable-daap --disable-ncurses --enable-libtwolame --enable-x264 --enable-png --enable-realrtsp --disable-libtool --prefix=$VLCDIR/install-root
+patch -p0 &lt; vlc-macosx.patch
+./compile
+
+# install everything we need
+make install
+for i in `$VLCDIR/vlc-config --target builtin`
+do
+  cp $VLCDIR/$i $VLCDIR/install-root/lib/vlc/`basename $i`
+done
+cp $VLCDIR/extras/contrib/vlc-lib/vlc_lib*.dylib $VLCDIR/install-root/lib
+
+# build python bindings
+cd $VLCDIR/bindings/python
+python setup.py install --prefix=$VLCDIR/install-root
+</pre><p>
+Now, we can test the bindings by downloading the attached vlc-test.py and providing a movie.mpg:
+</p>
+<pre class="wiki">export PYTHONPATH=$VLCDIR/install-root/lib/python*/site-packages
+export DYLD_LIBRARY_PATH=$VLCDIR/install-root/lib/
+python vlc-test.py
+</pre><p>
+The following script could come in handy if you want to configure the directory of the libraries:
+</p>
+<pre class="wiki"># fix dependencies
+(for i in `find $VLCDIR/install-root/lib -name "*.dylib" -or -name "*.so"`
+do
+  otool -L $i | perl -ne 'print "install_name_tool -change $1 lib/$2 '$i'
+" if m#(@executable_path/lib/(S+))#;'
+done) | bash -
+</pre><h1 id="Whatwaspatched">What was patched</h1>
+<p>
+When the VLC sources change, the patch as provided might break. This section explains the how and why behind the patch, so that it can be adopted when needed.
+</p>
+<h2 id="Buildingwithouterrors">Building without errors</h2>
+<p>
+First of all, po/Makefile, Makefile are patched to allow an error-free make install. Next, vlc-config is patched to remove a superfluous dependency on libvlc-config, and to remove specific Intel tuning parameters. The latter prevents the python bindings from building with a Universal version of python, since it will try to compile for both PPC and Intel and thus (unfortunately) cannot use processor-specific optimisations. Building the PPC part will fail anyway due to lack of PPC VLC libs, but this was the easiest way to get it to build.
+</p>
+<h2 id="Usingtherighthandle">Using the right handle</h2>
+<p>
+Then, the Mac GUI code was patched. The first thing necessary is to have wxPython and VLC agree on where to draw the video. wxPython supplies a control handle (of type <a class="missing" href="#">ControlRef</a>), but VLC expects an AGLDrawable surface. To convert a <a class="missing" href="#">ControlRef</a> to an AGLDrawable, use the following conversion:
+</p>
+<pre class="wiki">  windowhandle = GetControlOwner(controlhandle)
+  drawable = GetWindowPort(windowhandle)
+</pre><p>
+See also <a class="ext-link" href="http://developer.apple.com/qa/ogl/ogl02.html"><span class="icon">​</span>http://developer.apple.com/qa/ogl/ogl02.html</a> and <a class="ext-link" href="http://developer.apple.com/documentation/Carbon/Reference/Window_Manager/Reference/reference.html"><span class="icon">​</span>http://developer.apple.com/documentation/Carbon/Reference/Window_Manager/Reference/reference.html</a> for more information. I decided to do this conversion inside VLC, as this allows VLC to know the control to draw in and thus the boundaries of the region, which saves communication.
+</p>
+<h2 id="Redrawandresizeproperly">Redraw and resize properly</h2>
+<p>
+Unpatched, the video will not redraw automatically nor resize when the control boundaries change. To fix the redrawing, Carbon needs to be told that the control contents are invalidated and thus need to be redrawn. To fix the resizing, I use a hack: every frame, I recheck the boundaries and make adjustments when the boundaries changed. All of this is done in modules/gui/macosx/voutgl.m:
+</p>
+<pre class="wiki">static void aglSwap( vout_thread_t * p_vout )
+{
+    if( !p_vout-&gt;p_sys-&gt;b_clipped_out || !p_vout-&gt;p_sys-&gt;b_viewport_set )
+    {
+        p_vout-&gt;p_sys-&gt;b_got_frame = VLC_TRUE;
+        aglSwapBuffers(p_vout-&gt;p_sys-&gt;agl_ctx);
+
+        if( !p_vout-&gt;p_sys-&gt;b_viewport_set ) {
+            WindowRef win;
+            Rect rect,clipBounds,viewBounds;
+
+            /* invalidate window data to force redraw */
+            win = GetWindowFromPort( p_vout-&gt;p_sys-&gt;agl_drawable );
+            //GetWindowPortBounds( win, &amp;rect );
+            GetControlBounds( p_vout-&gt;p_sys-&gt;theControl, &amp;rect );
+            InvalWindowRect( win, &amp;rect );
+
+            /* check for resizing -- ugly hack to do this in aglSwap, i.e. every frame */
+            clipBounds = viewBounds = rect;
+
+            /* ignore consecutive viewport update with identical parameters */
+            if( memcmp(&amp;clipBounds, &amp;(p_vout-&gt;p_sys-&gt;clipBounds), sizeof(clipBounds) )
+             &amp;&amp; memcmp(&amp;viewBounds, &amp;(p_vout-&gt;p_sys-&gt;viewBounds), sizeof(viewBounds)) )
+            {
+                /* set first to avoid infinite recursion */
+                p_vout-&gt;p_sys-&gt;clipBounds = clipBounds;
+                p_vout-&gt;p_sys-&gt;viewBounds = viewBounds;
+
+                aglSetViewport(p_vout, viewBounds, clipBounds);
+                aglReshape( p_vout );
+            }
+        }
+    }
+    else
+    {
+        /* drop frame */
+        glFlush();
+    }
+}
+</pre><p>
+Ideally, the resizing should be triggered from wxPython. But this was easier :)
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

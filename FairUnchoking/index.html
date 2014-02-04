@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="FairChoking">Fair Choking</h1>
+<p>
+Boxun
+</p>
+<p>
+The choke algorithm is the peer selection algorithm in <a class="wiki" href="/BitTorrent">BitTorrent</a> and it is designed to guarantee certain level of fairness. In the mainline <a class="wiki" href="/BitTorrent">BitTorrent</a>, the Tit-for-Tat algorithm is introduced to guarantee reciprocation based on peer's download rate. Normally every 10 seconds, 4 fastest remote peers are unchoked. Every 30 seconds, a random interested remote peer is unchoked as optimistic unchoke.   
+</p>
+<p>
+Previous studies show that <a class="wiki" href="/BitTorrent">BitTorrent</a> achieves almost optimal upload bandwidth utilization, which means the system serves at full capacity. There are two main reasons for this result. First, the choking algorithm clusters peers with similar bandwidth together, which makes the bandwidth utilization more efficient. Second, the rarest first piece picking algorithm keeps high entropy in peer's neighborhood, which guarantee each peer always has content interested by others. 
+</p>
+<p>
+Choking algorithm based on <a class="wiki" href="/BarterCast">BarterCast</a> clusters peers with similar long term behavior, in which case it is difficult to maintain high upload bandwidth utilization. In Bartercast, both fast and slow peers can get high reputation scores by constantly uploading to others. Thus the choking algorithm may cluster both fast and slow peers together and potentially waste upload bandwidth of fast peers. In previous study[Microsoft Research], they design a block-based Tit-for-Tat to introduce strict fairness in <a class="wiki" href="/BitTorrent">BitTorrent</a>. Simulation result shows although fairness is achieved but bandwidth utilization is much lower than that with original Tit-for-Tat. 
+</p>
+<p>
+System(swarm) performance is directly related to quality of file replication, streaming and VOD, so it should have higher priority than fairness and it is not proper to sacrifice performance to acquire fairness. Besides, the Tit-for-Tat has already introduced certain level of fairness: the more bandwidth peer contributes, the faster the download is. Previous study[Legout] shows the Tit-for-Tat achieves good fairness in real swarms. 
+</p>
+<p>
+Current the Choker provides two seperated unchoking lists for non-tribler peers and tribler peers, which are the same size. Because most peers in networks are non-tribler peers, the unchoking list(upload bandwidth) for non-tribler peers will be always saturated. While because of the small amount of tribler peers, the upload bandwidth dedicated to tribler peers cannot always been saturated. This inefficiency of utilizing upload bandwidth decreases the throughput of the seeding client and also makes non-tribler peers wait more time to be unchoked than Tribler peers.
+</p>
+<p>
+To full saturate the upload bandwidth, we use a """single""" unchoking list instead of two. All requests from both tribler and non-tribler peers will come into this single list. To guarantee the fairness, incoming peers are ranking by their reputation first, then upload speed. Because reputation of non-tribler peers are seen as 0 by bartercast, ranking all peers straightforwardly may demotivate tribler peers. A non-tribler peer leeching a lot can get a even higher ranking than a tribler peer that uploads something but get a slightly minus reputation. This also encourage whitewashing among tribler peers. To eliminate this problem, we propose to use <strong>min(0, get_reputation(id))</strong> as the ranking function. All peers with non-positive reputation will be treated equally, and they are ranked by their download performance, in which way non-tribler peers can't exploit the bartercast. Peers with good reputation will preempt the upload bandwidth, which is incentive to upload more (popular) contents. 
+</p>
+<hr />
+<p>
+Boudewijn
+</p>
+<p>
+ 
+Using 'min(0, get_reputation(id)' has a disadvantage. It is possible that this results in a list of peers that have a high reputation but only limited available bandwidth. This can occur when peers with little bandwith leave Tribler running for a long time to gain reputation. 
+</p>
+<p>
+This can be solved by having an upload slot of variable size instead of the default 4. When a peer suspects that it is not utilizing its upload bandwith efficiently it should add another upload slot. Obviously it should also remove upload slots every now and then.
+</p>
+<hr />
+<p>
+Johan
+</p>
+<p>
+The situation in 2009 will be that a swarm consists of T4T peers for 99% and merely 1% or less of them support the Bartercast extensions. Swarms can vary in size from 20 to 20.000 peers. We define the <em>Bartercast peer discovery</em> problem as: finding the peers in a swarm that support the bartercast extensions. When seeding to T4T is completed (1.0 ratio) we by default will only seed to
+Bartercast peers and need to discover that 1%.
+</p>
+<p>
+Solving this problem without brute-force connecting to potentially all 20,000 peers is the core of this problem. A simple heuristic is using PEX to gather efficiently a large peer list. Bartercast supporting peers could be identified by their port number (7762).
+Perhaps we can find another efficient method, by using a new Tribler message or PEX extension.
+</p>
+<p>
+Boxun
+</p>
+<p>
+This seeding policy may lead to low upload bandwidth utilization. It's necessary to discover a set of Tribler neighbors to fully utilize peer upload bandwidth after finishing seeding to t4t peers. Because Tribler peers are few, it is also difficult to keep high piece entropy among Tribler peer, which is another key factor of bandwidth utilization. It will be better to stop seeding to t4t peers once there are enough Tribler peers in neighbor set, in terms of swarm performance.
+</p>
+<hr />
+<p>
+Current "give-to-get" means Tribler peers, not only for live streaming or VoD. <a class="ext-link" href="http://www.tribler.org/changeset?new=abc%2Fbranches%2Fmainbranch%2FTribler%2FCore%2FBitTornado%2Fdownload_bt1.py%408723&amp;old=abc%2Fbranches%2Fmainbranch%2FTribler%2FCore%2FBitTornado%2Fdownload_bt1.py%408482"><span class="icon">​</span>Code change history</a>
+ 
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="P2PWebhosting">P2PWebhosting</h1>
+<p>
+The software currently under development for<br />
+<strong>Web 2.0 browsing</strong> is ready in initial form.<br />
+</p>
+<p>
+<a class="missing attachment">Download the V1.0 20MB .exe file now</a><br />
+[source:/software_general/web_2.0_browser Browse the source code] or use <a class="ext-link" href="http://svn.tribler.org/software_general/web_2.0_browser"><span class="icon">​</span>SVN</a><br />
+</p>
+<p>
+Please email your questions or remarks in Dutch or English: fvanderwerf AT gmail.com<br />
+</p>
+<p>
+The Tribler Web 2.0 browser consists of dedicated
+Python code which uses a 250+ MByte cache and
+understanding of website structures of Wikipedia,
+Flickr.com, Youtube, Revver, etc.<br />
+This enables the access of Web 2.0 sites on platforms
+such as a Nokia 770, iPod video, TV Settop box, 64-bit AMD machines,
+and all other platforms which do not run the proprietary
+Flash format player or do not have a traditional PC screen
+with sufficient resolution.
+The demand for moving of video clips to non-proprietary
+formats is clear when 
+<a class="ext-link" href="http://digg.com/search?s=youtube&amp;submit=Search&amp;area=all&amp;age=365&amp;sort=most"><span class="icon">​</span>searching Digg.com</a> for
+articles on this topics, such as 
+<a class="ext-link" href="http://digg.com/software/How_To_Save_YouTube,_MySpace,_Etc._Videos_As_.AVI_s_Using_Free_Tools"><span class="icon">​</span>this highly popular article</a>.
+</p>
+<p>
+<a class="wiki" href="/P2PWebhostingSurvey">Related work survey</a>
+</p>
+<h2 id="FAQ">FAQ</h2>
+<p>
+<strong>Q</strong>: How can I access the video/photo/text file? / How do I convert videos to iPod format?<br />
+<strong>A</strong>: Look up your video/photo/text in the playlist on the viewer tab and click on it with the right mouse button. The menu that is displayed contains a "Save as..." option to save the file to a location of your choice. For videos, this menu also contains a "Save as ... for iPod" option to save the video in iPod format.<br />
+</p>
+<h2 id="Screenshots">Screenshots</h2>
+<p>
+Windows:
+</p>
+<p>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+</p>
+<p>
+Mac OS/X:
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<h3 id="Donelist">Done list</h3>
+<ul><li>GUI improvement
+</li><li>iPod transcoding
+</li><li>.exe by Ivaylo 
+</li><li>[source:software_general/star_buttons_for_ratings voting and rating] across all Web 2.0 sites
+</li><li>Progressive download ? FFMPEG: <em>-re Read input at native frame rate.</em>
+</li><li>TCPDump trace of activity
+<ul><li>   Timestamp of GUI events (Research, show results, )
+</li><li>   Timestamp of HTTP requests, data transfers, etc.
+</li></ul></li><li>Performance analysis, latency of queries
+<ul><li>   single  thread, single Web 2.0 server
+</li><li>   multiple thread, single Web 2.0 server
+</li><li>   multiple thread, multipe Web 2.0 server
+</li><li>   multiple thread, multipe Web 2.0 server + P2P caching !
+</li></ul></li><li>High scores graphs for thesis
+<ul><li>   top searches
+</li><li>   popular content
+</li><li>   highest rating
+</li></ul></li><li>Instant satisfaction interface (skipped)
+<ul><li>   show recent events on ratings and shared browser cache
+</li><li>   check /ratings.rss and /shared_browser_cache.rss
+</li></ul></li><li>Community measurements
+</li></ul><h3 id="ToDolist">ToDo list</h3>
+<ul><li>Layout of thesis report (? Problem description, design, implementation, experiments,etc.)
+<ul><li>   Two chapters for Web2.0 client and shared browser cache ?
+</li><li>   Which graphs are explained
+</li></ul></li><li>Create small wiki document on khashmir DHT matters
+<ul><li>   How bootstrapping goes (every session or after install)
+</li><li>   What steps are taken for the peer discovery
+</li><li>   .torrent fields usage
+</li><li>   What is stored in SQLight
+</li></ul></li><li>P2P element, single click seeding
+<ul><li>   lastest 5.0.7+ Bittorrent core
+</li><li>   use khasmir DHT node
+</li><li>   Possibly at Delft for bootstrapping
+</li><li>   parallel: download thumbnails; check if exists in shared browser cache
+</li></ul></li><li>Bandwidth saved using Shared Browser Cache
+<ul><li>   Experiment of downloading a <a class="missing" href="#">LiveLeak</a> video
+</li><li>   .Torrent file is created
+</li><li>   Track Buddycast spreading
+</li><li>   On another computer conduct a search on keyword
+</li><li>   Show results
+</li></ul></li></ul><h2 id="Planning">Planning</h2>
+<ul><li>Apr: Integration 4.0
+<ul><li>Create simplified version
+</li><li>No usage of <a class="wiki" href="/MegaCache">MegaCache</a>; main memory only
+</li><li>Simple keyword search
+</li><li>Integrate with VLC playback; no transcoding
+</li><li>Perhaps show in download manager
+</li><li>Perhaps show <a class="ext-link" href="http://youtube.com/browse?s=mp"><span class="icon">​</span>recent popular clips on Tribler startup</a>
+</li></ul></li><li>May: Code in initial production use<br />
+</li><li>Jun: Results &amp; writing
+</li><li>Jul: Finish writing
+</li></ul><blockquote>
+<p>
+100 test torrents <a class="ext-link" href="http://www.mininova.org/cat-list/8/seeds"><span class="icon">​</span>http://www.mininova.org/cat-list/8/seeds</a>
+</p>
+</blockquote>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

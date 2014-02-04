@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Subversionline-endingstyle:dosversusunix">Subversion line-ending style: dos versus unix</h1>
+<p>
+<em>Not all of the various editing tools understand that files may contain line endings in a format that differs from the native line-ending style of the operating system on which they are running. So, typically, Unix programs treat the CR character present in Windows files as a regular character (usually rendered as ^M), and Windows programs combine all of the lines of a Unix file into one giant line because no carriage return-linefeed (or CRLF) character combination was found to denote the ends of the lines.</em>
+</p>
+<p>
+<em>This sensitivity to foreign EOL markers can be frustrating for folks who share a file across different operating systems. For example, consider a source code file, and developers that edit this file on both Windows and Unix systems. If all the developers always use tools that preserve the line-ending style of the file, no problems occur. But in practice, many common tools either fail to properly read a file with foreign EOL markers, or convert the file's line endings to the native style when the file is saved.</em>
+<a class="ext-link" href="http://svnbook.red-bean.com/en/1.5/svn-book.html#svn.advanced.props.special.eol-style"><span class="icon">​</span>http://svnbook.red-bean.com/en/1.5/svn-book.html#svn.advanced.props.special.eol-style</a>
+</p>
+<p>
+(2008-10-01) Some files in the Tribler repository use the unix line-ending, while others use the windows line-ending. Even worse, some files contain a mixture of both unix and windows line-endings. An earlier attempt to solve this failed because an <em>invalid</em> svn property was used (eol-type = native). This should have been svn:eol-style = native.
+</p>
+<p>
+(2008-10-08) The solution described has been applied to the mainbranch.
+</p>
+<h1 id="Setupline-endingforasvnsourcetree">Setup line-ending for a svn source tree</h1>
+<p>
+To solve this problem we use the following <a class="ext-link" href="https://svn.tribler.org/abc/branches/boudewijn/junkyard/setup-svn-eol-style.sh"><span class="icon">​</span>commands</a> to use the unit line-ending on all text-files prior to committing them with the <em>correct</em> svn property svn:eol-style = native. This will avoid this problem in the future.
+</p>
+<p>
+<a class="missing" href="#">Include(http://svn.tribler.org/abc/branches/boudewijn/junkyard/setup-svn-eol-style.sh, text/txt)</a>
+</p>
+<h1 id="Mergingfileswithdifferentline-endings">Merging files with different line-endings</h1>
+<p>
+When merging files with different line-endings each line will be marked as changed. This makes it very difficult to find the actual changes. However, svn can be ordered to ignore the line-endings when doing a diff or merge.
+</p>
+<pre class="wiki"># diff: ignoring line-endings
+svn diff -x --ignore-eol-style OLD-URL[@OLDREV] NEW-URL[@NEWREV]
+
+# merge: ignoring line-endings
+svn merge -x --ignore-eol-style sourceWCPATH1@N sourceWCPATH2@M [WCPATH]
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

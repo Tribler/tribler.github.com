@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="WikiProcessors">Wiki Processors</h1>
+<p>
+Processors are <a class="wiki" href="/WikiMacros">WikiMacros</a> designed to provide alternative markup formats for the Trac Wiki engine. Processors can be thought of as <em>macro functions to process user-edited text</em>. 
+</p>
+<p>
+The wiki engine uses processors to allow using <a class="wiki" href="/WikiRestructuredText">Restructured Text</a> and <a class="wiki" href="/WikiHtml">raw HTML</a> in any wiki text throughout Trac.
+</p>
+<h2 id="UsingProcessors">Using Processors</h2>
+<p>
+To use a processor on a block of text, use a wiki blockquote, selecting a processor by name using 'hashbang notation' (#!), familiar to most UNIX users from scripts.
+</p>
+<p>
+<strong>Example 1</strong> (<em>inserting raw HTML in a wiki text</em>):
+</p>
+<pre class="wiki">{{{
+#!html
+&lt;h1 style="color: orange"&gt;This is raw HTML&lt;/h1&gt;
+}}}</pre>
+<p>
+<strong>Results in:</strong>
+</p>
+<h1 style="color: orange">This is raw HTML</h1>
+<hr />
+<p>
+<strong>Example 2</strong> (<em>inserting Restructured Text in wiki text</em>):
+</p>
+<pre class="wiki">{{{
+#!rst
+A header
+--------
+This is some **text** with a footnote [*]_.
+
+.. [*] This is the footnote.
+}}}</pre>
+<p>
+<strong>Results in:</strong>
+</p>
+<div class="code"><pre>A header
+--------
+This is some **text** with a footnote [*]_.
+
+.. [*] This is the footnote.
+</pre></div><hr />
+<p>
+<strong>Example 3</strong> (<em>inserting a block of C source code in wiki text</em>):
+</p>
+<pre class="wiki">{{{
+#!c
+int main(int argc, char *argv[])
+{
+  printf("Hello World\n");
+  return 0;
+}
+}}}</pre>
+<p>
+<strong>Results in:</strong>
+</p>
+<div class="code"><pre>int main(int argc, char *argv[])
+{
+  printf("Hello World\n");
+  return 0;
+}
+</pre></div><hr />
+<h2 id="AvailableProcessors">Available Processors</h2>
+<p>
+The following processors are included in the Trac distribution:
+</p>
+<ul><li><strong>html</strong> -- Insert custom HTML in a wiki page. See <a class="wiki" href="/WikiHtml">WikiHtml</a>.
+</li><li><strong>rst</strong> -- Trac support for Restructured Text. See <a class="wiki" href="/WikiRestructuredText">WikiRestructuredText</a>.
+</li><li><strong>textile</strong> -- Initial support as of aug 2, 2004.  See <a class="ext-link" href="http://projects.edgewall.com/trac/ticket/593"><span class="icon">​</span>ticket 593</a> and <a class="ext-link" href="http://dealmeida.net/projects/textile/"><span class="icon">​</span>Textile</a>.
+</li></ul><h3 id="SourceCodeSupport">Source Code Support</h3>
+<p>
+Trac includes processors to provide inline <a class="wiki" href="/TracSyntaxColoring">syntax highlighting</a> for these languages:
+</p>
+<ul><li><strong>c</strong> -- C
+</li><li><strong>cpp</strong> -- C++
+</li><li><strong>python</strong> -- Python
+</li><li><strong>perl</strong> -- Perl
+</li><li><strong>ruby</strong> -- Ruby
+</li><li><strong>php</strong> -- PHP
+</li><li><strong>asp</strong> --- ASP
+</li><li><strong>sql</strong> -- SQL
+</li><li><strong>xml</strong> -- XML
+</li></ul><p>
+<strong>Note:</strong> <em>Trac relies on external software packages for syntax coloring. See <a class="wiki" href="/TracSyntaxColoring">TracSyntaxColoring</a> for more info.</em>
+</p>
+<p>
+By using the mime-type as processor, it is posible to syntax-highlight the same languages that are supported when browsing source code.  (The list of mime-types can be found in [source:trunk/trac/Mimeview.py Mimeview.py]).
+</p>
+<p>
+For example, you can write:
+</p>
+<pre class="wiki">{{{
+#!text/html
+&lt;h1&gt;text&lt;/h1&gt;
+}}}
+</pre><p>
+The result will be syntax highlighted html code. The same is valid for all other mime types supported.
+</p>
+<p>
+For more processor macros developed and/or contributed by users, visit the macro bazaar: 
+</p>
+<blockquote>
+<p>
+<a class="ext-link" href="http://projects.edgewall.com/trac/wiki/MacroBazaar"><span class="icon">​</span>http://projects.edgewall.com/trac/wiki/MacroBazaar</a>
+</p>
+</blockquote>
+<hr />
+<h2 id="AdvancedTopics:DevelopingProcessorMacros">Advanced Topics: Developing Processor Macros</h2>
+<p>
+Developing processors is no different than <a class="wiki" href="/WikiMacros">WikiMacros</a>. In fact they work the same way, only the usage syntax differs. See <a class="wiki" href="/WikiMacros">WikiMacros</a> for more information.
+</p>
+<p>
+<strong>Example:</strong> (<em>Restructured Text Processor</em>):
+</p>
+<pre class="wiki">from docutils.core import publish_string
+
+def execute(hdf, text, env):
+    html = publish_string(text, writer_name = 'html')
+    return html[html.find('&lt;body&gt;')+6:html.find('&lt;/body&gt;')].strip()
+</pre><hr />
+<p>
+See also : <a class="wiki" href="/WikiMacros">WikiMacros</a>, <a class="wiki" href="/WikiHtml">WikiHtml</a>, <a class="wiki" href="/WikiRestructuredText">WikiRestructuredText</a>, <a class="wiki" href="/TracSyntaxColoring">TracSyntaxColoring</a>, <a class="wiki" href="/WikiFormatting">WikiFormatting</a>, <a class="wiki" href="/TracGuide">TracGuide</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

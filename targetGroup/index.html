@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TargetGroups">Target Groups</h1>
+<p>
+In Tribler we distinguish several target groups, based on the 'Technology adaption lifecycle' (<a class="ext-link" href="http://en.wikipedia.org/wiki/Technology_adoption_lifecycle"><span class="icon">​</span>wikipedia page</a>). It describes how different user groups accept new technology. Currently Tribler is with it's 4.1.7 release somewhere on the slope where early adapters and early majority meet. 
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+In the following pages I discuss some key aspects of the user groups. Next I give an overview of how they experience multimedia in their life. And how they find, consume and share multimedia in their life. Of course, this view on the user groups changes through time (fortunately for us) and products that are now popular for the innovators might decrease in popularity in a few months for these innovators, while they might become interesting for early adopters.
+</p>
+<h1 id="Example-IPod">Example -&gt; IPod</h1>
+<p>
+An example of a product that can be placed in this lifecycle is the MP3 player. The innovators have bought the first MP3 player on the market. The Early adopters bought the 1st IPod, the early majority bought the 2nd and 3rd IPod, while the late majority bought the Ipod that followed after the 3rd IPod. At the end, laggards would buy second hand Ipod's or cheap fake ones. 
+</p>
+<p>
+We currently focus on the first 4 groups. 
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

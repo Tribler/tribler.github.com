@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="MacWebcamStreaming">Mac Webcam Streaming</h1>
+<p>
+This page explains how to stream live video from a webcam to ffmpeg using off-the-shelf components. You will need:
+</p>
+<ul><li>QuickTime Broadcaster: <a class="ext-link" href="http://www.apple.com/quicktime/broadcaster/"><span class="icon">​</span>http://www.apple.com/quicktime/broadcaster/</a> or WireCast: <a class="ext-link" href="http://www.varasoftware.com/products/wirecast/download.html"><span class="icon">​</span>http://www.varasoftware.com/products/wirecast/download.html</a>
+</li></ul><ul><li>Darwin Streaming Server: <a class="ext-link" href="http://developer.apple.com/opensource/server/streaming/index.html"><span class="icon">​</span>http://developer.apple.com/opensource/server/streaming/index.html</a>
+</li></ul><ul><li>VLC
+</li></ul><ul><li>ffmpeg
+</li></ul><h2 id="Overview">Overview</h2>
+<p>
+The general idea is:
+</p>
+<ul><li>QuickTime Broadcaster captures the video stream and registers itself as an RTSP server at the Darwin Streaming Server.
+</li></ul><ul><li>VLC tunes into this streaming server, transcodes, and serves the stream on HTTP.
+</li></ul><ul><li>ffmpeg tunes into the HTTP stream.
+</li></ul><p>
+The reason behind this is that ffmpeg seems unable to tune into the RTSP stream directly or is unable to handle the audio format offered by QuickTime. Using VLC to transcode avoids this problem.
+</p>
+<h2 id="Setup">Setup</h2>
+<p>
+First, install everything.
+</p>
+<p>
+Next, start QuickTime Broadcaster, and broadcast using the following settings:
+</p>
+<ul><li>Audio: MPEG-4
+</li></ul><ul><li>Video: MPEG-4, increase width/height/data rate
+</li></ul><ul><li>Network: Automatic announce, using 'mystream' as file
+</li></ul><p>
+If starting the broadcast produces a 'precondition failed' error, try to announce a different filename.
+</p>
+<p>
+Then, start VLC, and enter File -&gt; <a class="missing" href="#">Stream/Transcoding</a> Wizard. Select:
+</p>
+<ul><li>'Stream to network', press Next.
+</li></ul><ul><li>Stream: rtsp://127.0.0.1/mystream.sdp, press Next.
+</li></ul><ul><li>Streaming method: HTTP, press Next.
+</li></ul><ul><li>Transcode Video: MPEG-4, Transcode Audio: MP3, press Next.
+</li></ul><ul><li>MPEG TS, press Next.
+</li></ul><ul><li>Select 'local playback' if you want, press Next.
+</li></ul><ul><li>Press Finish.
+</li></ul><p>
+Finally, start ffmpeg:
+</p>
+<pre class="wiki">ffmpeg -i http://localhost:8080 foo.avi
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BuildTribleronWindowsfromScratch">Build Tribler on Windows from Scratch</h1>
+<p>
+<em>This page may be outdated, see Tribler/readme.txt in the source tree for up-to-date info.</em>
+</p>
+<p>
+To build a Tribler installer on Windows from scratch, do the following.
+</p>
+<h2 id="Installingrequiredsoftware">Installing required software</h2>
+<ol><li>Download and install <a class="ext-link" href="http://www.python.org/download/releases/2.4.3/"><span class="icon">​</span>Python 2.4.3</a> into <tt>C:Python243wx2801</tt>.
+</li><li>Download and install <a class="ext-link" href="https://sourceforge.net/project/showfiles.php?group_id=10718&amp;package_id=10559"><span class="icon">​</span>wxPython 2.8.0.1-unicode</a>.
+</li><li>Download and install <a class="ext-link" href="http://sourceforge.net/project/showfiles.php?group_id=15583"><span class="icon">​</span>py2exe 0.6.6</a>.
+</li><li>Download and install the <a class="ext-link" href="http://nsis.sourceforge.net/Download"><span class="icon">​</span>NSIS installer</a> into <tt>C:Program FilesNSIS</tt>.
+</li><li>Download and install some Subversion client (for instance <a class="ext-link" href="http://tortoisesvn.net/downloads"><span class="icon">​</span>TortoiseSVN</a>).
+</li><li>Download and install <a class="ext-link" href="http://chandlerproject.org/Projects/MeTooCrypto#Downloads"><span class="icon">​</span>M2Crypto 0.18-win32 (Contributed Build)</a>.
+</li><li>Download and install <a class="ext-link" href="http://www.initd.org/tracker/pysqlite"><span class="icon">​</span>PySqlite and/or APSW</a>.
+</li></ol><h2 id="Preparingthesource">Preparing the source</h2>
+<p>
+Access to <tt>https</tt> requires authorisation. For read-only access, use <tt>http</tt>.
+</p>
+<ol><li>Check out <tt>https://svn.tribler.org/abc/branches/mainbranch</tt> into <tt>C:svnmainbranch</tt>.
+</li><li>Check out <tt>https://svn.tribler.org/ffmpeg/branches/ffmpeg-win32-ivaylo-jan2007</tt> into <tt>C:svn fmpeg</tt>.
+</li><li>Check out <tt>https://svn.tribler.org/vlc/branches/vlc-0.8.6a-win32-ivaylo-mar2007</tt> into <tt>C:svnvlc</tt>.
+</li><li>Copy the files in <tt>C:svn fmpeg</tt> and <tt>C:svnvlc</tt> into <tt>C:svnmainbranch</tt>.
+</li><li>Rename the copied <tt>C:svnmainbranchzip</tt> to <tt>vlc</tt>.
+</li></ol><h2 id="Buildinstaller">Build installer</h2>
+<ol><li>Open <tt>CMD</tt> and chdir to <tt>C:svnmainbranch</tt>
+</li><li>Run <tt>makedist</tt>
+</li></ol><p>
+You will now have an installer at <tt>C:svnmainbranchdistTribler-VERSION.exe</tt>, enjoy :)
+</p>
+<hr />
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

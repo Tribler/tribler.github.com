@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="DistributedTracker">Distributed Tracker</h1>
+<p>
+<em>Status: algorithm design done, re-PEX code merged in mainbranch</em><br />
+svn.tribler.org/abc/branches/mainbranch/Tribler/Core/DecentralizedTracking/repex.py
+</p>
+<p>
+Motivation: Traditional television is moving online <a class="ext-link" href="http://www.marketingcharts.com/television/internet-surpasses-tv-in-australia-mobile-approaches-saturation-point-3976/nielsen-australia-media-consumption-internet-vs-tv-2005-2007jpg/"><span class="icon">​</span>according</a> to <a class="ext-link" href="http://www.imediaconnection.com/images/content/chart_hitwise_060525_2_web.gif"><span class="icon">​</span>numerous studies</a>. This means every point of failure needs to be removed from the architecture, resulting in a fully self-organising system with unbounded scalability called <a class="wiki" href="/4thGenerationP2P">4th Generation P2P</a>.
+</p>
+<p>
+Tribler is striving for unbounded scalability. Tribler already addresses the problem of decentralized content discovery using <a class="wiki" href="/BuddyCast">BuddyCast</a>, but the current client still lacks a solution for decentralized tracking of swarms. <a href="/wiki#LittleBird">Previous work</a> on decentralized tracking has been done by <a class="wiki" href="/JelleRoozenburg">Jelle Roozenburg</a>, but further research is required. Current research is being conducted by MSc student Raynor Vliegendhart.
+</p>
+<h2 id="Masterthesiswork">Master thesis work</h2>
+<p>
+Implement and deploy a fully distributed tracker in Tribler. Used algorithm is the 2-hop torrentsmell algorithm, described in the research assignment document below. <a class="missing" href="#">ToDo</a>:
+</p>
+<ul><li>(done) basic cmdline tool for Re-pex handshake
+</li><li>(done) expand tool into swarm measurement crawler
+</li><li>Measure for a few swarms the average response time per client type
+<ul><li>(done) 1min max listen time
+</li><li>determine liars about PEX capability
+</li></ul></li><li>(done) Parallel crawling &amp; measurement
+<ul><li>Uniform event format <strong>.crawl</strong> file
+</li><li>Timestamp, SHA1, Peer-IP, peer-Port, EVENT, DATA
+<ul><li>CONNECTION_ESTABLISHED, PeerID
+</li><li>CONNECTION_TIMEOUT
+</li><li>CONNECTION_CLOSED, bytes-downloaded, bytes-uploaded
+</li><li>CONNECTION_LOST (in case of network error), bytes-downloaded, bytes-uploaded
+</li><li>EXTEND_SEND
+</li><li>EXTEND_RECEIVED, ut_pex=1 (msg#), Transmission 1.34 (client version)
+</li><li>PEX_RECEIVED, peer-IP, peer-port, ..., DROPPED:, peer-IP, peer-port, ...
+</li><li>(first time)   ONLINE_CHECK_SEND
+</li><li>(after 1hour,2h,...) ONLINE_CHECK_SEND
+</li><li>ONLINE_CHECK_SUCCESS
+</li><li>ONLINE_CHECK_TIMEOUT (connection never accepted: offline <strong>or busy</strong>)
+</li><li>ONLINE_CHECK_ERR (network error)
+</li></ul></li><li>Also included, but currently only relevant for human readers:
+<ul><li>TRACKER_PEERS_INJECTED, announce-url, #reported-seeds, #reported-downloaders, peer-IP, peer-port, ...
+</li></ul></li></ul></li><li>Experiment around churn rate and decay of PEX info
+<ul><li>Crawl several swarms for 1? hour, collect 10000 peers
+</li><li>Store all collected IPv4 addresses
+</li><li>Some peers were heard about multiple times
+</li><li>check online status and connectability of discovered peers for 1 week (drop if 10x connection unsuccessful)
+<ul><li>Still online
+</li><li>Still seeding
+</li></ul></li><li>Determine relation with swarm age (1hour old vs. 3 months old)
+</li></ul></li><li>Measure bytes used for PEX traffic
+</li><li>Are seeders-only swarms breaking our algorithms? Seeders have no established connections without leechers
+</li></ul><h2 id="ThesisChapterLayout">Thesis Chapter Layout</h2>
+<ul><li>Intro
+</li><li>Problem Description <br />
+speed, scalability, security, etc
+</li><li>Design of 2-hop <a class="wiki" href="/TorrentSmell">TorrentSmell</a><br />
+<ul><li>remote search, expand with PEX results
+</li><li>Re-PEX for keeping swarm contact
+</li></ul></li><li>Implementation and experiments<br />
+measuring and understanding PEX (or prev. section?)
+Graphs of 1 command line experiment<br />
+cost per re-pex, interval settings, etc.<br />
+Algorithm setting adjustments<br />
+Reduced tracker fallback rate, new bandwidth/storage requirements<br />
+</li><li>Deployment?<br />
+Deployment crawl results, etc
+</li><li>Conclusions
+</li></ul><p>
+    
+</p>
+<h2 id="Swarmcrawlingmeasurement">Swarm crawling measurement</h2>
+<p>
+<strong>Popular torrent, reportedly 2897 seeders and 826 downloaders, on 2009-09-04, from 10:36 to 11:38.</strong> <br />
+The graphs below show the bandwidth usage during the crawl, the number of the peers actually PEXed, statistics about the first PEX message, and the likelihood of reconnecting to a previously known peer in the future.
+</p>
+<p>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a><a class="missing" href="#"></a>
+</p>
+<p>
+<strong>3 Linux ISO swarms</strong> <br />
+Below is a graph showing the number of peers still connectable after we've last seen them. Note that the big drop at the end can be explained through the lack of data points: only 203 of the 475 initial peers have been checked for their online status.
+</p>
+<p>
+<a class="missing" href="#"></a><a class="missing" href="#"></a>
+</p>
+<p>
+If we crawl the swarm while trying to stay connected to PEX-capable peers until the connection is dropped by the other party, the graph looks quite different (see below). Peers seem to be less likely connectable after they have closed the connection. Also, while less peers get sent an online check, there is an increasing trend of connectability. This is in line with the results of the "Understanding Churn in Peer-to-Peer Networks" paper, where the authors found the uptime of a peer to be a good indicator of the peer's remaining uptime.
+</p>
+<p>
+<a class="missing" href="#"></a><a class="missing" href="#"></a>
+</p>
+<h2 id="ResearchAssignment">Research Assignment</h2>
+<p>
+Ongoing work by Raynor. Large measurements show that The Pirate Bay is the most dominant central tracker. For each tracker we computed the number of total peers that it tracks. This was done by summing up the swarm sizes of all torrents in which a tracker was mentioned in the announce fields. The .torrent files of these swarms were obtained by running the <a class="ext-link" href="http://svn.tribler.org/abc/branches/release-4.5/Tribler/Core/BuddyCast/TorrentCollecting.py"><span class="icon">​</span>Tribler TorrentCollecting</a> software for roughly a year. Swarm sizes were constantly updated during this time. The top 20 trackers are depicted in the bar chart below:
+</p>
+<p>
+<a class="missing" href="#"></a> <br /> <strong>Dataset:</strong> 283,031 swarms, total of 52,634,778 peers.
+</p>
+<p>
+In this chart, peers that are tracked solely by a tracker are marked as "Single Tracker". Hence, these peers come from a swarm which are only tracked by a single tracker. The remaining peers come from swarms that are tracked by multiple trackers. "Primary Tracker" indicates the peer came from a multi-tracker swarm which is primarily tracked by this tracker, i.e. the tracker is mentioned in the 'announce' field of the torrent file. If the tracker was not mentioned in the 'announce' field (and hence, it must have been mentioned in the 'announce-list' field), we label the peers as "Foreign Tracker".
+</p>
+<p>
+The swarms presented in this chart where carefully filtered for spam, fakes, and misreportings.
+</p>
+<h2 id="DHTPapers">DHT Papers</h2>
+<ul><li><strong>An Analysis of <a class="wiki" href="/BitTorrent">BitTorrent</a>'s Two Kademlia-Based DHTs</strong> (<a class="ext-link" href="http://www.cs.rice.edu/~scrosby/tr/BTMeasure-Main.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.76.8338"><span class="icon">​</span>CiteSeer</a>) <br /> Describes the DHT implementations of Mainline and Azureus and their shortcomings.
+</li><li><strong>The Index Poisoning Attack in P2P File Sharing Systems</strong> (<a class="ext-link" href="http://cis.poly.edu/~ross/papers/poison.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.81.3640"><span class="icon">​</span>CiteSeer</a>) <br /> Describes index poisoning in Overnet, which is a Kademlia-based DHT.
+</li><li><strong>DDoS Attacks by Subverting Membership Management in P2P Systems</strong> (<a class="ext-link" href="http://cobweb.ecn.purdue.edu/~isl/NPSec07.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:qed-p8JXGA8J:scholar.google.com/&amp;output=citation&amp;scfhb=1&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Discusses the vulnerabilities of DHTs and gossip algorithms and argue that pull-based designs are preferred over push-based designs.
+</li><li><strong>Handling Churn in a DHT</strong> (<a class="ext-link" href="http://oceanstore.cs.berkeley.edu/publications/papers/pdf/bamboo-usenix.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.10.5979"><span class="icon">​</span>CiteSeer</a>, <a class="ext-link" href="http://sahara.cs.berkeley.edu/jan2004-retreat/slides/bamboo-tr.pdf"><span class="icon">​</span>TR</a>) <br /> Contains a table on observed session times in various P2P systems.
+</li><li><strong>The Impact of DHT Routing Geometry on Resilience and Proximity</strong> (<a class="ext-link" href="http://www.mpi-sws.org/~gummadi/papers/p1101-gummadi.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:QOwTgp5uHQcJ:scholar.google.com/&amp;output=citation&amp;scfhb=1&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Comparison of different DHT routing <em>geometries</em>, including the XOR geometry of Kademlia.
+</li><li><strong>POND: The Power of Zone Overlapping in DHT Networks</strong> (<a class="ext-link" href="http://ieeexplore.ieee.org/stampPDF/getPDF.jsp?arnumber=04579564"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:SVsdcw8xihcJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Discusses the problem of load balancing in DHTs.
+</li><li><strong>Profiling a Million User DHT</strong> (<a class="ext-link" href="http://www.imconf.net/imc-2007/papers/imc150.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:28Cy8sHIpJUJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Studies the Azureus DHT.
+</li><li><strong>Secure routing for structured peer-to-peer overlay networks</strong> (<a class="ext-link" href="http://www.cs.rice.edu/~dwallach/pub/osdi2002.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://portal.acm.org/popBibTex.cfm?id=844156&amp;ids=J597.844128.844153.844156&amp;types=periodical.issue.section.article&amp;reqtype=article&amp;coll=GUIDE&amp;dl=GUIDE&amp;CFID=15386518&amp;CFTOKEN=41994084"><span class="icon">​</span>BibTeX</a>) <br /> Discusses secure nodeIds, secure maintenance of routing tables and secure message forwarding in DHTs.
+</li></ul><h2 id="PEXGossipsRandomAntWalks">PEX, Gossips, <a class="missing" href="#">Random/Ant</a> Walks</h2>
+<ul><li><strong>Understanding the Properties of the <a class="wiki" href="/BitTorrent">BitTorrent</a> Overlay</strong> (<a class="ext-link" href="http://arxiv.org/pdf/0707.1820"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:yu-yLeY_e0sJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Describes the effect of PEX on the overlay network.
+</li><li><strong>Evolution and Enhancement of <a class="wiki" href="/BitTorrent">BitTorrent</a> Network Topologies</strong> (<a class="ext-link" href="http://ieeexplore.ieee.org/stampPDF/getPDF.jsp?arnumber=4539662"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:QsghLFB65BcJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Slightly related to the previous paper, but does not cover PEX. Paper proposes modified central tracking algorithm for Small World effect.
+</li><li><strong>Really Truly Trackerless <a class="wiki" href="/BitTorrent">BitTorrent</a></strong> (<a class="ext-link" href="http://reports-archive.adm.cs.cmu.edu/anon/2006/CMU-CS-06-148.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:uO6T5XJVl4cJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Proposes random walks to discover peers.
+</li><li><strong>Random Walks in Peer-to-Peer Networks</strong> (<a class="ext-link" href="http://www.cc.gatech.edu/~mihail/rwp2p04.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:IJ9nWHksId4J:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Argues random walks are superior to flooding in case of clustered overlay topologies. Discusses a weakly decentralized construction algorithm using random walks.
+</li></ul><ul><li><strong>Gossip-based peer sampling</strong> (<a class="ext-link" href="http://www.irisa.fr/asap/intranet/gossip-based-peer-sampling.pdf/attachment_download/file"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:H5yQf3olY4YJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Explores the design space of gossip protocols for peer sampling.
+</li><li><strong>A pheromone-based coordination mechanism applied in P2P</strong> (<a class="ext-link" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.3.2172&amp;rep=rep1&amp;type=pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.3.2172"><span class="icon">​</span>CiteSeer</a>) <br /> Discusses real and synthetic pheromones and studies how the latter can be used to build a P2P system.
+</li><li><strong>Exploring the Interdisciplinary Connections of Gossip-based Systems</strong> (<a class="ext-link" href="http://www.cs.vu.nl/~costa/papers/costa07exploring.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:NCRXTvOn4RAJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Gives a definition of gossip protocols and shows several other algorithms share similarities.
+</li></ul><p>
+Also of interest: <a class="wiki" href="/PEXCrawl">PEXCrawl</a>
+</p>
+<h2 id="BitTorrentTrackers"><a class="wiki" href="/BitTorrent">BitTorrent</a> Trackers</h2>
+<ul><li><strong>Availability in <a class="wiki" href="/BitTorrent">BitTorrent</a> Systems</strong> (<a class="ext-link" href="http://www.cs.umass.edu/~arun/papers/BT_availability.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:hoonBR-9VwAJ:scholar.google.com/&amp;output=citation&amp;scfhb=1&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>, <a class="ext-link" href="http://www-net.cs.umass.edu/~honggang/pub/Neglia06availability_bt06-41.pdf"><span class="icon">​</span>TR</a>) <br /> Discusses central single and multi-tracker swarms and the availability of the trackers.
+</li></ul><h2 id="UnsortedPapers">Unsorted Papers</h2>
+<ul><li><strong>A Survey and Comparison of Peer-to-Peer Overlay Network Schemes</strong> (<a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:00YOHLoibNcJ:scholar.google.com/&amp;output=citation&amp;scfhb=1&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> Survey and comparison of various structured and unstructured P2P networks.
+</li><li><strong>Peer-to-Peer Overlay Networks: A Survey</strong> (<a class="ext-link" href="http://www.cse.ust.hk/~gabriel/Group/P2Psurvey/TR-P2P.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:UJXa5XunfeMJ:scholar.google.com/&amp;output=citation&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> A less extensive survey. (Can be removed since the previous paper is more extensive?)
+</li><li><strong>Debunking some myths about structured and unstructured overlays</strong> (<a class="ext-link" href="http://research.microsoft.com/en-us/um/people/antr/ms/myths.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?hl=nl&amp;lr=&amp;q=info:quix86-EUpYJ:scholar.google.com/&amp;output=citation&amp;scfhb=1&amp;oe=ASCII&amp;oi=citation"><span class="icon">​</span>BibTeX</a>) <br /> <em>Debunks</em> the myths that structured overlays are expensive to maintain, their topology constraints make it harder to exploit heterogeneity, etc.
+</li><li><strong>Understanding Churn in Peer-to-Peer Networks</strong> (<a class="ext-link" href="http://www.imconf.net/imc-2006/papers/p19-stutzbach2.pdf"><span class="icon">​</span>PDF</a>, <a class="ext-link" href="http://scholar.google.nl/scholar.bib?q=info:tBT4DC3nxJgJ:scholar.google.com/&amp;output=citation&amp;hl=en&amp;ct=citation&amp;cd=0"><span class="icon">​</span>BibTeX</a>) <br /> Contains extensive study of churn.
+</li></ul><h1 id="LittleBird">Previous Work: Little Bird</h1>
+<p>
+<em>This section should be merged after research has been completed</em>
+</p>
+<h2 id="RemovingtheBittorrenttracker">Removing the Bittorrent tracker</h2>
+<p>
+<em><a class="wiki" href="/JelleRoozenburg">JelleRoozenburg</a></em>
+</p>
+<p>
+In the <a class="wiki" href="/BitTorrent">BitTorrent</a> p2p system all users that download a certain file profit from each other by bartering file pieces. Using this principle, files can be downloaded faster. A group of users that download the same file on the same moment are called a download swarm. The function of the <a class="wiki" href="/BitTorrent">BitTorrent</a> tracker is to find out which users are in the download swarm of a certain file. A secondary task of the tracker is to administrate statistical information about the swarm, for instance which part of the file is downloaded by which users.
+</p>
+<h2 id="Trackerprotocol">Tracker protocol</h2>
+<p>
+These tasks are currently implemented in a centralized fashion. A <a class="wiki" href="/BitTorrent">BitTorrent</a> tracker is a server to which users can send a getPeers() request. This is request will be answered by the tracker with a response containing a list of IP addresses and port numbers of peers that are currently in this swarm. Communication with the tracker is done using the HTTP protocol, just like a webserver.
+</p>
+<h2 id="Disadvantagesofacentralizedtracker">Disadvantages of a centralized tracker</h2>
+<p>
+The decentralized design of p2p systems is one of their major advantages. It makes the <a class="wiki" href="/BitTorrent">BitTorrent</a> system flexible, scalable and reliable. The <a class="wiki" href="/BitTorrent">BitTorrent</a> tracker is one of the parts of the system that still has a centralized design. This makes its simple implementation possible, but is formost a disadvantage for <a class="wiki" href="/BitTorrent">BitTorrent</a>.
+</p>
+<p>
+A centralized tracker is a single point of failure in the <a class="wiki" href="/BitTorrent">BitTorrent</a> system. This means that its failure will cause an interruption of the <a class="wiki" href="/BitTorrent">BitTorrent</a> service, namely: to enable people to join and use download swarms. While the system gives a reliable download environment through thousands of users going online and offline at each moment, a disfunctional tracker immediately stops the download possibility of all new users.
+</p>
+<p>
+A <a class="wiki" href="/BitTorrent">BitTorrent</a> tracker is also not scalable because of its centralized design. On this moment it is already noticable that trackers have long response delays and peers often have to do more tracker requests due to time-outs. When the number of <a class="wiki" href="/BitTorrent">BitTorrent</a> users will grow in the future this problem will even grow in such a way that building a reliable centralized tracker will be undoable or at least very expensive.
+</p>
+<p>
+A final disadvantage of the current centralized trackers is that they are an easy target for an attack at the <a class="wiki" href="/BitTorrent">BitTorrent</a> system. A simple distributed denial of service (DOS) attack can stop a tracker and with it thousands of users. With the current use of <a class="wiki" href="/BitTorrent">BitTorrent</a> for the exchange of copyrighted materials, it is obvious that certain parties have motives for such attacks.
+</p>
+<h2 id="Distributedtracker">Distributed tracker</h2>
+<p>
+For the reasons given in the previous section, it shows that the centralized <a class="wiki" href="/BitTorrent">BitTorrent</a> tracker should be replaced by a distributed follow-up. In this section we will explain how this is done and which issues have to be considered when distributing the tracker's functionality over all peers in the swarm.
+Find initial tracker peers
+</p>
+<p>
+The most important functionality of a tracker is to give any peer a list of addresses through which other peers in the swarm can be contacted. With a centralized tracker, the tracker location is saved in the .torrent-file so that each peer that starts a download can immediately contact it. When such a central point is not present, then we first have to find the tracker. In the distributed case, the tracker consists of all peers (or more commonly: all peers in the swarm in question). So the problem is: find initial peers that are in the swarm and are part of the distributed tracker.
+</p>
+<p>
+This problem will be solved using peer gossiping. Using this protocol, each peer that starts to seed a new file over the network or joins an existing swarm, pushes a message to the peers in its neighborhood. This messages contains his permanent identifier, a timestamp and a datastructure (probably a Bloom filter) with all the info hashes of the files it is currently seeding. These messages are forwarded by other peers according to the probabilistic gossiping protocol. In this way, most peers in the network receive the messages.
+</p>
+<p>
+When a swarm of reasonable size has formed, most peers should have a collection of messages with information about the current members of this swarm. If a peer wants to download the file (so join the swarm), it can simply connect to the peers in its list, check if they are still active swarm members and join in.
+Get more swarm peers
+</p>
+<p>
+In the current <a class="wiki" href="/BitTorrent">BitTorrent</a> system, all peers in a swarm periodically reconnect to the tracker to add more swarm members to their peer lists. By doing so, they have knowledge of more peers and the probability of finding a peer with the pieces of the file you need grows.
+</p>
+<p>
+In the distributed tracker case, when a peer has found some peers using the method of section 'Find initial tracker peers', it will use these peers to enlarge its list of known peers in the swarm. This can be done by asking these peers for their swarm list (all peers in the swarm). Although this sounds very simple, there are different approaches to do this. 
+</p>
+<h3 id="Trackjustseeders">Track just seeders?</h3>
+<p>
+Would it make sense to gossip only about seeders?  A popular file will have fewer seeders than leechers, and the set of seeders will be more stable.  In principle, you only need to find one peer, since you can random walk from there to find others.  Bittorrent is normally supposed to work even when the swarm includes only leechers, but would it make sense to give up on that and instead try to get more seeders?  Actually, the distinction between seeders and leechers is blurry to me.  In practice, a peer could advertise itself when 1) its policy has been configured to seed files for a sufficiently long period of time after download completion <em>and</em> 2) it has detected that the user leaves it running all the time and not just when he is downloading a file.  <em><a class="mail-link" href="mailto:--rimey@hiit.fi"><span class="icon">​</span>--rimey@hiit.fi</a></em>
+</p>
+<h3 id="DHTandalternatives">DHT and alternatives</h3>
+<p>
+Numerous DHT proposals exist to decentralise peer discovery.
+An advanced proposal uses <a class="ext-link" href="http://arxiv.org/abs/cs.DS/0306043"><span class="icon">​</span>Skip Graphs</a> to 
+discover content and can be adapted to discover peers.
+However, security is not fully taken into account and a trivial pollution attack
+can bring the system down.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

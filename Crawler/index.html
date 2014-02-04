@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Statisticscrawlingandremotenetworkdebugging">Statistics crawling and remote network debugging</h1>
+<p>
+To understand how the network functions, how healthy it is, and to identify failures it is possible to <a class="ext-link" href="http://www.google.com/search?q=bittorrent+measurement+study"><span class="icon">​</span>crawl the Bittorrent network</a> and thus also Tribler.
+</p>
+<p>
+We integrated some additional support for crawling into Tribler. This feature is specifically designed to be able to prevent cascading failures and understand possible security incidents as the <a class="ext-link" href="http://www.google.com/search?q=gnutella+virus"><span class="icon">​</span>Gnutella worm</a> from <a class="ext-link" href="http://www.f-secure.com/v-descs/mandra.shtml"><span class="icon">​</span>2001</a>. This crawler will not record personal data, psychological information, nor other sensitive data. No Person-identifiable data such as names, addresses or contact details are recorded. We will never publish any personally identifiable information in any form or function. Neither do we record the name of the files or exact filesize, therefore, we do not know what content is played using our software. 
+</p>
+<p>
+This feature is can be easily turned on or off by removing the id's that identify the crawlers in the <a class="missing" href="#">Tribler/Core/Statistics</a>/crawler.txt file. Our Beta software has this feature enabled by default. We are trying to be the good guys and will not snoop around without reason, however, we need to gather performance statistics. For example, for developing <a class="wiki" href="/4thGenerationP2P">4G P2P</a> we need solid performance data on frame loss while doing on-demand Bittorrent streaming. This helps improve our algorithm and go towards sustained loss-less 4+ Mbps streaming.
+</p>
+<p>
+The Crawler can be used to connect to Tribler peers through the overlay swarm. A Crawler can than request specific statistics or for instance request a NAT test. All Tribler peers, as of version 4.2, are running the crawler backend, allowing them to respond to Crawler requests from authorised Crawler peers. To keep everyone from acting as a Crawler and requesting (possibly sensitive) information from peers, a Crawler request is only accepted from a select list of Crawler, identified with their public keys. As no one outside of Tribler has the associated private keys, they will not be able to act as a authentic Tribler Crawler.
+</p>
+<h1 id="Features">Features</h1>
+<ul><li>Frequency: we want to run several Crawler processes at the same time. However, we do not want the clients to handle duplicate requests. Therefore, all request-messages that are received within a given frequency will not be passed to the researchers part of the Crawler. Note that in this case the Crawler will send a reply-message with error-value 254, indicating a frequency error.
+</li><li>Channels: while not advisible it is possible to request large amounts of data from client processes. When the reply-messages is larger than a certain threshold (defined in <a class="missing" href="#/Crawler">Tribler/Core/Statistics/Crawler</a>.py) this message is split into parts. When all parts are received the researchers 'received-reply' method is called.
+</li></ul><h1 id="Forresearchers">For researchers</h1>
+<p>
+Crawler processes send Crawler-request messages to peers they find through buddycast. A peer that receives this request should send a matching Crawler-reply back as soon as possible. Any actions performed upon receiving a Crawler-request is left to the researchers.
+</p>
+<p>
+To use the Crawler mechanism, at least the following steps must be taken:
+</p>
+<ol><li>Reserve message-specific-id to identify request/reply pairs. These Message-id's are defined in <a class="missing" href="#">Tribler/Core/BitTornado</a>/BT1/MessageID.py.
+</li><li>Register three methods to the Crawler. Registering can be done in <a class="missing" href="#">Tribler/Core/Overlay/OverlayApps</a>.py. 
+<ul><li>Initiator-callback: called when a new connection is made AND periodically thereafter (crawler-side)
+</li><li>Request-callback: called when a request-message is received (client-side)
+</li><li>Reply-callback: called when a reply-message is received (crawler-side)
+</li></ul></li><li>Code to handle the actual requests and replies in a file at <a class="missing" href="#">Tribler/Core/Statistics</a>/MMMMCrawler.py. This includes writing the received statistics to disk or database.
+</li><li>Ensure that your code is in the latest Tribler release.
+</li><li>Start running one or more Crawler processes 24/7 (python <a class="missing" href="#">Tribler/Main</a>/crawler.py)
+</li></ol><h1 id="Request--Reply">Request --&gt; Reply</h1>
+<p>
+Sending a request from a Crawler to a Tribler peer
+</p>
+<pre class="wiki">4 byte: Message length
+1 byte: CRAWLER_REQUEST (from Tribler/Core/BitTornado/BT1/MessageID.py)
+1 byte: --MESSAGE-SPECIFIC-ID--
+1 byte: Channel id
+2 byte: Frequency
+n byte: Request payload
+</pre><p>
+Sending a reply from a Tribler peer to a Crawler
+</p>
+<pre class="wiki">4 byte: Message length
+1 byte: CRAWLER_REPLY (from Tribler/Core/BitTornado/BT1/MessageID.py)
+1 byte: --MESSAGE-SPECIFIC-ID--
+1 byte: Channel id
+1 byte: Parts left
+1 byte: Indicating success (0) or failure (non 0)
+n bytes: Reply payload
+</pre></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

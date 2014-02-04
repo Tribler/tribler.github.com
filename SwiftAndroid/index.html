@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="IntroductionWORKINPROGRESS">Introduction         WORK IN PROGRESS!!</h1>
+<p>
+This article details the steps taken in creating the Android port of the libswift library. 
+</p>
+<h1 id="Requiredsoftware">Required software</h1>
+<p>
+To build the Android application you will need the following:
+</p>
+<ul><li>Android SDK
+</li><li>a running Java environment
+</li><li>Preferably Eclipse with the SKD &amp; AVDmanager plugin for creating Android apps
+</li><li>At least one Android emulator (I used versions 1.6 and 2.2)
+</li><li>the Android NDK that provides cross compilation tools for ARM processors
+</li></ul><h1 id="Compilinglibswift">Compiling libswift</h1>
+<p>
+Libswift uses few libraries and it's very portable. Anyway the android NDK doesn't include any library except libc.
+To compile libswift we will need the stdlib that needs to be compiled and included in the NDK.
+</p>
+<p>
+Statically compile swift is not a bit issue, it can be easily archived by using a different compiler (not the NDK) that supports cross-compilation to ARM processor. 
+The problem is that you will end up with a standalone application that can't be linked to the hardware resources and doesn't have any access permission for the system.
+</p>
+<p>
+The trick is to be able to create a library that can be used by a java front-end application. We can than give disk/network access right to the java application.
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+The above picture taken from <a class="ext-link" href="http://marakana.com"><span class="icon">​</span>http://marakana.com</a> shows how the linking between the c++ library and the java front-end works.
+The Java Native Interface (jni) is been used to call the native C++ library
+</p>
+<h1 id="Steps">Steps</h1>
+<ul><li>Prepare the environment. Look at the requirement above
+</li><li>Create a new Eclispe project.
+</li><li>Create a scheletron of the native library calls in the src dir using the "native" key in the declaration.
+<ul><li>I used <a class="missing" href="#">NativeLib</a>.java and implemented the functions start, stop, and progress (to report the current download status)
+</li></ul></li><li>Create the c header file based on the above scheletron.
+<ul><li>in the "bin" dir run "javah -jni com. ... .<a class="missing" href="#">NativeLib</a>" in my case
+</li><li>this will create the file com_ .. _NativeLib.h in yourbin dir
+</li><li>create a jni dir in the base project dir
+</li><li>move the new header file in the jni dir
+</li></ul></li><li>Put the Swift sources in the jni dir
+<ul><li>an interface has to be provided to the jni header file
+</li><li>the new interface can be implemented based on the content of the previous header file. This will also change data structures from/to jni/c++.
+</li></ul></li><li>Create android's Makefile, called Android.mk, inside the jni dir 
+<pre class="wiki">LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := swift
+LOCAL_SRC_FILES := swift.cpp sha1.cpp compat.cpp sendrecv.cpp send_control.cpp hashtree.cpp bin64.cpp bins.cpp channel.cpp datagram.cpp transfer.cpp httpgw.cpp	
+
+LOCAL_CFLAGS    += -D__NEW__ 
+
+include $(BUILD_SHARED_LIBRARY)
+</pre></li><li>Now we need to compile everything using the NDK. As previously mentioned we need to first include all the needed libraries, such as the stdlib, in the NDK to be able to compile. There are several ways to archive it, I'll not mention them here since it's a long process and Google will help you :-).
+</li><li>Create a project directory (in my case I called it swift) in the apps dir of the NDK root directory.
+</li><li>Create a Application.mk in the above directory
+<pre class="wiki">APP_PROJECT_PATH := $(call my-dir)/project
+APP_MODULES      := swift_demo
+</pre></li><li>In the above directory create a symbolic link called "project" that points to the root dir of Eclipse's project
+</li><li>Run ndk-build located in NDK's root directory from your project dir
+<ul><li>This should compile everything and create the library that we'll be using in our application
+</li><li>If you have some errors than run: make APP=&lt;name of your module&gt; (in my case "swift") from your NDK's root dir 
+</li><li>Use "-B V1" options for debugging
+</li></ul></li><li>If the compilation process went fine you will find the new library inside the "lib" dir in your Eclipse project
+</li><li>Now the hardest part is done and the integration with the app's interface is almost complete
+</li><li>Instantiate the <a class="missing" href="#">NativeLib</a> in your UI java application and call the native methods.
+</li><li>create a layout, file main.xml
+</li><li>IMPORTANT: you need to give rights to the application for using the internet and for writing on the SD
+<ul><li>add the line:
+<pre class="wiki">&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/&gt; 
+</pre>in your manifest file (<a class="missing" href="#">AndroidManifest</a>.xml).
+</li></ul></li></ul><h1 id="Miscellaneousinfo">Miscellaneous info</h1>
+<p>
+Modifications to libwsift:
+</p>
+<ul><li>all the unneeded files can be removed (everything except .cpp and .h files)
+</li><li>swift.cpp has to be modified and changed to accept function calls from java
+<ul><li>providing library calls (I just implemented the start(root_hash, tracker) function)
+</li><li>handling and converting JNI datastructures in C++
+</li></ul></li><li>_S_IREAD and _S_IWRITE are apparently undefined. for the moment I set them to 0000400 (read) and 0000200 (write)
+</li><li>NDK's compiler is way more strict that g++. Some things have to change.. like casting to const some variables
+</li><li>an Android.mk file has to be created. This will substitute the Makefile 
+</li></ul><p>
+Video Player:
+</p>
+<ul><li>the video player will reproduce only audio tracks on the emulator &gt; 1.5. It still works correctly on the real device. The problem occurs with h264 video files (and mp4, m4v container).        <a class="ext-link" href="http://code.google.com/p/android/issues/detail?id=2570&amp;q=videoview&amp;colspec=ID%20Type%20Version%20Security%20Status%20Owner%20Summary"><span class="icon">​</span>Video playback regression in 1.5 </a>.
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

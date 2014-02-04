@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="SuperpeerMode">Superpeer Mode</h1>
+<p>
+This page describes some issues regarding running the Tribler Core in superpeer mode:
+</p>
+<h2 id="Processingspeed">Processing speed</h2>
+<p>
+The performance of the superpeer in terms of message per second is limited by the SQLite database. Possibilities for improvement are:
+</p>
+<ol><li>Batch multiple messages, commit if no new msg after X secs.
+</li><li>Replace storage layer with real async:
+</li></ol><blockquote>
+<blockquote>
+<p>
+That's what we do with extra thread, slower complete time. Risk of large queue
+</p>
+</blockquote>
+</blockquote>
+<ol start="3"><li>Store less data
+</li></ol><blockquote>
+<blockquote>
+<p>
+Does that help?
+</p>
+</blockquote>
+</blockquote>
+<ol start="4"><li>Run sqlite in memory. Can we dump contents afterwards?
+</li></ol><blockquote>
+<blockquote>
+<p>
+Scientific measurement would be done from log.
+Even if we don't dump we can cold start superpeer procs. Need to ensure
+that non-bootstrapping peers (i.e., long-running) also contact it. Otherwise
+it will just be bootstrapping peers that learn about eachother. Not all bad
+as bootstrapping peers may also be rebooting non-virgin peers.
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+Need to spread online peers, right. So no use of stale db data.
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>
+Superpeer on Core appears to go out and <a class="wiki" href="/BuddyCast">BuddyCast</a> itself, so if it
+meets any of the other superpeers it can bootstrap from them.
+</p>
+</blockquote>
+</blockquote>
+<ol start="5"><li>Combine 4 with just writing to logfile, don't need indexed DB for sp
+</li><li>Ignore, just have 32 tps peers on suitable filesystem and have more of them.
+</li><li>Turn off indices: see log, is somewhat faster.
+</li></ol><p>
+Find suitable filesys: if we have multiple sp procs (+logging Apache, etc.) on single 
+ext3 FS will be snail
+</p>
+<h2 id="Performancetests">Performance tests</h2>
+<p>
+<a class="missing" href="#">Tribler/Test</a>/test_buddycast2_datahandler.py replaying largelog.log. This log contains 11243 received messages.
+"superpeer True" means that there is a separate thread to which the <a class="missing" href="#">OverlayThread</a> delegates all updates to the
+database (disabled for most tests). Test were run on a AMD Athlon(tm) 64 X2 Dual Core Processor 4400+ with SATA3@3Gbps disks: 
+</p>
+<ul><li>ext3: WD2500YS-01SHB1
+</li><li>ext2: WD2500JS-60MHB5
+</li></ul><pre class="wiki">
+superpeer True largelog.log
+
+got msg: 11243 0.00 0.00 0.04 3.01
+Total time 448.095255136 avg per sec 25.0906472923
+
+superpeer False
+
+got msg: 11243 0.00 0.00 0.02 1.14
+Total time 222.51010704 avg per sec 50.5280418474
+
+
+
+WITH PEER AND TORRENT INDEX
+===========================
+
+superpeer True
+
+got msg: 11243 0.00 0.00 0.06 8.02
+Total time 701.141772032 avg per sec 16.0352733905
+
+got msg: 11243 0.00 0.00 0.05 5.02
+Total time 546.330826998 avg per sec 20.5791060003
+
+
+
+superpeer False
+
+got msg: 11243 0.00 0.00 0.03 3.12
+Total time 346.95689702 avg per sec 32.4046015414
+
+
+PROFILING
+=========
+superpeer False, python -m cProfile test.py
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   164816  370.180    0.002  370.180    0.002 {method 'execute' of 'apsw.Cursor' objects}
+    22486   11.896    0.001   12.173    0.001 {eval}
+133735/11243    6.346    0.000   19.986    0.002  bencode.py:271(encode_dict)
+   603860    6.006    0.000   11.823    0.000 threading.py:114(release)
+   603860    5.940    0.000   12.102    0.000 threading.py:94(acquire)
+  1462932    5.680    0.000    8.153    0.000 threading.py:733(currentThread)
+   627927    4.121    0.000    6.352    0.000 bencode.py:258(encode_string)
+   223878    3.867    0.000    6.935    0.000 base64.py:310(encodestring)
+2022160/1996884    3.534    0.000    3.641    0.000 {len}
+   148545    3.175    0.000   18.275    0.000 sqlitecachedb.py:560(fetchone)
+  1604289    2.944    0.000    2.944    0.000 {method 'extend' of 'list' objects
+}
+
+
+
+EXTRA DISK ACTIVITY
+===================
+, to test ext3 data=ordered problem
+http://shaver.off.net/diary/2008/05/25/fsyncers-and-curveballs/
+
+cp -r /arno/co /arno/co2
+not sure whether it ran all the time.
+CPU went to 50% I/O wait while it ran :-(
+
+got msg: 11243 0.00 0.00 0.07 4.05
+Total time 850.66663599 avg per sec 13.2166932666
+
+
+PRAGMA synchronous = OFF;
+=========================
+got msg: 11243 0.00 0.00 0.01 0.88
+Total time 79.4556992054 avg per sec 141.50023362
+got msg: 11243 0.00 0.00 0.01 0.85
+Total time 78.9960501194 avg per sec 142.32357166
+
+PRAGMA synchronous = NORMAL;
+============================
+got msg: 11243 0.00 0.00 0.02 0.36
+Total time 228.743458033 avg per sec 49.1511324376
+
+got msg: 11243 0.00 0.00 0.02 0.33
+Total time 233.051220894 avg per sec 48.242613606
+
+:memory:, no PRAGMA
+===================
+
+got msg: 11243 0.00 0.00 0.00 0.06
+Total time 56.5569238663 avg per sec 198.790868234
+got msg: 11243 0.00 0.00 0.00 0.08
+Total time 57.1252849102 avg per sec 196.813022774
+
+:memory:, PRAGMA synchronous = OFF;
+===================================
+got msg: 11243 0.00 0.00 0.00 0.05
+Total time 56.4784419537 avg per sec 199.067106158
+
+ext2, no PRAGMA
+===============
+got msg: 11243 0.00 0.00 0.02 0.23
+Total time 189.385440111 avg per sec 59.365704108
+
+ext2, PRAGMA synchronous = NORMAL;
+==================================
+got msg: 11243 0.00 0.00 0.02 0.22
+Total time 191.289695024 avg per sec 58.7747290755
+got msg: 11243 0.00 0.00 0.02 0.21
+Total time 186.900032043 avg per sec 60.1551528754
+
+ext2, PRAGMA synchronous = OFF;
+==================================
+got msg: 11243 0.00 0.00 0.00 0.05
+Total time 68.7484490871 avg per sec 163.53823467
+got msg: 11243 0.00 0.00 0.00 0.05
+Total time 67.9281270504 avg per sec 165.513175296
+
+
+ext2, no PRAGMA, EXTRA DISK ACTIVITY
+====================================
+
+cp -r /arno/co /mnt/arno/co2
+
+got msg: 11243 0.00 0.00 0.03 2.57
+Total time 350.900815964 avg per sec 32.0403928646
+
+got msg: 11243 0.00 0.00 0.03 2.17
+Total time 360.202973843 avg per sec 31.2129571837
+
+
+
+
+ext2, PRAGMA synchronous = NORMAL; EXTRA DISK ACTIVITY
+======================================================
+Hypo: Should be fastest.
+
+got msg: 11243 0.00 0.00 0.03 2.18
+Total time 377.43993187 avg per sec 29.7875212734
+
+got msg: 11243 0.00 0.00 0.03 2.03
+Total time 336.654088974 avg per sec 33.3962971734
+
+Concl: FULL vs. NORMAL doesn't matter.
+
+
+
+
+ext3, PRAGMA synchronous = NORMAL; EXTRA DISK ACTIVITY
+======================================================
+got msg: 11243 0.00 0.00 0.06 15.36
+Total time 663.243402004 avg per sec 16.9515444346
+
+got msg: 11243 0.00 0.00 0.06 6.27
+Total time 731.38639307 avg per sec 15.3721755101
+
+</pre><h2 id="Recommendation">Recommendation</h2>
+<ol><li>In memory with log file on ext3. Perhaps replay last
+part of log after reboot to get some initial data.
+</li></ol><ol start="2"><li>On dedicated disk, PRAGMA normal, ext2 or fast logging FS.
+Log will remain major research vehicle, db helps
+keep network together at reboots.
+</li></ol></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

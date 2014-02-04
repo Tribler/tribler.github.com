@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="UsingTriblerNotifierstutorial">Using Tribler Notifiers tutorial</h1>
+<p>
+In this tutorial, we will explain how to respond to notification messages sent by the Tribler Core.
+Therefore, we will create a widget that displays the last 10 discovered torrents, with a download button.
+We will assume you already have a <a class="missing" href="#">HelloWorld</a> widget here.
+</p>
+<p>
+<strong> Step 1: imports </strong>
+</p>
+<pre class="wiki">import wx
+import Tribler.Core.Widgets.widgets as widgets
+from Tribler.Core.simpledefs import *
+from Tribler.Core.exceptions import *
+from Tribler.Core.TorrentDef import TorrentDef
+from Tribler.Core.Session import Session
+from Tribler.Core.CacheDB.CacheDBHandler import TorrentDBHandler
+from threading import RLock
+</pre><p>
+The imports are needed because:
+</p>
+<ul><li>We'll need wx for the GUI, 
+</li><li>widgets because this is a widget. 
+</li><li>Simpledefs, Session to observe added torrents, 
+</li><li>TorrentDBHandler to retrieve information on the torrents
+</li><li>Session and <a class="missing" href="#">TorrentDef</a> to start downloading
+</li><li>RLock to threadsafe modify the GUI torrentlist
+</li></ul><p>
+<strong> Step 2: general information on the widget </strong>
+</p>
+<p>
+Don't forget to add the general information!
+</p>
+<pre class="wiki">__name__        = "Newest discovered torrents"
+__author__      = "My Name"
+__version__     = "0.1"
+__description__    = "Displays newest discovered torrents"
+width   = 300
+height  = 200
+</pre><p>
+<strong> Step 3: initialize the widget </strong>
+</p>
+<pre class="wiki">    def __init__(self, *args, **kw):
+        widgets.tribler_widget.__init__(self, *args, **kw)
+
+        self.torrentdb = TorrentDBHandler.getInstance() # Get the torrent DB
+        self.session = Session.get_instance()           # Get the session
+        self.config = self.session.sessconfig           # Session config for the collected torrents dir
+        self.lock = RLock()                             # Create the log        
+
+        self.torrentFileDict = {}                       # A dictionary to store torrent_name -&gt; torrent_file_name
+
+        #Create the list of discovered torrents with one column
+        self.torrentList = wx.ListCtrl(self, -1, (0,0),(width, height-20), wx.LC_REPORT)
+        self.torrentList.InsertColumn(0, 'Torrent')
+        self.torrentList.SetColumnWidth(0, width)
+
+
+        #Create the download button        
+        self.downloadButton = wx.Button(self,-1,"Download",(0,height-20))
+        self.downloadButton.Bind(wx.EVT_LEFT_UP, self.OnDownloadClicked)
+
+
+        # Observe insertions of torrents
+        self.session.add_observer(self.OnNotify, NTFY_TORRENTS, [NTFY_INSERT])
+</pre><p>
+<strong> Step 4: Remove observer when widget gets removed </strong>
+</p>
+<p>
+When the widget is removed or tribler is shut down, the <a class="missing" href="#">OnClose</a> method of each widget gets called to do any cleanup.
+We will have to remove our observer, otherwise a non existing function will be called when a torrent is discovered.
+</p>
+<pre class="wiki">    def OnClose(self):
+        self.session.remove_observer(self.OnNotify)
+</pre><p>
+<strong> Step 5: Add discovered widgets to the GUI list </strong>
+</p>
+<p>
+Now we make sure when <a class="missing" href="#">OnNotify</a> gets called with an infohash, we insert the torrent name 
+into the GUI and store the torrent filename for later use, when the user clicks on download
+</p>
+<pre class="wiki">    def OnNotify(self, subject, type, infohash):
+        # Acquire thread-safe lock 
+        self.lock.acquire()
+
+        try:
+            # Retrieve name and torrent file name from database
+            torrent = self.torrentdb.getTorrent(infohash, ('name', 'torrent_file_name'),include_mypref=False)
+
+            # Insert the name into the GUI list
+            self.torrentList.InsertStringItem(0, torrent['name'])
+
+            # Store a mapping from name to filename in the dictionary, for easy retrieval when user clicked download
+            self.torrentFileDict[torrent['name']] = torrent['torrent_file_name'] 
+            
+            # Purge list when size is to great
+            size = self.torrentList.GetItemCount()
+            if size &gt; 10:
+                self.torrentList.DeleteItem(size-1)
+        finally:
+            self.lock.release()
+</pre><p>
+<strong> Step 6: Start downloading when the user clicks download </strong>
+</p>
+<p>
+When the download button is clicked, we have to handle the event and start downloading the selected torrent.
+</p>
+<pre class="wiki">    def OnDownloadClicked(self, event):
+    
+        self.lock.acquire()
+        try:
+            # Get the first item selected
+            itemId = self.torrentList.GetFirstSelected()
+
+            
+            if itemId  != -1:
+                # Get the torrent name from the list
+                torrent_name = self.torrentList.GetItem(itemId, 0).GetText()
+
+                # Get the torrent filename from the dictionary
+                torrent_file = self.torrentFileDict[torrent_name]
+
+                # Load the torrent file
+                tdef=TorrentDef.load(os.path.join(self.config['torrent_collecting_dir'],torrent_file))
+                # Start the download
+
+                try:
+                    d = self.session.start_download(tdef)
+                except DuplicateDownloadException:
+                    pass  # We could show a message to the user, but who cares: it is already downloading it.
+
+            else:
+                # No item has been selected, show the user
+                test = wx.MessageDialog(self, "Please select an item to download first.", "Select item", wx.OK)
+                result = test.ShowModal()
+                test.Destroy()
+        finally:
+            self.lock.release()
+
+</pre><p>
+<strong> Step 7: Test your widget! </strong>
+</p>
+<p>
+Start Tribler, click the "Add widget" button and go to the "insert widget" tab. Select your widget file and select "Debug Widget".
+Test your widget, before inserting it into the repository!
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

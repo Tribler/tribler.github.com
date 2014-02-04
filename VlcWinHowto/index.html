@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BuildingVLCwithPythonbindingsforWindows">Building VLC with Python bindings for Windows</h1>
+<p>
+This page describes how to cross-compile vlc for Windows on Debian. See also <a class="wiki" href="/BrowserPlugin">BrowserPlugin</a>.
+</p>
+<p>
+Cross-compiling with mingw32 is the preferred method for building vlc for Windows. 
+</p>
+<p>
+Look also here: <a class="ext-link" href="http://wiki.videolan.org/Win32Compile"><span class="icon">​</span>http://wiki.videolan.org/Win32Compile</a>
+</p>
+<h1 id="Buildingversion0.8.6a">Building version 0.8.6a</h1>
+<h2 id="Prerequisites">Prerequisites</h2>
+<ul><li><strong>The 0.8.6a sources</strong>: The original sources can be found here <a class="ext-link" href="http://download.videolan.org/pub/videolan/vlc/0.8.6a/"><span class="icon">​</span>http://download.videolan.org/pub/videolan/vlc/0.8.6a/</a>, and the modified version by Ivaylo here <a class="ext-link" href="http://www.st.ewi.tudelft.nl/~ivaylo/files/vlc/"><span class="icon">​</span>http://www.st.ewi.tudelft.nl/~ivaylo/files/vlc/</a> (to be added)
+</li><li><strong>mingw32</strong>: On Debian you need to install the <em>mingw32</em> package.
+</li><li><strong>pre-built libraries</strong>: You can get them here <a class="ext-link" href="http://downloads.videolan.org/pub/videolan/testing/win32/"><span class="icon">​</span>http://downloads.videolan.org/pub/videolan/testing/win32/</a>. For our build we use contrib-20070530-win32-bin-gcc-3.4.5-only.tar.bz2. Extract the archive in / with 
+<pre class="wiki">cd /; tar -xjf contrib-20070530-win32-bin-gcc-3.4.5-only.tar.bz2
+</pre></li><li><strong>Python 2.4 sources prepared for win32, and python24.dll</strong>: Extract the dll and the Python sources in the same directory you have the vlc-0.8.6a sources directory. Then, configure the Python sources with: 
+<pre class="wiki">./configure --host=mingw32 --with-gcc=i586-mingw32msvc-gcc  --with-cxx=i586-mingw32msvc-g++ --enable-shared
+</pre></li><li>For making packages and zip archives (see below) you need to install the <em>tofrodos</em> and <em>zip</em> packages.
+</li></ul><h2 id="Configuring">Configuring</h2>
+<p>
+Before building, vlc has to be configured:
+</p>
+<pre class="wiki">  ./bootstrap &amp;&amp; 
+   PKG_CONFIG_LIBDIR=/usr/win32/lib/pkgconfig 
+   CPPFLAGS="-I/usr/win32/include -I/usr/win32/include/ebml" 
+   LDFLAGS=-L/usr/win32/lib 
+   CC=i586-mingw32msvc-gcc CXX=i586-mingw32msvc-g++ 
+   ./configure --host=i586-mingw32msvc --build=i386-linux 
+   --disable-gtk 
+   --enable-nls --enable-sdl --with-sdl-config-path=/usr/win32/bin 
+   --enable-ffmpeg --with-ffmpeg-mp3lame --with-ffmpeg-faac 
+   --with-ffmpeg-zlib --enable-faad --enable-flac --enable-theora 
+   --with-wx-config-path=/usr/win32/bin 
+   --with-freetype-config-path=/usr/win32/bin 
+   --with-fribidi-config-path=/usr/win32/bin 
+   --enable-live555 --with-live555-tree=/usr/win32/live.com 
+   --enable-caca --with-caca-config-path=/usr/win32/bin 
+   --with-xml2-config-path=/usr/win32/bin 
+   --with-dvdnav-config-path=/usr/win32/bin 
+   --enable-mediacontrol-python-bindings 
+   --disable-cddax --disable-vcdx --enable-goom 
+   --enable-twolame --enable-dvdread 
+   --enable-debug
+</pre><h2 id="Compiling">Compiling</h2>
+<p>
+Do a <em>make</em>. It will result in many errors that you can solve with the help of the list below:
+</p>
+<ul><li>on mediacontrol compile errors use a line with compiler changed to i586-mingw32msvc-g++
+</li><li>on vlc/modules/audio_filter/converter error mentioning "dca_something" errors use a line with "-ldca" added
+</li><li>on modules/codec/flac.c errors: replace flac.c with the latest flac.c and replace some of the include lines (those 2 after decoder.h that give the error)
+</li><li>on ntohl errors in libFLAC: add -lwsock32 to the compile line
+</li><li>on twolame errors: define LIBTWOLAME_STATIC before including twolame header in modules/codec/twolame.c
+</li><li>on a52 errors: add -la52 to the last compile line
+</li><li>for python bindings use the following script:
+<pre class="wiki">i586-mingw32msvc-gcc -pthread -fno-strict-aliasing -DNDEBUG -g -O3 -Wall -Wstrict-prototypes -fPIC 
+  -I../.. -I./../../include -I/usr/win32/include -I../../../Python-2.4.2 -I../../../Python-2.4.2/Include 
+  -c ./vlcglue.c -o ../../bindings/mediacontrol-python/./vlcglue.o -D_FILE_OFFSET_BITS=64 -D__USE_UNIX98 
+  -D_LARGEFILE64_SOURCE -D_REENTRANT -D_THREAD_SAFE -D_GNU_SOURCE 
+  -DLOCALEDIR="d:\projects\tribler\video\vlc-0.8.6a\locale" 
+  -DDATA_PATH="d:\projects\tribler\video\vlc-0.8.6a" 
+  -DPLUGIN_PATH="d:\projects\tribler\video\vlc-0.8.6a\plugins" -DDEBUG -O3 -ffast-math -funroll-loops 
+  -mtune=pentium2 -g
+i586-mingw32msvc-gcc -pthread -fno-strict-aliasing -DNDEBUG -g -O3 -Wall -Wstrict-prototypes -fPIC 
+  -I../.. -I./../../include -I/usr/win32/include -I../../../Python-2.4.2 -I../../../Python-2.4.2/Include 
+  -c ./../../src/control/mediacontrol_init.c 
+  -o ../../bindings/mediacontrol-python/./../../src/control/mediacontrol_init.o -D_FILE_OFFSET_BITS=64 -D__USE_UNIX98 
+  -D_LARGEFILE64_SOURCE -D_REENTRANT -D_THREAD_SAFE -D_GNU_SOURCE -DLOCALEDIR="/usr/local/share/locale" 
+  -DDATA_PATH="/usr/local/share/vlc" -DPLUGIN_PATH="/usr/local/lib/vlc" -DDEBUG -O3 -ffast-math -funroll-loops -mtune=pentium2 -g
+i586-mingw32msvc-g++  -Wsign-compare -Wall -mms-bitfields -pipe -shared 
+  ../../bindings/mediacontrol-python/./vlcglue.o ../../bindings/mediacontrol-python/./../../src/control/mediacontrol_init.o 
+  ../../src/libvlc.a ../../../python24.dll -o ../../bindings/mediacontrol-python/lib.linux-x86_64-2.4/vlc.so 
+  -L../.. ../../modules/misc/memcpy/libmemcpymmx.a ../../modules/video_chroma/libi420_rgb_mmx.a 
+  ../../modules/video_chroma/libi422_yuy2_mmx.a ../../modules/video_chroma/libi420_ymga_mmx.a 
+  ../../modules/video_chroma/libi420_yuy2_mmx.a ../../modules/misc/memcpy/libmemcpymmxext.a 
+  ../../modules/misc/memcpy/libmemcpy3dn.a ../../modules/demux/liblive555.a ../../modules/mux/mpeg/libmux_ts.a 
+  ../../modules/codec/ffmpeg/libffmpeg.a ../../modules/stream_out/libstream_out_switcher.a 
+  -L/usr/lib/python2.4 -g -Wl,--exclude-libs,libunicows.a -lunicows -lkernel32 -L/usr/win32/lib -liconv 
+  /usr/win32/lib/libintl.a /usr/win32/lib/libiconv.a -lws2_32 -lnetapi32 -lwinmm -mwindows -L/usr/win32/lib 
+  -L/usr/win32/live.com/UsageEnvironment -lUsageEnvironment -L/usr/win32/live.com/groupsock -lgroupsock 
+  -L/usr/win32/live.com/BasicUsageEnvironment -lBasicUsageEnvironment -L/usr/win32/live.com/liveMedia -lliveMedia -lws2_32 
+  -ldvbpsi -lavformat -lz -lpostproc -lavcodec -lavutil -lz -lfaac -lmp3lame -lfaad -lx264 -lole32 -loleaut32 -luuid -lstrmiids -la52
+cp lib.linux-x86_64-2.4/vlc.so vlc.dll
+</pre></li><li>put -la52 in vlc-config next to -lavcodec (see if it solves 8)
+</li></ul><p>
+Now you can do <em>make package-win32-zip</em> to get all the needed vlc stuff into a zip archive.
+</p>
+<h2 id="Installing">Installing</h2>
+<p>
+(to be finished)
+</p>
+<h1 id="Buildingversion0.8.6d">Building version 0.8.6d</h1>
+<p>
+(To be done)
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

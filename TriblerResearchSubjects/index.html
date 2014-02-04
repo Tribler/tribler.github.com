@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Research">Research</h1>
+<p>
+Please read the Tribler overview in our scientific 
+<a class="ext-link" href="https://www.tribler.org/attachment/wiki/File/CPE-Tribler-final.pdf?format=raw"><span class="icon">​</span>Journal publication</a>.
+Note that this publication reflects an older version of Tribler, all the latest research findings are listed below.
+</p>
+<h1 id="Completedandoperational">Completed and operational</h1>
+<ul><li><strong><a class="wiki" href="/Give-To-Get">Give-To-Get</a></strong>: Video-on-Demand protocol to stream Bittorrent videos
+</li><li><strong><a class="wiki" href="/PermID">PermID</a></strong>: <em>Perm</em>anent <em>Id</em>entifier of peers to enhance the security of Bittorrent
+</li><li><strong><a class="wiki" href="/MerkleHashes">MerkleHashes</a></strong>: Secure identifiers of content which removes the need for .torrent files
+</li><li><strong><a class="wiki" href="/OverlaySwarm">OverlaySwarm</a></strong>: A secure method of communication between peers in different swarms
+</li><li><strong><a class="wiki" href="/CooperativeDownload">CooperativeDownload</a></strong>: Double your download speed by sharing upload capacity amongst friends
+</li><li><strong><a class="wiki" href="/DecentralizedRecommendation">Content search &amp; recommendation</a></strong>: Websites for finding .torrent files are no longer needed, Tribler knows what you like and finds it
+</li></ul><h1 id="Ongoingresearch">Ongoing research</h1>
+<ul><li><strong><a class="wiki" href="/GUIconcepts">GUIconcepts</a></strong>: Simply make it look stunning. Add Friends, Previews, Messages, etc. <a class="ext-link" href="https://www.tribler.org/browser/abc/branches/mtenbrinke/flash_demo/tribler.swf?format=raw"><span class="icon">​</span>(Flash demo)</a>
+</li><li><strong><a class="wiki" href="/DistributedTracker">DistributedTracker</a></strong>: Replacing the bittorrent tracker with a gossip protocol
+</li><li><strong><a class="wiki" href="/SocialOverlay">SocialOverlay</a></strong>: Comparing the p2p network with the social network
+</li><li><strong><a class="wiki" href="/P2PWebhosting">P2PWebhosting</a></strong>: Challenges of P2P content hosting
+</li><li><strong><a class="wiki" href="/Moderation">Moderation</a></strong>: Clean and rich metadata for swarms
+</li><li><strong><a class="wiki" href="/SocioCast">SocioCast</a></strong>: Social extension with friends and voting on moderators
+</li><li><strong><a class="wiki" href="/SuperSeeding">SuperSeeding</a></strong>: (Bernard) Hashing and memory problems when seeding 5000+ files
+</li><li><strong><a class="wiki" href="/NATtraversal">NATtraversal</a></strong>: Connect to peers without hindrance of NAT and Firewall equipment
+</li><li><strong><a class="wiki" href="/BarterCast">BarterCast</a></strong>: a protocol to exchange the altruism levels of peers. Altruism is defined as the amount of uploading versus downloading of a person
+</li><li><strong><a class="wiki" href="/Buddycast3">Buddycast3</a></strong>: This version of BuddyCast adds ratings, comments, faster .torrent collecting, access to more content due to RSS subscription integration, and superior scalability
+</li><li><strong><a class="wiki" href="/TagBasedRecommendation">TagBasedRecommendation</a></strong>: How to do tag based recommendation in a distributed environment
+</li><li><strong><a class="wiki" href="/P2PWidgets">P2PWidgets</a></strong>: A proof-of-principle app store/widget collection without a server
+</li><li><strong><a class="wiki" href="/ModelingBitTorrent">ModelingBitTorrent</a></strong>: Mathematical models of bittorrent behaviour
+</li><li><strong><a class="wiki" href="/LiveStreaming">LiveStreaming</a></strong>: tit-for-tat with streams
+</li><li><strong><a class="wiki" href="/SwarmSize">SwarmSize</a></strong>: Tracking the popularity of content with robustness
+</li><li><strong><a class="wiki" href="/MultipleDescriptionCoding">MultipleDescriptionCoding</a></strong>: Split video into separate streams that can be decoded individually
+</li><li><strong><a class="wiki" href="/MultiBitrateSupport">MultiBitrateSupport</a></strong>: Support multiple bitrates in a single swarm and maximize video quality under dynamic download speed constraints
+</li><li><strong><a class="wiki" href="/DownloadPerformance">DownloadPerformance</a></strong>: Performance analysis of the download core and implementation improvements
+</li><li><strong><a class="wiki" href="/SupervisedTeaming">SupervisedTeaming</a></strong>: (Boudewijn) Removing free-riding by forcing team-members to upload to each other. Positive side affect: allows removal of team members that do not meet upload speed requirements
+</li><li><strong><a class="wiki" href="/triblerGUIBandwidthSharing">GUIBandwidthSharing</a></strong>: Show the good and bad (upload) behavior of peers using tables and graphs 
+</li><li><strong><a class="wiki" href="/SeedingIncentives">SeedingIncentives</a></strong>: Provide an incentive for uploading
+</li><li><strong><a class="wiki" href="/FullIncentivisation">FullIncentivisation</a></strong>: Provide an incentive for all 9 actions in P2P such as uploading, search, staying online, port forwarding, ..
+</li><li><strong><a class="wiki" href="/ClickLog">ClickLog</a></strong>: The foundation for a Google-like efficient keyword search algorithm in a zero-server setting
+</li><li><strong><a class="wiki" href="/SwarmDynamics">SwarmDynamics</a></strong>: Prototype of visualising in real-time the upload and download dynamics of peers around you in swarms
+</li><li><strong><a class="wiki" href="/SimilarityFunction">SimilarityFunction</a></strong>: Calculate the taste similarity of peers around you and foundation for a semantic overlay
+</li></ul><p>
+ 
+</p>
+<h1 id="Publications">Publications</h1>
+<p>
+Publications on Tribler and related P2P technology <a class="ext-link" href="https://publications.st.ewi.tudelft.nl/index.php?selectedPageId=list&amp;author=&amp;year=&amp;project=&amp;topic=10&amp;group=386&amp;order=1&amp;layout=standard"><span class="icon">​</span>(publications)</a>
+</p>
+<h1 id="DoingPhDorGraduationProject">Doing PhD or Graduation Project</h1>
+<p>
+If you want to do a Masters thesis project, please read 
+<a class="wiki" href="/MasterThesisAtTribler">this with all details and example planning</a>. 
+</p>
+<p>
+If you want to do a PhD. please look at the <a class="wiki" href="/Jobs">list of available positions</a>.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

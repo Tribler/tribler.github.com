@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><ul><li>About Us
+<ul><li><a class="wiki" href="/AboutTribler">Vision</a>
+</li><li><a class="wiki" href="/background">Background</a>
+</li><li><a class="wiki" href="/TriblerTeam">The Tribler Team</a>
+</li></ul></li></ul></div></td><td>
+</p>
+<p>
+The scientific research and programming on Tribler have been partially supported by
+</p>
+<ul><li>The I-Share project (part of the Dutch Freeband program)
+<ul><li>I-Share project website <a class="ext-link" href="http://www.freeband.nl/project.cfm?id=520"><span class="icon">​</span>http://www.freeband.nl/project.cfm?id=520</a> <br />
+</li></ul></li></ul><ul><li>The STW project Peer to Peer technology (grant no. DTC7299)
+<ul><li>website <a class="ext-link" href="http://www.stw.nl/Projecten/D/dtc/dtc7299.htm"><span class="icon">​</span>http://www.stw.nl/Projecten/D/dtc/dtc7299.htm</a> <br />
+</li></ul></li></ul><ul><li>The EU FP7 project P2P-Next (grant no.: 216217)
+<ul><li>P2P-Next project website: <a class="ext-link" href="http://wwww.p2p-next.org"><span class="icon">​</span>http://wwww.p2p-next.org</a> <br />
+</li></ul></li></ul><ul><li>The EU FP7 project QLectives (grant no.: 231200)    
+<ul><li>read more on <a class="wiki" href="/QLectives">QLectives</a>
+</li><li>Qlectives project website: <a class="ext-link" href="http://www.qlectives.eu"><span class="icon">​</span>http://www.qlectives.eu</a> <br />
+</li></ul></li></ul><ul><li>The NoE <a class="missing" href="#">PetaMedia</a>
+<ul><li>website: <a class="ext-link" href="http://www.petamedia.eu"><span class="icon">​</span>http://www.petamedia.eu</a>.
+</li></ul></li></ul>    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

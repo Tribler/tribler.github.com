@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><p>
+tracsecret: tribler
+</p>
+<ul><li>Tribler 4
+<ul><li><a class="wiki" href="/Tribler4">Tribler 4 Overview</a>
+</li><li><a class="missing" href="#">Scenarios</a>
+</li><li><a class="missing" href="#">Functionalities</a>
+</li><li><a class="wiki" href="/GuiRequirements">GUI Requirements</a>
+</li><li><a class="wiki" href="/42todo">4.2 To do</a>
+</li><li><a class="wiki" href="/GuiClientImprovements">GUI improvements</a>
+</li><li><a class="wiki" href="/GuiDiscussion">GUI Discussion</a>
+</li><li><a class="wiki" href="/triblerGUI">GUI General &gt;</a>
+</li></ul></li></ul><p>
+endsecret
+</p>
+</div></td><td>
+</p>
+<h1 id="GuiDiscussion">Gui Discussion</h1>
+<h2 id="Hierarchyandactivity">Hierarchy and activity</h2>
+<p>
+This page describes the function of the panels in the Tribler GUI design for Tribler 4.0. 
+         
+</p>
+<h3 id="Panels">Panels</h3>
+<p>
+In the GUI we distinguish the following panels:
+</p>
+<ul><li>The buttonPanel: This is the top panel that shows buttons for the main functionalities of Tribler. The buttonPanel can be in the following modes: [contentMode, personsMode, profileMode, libraryMode, friendsMode, messageMode, indefinedMode]. These modes only mean that the related button is selected/highlighted.
+</li><li> The overviewPanel: This is the left hand panel, which shows an overview of items. The overviewPanel can be in the following modes: [contentMode, personsMode, libraryMode, profileMode, messageMode].
+</li><li> The detailPanel: This is the smaller right hand panel, which shows details of one of the items selected on the left. The detailPanel can be in the following modes:  [contentMode, personsMode, messageMode?].
+</li><li> Other panels: There are some other less important panels (current downloads, messages) that are out of scope of this document.
+</li></ul><p>
+         
+</p>
+<h2 id="Panellinkfunctionality">Panel link functionality</h2>
+<p>
+On each panel, there are some buttons/text with button functionality, which (when clicked) result in activity in this same panel and/or in other panels. We will refer to this as emph{panel link functionality}.         The general idea is that the buttonPanel has superfunctionality over the other two panels. Furthermore, links/buttons in the detailPanel and         overviewPanel always only change the appearance of one of them (either the detailPanel or the overviewPanel).
+        
+The following lists define for each panel all link functionality.
+                
+</p>
+<h3 id="buttonPanel">buttonPanel</h3>
+<p>
+        
+</p>
+<ul><li> Content button. Shows overviewPanel[contentMode, all content], detailPanel[first item of overview].
+</li><li> Persons button. Shows overviewPanel[personsMode, all persons], detailPanel[first person of overview].
+</li><li> Library button. Shows overviewPanel[libraryMode, all downloaded content+in progress downloads], detailPanel[first downloaded item of overview]
+</li><li> Friends button. Shows overviewPanel[personsMode, all friends], detailPanel[first person of overview].
+</li><li> Messages button. Shows overviewPanel[messageMode, all messages], detailPanel[newest message]. ??
+</li><li> Profile button. Shows overviewPanel[profileMode, my profile], detailPanel[ ???? ].
+</li><li> back button (not a main button, but placed on the buttonPanel). Shows previous state. This effects either overviewPanel or detailPanel.
+</li></ul><p>
+        
+        
+        
+</p>
+<h3 id="overviewPanel">overviewPanel</h3>
+<p>
+        
+</p>
+<ul><li> item clicked. overviewPanel does not change, detailPanel[selected item] in same mode as overviewPanel.
+</li><li> page button. Shows overviewPanel[current mode, content on new page], detailPanel does not change.
+</li></ul><p>
+        
+        
+        
+        
+If overviewPanel is in contentMode or personsMode:
+        
+        
+</p>
+<ul><li> filter button. Shows overviewPanel[current mode, filtered content/persons], detailPanel does not change.
+</li><li> category button. Shows overviewPanel[current mode, filtered content/persons from category], detailPanel does not change.
+</li><li> search action. Shows overviewPanel[current mode, content/persons found], detailPanel does not change.
+</li></ul><p>
+For all these buttons/links counts that the button in the buttonPanel that was last clicked keeps a selection.
+</p>
+<p>
+If overviewPanel is in libraryMode:
+        
+        
+</p>
+<ul><li> filter button?
+</li><li> category button? 
+</li><li> search action?
+</li><li> Possibly the links: related/injected content, direct items, related persons, friend are also in the profile and result in the same action as these links in other panels/modes.
+</li></ul><p>
+        
+        
+        
+</p>
+<h3 id="detailPanel">detailPanel</h3>
+<p>
+        
+</p>
+<ul><li> download button. The download is started in the library which may or may not be currently visible.
+</li><li> play button (video on demand). The video is directly played while downloading in an external/embedded video-player.
+</li></ul><p>
+                
+        
+        
+If detailPanel is in contentMode:
+</p>
+<ul><li> injected by/related persons link. Shows overviewPanel[personsMode, related persons], detailPanel[personMode, first person], buttonPanel loses selection of the content button (if still enabled).
+</li><li> injected by/related persons-click certain person. Idem, but detailPanel[personMode, certain person], buttonPanel loses selection of the content button (if still enabled).
+</li><li> tags links. Shows overviewPanel[contentMode, content with this tag], detailPanel[contentMode, first content].
+</li><li> people who liked this also like/related content. Shows overviewPanel[contentMode, related content], detailPanel[contentMode, first content]
+</li></ul><p>
+        
+        
+If detailPanel is in personsMode:
+        
+        
+</p>
+<ul><li> latest downloads/related content link. Shows overviewPanel[contentMode, related content], detailPanel[contentMode, first content], buttonPanel loses selection of the persons button (if still enabled).
+</li><li> latest downloads/related content-click certain content item. Idem, but detailPanel[contentMode, certain content], buttonPanel loses selection of the persons button (if still enabled).
+</li><li> friends link. Shows overviewPanel[personsMode, friends], detailPanel[personsMode, first friend].
+</li><li> favorite tags link. Shows overviewPanel[contentMode, content with this tag], detailPanel[contentMode, first content], buttonPanel loses selection of the persons button (if still enabled).
+</li></ul><h2 id="Myprofile">My profile</h2>
+<p>
+The profile of the user is supposed to be too extensive to be shown only in the detail panel. Therefore, this is the only single item that is shown in the overviewPanel (although it does not use the overview panel for an overview of items).
+         
+</p>
+<h2 id="Backbutton:cancelingpanelactions">Back button: canceling panel actions</h2>
+<p>
+As described above, clicking buttons/text in the overviewPanel or detailPanel results in a change of view/mode of one of the panels. After a user action a panel can change from showing a certain group of persons to showing a rather different group of content. These changes of views call for a functionality  with which a user can revert its action by clicking a emph{back} button.
+         
+User actions will be stored in a way similar to the actions listed above, a user action table can for instance look like Table 
+ef{actionTable}:
+         
+</p>
+<table class="wiki">
+<tr><td> <strong>user action</strong>        </td><td style="text-align: center">           <strong>buttonPanel</strong>  </td><td style="text-align: center">   <strong>overviewPanel</strong>      </td><td>       <strong>detailPanel</strong> 
+</td></tr></table>
+<table class="wiki">
+<tr><td> start [no action]    </td><td style="text-align: center">      (contentMode)    </td><td style="text-align: center">   (contentMode, all content)  </td><td>   (contentMode, first content item) 
+</td></tr><tr><td> click persons button   </td><td style="text-align: center">        (personsMode)  </td><td style="text-align: center">   (personsMode, all persons)  </td><td style="text-align: right">    (personsMode, first person)
+</td></tr><tr><td style="text-align: right"> click detailPanel(friend of person)</td><td style="text-align: center">  [no change]    </td><td style="text-align: center">   [no change]                 </td><td style="text-align: right">    (personsMode, clicked friend)
+</td></tr><tr><td> click detailPanel(related content) </td><td style="text-align: right">     (indefinedMode)</td><td>  (contentMode, related content) </td><td>   [no change] 
+</td></tr></table>
+<p>
+        
+</p>
+<p>
+<em>Tribler user action table.</em>
+</p>
+<p>
+        
+The action table stores user actions for a certain number of rows (maximum possible revertible steps). The final row represents the current panel state. The back button will delete this row and revert the state of the panels to the one stated in the row before that.
+</p>
+<h2 id="Summary">Summary</h2>
+<ul><li>Click in detail panel results in update of Overview panel AND Detail panel itself (either by first item in overview or specific item selected in detail Panel)
+</li><li>Minimum information below thumbnail. Extra information on top of thumbnail on roll over.
+</li><li>Filter area is used only for search bar in Basic state. A small button allow for advanced filtering with extra filter options. 
+</li><li>When 'profile', 'library' or 'friends' of a person is selected, small icons are available in title bar of overview Panel. These give access to 'profile', 'library' and 'friends' of this selected person. 
+</li></ul><h2 id="Notyetdecided">Not yet decided</h2>
+<ul><li>Tag button for tag cloud in overview Panel
+</li><li>Subscription functionality integration or not?
+</li><li>What information in orange header bar of overview Panel.
+</li></ul>    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

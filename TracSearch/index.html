@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="UsingSearch">Using Search</h1>
+<p>
+Trac has a built-in search engine to allow finding occurrences of keywords and substrings in wiki pages, tickets and changeset descriptions.
+</p>
+<p>
+Using the Trac search facility is straightforward and its interface should be familiar to most www users.
+</p>
+<p>
+Apart from the [search: Search module], you will also find a small search field above the navigation bar at all time. It provides convenient access to the search module from all pages.
+</p>
+<h2 id="Quickjumps">Quickjumps</h2>
+<p>
+For intermediate and advanced use, Trac has a useful way to quickly navigate to a given resource, named <strong>quickjumps</strong>.
+</p>
+<p>
+If you enter a <a class="wiki" href="/TracLinks">TracLink</a> in the search field above the navigation bar, Trac will recognize this and assume you know where you're going. 
+</p>
+<p>
+For example:
+</p>
+<ul><li>![42] -- Opens change set 42
+</li><li>#42 -- Opens ticket number 42
+</li><li>!{1} -- Opens report 1
+</li></ul><p>
+<strong>Note:</strong> <em>This is a particularly useful feature to quickly navigate to a specific issue ticket or changeset.</em>
+</p>
+<h3 id="Advanced:DisablingQuickjumps">Advanced: Disabling Quickjumps</h3>
+<p>
+To disable the quickjump feature for a search keyword - for example when searching for occurences of the literal word TracGuide - begin the query with an exclamation mark (!).
+</p>
+<hr />
+<p>
+See also: <a class="wiki" href="/TracGuide">TracGuide</a>, <a class="wiki" href="/TracLinks">TracLinks</a>, <a class="wiki" href="/TracQuery">TracQuery</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

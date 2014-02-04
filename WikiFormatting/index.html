@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><ul><li>Wiki help
+<ul><li><a class="wiki" href="/WikiHelp">Overview</a>
+</li><li><a class="wiki" href="/TriblerTracSecurity">Security</a>
+</li><li><a class="wiki" href="/WikiFormatting">Formatting</a>
+</li><li><a class="wiki" href="/WikiHtml">HTML</a>
+</li><li><a class="wiki" href="/WikiMacros">Macros</a>
+</li></ul></li></ul></div></td><td>
+</p>
+<h1 id="WikiFormatting">Wiki Formatting</h1>
+<p>
+Wiki markup is a core feature in Trac, tightly integrating all the other parts of Trac into flexible and powerful whole.
+</p>
+<p>
+Trac has a built in small and powerful wiki rendering engine. This wiki engine implements an ever growing subset of the commands from other popular Wikis especially <a class="ext-link" href="http://moin.sf.net/"><span class="icon">​</span>MoinWiki</a>. 
+</p>
+<p>
+This page demonstrates the formatting syntax available anywhere <a class="wiki" href="/WikiFormatting">WikiFormatting</a> is allowed.
+</p>
+<h2 id="Fontstyles">Font styles</h2>
+<p>
+The Trac wiki support the following font styles: <strong>bold</strong>, <em>italic</em>,
+<span class="underline">underline</span> and <del>strike-through</del>.
+</p>
+<pre class="wiki">The Trac wiki support the following font styles: '''bold''', ''italic'',
+__underline__ and ~~strike-through~~.
+</pre><h2 id="Heading">Heading</h2>
+<p>
+You can create heading by starting a line with one up to five <em>equal<br /> '=' characters
+followed by a single space and the headline text. The line should end with a space 
+followed by the same number of </em>equal<em> characters. 
+</em></p>
+<p>
+<em>Note: As of writing, headings cannot contain <a class="wiki" href="/TracLinks">TracLinks</a>.</em>
+</p>
+<h3 id="Example:">Example:</h3>
+<pre class="wiki">= Heading =
+== Subheading ==
+</pre><h2 id="Paragraphs">Paragraphs</h2>
+<p>
+A new text paragraph is created whenever two blocks of text are separated
+by one or more empty lines.
+</p>
+<p>
+A forced line break can also be inserted, using:
+</p>
+<pre class="wiki">Line 1[[BR]]Line 2
+</pre><p>
+Display:
+</p>
+<p>
+Line 1<br />Line 2
+</p>
+<blockquote>
+<p>
+Text paragraphs can be indented by starting the lines with two or more spaces.
+</p>
+</blockquote>
+<h2 id="Lists">Lists</h2>
+<p>
+The wiki supports both ordered/numbered and unordered lists.
+</p>
+<p>
+Example:
+</p>
+<pre class="wiki"> * Item 1
+   * Item 1.1
+ * Item 2
+
+ 1. Item 1
+   1. Item 1.1
+ 1. Item 2
+</pre><p>
+Display:
+</p>
+<ul><li>Item 1
+<ul><li>Item 1.1
+</li></ul></li><li>Item 2
+</li></ul><ol><li>Item 1
+<ol><li>Item 1.1
+</li></ol></li><li>Item 2
+</li></ol><h2 id="Preformattedtext">Preformatted text</h2>
+<p>
+Block quotes, preformatted text, are suitable for source code snippets, notes and examples. Use three <em>curly braces</em> wrapped around the text to define a block quote:
+  
+Example:
+</p>
+<pre class="wiki"> {{{
+  def HelloWorld()
+      print "Hello World"
+ }}}
+</pre><p>
+Display:
+</p>
+<pre class="wiki"> def HelloWorld()
+     print "Hello World"
+</pre><h2 id="Tables">Tables</h2>
+<p>
+Simple tables can be created like this:
+</p>
+<pre class="wiki">||Cell 1||Cell 2||Cell 3||
+||Cell 4||Cell 5||Cell 6||
+</pre><p>
+Display:
+</p>
+<table class="wiki">
+<tr><td>Cell 1</td><td>Cell 2</td><td>Cell 3
+</td></tr><tr><td>Cell 4</td><td>Cell 5</td><td>Cell 6
+</td></tr></table>
+<h2 id="Links">Links</h2>
+<p>
+!Hyperlinks are automatically created for <a class="wiki" href="/WikiPageNames">WikiPageNames</a> and urls. WikiPageLinks can be disabled by
+prepending an exclamation mark (!) character, such as <tt>!WikiPageLink</tt>.
+</p>
+<p>
+Examples:
+</p>
+<blockquote>
+<p>
+<a class="wiki" href="/TitleIndex">TitleIndex</a>, <a class="ext-link" href="http://www.edgewall.com/"><span class="icon">​</span>http://www.edgewall.com/</a>.
+</p>
+</blockquote>
+<p>
+Links can be given a more descriptive title by writing the link followed by
+a space and a title and all this inside two square brackets. Like this:
+</p>
+<pre class="wiki"> * [http://www.edgewall.com/ Edgewall Software]
+ * [wiki:TitleIndex Title Index]
+</pre><p>
+Display:
+</p>
+<ul><li><a class="ext-link" href="http://www.edgewall.com/"><span class="icon">​</span>Edgewall Software</a>
+</li><li><a class="wiki" href="/TitleIndex">Title Index</a>
+</li></ul><h3 id="TracLinks">Trac Links</h3>
+<p>
+Wiki pages can link directly to other parts of the Trac system.
+Pages can refer to tickets, reports, changesets, milestones, source files and
+other Wiki pages using the following notation:
+</p>
+<ul><li>Tickets: <strong>#1</strong> or <strong>ticket:1</strong>
+</li><li>Reports: <strong>!{1}</strong> or <strong>report:1</strong>
+</li><li>Changesets: <strong>![1]</strong> or <strong>changeset:1</strong>
+</li><li>Wiki pages: <strong><a class="wiki" href="/CamelCase">CamelCase</a></strong> or <strong>wiki:CamelCase</strong>
+</li><li>Milestones: <strong>milestone:1.0</strong>
+</li><li>Files: <strong>source:trunk/COPYING</strong>
+</li><li>A specific file revision: <strong>source:/trunk/COPYING#200</strong>
+</li></ul><p>
+Display:
+</p>
+<ul><li>Tickets: <a class="missing ticket">#1</a> or <a class="missing ticket">ticket:1</a>
+</li><li>Reports: {1} or report:1
+</li><li>Changesets: [1] or changeset:1
+</li><li>Wiki pages: <a class="wiki" href="/CamelCase">CamelCase</a> or <a class="wiki" href="/CamelCase">wiki:CamelCase</a>
+</li><li>Milestones: milestone:1.0
+</li><li>Files: source:trunk/COPYING
+</li><li>A specific file revision: source:/trunk/COPYING#200
+</li></ul><p>
+See <a class="wiki" href="/TracLinks">TracLinks</a> for more in-depth information.
+</p>
+<h2 id="EscapingLinksandWikiNames">Escaping Links and <a class="missing" href="#">WikiNames</a></h2>
+<p>
+You may avoid making hyperlinks out of <a class="wiki" href="/TracLinks">TracLinks</a> by preceding an expression with a single '!' (exclamation mark).
+</p>
+<pre class="wiki"> !NoHyperLink
+ !#42 is not a link
+</pre><p>
+Display:
+</p>
+<blockquote>
+<p>
+NoHyperLink
+#42 is not a link
+</p>
+</blockquote>
+<h2 id="Images">Images</h2>
+<p>
+Urls ending with .png, .gif or .jpg are automatically interpreted as image links, and converted to IMG tags.
+</p>
+<p>
+Example:
+</p>
+<pre class="wiki">http://www.edgewall.com/gfx/trac_example_image.png
+</pre><p>
+Display:
+</p>
+<p>
+<a class="ext-link" href="http://www.edgewall.com/gfx/trac_example_image.png"><span class="icon">​</span>http://www.edgewall.com/gfx/trac_example_image.png</a>
+</p>
+<h2 id="Macros">Macros</h2>
+<p>
+Macros are <em>custom functions</em> to insert dynamic content in a page. See <a class="wiki" href="/WikiMacros">WikiMacros</a> for usage.
+</p>
+<p>
+Example:
+</p>
+<pre class="wiki"> [[Timestamp]]
+</pre><p>
+Display:
+</p>
+<blockquote>
+<p>
+<a class="missing" href="#">Timestamp</a>
+</p>
+</blockquote>
+<h2 id="Processors">Processors</h2>
+<p>
+Trac supports alternative markup formats using <a class="wiki" href="/WikiProcessors">WikiProcessors</a>. For example, processors are used to write pages in <a class="wiki" href="/WikiRestructuredText">reStructuredText</a> or <a class="wiki" href="/WikiHtml">HTML</a>. 
+</p>
+<p>
+See <a class="wiki" href="/WikiProcessors">WikiProcessors</a> for more information.
+</p>
+<p>
+<strong>Example 1:</strong>
+</p>
+<pre class="wiki">{{{
+#!html
+&lt;h1 style="text-align: right; color: blue"&gt;HTML Test&lt;/h1&gt;
+}}}</pre>
+<p>
+Display:
+</p>
+<h1 style="text-align: right; color: blue">HTML Test</h1>
+<p>
+<strong>Example 2:</strong>
+</p>
+<pre class="wiki">{{{
+#!python
+class Test:
+    def __init__(self):
+        print "Hello World"
+if __name__ == '__main__':
+   Test()
+}}}</pre>
+<p>
+Display:
+</p>
+<div class="code"><pre>class Test:
+    def __init__(self):
+        print "Hello World"
+if __name__ == '__main__':
+   Test()
+</pre></div><h2 id="Miscellaneous">Miscellaneous</h2>
+<p>
+Four or more dashes will be replaced by a horizontal line (&lt;HR&gt;)
+</p>
+<pre class="wiki"> ----
+</pre><p>
+Display:
+</p>
+<hr />
+<hr />
+<p>
+See also: <a class="wiki" href="/TracLinks">TracLinks</a>, <a class="wiki" href="/TracGuide">TracGuide</a>, <a class="wiki" href="/WikiHtml">WikiHtml</a>, <a class="wiki" href="/WikiMacros">WikiMacros</a>, <a class="wiki" href="/WikiProcessors">WikiProcessors</a>, <a class="wiki" href="/TracSyntaxColoring">TracSyntaxColoring</a>.
+</p>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

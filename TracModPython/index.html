@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Tracandmod_python">Trac and mod_python</h1>
+<p>
+Trac 0.7.1 and later supports <a class="ext-link" href="http://www.modpython.org/"><span class="icon">​</span>mod_python</a>, which speeds up Trac's response times considerably and permits use of many Apache features not possible with tracd/mod_proxy.
+</p>
+<h2 id="Simpleconfiguration">Simple configuration</h2>
+<p>
+Here's a typical Trac CGI/Apache setup:
+</p>
+<pre class="wiki">ScriptAlias /projects/myproject /path/to/python/share/trac/cgi-bin/trac.cgi
+&lt;Location /projects/myproject&gt;
+   SetEnv TRAC_ENV /var/trac/myproject
+&lt;/Location&gt;
+</pre><p>
+The equivalent mod_python setup is:
+</p>
+<pre class="wiki">&lt;Location /projects/myproject&gt;
+   SetHandler mod_python
+   PythonHandler trac.ModPythonHandler
+   PythonOption TracUriRoot "/projects/myproject"
+   PythonOption TracEnv /var/trac/myproject
+&lt;/Location&gt;
+</pre><p>
+Note that the option <em><a class="missing" href="#">TracUriRoot</a></em> may or may not be necessary in your setup. Try without first, and if the URLs produced by Trac look wrong, add the <em><a class="missing" href="#">TracUriRoot</a></em> option.
+</p>
+<h2 id="Settingupmultipleprojects">Setting up multiple projects</h2>
+<p>
+The Trac mod_python handler handler supports a configuration option similar to Subversion's <tt>SvnParentPath</tt>, called <tt>TracEnvParentDir</tt>:
+</p>
+<pre class="wiki">&lt;Location /projects&gt;
+  SetHandler mod_python
+  PythonHandler trac.ModPythonHandler
+  PythonOption TracUriRoot /projects
+  PythonOption TracEnvParentDir "/var/trac"
+&lt;/LocationMatch&gt;
+</pre><p>
+When you request the <tt>/projects</tt> URL, you will get a (currently very simple) listing of all subdirectories of the directory you set as <tt>TracEnvParentDir</tt>. Selecting any project in the list will bring you to the corresponding Trac instance. You should make sure that the configured directory only contains Trac environment directories that match the currently installed Trac version, because that is not checked prior the the generation of the project list.
+</p>
+<h3 id="Addingauthentication">Adding authentication</h3>
+<p>
+Adding authentication is straightforward in both cases. For example:
+</p>
+<pre class="wiki">&lt;LocationMatch /projects/[[:alnum:]]+/login&gt;
+  AuthType Basic
+  AuthName "Trac"
+  AuthUserFile /var/www/passwd
+  Require valid-user
+&lt;/LocationMatch&gt;
+</pre><h3 id="Win32Issues">Win32 Issues</h3>
+<p>
+If you run trac with mod_python on Windows, attachments will not work.
+</p>
+<p>
+There is a (simple) workaround for this which is to apply the patch attached to 
+ticket <a class="ext-link" href="http://projects.edgewall.com/trac/ticket/554"><span class="icon">​</span>#554</a>.
+</p>
+<hr />
+<p>
+See also <a class="wiki" href="/TracGuide">TracGuide</a>, <a class="wiki" href="/TracInstall">TracInstall</a>, <a class="wiki" href="/TracMultipleProjects">TracMultipleProjects</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

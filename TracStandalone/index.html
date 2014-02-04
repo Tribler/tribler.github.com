@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Tracd">Tracd</h1>
+<p>
+Tracd is a lightweight stand-alone Trac server. In most cases it's easier to setup and runs faster than trac.cgi.
+</p>
+<p>
+<strong>Note: tracd is still experimental.</strong>
+</p>
+<h2 id="Pros">Pros</h2>
+<ul><li>Fewer dependencies: You don't need to install apache or any other web-server.
+</li><li>Fast: Should be as fast as the <a class="missing" href="#">ModPython</a> version (much faster than the cgi).
+</li></ul><h2 id="Cons">Cons</h2>
+<ul><li>Less features: Tracd implements a very simple web-server and is not as configurable as apache.
+</li><li>Only htdigest authentication: Tracd can currently only authenticate users against apache-htdigest files.
+</li><li>No native https support: <a class="ext-link" href="http://www.rickk.com/sslwrap/"><span class="icon">​</span>sslwrap</a> can be used instead.
+</li></ul><h2 id="Usageexamples">Usage examples</h2>
+<p>
+A single project on port 8080. (<a class="ext-link" href="http://localhost:8080/"><span class="icon">​</span>http://localhost:8080/</a>)
+</p>
+<pre class="wiki"> $ tracd -p 8080 /path/to/project
+</pre><p>
+With more than one project. (<a class="ext-link" href="http://localhost:8080/project1/"><span class="icon">​</span>http://localhost:8080/project1/</a> and <a class="ext-link" href="http://localhost:8080/project2/"><span class="icon">​</span>http://localhost:8080/project2/</a>)
+</p>
+<pre class="wiki"> $ tracd -p 8080 /path/to/project1 /path/to/project2
+</pre><p>
+With htdigest authentication. The file /tmp/users.htdigest contain user accounts for project1 with the realm "mycompany.com".
+</p>
+<pre class="wiki"> $ tracd -p 8080 --auth project1,/tmp/users.htdigest,mycompany.com /path/to/project1
+</pre><hr />
+<p>
+See also: <a class="wiki" href="/TracGuide">TracGuide</a>, <a class="wiki" href="/TracInstall">TracInstall</a>, <a class="wiki" href="/TracModPython">TracModPython</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

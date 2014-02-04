@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="BarterCast"><a class="wiki" href="/BarterCast">BarterCast</a></h1>
+<p>
+<a class="wiki" href="/BarterCast">BarterCast</a> is a protocol to exchange the
+altruism levels of peers. Altruism is
+defined as the amount of uploading versus
+downloading of a person. The goal is to 
+create incentives for cooperation.
+(See <a class="wiki" href="/IncentiveSystems">IncentiveSystems</a> for an 
+overview of other incentive mechanisms.)
+</p>
+<p>
+Attached is a <strong>draft</strong> 8-page paper of Dispersy, a system used for signatures and targeted to replace <a class="wiki" href="/BarterCast">BarterCast</a> eventually. It uses Bloom filters, see for detailed documentation: <a class="wiki" href="/IPv8Datasync">IPv8Datasync</a> and <a href="http://www.tribler.org/trac/raw-attachment/wiki/IPv8Datasync/thesis_final.pdf">thesis work</a>
+</p>
+<p>
+A lot of <strong>draft</strong> info on BarterCast <a class="wiki" href="/SwarmBasedReputationConsensus">is located here</a>
+</p>
+<p>
+<a href="http://www.tribler.org/trac/raw-attachment/wiki/BarterCast/bartercast_techreport.pdf">Our first research paper on BarterCast</a>. A greatly expanded version with a performance evaluation is pending publication.
+</p>
+<h3 id="Sourceofinfo">Source of info</h3>
+<p>
+<a class="ext-link" href="http://multiprobe.ewi.tudelft.nl/dataset.html"><span class="icon">​</span>Bittorrent crawls</a><br />
+<a class="wiki" href="/LogFileAnalysis">Tribler crawl</a><br />
+<a class="wiki" href="/SocialOverlay">Community crawl</a><br />
+<a class="wiki" href="/P2PSimulator">P2PSimulator</a>
+</p>
+<h2 id="Keyresearchchallenges">Key research challenges</h2>
+<ul><li>Unavailability of information due to: using 1st hand info only and peers unreliability
+</li><li>Overhead of sending to everyone, for instance, at the cost of 250 Bytes when giving out 10MByte.
+</li><li>Bootstrapping into this collective rep sys.
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

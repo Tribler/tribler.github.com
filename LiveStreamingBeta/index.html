@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="LiveStreaming">Live Streaming</h1>
+<p>
+This page is a quick guide to using the second Live Streaming development branch, which is based on the new Tribler Core, and can be found at [source:abc/branches/jandavid/d08-03-06-swarmplayer-livestreaming-r6955]. This guide was written for revision 7528.
+</p>
+<h1 id="Status">Status</h1>
+<p>
+Live Streaming works, but:
+</p>
+<ul><li>Broadcasts can use the same .torrent, as long as piece size, duration, name and source authentication parameters remain the same. Duration is just a parameter to "set window size" as we now have wraparound.
+</li></ul><ul><li>Currently the name + source auth info makes the .torrent unique. In particular, the 'live' field in the 'info' dict now is a dict that contains an 'authmethod' field indicating what method of source auth is being used. We support one method at the moment, ECDSA signatures. For this method the 'live' dict contains an extra 'pubkey' field containing a binary EC public key. ECDSA signature now also handles replays and reordering of pieces.
+</li></ul><ul><li>Broadcasts cannot be downloaded with a different <a class="wiki" href="/BitTorrent">BitTorrent</a> client (but a different client can be easily modified to support it).
+</li></ul><ul><li>The delay between channel and end-user varies greatly (10 seconds to several minutes).
+</li></ul><ul><li>Batched G2G_XFER messages: We send list of [piece,perc (1byte)] every 4 seconds, instead of for every chunk.
+</li></ul><ul><li>Is tested at only the lab (100 Mbit links).
+</li></ul><h1 id="Howtouse">How to use</h1>
+<p>
+The following steps are required to start and watch a broadcast. First, have an URL for the source stream.
+</p>
+<ol><li>Determine the bitrate and length of your broadcast. To do this for a file, do <tt>ffmpeg -i myfile.mpeg /dev/null</tt>.
+</li></ol><ol start="2"><li>Start the server, with a stream named <tt>foo</tt>, which is read from url <tt>http://myurl</tt>. For streaming from file, omit the scheme. For streaming from a pipe, use <tt>pipe:script.sh</tt>. A file called <tt>foo.tstream</tt> will be created.
+</li></ol><pre class="wiki">./runmac.command Tribler/Tools/createlivestream.py --name foo --source http://myurl
+</pre><p>
+If the stream needs to be limited in speed (for instance, when it is read from file), use the <tt>--bitrate 1024</tt> parameter to limit the stream to 1kbyte/s.
+</p>
+<ol start="3"><li>Start each client using the <tt>foo.tstream</tt> created by the server.
+</li></ol><h1 id="Codecs">Codecs</h1>
+<p>
+The perceived quality depends on several factors, among which the codec that is used.
+</p>
+<table class="wiki">
+<tr><td> server </td><td> video codec </td><td> audio codec </td><td> container </td><td> notes 
+</td></tr><tr><td> VLC </td><td> mp2v </td><td> mp2 </td><td> ts </td><td> Used for early demos. Ancient codecs though. 
+</td></tr><tr><td> ffmpeg </td><td> mpeg1video </td><td> - </td><td> mpeg </td><td> ffmpeg -s 320x240 -an -f video4linux -i  /dev/video -vcodec mpeg1video -vb 1024000 -minrate 1024000 -f mpeg 
+</td></tr><tr><td> ffmpeg </td><td> mpeg4 </td><td> - </td><td> mpegts </td><td> ffmpeg -s 320x240 -f video4linux -i /dev/video -vcodec mpeg4 -vb 428288 -s 320x240 -an -f mpegts - ; good quality 
+</td></tr><tr><td> ffmpeg </td><td> mpeg4 </td><td> mp3 </td><td> mpegts </td><td> ffmpeg -i /dev/video -vcodec mpeg4 -vb 428288 -s 320x240 -acodec mp3 -ab 96000 -ac 1 -f mpegts - 
+</td></tr><tr><td> VLC </td><td> h264 </td><td> mp3 </td><td> mpegts </td><td> internal VLC (0.8.6a) plays H2.64 ; problem is generating good input with ffmpeg/x264, motion issues when putting it in mpegts 
+</td></tr></table>
+<h1 id="Todo">Todo</h1>
+<h2 id="Highpriority:">High priority:</h2>
+<p>
+Jan David:
+</p>
+<ul><li>Allow readers to re-tune-in when the source goes away for a while.
+</li><li>Related: may sure a reader can survive a stall, i.e., if it is stalled, it should not start throwing away HAVEs from the source as being invalid.
+</li><li>= External moving play pos and selective dropping.
+</li><li>Optimizations from simulations.
+</li></ul><p>
+Arno:
+</p>
+<ul><li>Get rid of INTERESTED/NOT_INTERESTED msgs. NOT: JD says this has value (CHECK)
+</li><li>Long-playing bug (player stops playing after &gt; 24 hours)
+</li></ul><p>
+Middle priority:
+</p>
+<ul><li>Adjusting stream to match situation (speedup at full buffer, slowdown at empty buffer?).
+</li><li>Find good codecs (good = nice quality and no vlc problems).
+</li><li>Proper timing of starting playback.
+</li><li>Prebuffer minimalisation
+</li><li>GUI for webcam interface.
+</li></ul><p>
+Low priority:
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

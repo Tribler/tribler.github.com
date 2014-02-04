@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="Underconstruction">Under construction</h1>
+<p>
+This page will contain raw results, which allows us to link to them before we had a chance to tidy this page up a bit. 
+</p>
+<p>
+<em>New! </em> See our tidy <a class="ext-link" href="http://svn.tribler.org/bt2-design/proto-spec-unified/trunk/PDS-2009-002.pdf"><span class="icon">​</span>technical report on the results of the live part of the experiment.</a>
+</p>
+<h2 id="Peerpresence">Peer presence</h2>
+<p>
+The following picture shows which peers were watching the live video stream on Saturday July 19th 07:30 CEST.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/earth_map_modified_0080.png"></a>
+</p>
+<p>
+The animated version, running from Thursday July 17th to Friday July 25th, is available as peer_live.mp4, attached to this wiki page. Each frame represents 30 minutes of actual time.
+</p>
+<p>
+We were able to locate 90% of the peers using information available at <a class="ext-link" href="http://hostip.info"><span class="icon">​</span>hostip.info</a>, <a class="ext-link" href="http://maxmind.com"><span class="icon">​</span>MaxMind</a>, and <a class="ext-link" href="http://geoiptool.com"><span class="icon">​</span>Geo IP Tool</a>. The earth map, including the day/night overlay, was taken from <a class="ext-link" href="http://www.fourmilab.ch/cgi-bin/Earth"><span class="icon">​</span>fourmilab.ch</a>.
+</p>
+<h2 id="QualityofService">Quality of Service</h2>
+<p>
+The figure below presents the average quality as observed by the peers. The bottom half shows the percentage of pieces that were lost, and the percentage of time the peers were paused to rebuffer. As a reference, the number of peers present at each moment in time is shown in the top half of the figure.
+</p>
+<p>
+The average stall time and piece loss is skewed towards malfunctioning clients, which for instance report a continuous stall as well as 80-100% piece loss. To avoid this bias, we plot the median values instead.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/loss.png"></a>
+</p>
+<h2 id="Sessionduration">Session duration</h2>
+<p>
+The figure below plots the length of each visit in a log-log plot. The 'rank' of a peer means its order in the list of visits ordered from long to short.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sessiondurations.png"></a>
+</p>
+<h2 id="Sharingefficiency">Sharing efficiency</h2>
+<p>
+Our network consists of our seeding servers (which make the video stream available) and the users. The figure below shows the cumulative amount of data which the peers downloaded from the seeding servers and other users and the cumulative amount of data uploaded between the users. The blue line shows the ratio uploaded:downloaded, indicating the total sharing ratio of the users. At the last point of measurement, the users supplied 40% of the data to each other. Our servers thus had to supply 60% of the stream. Note that peers were not given any preference to download from the seeding servers or the users. Instead, the seeding servers and users were treated the same and ran the same software. Since the seeding servers obtain each piece the earliest, peers have a natural tendency to request the pieces from them.
+</p>
+<p>
+<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sharingratio.png"></a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

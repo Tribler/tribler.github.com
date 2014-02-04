@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="VideoonDemand">Video on Demand</h1>
+<p>
+Video on Demand is one of the three methods of distributing video content:
+</p>
+<ul><li><a class="wiki" href="/DownloadPlay">DownloadPlay</a>, first download something, then play it. Standard <a class="wiki" href="/BitTorrent">BitTorrent</a> + player
+</li><li><a class="wiki" href="/LiveStreaming">LiveStreaming</a>, p2p videodistribution where everybody in the swarm is viewing the same content at the same time. Comparable to television channels.
+</li><li><a class="wiki" href="/VideoOnDemand">VideoOnDemand</a>, comparable to an online movie rental. User decides what to watch and when to watch.
+</li></ul><p>
+The complication with video on demand is in getting the incentives right.
+</p>
+<h2 id="Multi-bitrateBittorrentswarms">Multi-bitrate Bittorrent swarms</h2>
+<p>
+<a class="ext-link" href="http://www.vuze.com/details/RPZLUVD2BPGGOB5XMHBFDVBRG3HDDXLJ.html"><span class="icon">​</span>Vuze live test content</a>
+</p>
+<h1 id="Codeupdates">Code updates</h1>
+<p>
+On 25/02/09 a large code update was committed to the Tribler mainbranch with the purpose of improving VOD performance. In order not to loose the general idea behind the changes that were applied at this update we will list them here.
+</p>
+<ul><li>Perviously a timestamp was given to each piece that the piece picker selected. This is inefficient for large pieces as the chunk requests for some of the chunks in this piece may be done 'a lot later' instantly expiring them. After the fix a timestamp is stored for each individual chunk request. 
+</li><li>With the new chunk-based timestamp we cancel individual requests instead of all the outstanding requests for a piece where ONE request expired.
+</li><li>Only chunks from the high priority range are examined for timeout/on-time-delivery. Previously all pieces were examined.
+</li><li>Each chunk may be canceled if (1.1) is was requested a minimal amount of time ago and (1.2) the data will not arrive on time given number of outstaning chunks and current download speed. Or if may be canceld if (2.1) the request was given a minimal amount of time ado and (2.2) the request has been outstanding more than the maximal amount of time. These minimal and maximal times are configurable and differ during playback and pause/buffering phases.
+</li><li>The current download speed (used to estimate if a peer will send data within the deadline) is calculated using a 5 second history on received chunks. Previously this was a 20 second history on received chunks.
+</li><li>The ETA to play is now estimated based on a weighted average between (1) download speed of chunks in the high priority range using the 5 second history and (2) overall download speed of any chunk in of the file using the 20 second history. The weight depends on the number of pieces that have been received from the high priority range. 
+</li><li>The high priority range now depends on either (1) a the amount of data required to play for a minimal amount of time or (2) a minimal number of pieces. 
+</li><li>The high priority range will grow each time the playback fails and the client is forced to pause for buffering. There is a maximum to the this buffer size given in either amount of time or number of pieces.
+</li><li>Connections are given a bad-performance counter that increases each time a high priority chunk fails to download on time and decreases (with a minimal of 0) each time that -any- chunk is downloaded. 
+</li><li>High priority pieces are only downloaded (piece picker policy) from connections that have a bad-performance counter &lt;= 0.
+</li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

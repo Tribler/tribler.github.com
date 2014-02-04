@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="SocioCast:SocialNetworkcasting"><a class="wiki" href="/SocioCast">SocioCast</a>: Social Network casting</h1>
+<p>
+Thesis: <a class="ext-link" href="http://www.tribler.org/attachment/wiki/SocioCast/thesis.pdf"><span class="icon">​</span>http://www.tribler.org/attachment/wiki/SocioCast/thesis.pdf</a>
+</p>
+<h1 id="ResearchDirection">Research Direction</h1>
+<p>
+<strong>Research Question</strong>
+</p>
+<blockquote>
+<p>
+Is a social network sufficient means for peers to distinguish good moderators
+</p>
+</blockquote>
+<p>
+<strong>Definitions</strong>
+</p>
+<ol><li>Hubs are the top 1% connected peers.
+</li><li>Leaf nodes are the bottom 50% connected peers.
+</li><li>Coverage is the social influence of a node compared to other nodes.
+</li></ol><p>
+<strong>Assumptions</strong> - made credible using literature or sound reasoning
+</p>
+<ol><li>The social network formed by <a class="wiki" href="/SocioCast">SocioCast</a> will be a combination of a scale-free and a small-world network.
+</li><li>Hubs are the main providers of good approvals.
+</li></ol><p>
+<strong>Subproblems</strong> - made credible using results from theoretic models
+</p>
+<ol><li>A social network can be formed by <a class="wiki" href="/SocioCast">SocioCast</a> given that peers have added friends.
+</li><li><a class="wiki" href="/SocioCast">SocioCast</a> scales considering a fixed cache size to store relations.
+</li><li>The coverage of hubs is significantly higher than the coverage of (colluding) leaf nodes.
+</li><li>Socially relevant information equals good information.
+</li><li><em>Resistant against friend spam attack.</em>
+</li><li><em>Resistant against traitoring hub attack.</em>
+</li></ol><h1 id="Testing">Testing</h1>
+<p>
+Each of the subproblems posed above should be solved using a model of <a class="wiki" href="/SocioCast">SocioCast</a>.
+</p>
+<p>
+<strong>First model:</strong> Explorative test. Hubs are interesting nodes and therefore we looked at their coverage. Tests have been done on a 100.000 size network with on average 10 links per node. These networks have been generated with an algorithm for scale-free networks and an algorithm for small-world networks. From the outcome it can be concluded that the coverage of hubs in scale free networks is far greater than those in small world networks. Also the coverage of hubs in a scale-free network outperforms the coverage of 25 leaf nodes in contrast to the small-world network.
+</p>
+<p>
+The problem of this first test is that the coverage is concluded from a breadth first search from the source. This does not take into account the bucket size (size of the cache used to store network links per peer).
+</p>
+<p>
+<strong>Second model:</strong> Run a simulation of a generated scale-free network bootstrapping. Unfortunately calculating SRI many times for every node is very expensive.
+</p>
+<p>
+<em>exploration speed</em> - Compare exploration speed of a new node with network churn and without and also connectibility issues. The problem is that connectibility can only be circumvented if contact is done from 2 ways. Simulations with only 1 active node are essentially the same as the first model, only select_peer is different.
+</p>
+<p>
+<em>scalability</em>
+</p>
+<p>
+<em>collusion resistance</em>
+</p>
+<p>
+<em>traitor resistance</em>
+</p>
+<p>
+To compare different designs <em>Performance Indicators</em> should be introduced
+</p>
+<ul><li>global hub coverage given a fixed relation cache
+</li><li>bootstrap speed
+</li></ul><h1 id="ComparisonsofSocioCastvsexistingnetworks">Comparisons of <a class="wiki" href="/SocioCast">SocioCast</a> vs existing networks</h1>
+<p>
+This information is to be used in the background chapter and the recommendation chapter.
+</p>
+<p>
+<strong>last.fm</strong>
+</p>
+<p>
+<em>friend network is similar</em>
+</p>
+<ul><li>added via hotmail/gmail
+</li></ul><p>
+<em>interest groups</em>
+</p>
+<ul><li>invite policy (open, owner approval, member approval, closed)
+</li><li>owner can link to content
+</li><li>users can recommend content
+</li><li>communication via forums / journal
+</li></ul><p>
+<em>neighbors</em>
+</p>
+<ul><li>view listening behavior of users that listen to similar music
+</li></ul><p>
+Last.fm <em>recommendations</em> are directed towards a user or group. Tribler <em>approvals</em> and <em>moderations</em> are however undirected. This means these systems are hard to compare.
+</p>
+<p>
+Last.fm played tracks/artists can be linked to downloads.
+</p>
+<p>
+Tight social networks are formed by communication between members.
+</p>
+<p>
+Benefit of having friends in Last.fm is
+</p>
+<ul><li>keep track of your friends listening behavior
+</li></ul><p>
+Benefit of having groups in Last.fm is
+</p>
+<ul><li>sense of belonging
+</li><li>communication
+</li><li>specific recommendations (ska concerts are recommended in the Ska user group)
+</li></ul><p>
+<strong>Ideas for Tribler:</strong>
+</p>
+<p>
+Interest groups are a good idea as this will create small worlds for peers with similar interests. Probably does not make <a class="wiki" href="/SocioCast">SocioCast</a> resistant against attacks but makes finding relevant information easier.
+</p>
+<p>
+Share download behavior with friends/group. Might be more privacy sensitive than listening behaviour. Does however give implicit recommendations.
+</p>
+<p>
+Sending of explicit recommendations to friends/groups. (spam?)
+</p>
+<p>
+The neighbour algorithm in Last.fm is significantly different from recommendations in Tribler. If monitoring of behavior of users in Tribler it could be enhanced in the Last.fm way..
+</p>
+<p>
+Easy adding of users by fetching them from gmail or hotmail would be nice, but could give privacy concerns.
+</p>
+<h1 id="ResearchquestionsHurdles">Research questions / Hurdles</h1>
+<p>
+<strong>idea study advisor</strong>
+</p>
+<p>
+Eliminate uncontrollable variables: good/bad peers. Evaluate SRI performance theoretically using a manually constructed network.
+</p>
+<ul><li>social relevance of friends
+</li><li>social relevance of distant celebrities
+</li><li>social relevance of distant non-popular leaf injectors
+</li><li>social relevance of a collusion network
+</li></ul><p>
+explain choice for maxflow sri using the above
+</p>
+<p>
+<strong>Network</strong>
+</p>
+<p>
+<em>Which social network structure will arise if any and can this be influenced by the protocol?</em>
+</p>
+<p>
+According to research<a href="/wiki?">?</a> the existing social networks of Flickr, Youtube, Orkut and Livejournal are scale free and small world networks. Youtube has an interesting property where some peers are celebrities. These celebrities are highly connected but unlike hubs they do not have a higher than random chance to be connected to other highly connected peers.
+</p>
+<p>
+The problem I foresee is that it is not clear to users why they are building a social network. This may result into users making many friends just for the fun of it or leaving the functionality for what it is and not make any friends at all. A social network can only be used to infer some kind of trust information if relationships are meaningful. Unfortunately this can not be tested or prophesied and therefore only the recommendation can be made to make friendship relations more meaningful.
+</p>
+<p>
+Unlike friendship relations, moderator approvals are of clear use to users because it will help the user pick moderations from the same moderator for next files. Without a social network these moderator approvals are however useless, because without any ties it is hard to distinguish approvals of honest peers from collusion networks
+</p>
+<p>
+<em>Which type of peers will be the originators of useful approvals?</em>
+</p>
+<p>
+Hopefully hubs as these have the highest network coverage.. Can this be tested or made likely to believe?
+</p>
+<p>
+We assume the big information providers will be in large part the hubs in the network. The reasoning behind this is that these nodes put a lot of effort into building a meaningful social network and are active in the Tribler community. This will make the chance that they produce a lot of meaningful moderator approvals larger than average.
+</p>
+<p>
+Leaf nodes are less active in the network or potential hubs that have just started. These nodes are highly clustered with their friends which may or may not create specific interest clusters. This will make finding moderator approvals far more easy.
+</p>
+<p>
+Youtube like celebrities, be it approval or moderator providers. Celebrity moderators means many approvals which is good. Approval celebrities create a big star form network without scalefree characteristics.
+</p>
+<p>
+We assume the big information providers will be in large part the hubs in the network. The reasoning behind this is that these nodes put a lot of effort into building a meaningful social network and are active in the Tribler community. This will make the chance that they produce a lot of meaningful moderator approvals larger than average.
+</p>
+<p>
+Leaf nodes are less active in the network or potential hubs that have just started. These nodes are highly clustered with their friends which may or may not create specific interest clusters. This will make finding moderator approvals far more easy.
+The youtube dataset has favorites, but these point towards movies and not users. Could look at the correlation between amount of friends and amount of favorites to predict moderator approval behavior.
+</p>
+<p>
+<em>Is the current youtube dataset sufficient?</em>
+</p>
+<p>
+Doubtful. Peers have favorites, which can not be used to simulate approvals as these link to files and not peers. The correlation between the connectedness of nodes and the amount of (useful) approvals should be extracted.
+</p>
+<p>
+<em>What is the effect of friend spam and can it be countered?</em>
+</p>
+<ul><li><a class="ext-link" href="http://smg.media.mit.edu/papers/Zinman/britneyspears.pdf"><span class="icon">​</span>Is britney Spears spam?</a> - Paper that describes ways to determine whether profiles are real or not.
+</li><li>Alan Mislove notes this is easily fooled and therefore network centrality and clustering should be used.
+</li></ul><p>
+<em>Should <a class="wiki" href="/SocioCast">SocioCast</a> work with bidirectional relationships or unidirectional and how does this affect the choice of real datasets and results?</em>
+</p>
+<p>
+<strong>Protocol</strong>
+</p>
+<p>
+<em>What message size should be chosen for sociocast messages?</em>
+</p>
+<p>
+No idea.. Small message size will however hamper breadth first search of the social network. Whether this is bad remains to be seen. If hubs are the most interesting nodes peers can choose to send these relations first to direct the discovery algorithm.
+</p>
+<p>
+<em>Should incoming relations be tracked and propagated?</em>
+</p>
+<p>
+Incoming relations can only be trusted if they are reachable from the current path. It could help speed up discovery, but then again if peers use breadth first search it should not be necessary.
+</p>
+<p>
+<em>Should it be made possible to remove relationships and how to do it?</em>
+</p>
+<p>
+If friend spam becomes common practice it should be possible to remove connections. This could be done by adding a lifetime to relationships so they have to be renewed every few days or something. This could however cause social networks to collapse if central peers remain offline longer than the lifetime of their relationships.
+</p>
+<p>
+<em>Which relations should be selected to propagate first?</em>
+</p>
+<p>
+Hubs and peers with (useful?) approvals.
+</p>
+<p>
+<em>Is bootstrapping a problem, and should peers be bootstrapped?</em>
+</p>
+<p>
+Without a social network peers will have trouble distinguishing good metadata approvers from bad approvers. Bartercast could help, otherwise the amount of approvals could be compared to rate moderations.
+</p>
+<h1 id="SRISocialRelevanceIndex">SRI ( Social Relevance Index )</h1>
+<p>
+Is a global trust level which can be used for moderator trustworthiness calculation.
+</p>
+<p>
+2 versions:
+</p>
+<p>
+<strong>BFS</strong> - The SRI of node <em>b</em> from the point of view of node <em>a</em> is 1/depth where depth the depth of <em>b</em> in the social graph that is known in <em>a</em>.
+</p>
+<p>
+<strong>Maxflow?</strong>
+</p>
+<img src="http://tribler.org/attachment/wiki/SocioCast/newsri.png?format=raw" width="400" />
+<p>
+Using maxflow is more interesting. Graph discovery focuses towards highly connected peers and hubs gain a higher SRI. Helps to quickly traverse a scale-free network where BFS would choke.
+</p>
+<p>
+<strong>Bootstrapping</strong>
+</p>
+<p>
+WARNING: <em>guestimates</em>
+</p>
+<ul><li>1% of all people indicate trusted moderators
+</li><li>10% of all people add friends
+</li><li>100% of all peers have barter connections with other peers
+</li></ul><p>
+Due to the low amount of people that indicate moderators other indicators of trustworthiness should be used. A friend relation does not imply that a peer should be trusted concerning their opinion about moderators and therefore it should be used as a mere indicator. Not part of research though.
+</p>
+<p>
+Hack to bootstrap.. should be mentioned as a recommendation for bootstrapping, but does not need testing or modeling. Hard to calculate SRI if it is possible to alternate friendship and bartercast connections. Therefore bartercast 'trust' should only be used if no other information is available and should not be mixed with social connections.
+</p>
+<p>
+<em>Should approvals be used as friendships links? If hubs are clustered and approved these links can help discover other hubs?</em>
+</p>
+<p>
+Peers that insert valuable approvals into the network may choose to befriend other peers with valuable approvals. Only if this is the case approvals be used in the SRI to determine the relevance of social paths containing 2 or more approvals. This would require a name change for SRI as it will be a specific index for approval relevance and not social relevance.
+</p>
+<h1 id="Epidemicprotocolalgorithm">Epidemic protocol algorithm</h1>
+<ul><li>Sync, push/pull, storage of state versus bandwidth users
+</li><li>exchange table <br />
+(keep last 3 days peers, keep top1000 SRI() peers, keep freq online&amp;new friends peers)
+</li><li>Purge policies
+</li><li>Hot rumor mongering ?
+</li><li>Social_relevance_ranking_algorithm
+<ul><li>In-Direct downloaded X MByte == Y Max_Flow points
+</li><li>Direct downloaded X MByte == Y points
+</li><li>f-o-a-f = X points
+</li><li>Friend = X points
+</li><li>Moderator with X approvals == Y points
+</li></ul></li></ul><p>
+Architecture:
+</p>
+<ul><li>BuddyCast4 links; candidate cache, connect to Highest SRI() 33% of the time.
+</li><li>Bootstrap into 1 friend or f-o-a-f
+</li><li><a class="wiki" href="/BarterCast">BarterCast</a> links
+</li></ul><p>
+A very interesting problem is: how to efficiently fill the 10MB of
+data (e.g. bootstrap phase) plus how to keep this data updated
+when only a few updates per day occur (e.g. maintenance phase).
+The challenge is not to spend 960 messages per 4 hour <a class="wiki" href="/BuddyCast">BuddyCast</a> cycle
+on bandwidth.
+</p>
+<p>
+Only store entries which are most <strong>interesting</strong>. Problem is lack of info, thus collect info based on social distance.
+</p>
+<p>
+Possibly: 
+</p>
+<ul><li>first pull 10MB
+</li><li>afterward do rumor mongering
+</li></ul><ul><li>do not send outgoing <a class="wiki" href="/SocioCast">SocioCast</a> messages
+</li><li>Only send out when:
+<ul><li>received hot rumor
+</li><li>User updated his social network (voted or added/deleted a friend)
+</li></ul></li></ul><ul><li>possibly use a 1 month expire on <a class="wiki" href="/SocioCast">SocioCast</a> messages to purge non-active peers
+<ul><li>possibly expire on both time, social distance, and <a class="wiki" href="/BarterCast">BarterCast</a> activity.
+</li></ul></li></ul><p>
+The epidemic protocol should be <strong>push-based</strong> because of the sparseness of social information. In the Youtube dataset almost half of the users has no friends. A push-based method will prevent users that have no friends from contacting other users without friends.
+</p>
+<p>
+<a class="wiki" href="/SocioCast">SocioCast</a> will be tied to <a class="wiki" href="/BuddyCast">BuddyCast</a> like <a class="wiki" href="/BarterCast">BarterCast</a>. <a class="wiki" href="/Buddycast3">Buddycast3</a> connects 50% of the time to random peers and 50% of the time to taste buddies. This is unwanted behavior for <a class="wiki" href="/SocioCast">SocioCast</a>, because peers should expand their social network tree. Therefore it is proposed that <a class="missing" href="#">Buddycast4</a> will connect 33% of the time to random peers, 33% of the time to taste buddies and 33% of the time to peers with a high SRI.
+</p>
+<h1 id="Protocolmessagelayout">Protocol message layout</h1>
+<p>
+The layout is very similar to deployed protocols. Each peer only broadcasts its own relations to others. A message contains 2 parts:
+</p>
+<table class="wiki">
+<tr><td> <strong>Friends</strong> </td><td style="text-align: center">             </td><td colspan="2"> <strong>Moderator Approvals</strong> </td><td>   
+</td></tr><tr><td> public key  </td><td> 112 bytes     </td><td colspan="2"> MD5(public key)     </td><td> 32 bytes 
+</td></tr><tr><td> ip          </td><td> 4 bytes       </td><td>
+</td></tr><tr><td> port        </td><td> 2 bytes       </td><td>
+</td></tr><tr><td> last_seen   </td><td> 4 bytes       </td><td>
+</td></tr><tr><td> connectable </td><td> 1 byte        </td><td>
+</td></tr><tr><td> <em>total</em>   </td><td> max 10x <em>123 bytes</em> </td><td colspan="2"> <em>total</em> </td><td> max 10x 32 bytes 
+</td></tr></table>
+<p>
+The size of messages should not exceed 2kb. The sizes of all messageparts are guesstimates, but when 10 friends and 10 moderators are packed the message will not exceed this 2kb limitation.
+</p>
+<p>
+Design principle for security: Only exchange first hand observations of social network edges.
+</p>
+<p>
+The reason that the public keys of moderators are encrypted with MD5 are twofold. First it saves a lot of space in the protocol and second to help moderators remain anonymous. Peers need only know the opinion of their friends about moderations they have and thus MD5 is sufficient.
+</p>
+<h1 id="MEGACACHE">MEGACACHE</h1>
+<p>
+<a class="wiki" href="/SocioCast">SocioCast</a> will require 3 SQL tables to keep track of friends and moderators seperately. All tables use <em>peerid</em>, which is linked to the public key of peers in the <strong>peer</strong> table.
+</p>
+<table class="wiki">
+<tr><td> <strong>Friends Table</strong> 
+</td></tr><tr><td> peerid_from    </td><td> ? bytes 
+</td></tr><tr><td> peerid_to      </td><td> 32 bytes 
+</td></tr><tr><td> timestamp      </td><td> 4 bytes 
+</td></tr></table>
+<p>
+Local relations will also be stored in these tables. <em>Timestamp</em> indicates at what time the relation was added to the local database.
+</p>
+<table class="wiki">
+<tr><td> <strong>Moderator Table</strong> 
+</td></tr><tr><td> peerid_from    </td><td> ? bytes 
+</td></tr><tr><td> moderator_MD5  </td><td> 32 bytes 
+</td></tr><tr><td> timestamp      </td><td> 4 bytes 
+</td></tr></table>
+<p>
+As explained before <a class="wiki" href="/SocioCast">SocioCast</a> messages do not contain the PermID of moderators. It is possible based on moderations in the local database to deduct what PermID is likely referred to. However due to hash collisions the hash will be stored. <em>Timestamp</em> indicates at what time the relation was added to the local database.
+</p>
+<table class="wiki">
+<tr><td> <strong>Exchange Table</strong> 
+</td></tr><tr><td> peerid             </td><td> ? bytes 
+</td></tr><tr><td> incoming_timestamp </td><td> 4 bytes 
+</td></tr><tr><td> outgoing_timestamp </td><td> 4 bytes 
+</td></tr></table>
+<p>
+<em>xx_timestamp</em> signifies the timestamp of the last relationship that has been sent and receive to and from peer <em>peerid</em>. This table will be purged based on purge actions in the friends table.
+</p>
+<h1 id="Previouslyconsidered">Previously considered</h1>
+<p>
+<a class="ext-link" href="http://en.wikipedia.org/wiki/Centrality"><span class="icon">​</span>Centrality</a> is the social importance of a node. The measures for centrality are: degree centrality, betweenness, closeness, and eigenvector centrality. Random Walk Centrality might be interesting because the centrality of nodes is inversely proportional to the degree of branches along a path and it is determined relative to the observer, not as a global value per node. RWC is also a measure of effectiveness of communication, information from a node with high centrality is propagated more quickly.
+<a class="ext-link" href="http://scitation.aip.org/getabs/servlet/GetabsServlet?prog=normal&amp;id=PRLTAO000092000011118701000001&amp;idtype=cvips&amp;gifs=yes"><span class="icon">​</span>RWC paper</a>
+</p>
+<p>
+It is hard to get a global overview of network connections free from tampering. And if unsafe relations are considered centrality and other network analyses may not be accurate enough and influenced. 
+</p>
+<h1 id="Youtubedataset">Youtube dataset</h1>
+<p>
+Some statistical graphs have been constructed from a Youtube dataset. This Youtube dataset consists of 239535 users. About a third of all agents have favorites, 81330 users to be exact.
+</p>
+<img src="http://tribler.org/attachment/wiki/SocioCast/favs_agents.png?format=raw" width="400" />
+<p>
+The distribution of the amount of favorites per agent seems to be a powerlaw.
+</p>
+<img src="http://tribler.org/attachment/wiki/SocioCast/agents_per_fav.png?format=raw" width="400" />
+<p>
+A similar distribution can be seen for favorite holders per movie.
+</p>
+<p>
+We have also looked at the social network in this dataset. This is however not a complete crawl which has several implications. For each user that has been crawled it is known what his friends are. It is however possible that these friends themselves are not crawled. The networks that have been found are sparser than in reality and due to missing connections they are probably more connected than what is found in the following graphs.
+</p>
+<img src="http://tribler.org/attachment/wiki/SocioCast/networksizes.png?format=raw" width="400" />
+<p>
+We have first looked at the distribution of social network sizes. The largest network consists of 134246 users of which 105793 users are part of our dataset. That means that we have no information about outgoing and incoming connections from the remaining 28453 users.
+The small amount of networks of size 1 can be explained due to Youtube allowing users to add themselves as a friend.
+</p>
+<img src="http://tribler.org/attachment/wiki/SocioCast/rings.png?format=raw" width="400" />
+<p>
+This last graph is the result from a peer discovery algorithm performed on the largest network. In each step the algorithm determines the friends of newly discovered peers, the fringe. The algorithm started at a random node, therefore the fringe in step 0 is 1. The social small world experiment done in 1967 at Harvard University determined that social connections are of length 5.5 on average. The average in our graph is slightly higher which can be explained due to our dataset being sparser than in reality.
+<a class="ext-link" href="http://en.wikipedia.org/wiki/Small_world_phenomenon"><span class="icon">​</span>http://en.wikipedia.org/wiki/Small_world_phenomenon</a>
+</p>
+<p>
+For a better overview of social networks read the paper included below and the following website: <a class="ext-link" href="http://socialnetworks.mpi-sws.mpg.de/"><span class="icon">​</span>http://socialnetworks.mpi-sws.mpg.de/</a>
+</p>
+<h1 id="Remarks">Remarks</h1>
+<p>
+.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

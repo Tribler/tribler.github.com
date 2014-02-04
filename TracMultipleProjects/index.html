@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="ConfigureApacheformultipleprojects">Configure Apache for multiple projects</h1>
+<p>
+By following these instructions, you will set up Apache to automatically serve multiple Trac projects for you. 
+</p>
+<p>
+Start out by creating a project directory in your documentroot (/var/www in this example). Projects will be accessed as <a class="ext-link" href="http://hostname/projects/projectname"><span class="icon">​</span>http://hostname/projects/projectname</a>. Copy (or symlink) trac.cgi to this directory together with a file named index.html. This will be shown when users try to access nonexistent projects.
+</p>
+<p>
+Then create your trac projects with trac-admin. It's important that they are all placed in the same directory. In this example we'll use /var/lib/trac. Add to your Apache configuration:
+</p>
+<pre class="wiki">RewriteEngine on
+RewriteRule ^/projects/+$			/projects/index.html [L]
+RewriteCond /var/lib/trac/$1			-d
+RewriteRule ^/projects/([[:alnum:]]+)(/?.*)	/projects/trac.cgi$2 [S=1,E=TRAC_ENV:/var/lib/trac/$1]
+RewriteRule ^/projects/(.*)			/projects/index.html
+
+&lt;Directory "/var/www/projects"&gt;
+	AllowOverride None
+	Options ExecCGI -MultiViews +SymLinksIfOwnerMatch
+	AddHandler cgi-script .cgi
+	Order allow,deny
+	Allow from all
+&lt;/Directory&gt;
+
+&lt;LocationMatch "/projects/[[:alnum:]]+/login"&gt;
+	AuthType Basic
+	AuthName "trac"
+	AuthUserFile /path/to/trac.htpasswd
+	Require valid-user
+&lt;/LocationMatch&gt;
+</pre><p>
+Make sure you have the rewrite module loaded or compiled in Apache.
+</p>
+<p>
+<tt>LoadModule rewrite_module modules/mod_rewrite.so</tt>
+</p>
+<p>
+Now, when you add another project, you don't need to edit any apache config. The only file you may want to edit is index.html to make it list the new project. If you think this is too much work, replace it with a python cgi script that does it for you.
+</p>
+<p>
+<a class="wiki" href="/TracStandalone">tracd</a> and <a class="wiki" href="/TracModPython">TracModPython</a> can also serve multiple projects.
+</p>
+<hr />
+<p>
+See also: <a class="wiki" href="/TracGuide">TracGuide</a>, <a class="wiki" href="/TracInstall">TracInstall</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="MetadataEnrichmentinTriblerMETNotes">Metadata Enrichment in Tribler (MET) Notes</h1>
+<p>
+Basically miscellaneous notes moved from the main page to here to reduce clutter, but still archive them.
+</p>
+<h2 id="MTurkExperiment">MTurk Experiment</h2>
+<h3 id="FirstExperiment">First Experiment</h3>
+<p>
+Data:
+</p>
+<ul><li>before_open_size_07_Batch_357268_result.csv
+</li><li>before_open_size_12_Batch_355973_result.csv
+</li><li>before_open_size_37_Batch_357607_result.csv (orig. size 40)
+</li><li>after_open_size_11_Batch_357999_result.csv
+</li><li>after_open_size_45_Batch_358463_result.csv
+</li></ul><p>
+Results Before:
+</p>
+<table class="wiki">
+<tr><td> <strong>Real</strong> </td><td> 157 / 124 </td><td> (281) </td><td> 0.5587 / 0.4413 
+</td></tr><tr><td> <strong>Fake</strong> </td><td> 149 / 130 </td><td> (279) </td><td> 0.5341 / 0.4659 
+</td></tr><tr><td> -- 
+</td></tr><tr><td> TV         </td><td> 43 / 17 </td><td> (60) </td><td> 0.7167 / 0.2833 
+</td></tr><tr><td> Movies     </td><td> 37 / 22 </td><td> (59) </td><td> 0.6271 / 0.3729 
+</td></tr><tr><td> Books      </td><td> 18 / 25 </td><td> (43) </td><td> 0.4186 / 0.5814 
+</td></tr><tr><td> Music      </td><td> 33 / 29 </td><td> (62) </td><td> 0.5323 / 0.4677 
+</td></tr><tr><td> Software   </td><td> 26 / 31 </td><td> (57) </td><td> 0.4561 / 0.5439 
+</td></tr><tr><td> -- 
+</td></tr><tr><td> Cur news   </td><td> 38 / 19 </td><td> (57) </td><td> 0.6667 / 0.3333 
+</td></tr><tr><td> Commercial </td><td> 41 / 31 </td><td> (72) </td><td> 0.5694 / 0.4306 
+</td></tr><tr><td> Sport      </td><td> 18 / 33 </td><td> (51) </td><td> 0.3529 / 0.6471 
+</td></tr><tr><td> <a class="missing" href="#">Howto/Talk</a> </td><td> 23 / 25 </td><td> (48) </td><td> 0.4792 / 0.5208 
+</td></tr><tr><td> Home video </td><td> 29 / 22 </td><td> (51) </td><td> 0.5686 / 0.4314 
+</td></tr></table>
+<p>
+Results After:
+</p>
+<table class="wiki">
+<tr><td> <strong>Real</strong> </td><td> 151 / 130 </td><td> (281) </td><td> 0.5374 / 0.4626 
+</td></tr><tr><td> <strong>Fake</strong> </td><td> 157 / 122 </td><td> (279) </td><td> 0.5627 / 0.4373 
+</td></tr><tr><td> -- 
+</td></tr><tr><td> TV         </td><td> 26 / 19 </td><td> (45) </td><td> 0.5778 / 0.4222 
+</td></tr><tr><td> Movies     </td><td> 31 / 24 </td><td> (55) </td><td> 0.5636 / 0.4364 
+</td></tr><tr><td> Books      </td><td> 39 / 31 </td><td> (70) </td><td> 0.5571 / 0.4429 
+</td></tr><tr><td> Music      </td><td> 29 / 28 </td><td> (57) </td><td> 0.5088 / 0.4912 
+</td></tr><tr><td> Software   </td><td> 26 / 28 </td><td> (54) </td><td> 0.4815 / 0.5185 
+</td></tr><tr><td> -- 
+</td></tr><tr><td> Cur news   </td><td> 40 / 28 </td><td> (68) </td><td> 0.5882 / 0.4118 
+</td></tr><tr><td> Commercial </td><td> 23 / 21 </td><td> (44) </td><td> 0.5227 / 0.4773 
+</td></tr><tr><td> Sport      </td><td> 38 / 28 </td><td> (66) </td><td> 0.5758 / 0.4242 
+</td></tr><tr><td> <a class="missing" href="#">Howto/Talk</a> </td><td> 35 / 22 </td><td> (57) </td><td> 0.6140 / 0.3860 
+</td></tr><tr><td> Home video </td><td> 21 / 23 </td><td> (44) </td><td> 0.4773 / 0.5227 
+</td></tr></table>
+<h2 id="Mockups">Mockups</h2>
+<p>
+Search recommendation:<br />
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+</p>
+<p>
+Smart search bar:<br />
+<a class="missing" href="#"></a>
+</p>
+<p>
+Tag cloud / list:<br />
+<a class="missing" href="#"></a><br />
+<a class="missing" href="#"></a>
+</p>
+<p>
+Multilevel tag clouds:<br />
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+</p>
+<h2 id="PreliminaryfindingsstudyingsomedatafromtheClickLogcrawl">Preliminary findings studying some data from the <a class="wiki" href="/ClickLog">ClickLog</a> crawl</h2>
+<ul><li>Sometimes a hit was found by matching keywords from the query against a file name in a multi-file torrent.
+<ul><li>Question: Is there a significant number of users that search for file names?
+</li></ul></li><li>Based on a corpus of more than 800k swarm names, we have identified some users use stopwords in their queries.
+<ul><li>Remark by Martha: certain users probably expect exact-match behaviour. Example query: "the hill productions".
+</li></ul></li><li><em>Further directions:</em> Group search queries by users (anonymized) and study search behaviour.
+</li><li><a class="wiki" href="/ClickLog">ClickLog</a> bug: Propagation of <a class="wiki" href="/ClickLog">ClickLog</a> information is incorrect when a user has searched and downloaded the same torrent multiple times. Consequence: Reconstructing the query results in repeated words.
+</li></ul><p>
+Current Tribler code for determining keywords of a swarm:
+</p>
+<pre class="wiki">        keywords = Set(split_into_keywords(torrent_name))
+
+        # search through the .torrent file for potential keywords in
+        # the filenames
+        for filename in torrentdef.get_files_as_unicode():
+            keywords.update(split_into_keywords(filename))
+</pre><p>
+After 20 days of crawling:
+</p>
+<ul><li>501 unique queries found.
+</li><li>Contacted 48 peers.
+</li><li>Queries were issued by 227 peers, of which 26 were directly crawled.
+</li><li>1467 different swarms were clicked on.<strong>
+</strong></li></ul><p>
+(<strong> only swarms for which their names are known are counted)
+</strong></p>
+<h2 id="Discoveryoftorrentsterms">Discovery of torrents/terms</h2>
+<p>
+The following three plots show how many torrents are discovered over time, and how many terms are extracted from that. We also show how many terms remain after doing simple filtering (word length &gt; 2, freq &gt; 1).
+</p>
+<p>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+</p>
+<p>
+Note that the act of searching causes torrents to be discovered at a higher rate (metadata for unknown infohashes in the search results gets requested).
+</p>
+<p>
+This raises the question whether active peers will tend to get a "narrower" view on the network than idling peers. When an active peer is shown a term cloud and clicks in it, it will perform a search on neighbouring peers. Due to Tribler's semantic overlay, these peers tend to have a similar taste as the searching peer. If a term cloud would only show the most popular terms (according to the peer's own <a class="wiki" href="/MegaCache">MegaCache</a>), clicking on these terms may enforce the popularity of the clicked terms.
+</p>
+<h2 id="Frequencyofdiscoveredterms">Frequency of discovered terms</h2>
+<h3 id="a800kdataset">800k+ dataset</h3>
+<p>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+</p>
+<h3 id="Dataset1">Dataset 1</h3>
+<table class="wiki">
+<tr><td> Unfiltered </td><td> Filtered 
+</td></tr><tr><td><a class="missing" href="#"></a><a class="missing" href="#"></a><br /><a class="missing" href="#"></a><a class="missing" href="#"></a></td><td><a class="missing" href="#"></a><a class="missing" href="#"></a><br /><a class="missing" href="#"></a><a class="missing" href="#"></a>
+</td></tr></table>
+<h3 id="Dataset2">Dataset 2</h3>
+<table class="wiki">
+<tr><td> Unfiltered </td><td> Filtered 
+</td></tr><tr><td><a class="missing" href="#"></a><a class="missing" href="#"></a><br /><a class="missing" href="#"></a><a class="missing" href="#"></a></td><td><a class="missing" href="#"></a><a class="missing" href="#"></a><br /><a class="missing" href="#"></a><a class="missing" href="#"></a>
+</td></tr></table>
+<h2 id="Clustering">Clustering</h2>
+<p>
+<em>Status: Research put on hold for now as it proved to be quite complex</em><br />
+</p>
+<p>
+In a multilevel tag cloud, we cannot simply display the top N terms ranked on df and, when the user selects one of these terms, display the top M terms that co-occur with the selected term and are ranked on df. The graph below illustrates why. In this graph, the red nodes represent the top N=100 level 1 tags. For each level 1 tag, the top M=100 co-occurring tags are connected by an edge. "Pure" level 2 tags are colored green in the graph. As you can see, most level 1 tags also show up at the second level.
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+An example why we don't want this ranking is the following situation. Let's say that in the global top N terms, the terms "x" and "y" are the two most frequent terms, but that they have a co-frequency of merely 1. Let's say the user selects term "x". For the second level of terms, we do not want "y" to be ranked high at all.
+</p>
+<p>
+<a class="missing" href="#"></a>
+</p>
+<p>
+A better approach seems to be to rank level 2 term candidates using the co-df. This results in a graph with 2275 nodes, as opposed to only 165 nodes.
+</p>
+<p>
+<a class="missing" href="#"></a>
+<a class="missing" href="#"></a>
+</p>
+<p>
+The above images show how terms co-occur.
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

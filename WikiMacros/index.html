@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><p>
+<div class="wiki-toc trac-nav"><ul><li>Wiki help
+<ul><li><a class="wiki" href="/WikiHelp">Overview</a>
+</li><li><a class="wiki" href="/TriblerTracSecurity">Security</a>
+</li><li><a class="wiki" href="/WikiFormatting">Formatting</a>
+</li><li><a class="wiki" href="/WikiHtml">HTML</a>
+</li><li><a class="wiki" href="/WikiMacros">Macros</a>
+</li></ul></li></ul></div></td><td>
+</p>
+<h1 id="WikiMacros">Wiki Macros</h1>
+<p>
+Trac macros are plugins to extend the Trac engine with custom 'functions' written in Python. A macro inserts dynamic HTML data in any context supporting <a class="wiki" href="/WikiFormatting">WikiFormatting</a>.
+</p>
+<p>
+Another kind of macros are <a class="wiki" href="/WikiProcessors">WikiProcessors</a>. They typically deal with alternate markup formats and representation of larger blocks of information (like source code highlighting). See also: <a class="wiki" href="/WikiProcessors">WikiProcessors</a>.
+</p>
+<h2 id="UsingMacros">Using Macros</h2>
+<p>
+Macro calls are enclosed in two <em>square brackets</em>. Like python functions, macros can also have arguments, a comma separated list within parenthesis. 
+</p>
+<h3 id="Examples">Examples</h3>
+<pre class="wiki"> [[Timestamp]]
+</pre><p>
+Display:
+</p>
+<blockquote>
+<p>
+<a class="missing" href="#">Timestamp</a>
+</p>
+</blockquote>
+<pre class="wiki"> [[HelloWorld(Testing)]]
+</pre><p>
+Display:
+</p>
+<blockquote>
+<p>
+<a class="missing" href="#">HelloWorld(Testing)</a>
+</p>
+</blockquote>
+<h2 id="AvailableMacros">Available Macros</h2>
+<p>
+Macros are still a new feature, and the list of available (and distributed) macros is 
+admittedly not very impressive. In future Trac releases, we hope to build a library of useful macros, and will of course happily include contributed macros (see below). 
+</p>
+<ul><li><strong>HelloWorld</strong> -- An example macro, useful for learning how to write macros.
+</li><li><strong>Timestamp</strong> -- Insert the current date and time.
+</li></ul><p>
+<a class="missing" href="#">MacroList</a>
+</p>
+<hr />
+<h2 id="Macrosfromaroundtheworld">Macros from around the world</h2>
+<p>
+The <a class="ext-link" href="http://projects.edgewall.com/trac/"><span class="icon">​</span>Trac Project</a> has a section dedicated to user-contributed macros, <a class="ext-link" href="http://projects.edgewall.com/trac/wiki/MacroBazaar"><span class="icon">​</span>MacroBazaar</a>. If you're looking for new macros, or have written new ones to share with the world, don't hesitate adding it to the <a class="ext-link" href="http://projects.edgewall.com/trac/wiki/MacroBazaar"><span class="icon">​</span>MacroBazaar</a> wiki page.
+</p>
+<blockquote>
+<p>
+<a class="ext-link" href="http://projects.edgewall.com/trac/wiki/MacroBazaar"><span class="icon">​</span>http://projects.edgewall.com/trac/wiki/MacroBazaar</a>
+</p>
+</blockquote>
+<hr />
+<h2 id="DevelopingNewMacros">Developing New Macros</h2>
+<p>
+Macros, like Trac itself, are written in the <a class="ext-link" href="http://www.python.org/"><span class="icon">​</span>Python programming language</a>. They are very simple modules, identified by the filename and should contain a single <em>entry point</em> function. Trac will display the returned data inserted into the HTML where the macro was called.
+</p>
+<p>
+It's easiest to learn from an example:
+</p>
+<pre class="wiki"># MyMacro.py -- The world's simplest macro
+
+def execute(hdf, args, env):
+    return "Hello World called with args: %s" % args
+</pre><h3 id="AdvancedTopics:Template-enabledMacros">Advanced Topics: Template-enabled Macros</h3>
+<p>
+For advanced uses, macros can also render structured output in HDF, to be rendered to HTML using clearsilver templates - like most Trac output. In short, this allows more generic and well-designed advanced macros.
+</p>
+<p>
+Macros gain direct access to the main HDF tree, and are free to manipulate it. 
+</p>
+<p>
+Example:
+</p>
+<pre class="wiki">def execute(hdf, args, env):
+    # Currently hdf is set only when the macro is called
+    # From a wiki page
+    if hdf:
+        hdf.setValue('wiki.macro.greeting', 'Hello World')
+        
+    # args will be null if the macro is called without parentesis.
+    args = args or 'No arguments'
+    return 'Hello World, args = ' + args
+</pre><p>
+You can also use the environment (env) object to access configuration data.
+</p>
+<p>
+Example.
+</p>
+<pre class="wiki">def execute(hdf, txt, env):
+    return env.get_config('trac', 'repository_dir')
+</pre><hr />
+<p>
+See also:  <a class="wiki" href="/WikiProcessors">WikiProcessors</a>, <a class="wiki" href="/WikiFormatting">WikiFormatting</a>, <a class="wiki" href="/TracGuide">TracGuide</a>
+</p>
+    <script type="text/javascript">
+        (function($){
+          $.loadStyleSheet = function(href, type) {
+            type = type || "text/css";
+            $(document).ready(function() {
+              if (document.createStyleSheet) { // MSIE
+                document.createStyleSheet(href);
+              } else {
+                $("<link rel='stylesheet' type='" + type + "' href='" + href + "' />")
+                  .appendTo("head");
+              }
+            });
+          }
+         
+        })(jQuery);
+        jQuery.loadStyleSheet("css/tracnav.css", "text/css");
+    </script></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

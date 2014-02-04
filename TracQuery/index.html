@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TracTicketQueries">Trac Ticket Queries</h1>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+In addition to <a class="wiki" href="/TracReports">reports</a>, Trac provides support for <em>custom ticket queries</em>, used to display lists of tickets meeting a specified set of criteria. 
+</p>
+<p>
+To configure and execute a custom query, switch to the <em>View Tickets</em> module from the navigation bar, and select the <em>Custom Query</em> link.
+</p>
+<h2 id="QueryForm">Query Form</h2>
+<p>
+A form will be presented, letting you select or enter values for any of the ticket properties (both built-in and custom). Any value selected/entered in this form will be used to constrain the set of tickets displayed. Only tickets where properties match the criteria will be displayed.
+</p>
+<h2 id="ResultsDisplay">Results Display</h2>
+<p>
+After executing the search, a list of tickets meeting the selected criteria will show. By default, the list is sorted by priority. You can change the sorting to any other visible column by clicking on the corresponding column header. Clicking the same header again will reverse the sort order.
+</p>
+<p>
+You can edit the query by clicking <em>Refine Query</em>.
+</p>
+<hr />
+<p>
+See also: <a class="wiki" href="/TracTickets">TracTickets</a>, <a class="wiki" href="/TracReports">TracReports</a>, <a class="wiki" href="/TracGuide">TracGuide</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

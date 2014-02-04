@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="UniversalBinary">Universal Binary</h1>
+<p>
+A <em>universal binary</em> is a Mac executable which contains native code for both PPC and i386 platforms.
+</p>
+<p>
+This page contains an incomplete guide on how Tribler was made Universal. It is incomplete because for some odd reason, I didn't have to recompile bsddb?
+</p>
+<h2 id="Prerequisites">Prerequisites</h2>
+<p>
+You need:
+</p>
+<ul><li>The Mac OS/X 10.4u (Universal) SDK, found with XCode 2.2.1 or higher.
+</li><li>A universal version of Python (see <a class="ext-link" href="http://www.python.org/download/releases/2.4.4/"><span class="icon">​</span>http://www.python.org/download/releases/2.4.4/</a>). You can check this with the <tt>file command</tt>:
+<pre class="wiki">$ file -L `which python2.4` 
+/usr/local/bin/python2.4: Mach-O fat file with 2 architectures
+/usr/local/bin/python2.4 (for architecture i386):       Mach-O executable i386
+/usr/local/bin/python2.4 (for architecture ppc):        Mach-O executable ppc
+</pre></li><li>A universal version of wxPython (<a class="ext-link" href="http://prdownloads.sourceforge.net/wxpython/wxPython2.8-osx-unicode-2.8.1.1-universal10.4-py2.4.dmg"><span class="icon">​</span>http://prdownloads.sourceforge.net/wxpython/wxPython2.8-osx-unicode-2.8.1.1-universal10.4-py2.4.dmg</a>).
+</li></ul><h2 id="Globalpicture">Global picture</h2>
+<ol><li>Make sure you're always using the Universal Binary version of Python. Default install puts python at <tt>/Library/Frameworks/Python.framework/Versions/2.4/Resources/Python.app/Contents/MacOS/Python</tt>.
+</li><li>Follow the instructions below to build OpenSSL.
+</li><li>Build M2Crypto. Make sure you wipe the old building dir first.
+</li><li>Build Tribler.
+</li></ol><h2 id="OpenSSL">OpenSSL</h2>
+<p>
+OpenSSL needs to be compiled twice: once for each platform. The following script can be used, following instructions <a class="ext-link" href="http://developer.apple.com/opensource/buildingopensourceuniversal.html"><span class="icon">​</span>http://developer.apple.com/opensource/buildingopensourceuniversal.html</a>:
+</p>
+<pre class="wiki">#!/bin/bash
+mkdir -p build-ppc build-i386
+
+# build PPC version
+make clean
+./Configure darwin-ppc-cc
+make build_libs
+mv *.a build-ppc
+
+# build i386 version
+make clean
+./Configure 386 darwin-i386-cc
+make build_libs "CC=cc -arch i386"
+mv *.a build-i386
+
+# merge them
+for i in libssl.a libcrypto.a
+do
+  lipo -create -output $i build-ppc/$i build-i386/$i
+  ranlib $i
+done
+</pre><p>
+You can verify that the created libraries are indeed fat:
+</p>
+<pre class="wiki">$ file *.a
+libcrypto.a: Mach-O fat file with 2 architectures
+libcrypto.a (for architecture ppc):     current ar archive
+libcrypto.a (for architecture i386):    current ar archive random library
+libssl.a:    Mach-O fat file with 2 architectures
+libssl.a (for architecture ppc):        current ar archive
+libssl.a (for architecture i386):       current ar archive random library
+</pre><h2 id="M2Crypto">M2Crypto</h2>
+<p>
+M2Crypto should compile correctly. Make sure you use the universal version of Python:
+</p>
+<pre class="wiki">rm -rf build
+python2.4 setup.py build
+</pre><p>
+To verify the result:
+</p>
+<pre class="wiki">$ file build/lib.macosx-*-fat-*/M2Crypto/__m2crypto.so 
+build/lib.macosx-10.3-fat-2.4/M2Crypto/__m2crypto.so: Mach-O fat file with 2 architectures
+build/lib.macosx-10.3-fat-2.4/M2Crypto/__m2crypto.so (for architecture i386):   Mach-O bundle i386
+build/lib.macosx-10.3-fat-2.4/M2Crypto/__m2crypto.so (for architecture ppc):    Mach-O bundle ppc
+</pre><h2 id="Tribler">Tribler</h2>
+<p>
+Finally we can build Tribler:
+</p>
+<pre class="wiki">python2.4 setuptriblermac.py build
+</pre><p>
+Verify the resulting application on both platforms to be sure :)
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

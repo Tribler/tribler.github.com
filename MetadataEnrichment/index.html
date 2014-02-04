@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="MetadataEnrichmentinTriblerMET">Metadata Enrichment in Tribler (MET)</h1>
+<p>
+<em>Status: Phase I implemented in Tribler's mainbranch, awaiting 5.3 release</em><br />
+<em>(<a class="missing" href="#">archived notes</a>)</em>
+</p>
+<h2 id="ResearchQuestions">Research Questions</h2>
+<p>
+P: We conjecture that the user has no idea what is available in the Tribler network.<br />
+S: Show a term cloud.<br />
+(TODO: make this more elaborate. Include things like: we extract terms from swarm names, tf-idf not useful, high frequent terms may not be really informative but should still be included, need for sampling, allowing the cloud to be noisy.)
+</p>
+<ul><li>Will a tag cloud of popular content be useful? Will the user find the information he or she is looking for?
+<ul><li>If we want to measure this, do we have to annotate clicklogs whether the click was performed after a normal search or after clicking on a tag? (Assuming that clicking on a tag is effectively the same as performing a keyword search on that tag.)
+</li><li>Also note that we have to spread metadata for tag clouds to work. We cannot rely on <a class="wiki" href="/ClickLog">ClickLog</a> data since it is not propagated.
+</li></ul></li><li>Is displaying a "pimped" swarm name instead of its original name useful for search?
+<ul><li>(Assuming we are still going to implement this? Metadata can be spread via channels.)
+</li><li>Open question: how are we going to measure the effect of a "pimped" swarm name?
+</li></ul></li><li>How can we detect near-duplicates and related swarms?
+<ul><li>Can we only rely on techniques like tf-idf for this?
+</li><li>Do we need additional user inputted metadata? Or implicit metadata obtained through click behaviour?
+</li><li>Can we use techniques like multimodal video copy detection (paper linked below)?
+<ul><li>If so, who will be responsible for generating the video and audio descriptors?
+</li><li>How are these video/audio descriptors to be distributed?
+</li><li>How do we check the integrity of these descriptors?
+</li></ul><em>Johan's new idea</em> (02-09-2010): <strong>Triple Synergy Near Duplicates Detection</strong><br />A/V match + bitrate + duration + metadata + network connections.
+</li></ul></li></ul><p>
+(TODO: merge the following questions/remarks with the list above)
+</p>
+<p>
+Are there certain users whose queries are "more reliable" -- i.e. should make a larger contribution to the network cloud?
+</p>
+<ol><li>Skill level?
+</li><li>Use of queries that others also use?
+</li><li>Combo with matched swarm names?
+</li><li>Future channel owners?
+</li><li>(Does the query word order reflect the order of elements in swarm title?)
+</li></ol><p>
+Bottlenecks
+</p>
+<ol><li>Few queries are used by more than person --&gt; bigger sample.
+</li><li>How to propagate <a class="wiki" href="/MegaCache">MegaCache</a> info throughout the network! <br />(Blindly propagating is not spam-resilient)
+</li><li>Lack of channel owners.
+</li><li>Hierarchical clouds are interesting but difficult (need to contact Christian Wartena).
+</li></ol><p>
+More questions and issues (added 04-08-2010):
+</p>
+<ul><li>Ranking terms extracted from swarm titles is difficult:
+<ul><li>Term frequency of a term is nearly equal to document frequency (where title=single document).
+</li><li>Ranking terms based on frequency-popularity results in stopwords getting the highest ranks. One possible solution is to use the <a class="ext-link" href="http://snowball.tartarus.org/algorithms/english/stop.txt"><span class="icon">​</span>Snowball stopword list</a> as a filter.
+</li></ul></li><li>Some torrent titles use "." as a space and is currently considered as such by the current term extraction test implementation. A side-effect is that domains in titles (e.g. www.somereleasegroup.org) will generate useless terms as "www", "org", "com", "net", etc. Possibly, domains should be detected and extracted as a single term.  
+</li><li>Relying on the Snowball stopword list is not sufficient when finding co-occurring term pairs. Terms with a high document frequency should be considered as stopwords when trying to find interesting term pairs.
+</li></ul><h2 id="Currentfilteringandextractionrules">Current filtering and extraction rules</h2>
+<ul><li>The full swarm title is feed into Tribler's <a class="missing" href="#">FamilyFilter</a> to determine whether the swarm title is safe. Only safe titles are further processed.
+</li><li>Titles are split on: whitespace, periods, underscores, hyphens. Single quotes are ignored, as are brackets and parentheses.
+</li><li>Each extracted term is subject to the following filter rules:
+<ol><li>Terms in the Snowball stopwords list are ignored.
+</li><li>All digit terms are ignored, unless it has the form "19##" or "20##".
+</li><li>Terms of the form "s##e##" are ignored.
+</li><li>Terms of length less than 3 are ignored.
+</li><li>The terms "www", "net", "com", and "org" ignored.
+</li></ol></li><li>We may later reconsider some of these rules.
+</li><li>We could consider using an exception list that is based on <a class="wiki" href="/ClickLog">ClickLog</a> information. If a certain search term is used to find data, but is ignored according to the rules above, we can add this term to the exception list.
+</li></ul><div class="system-message"><strong>Error: Failed to load processor <code>protected</code></strong><pre>No macro or processor named 'protected' found</pre></div><p>
+TODO: Update this for the "network buzz" prototype.
+</p>
+<h2 id="Literature">Literature</h2>
+<table class="wiki">
+<tr><td><a class="ext-link" href="http://ericbaumer.com/publications/HICSS-SmarterBlogroll-published.pdf"><span class="icon">​</span>Smarter Blogroll: An Exploration of Social Topic Extraction for Manageable Blogrolls</a></td><td>Hawaii International Conference on System Sciences, vol. 0, pp. 155+, 2008.</td><td>Baumer et al
+</td></tr><tr><td><a class="ext-link" href="http://www.pui.ch/phred/automated_tag_clustering/automated_tag_clustering.pdf"><span class="icon">​</span>Automated Tag Clustering: Improving search and exploration in the tag space</a></td><td>In Proc. of the Collaborative Web Tagging Workshop at WWW'06, 2006</td><td>Begelman et al
+</td></tr><tr><td>Query Similarity by Projecting the Query-Flow Graph</td><td>ACM SIGIR conference on Research and development in information retrieval. ACM Press, July 2010</td><td>Bordino et al
+</td></tr><tr><td><a class="ext-link" href="http://bradipo.net/mark/papers/carman_sigir2009.pdf"><span class="icon">​</span>A Statistical Comparison of Tag and Query Logs</a></td><td>SIGIR '09: Proceedings of the 32nd international ACM SIGIR conference on Research and development in information retrieval. New York, NY, USA: ACM, 2009</td><td>Carman et al
+</td></tr><tr><td><a class="ext-link" href="http://www.cs.vu.nl/ishare/public/I-Share-P31v1.0.pdf"><span class="icon">​</span>Tag-Based Navigation for Peer-to-Peer Wikipedia</a></td><td>(I-Share)</td><td>Fokker et al
+</td></tr><tr><td><a class="ext-link" href="http://personalpages.manchester.ac.uk/staff/sophia.ananiadou/ijodl2000.pdf"><span class="icon">​</span>Automatic recognition of multi-word terms: the C-value/NC-value method</a></td><td>International Journal on Digital Libraries, vol. 3, no. 2, pp. 115-130, August 2000</td><td>Frantzi et al
+</td></tr><tr><td><a class="ext-link" href="http://jis.sagepub.com/content/32/2/198.full.pdf"><span class="icon">​</span>Usage patterns of collaborative tagging systems</a></td><td>Journal of Information Science, vol. 32, no. 2, pp. 198-208, April 2006</td><td>Golder et al
+</td></tr><tr><td><a class="ext-link" href="http://www.nosolousabilidad.com/hassan/improving_tagclouds.pdf"><span class="icon">​</span>Improving Tag-Clouds as Visual Information Retrieval Interfaces</a></td><td>MerÃ­da, InSciT2006 conference, 2006</td><td>Hassan-Montero et al
+</td></tr><tr><td><a class="ext-link" href="http://eprints.rclis.org/8315/1/KippCampbellASIST.pdf"><span class="icon">​</span>Patterns and Inconsistencies in Collaborative Tagging Systems : An Examination of Tagging Practices</a></td><td>Annual General Meeting of the American Society for Information Science and Technology, November 2006</td><td>Kipp et al
+</td></tr><tr><td><a class="ext-link" href="http://journals.tdl.org/jodi/article/view/269/278"><span class="icon">​</span>Studying Social Tagging and Folksonomy: A Review and Framework</a></td><td>Journal of Digital Information, vol. 10, no. 1, 2009</td><td>Trant
+</td></tr><tr><td>Tag clouds and the case for vernacular visualization</td><td>ACM interactions, vol. 15, no. 4, pp. 49-52, 2008</td><td>ViÃ©gas et al
+</td></tr><tr><td><a class="ext-link" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1.2851&amp;rep=rep1&amp;type=pdf"><span class="icon">​</span>Learning to cluster web search results</a></td><td>SIGIR '04: Proceedings of the 27th annual international ACM SIGIR conference on Research and development in information retrieval.    New York, NY, USA: ACM, 2004, pp. 210-217</td><td>Zeng et al
+</td></tr></table>
+<h2 id="MeetingTBATBAinTBA">Meeting TBA @ TBA in TBA</h2>
+<p>
+TBA
+</p>
+<h2 id="Meeting30-03-20101:30pminShannonRoom">Meeting 30-03-2010 @ 1:30pm in Shannon Room</h2>
+<p>
+<em>Attendees:</em> Martha, Raynor, Johan, Niels<br />
+<em>Topic:</em> Bundling issues and future ranking issues
+</p>
+<p>
+<strong>Top Three Current Issues for Bundling</strong>
+</p>
+<ol><li>Currently underway: We need to identify simple combinations of bundling functions + bundling conditions that are consistent with user-perceived similarities (we think yes: one that targets "series bundling" functionality and one that targets "spam filtering"). (Martha's top risk point)<br /><br />
+<ul><li>Conservative choices
+</li><li>Raynor + Niels will figure out the representation in the GUI.
+</li></ul></li></ol><ol start="2"><li>How does bundling interact with the order-by buttons. Maybe there is a "representative" item that determines the ordering. Feasibility depends on GUI. (Raynor's top risk point)<br /><br />
+<ul><li>order-by button reorders bundles, not individual results.
+</li></ul></li></ol><ol start="3"><li>We need to elegantly handle incoming results, which can destroy bundles -- the destruction is potentially global, i.e., goes beyond the results of the moment. (Raynor's second-to-top risk point)<br /><br />
+<ul><li>Niels: Can be solved using a "Click here to show new results" approach similar to Twitter.
+</li></ul></li></ol><p>
+<strong>Further current issues for bundling</strong>
+</p>
+<ol start="4"><li>How to crawl usage statistics for bundles that will allow us to assess effectivity?
+</li><li>We need to represent the bundles in the interface in a way that does not lead to semantic overload for the user.
+<ul><li>Johan: Hide results only when your level of confidence is high.
+</li></ul></li><li>We need to give the user a simple, intuitive way of changing between bundles (Raynor has a nice idea).
+<ul><li>Raynor: use simple circle/bullet icons to switch between bundled views. Example of this interface can be found on channel9.msdn.com.
+</li></ul></li><li>We need to decide how many of the results from the ranked list should be considered for bundling (do we go beyond the top 250)?
+<ul><li>Niels: Performance issue. Should discuss for example with Boudewijn if we can use psyco to speed up certain grouping functions.
+</li></ul></li><li>How to choose and combine bundling conditions.
+</li><li>How to use the user-perceived similarity data gathered on MTurk to quantitatively demonstrate that our bundles group near-duplicates (and demote spam).
+</li><li>How to propagate condition+function pairs through the network (is this even useful)?
+<ul><li>Niels: At the very least, override locally when the user has selected a non-default bundling in the past for a certain query.
+</li></ul></li><li>How to exploit MCA information? Can we integrate it?
+</li></ol><p>
+<strong>Future Issues for Ranking</strong>
+</p>
+<ol><li>Developing a high quality combination of bundling and ranking
+</li><li>Are reranker keywords feasible? (i.e., automatically extractible and useful to the user)
+</li><li>How to take open2edit information into account in the ranking?
+</li><li>If reranking modalities (reranker keywords, bundling function+condition_ are helpful, can/should they be propagated through the network?
+</li></ol><p>
+Current issues with ranking in Tribler:
+</p>
+<ol><li>Ranking function in the code seems to add the number of negative votes to the ranking score, but it might be actually ok and just coded in a non-obvious way.
+</li><li>Incoming results reset "ordered-by" option selected by users to the default ranking.
+<ul><li>Niels: this particular behaviour should have been fixed.
+</li></ul></li><li>There is no way to return from the "order-by" option to the original ranking unless a new result comes in.
+</li><li>Ranking algorithm doesn't take into account where the keyword is mentioned
+</li><li>The surrogates displayed in the ranked list don't contain evidence that would help the user assess their relevance. In snippets used in mainstream search engines query words are highlighted for this purpose.
+<ul><li>Niels: cannot easily highlight search terms using wxPython.
+</li></ul></li></ol><p>
+Additional notes:
+</p>
+<ul><li>2010 --&gt; maybe if everything has a number, you don't actually use the function?
+</li><li>How to make the decision about when to apply weighting in the Levenshtein function --&gt; discussion about decaying penalty
+</li><li>Johan: make it conservative to handle the season case.
+</li><li>Niels: harm of incorrect bundling depends on visibility in GUI.
+</li></ul><h2 id="Meeting20-01-20112pminHB10.230">Meeting 20-01-2011 @ 2pm in HB10.230</h2>
+<p>
+<em>Attendees:</em> Martha, Raynor<br />
+<em>Topic:</em> Near-Duplicate Detection
+</p>
+<ul><li>Possible new algorithm: pairwise similarity.
+</li><li>Concerns for available real estate in UI.
+</li><li>Need to know relevance ranking and how bundling would interact.
+</li></ul><h2 id="Meeting10-01-20113pminHB10.230">Meeting 10-01-2011 @ 3pm in HB10.230</h2>
+<p>
+<em>Attendees:</em> Niels, Nitin, Martha, Raynor<br />
+<em>Topic:</em> Near-Duplicate Detection
+</p>
+<p>
+Raw meeting notes from Martha:
+</p>
+<ul><li>Card Sort of responses from first HIT: User-derived dimensions of similarity Goal is to classifying the HIT responses into reasons why people think torrent names are similar.
+</li><li>Sorted all "high agreement" blocks (triples of swarm names). High agreement blocks are blocks in which all three workers decided that there was a two-one split and picked the same item as the odd one out.
+</li><li>Lots of types of blocks left to sort: validation blocks, mid-agreement blocks (two workers agree), low agreement blocks.
+</li></ul><ul><li>General observations about the process:
+<ul><li>Niels: Are we identifying reasons or methods by which people categorize things?<br />(we seem to be getting information on both)
+</li><li>Nitin: They write what is different, and we are trying to identify on what basis that they are trying to group.
+</li></ul></li></ul><ul><li>A set of similarity dimensions is derived (recorded on green sheets).
+</li></ul><p>
+ 
+</p>
+<ul><li>Other observations about the results:
+<ul><li>People don't seem to differentiate episodes from series in the film (seems to be two understandings of "episodes") It makes most sense to count "mistakes" (for example confusing a game and a soundtrack) as part of user-perceived similarities Users are quite able to identify episodes (Niels)
+</li><li>Is it important to differentiate items associated with films (the films soundtrack) with other items that happen to have the same name. Where to draw the line for this understanding of corresponding items?
+</li></ul></li></ul><ul><li>Bundle Functions<br />Which light-weight algorithms are anticipated to be most useful to create bundlings that would reflect the user-derived dimensions of similarity:
+<ul><li>Extensions (reflect the types of files)
+</li><li>Filesize
+</li><li>Integer ranking
+</li><li>Modified Levenshtein<br />(modified Levenshtein should be based on past experience of Niels, aspects like it's difficult to use stopwords appropriately etc.)
+</li></ul></li></ul><ul><li>Most interesting innovative aspect of bundling:
+<ul><li>Condition the bundling functions on properties of results list
+</li><li>Application conditions for the bundle function are then propagated with the bundle function through the network<br />(NB For bundling there should be local override.)
+</li></ul></li></ul><ul><li>Next steps:
+<ul><li>set up list of characteristics of lists that can be used for conditioning bundling
+</li><li>set up a plan for implementation (in particular what are the expected risks and contraints)
+</li><li>finish the card sort on the responses: in the end we'll have a list of user-derived similarity dimensions that lightly motivates each bundling function
+</li></ul></li></ul><h2 id="Meeting29-12-20104pminHB10.320">Meeting 29-12-2010 @ 4pm in HB10.320</h2>
+<p>
+<em>Attendees:</em> Martha, Raynor<br />
+<em>Topic:</em> Near-Duplicate Detection
+</p>
+<ul><li>Concerns about Near-Duplicates include:
+<ul><li>Different concepts of near-duplicates are applicable in different situations. Example: do you group all "Bronze Boy" soundtracks together and all "Bronze Boy" movies (i.e. Bronze Boy 1, Bronze Boy 2.5, Bronze Boy 33.333333...) together, or do you put the "Bronze Boy 1" soundtrack together with the "Bronze Boy 1" movie?
+</li><li>There is "noise" in the results list, which means it makes it harder to do "noise-free" near-duplicate clustering. So it means that we need a method of presenting of clustered results to the user in a way that "noise" is not bothersome.
+</li><li>Practically speaking, in the interface there is already one level of collapsing to give details of a given item, so it would also be difficult to visually group near-duplicates in a similar way (nested collapsing).
+</li></ul></li></ul><ul><li>More precise definitions of similarities:
+<ul><li>Content similarity:<br />
+One will do for everyone.
+</li><li>Context similarity:<br />
+One will do for a certain class of users (e.g. Portugese speakers) or situations (e.g. mobile devices).
+</li></ul></li></ul><h2 id="Meeting16-12-20104:00pminHB09.290">Meeting 16-12-2010 @ 4:00pm in HB09.290</h2>
+<p>
+<em>Attendees:</em> Johan, Niels, Nitin, Raynor.<br />
+<em>Topic:</em> Near-Duplicate Detection
+</p>
+<ul><li>HIT design:
+<ul><li>Verifyable results are important.
+</li><li>Niels mentioned a MTurk experiment about rewriting paragraphs that consisted of 3 successive HITs.
+<ol><li>Highlight a candidate sentence in a given paragraph to be rewritten.
+</li><li>Rewrite the highlighted sentence (from HIT 1) in a given paragraph.
+</li><li>Given a highlighted sentence in a paragraph, choose a sentence (from HIT 2) to replace it.
+</li></ol></li><li>Similarly, we can split our experiment into multiple HITs:
+<ol><li>Let workers group search results into 2 or 3 groups.
+</li><li>Let workers, given groupings from HIT 1, pick the best grouping.
+</li></ol></li></ul></li><li>Nitin mentioned that our NDD and grouping should be generally applicable if we want to write a paper (in order to avoid legal issues).
+<ul><li>We could draw comparisons with <a class="wiki" href="/YouTube">YouTube</a> and their near-duplicates problem.
+</li><li>Niels remarked that we then might have to focus on <a class="wiki" href="/YouTube">YouTube</a>, using search results from <a class="wiki" href="/YouTube">YouTube</a> and not public <a class="wiki" href="/BitTorrent">BitTorrent</a> trackers.
+</li><li>For a paper, focus should be on user-generated content?
+</li></ul></li></ul><h2 id="Meeting09-12-20104:00pminHB09.290">Meeting 09-12-2010 @ 4:00pm in HB09.290</h2>
+<p>
+<em>Attendees:</em> Johan, Martha, Niels, Nitin, Raynor.<br />
+<em>Topic:</em> Near-Duplicate Detection
+ 
+</p>
+<ul><li>HIT design:
+<ul><li>Display as much as information as possible in a HIT, such that the user can group the data.
+</li></ul></li><li>Dataset:
+<ul><li>Don't use Tribler search results (not enough different sources, hence, less duplicates).
+</li><li>Fetch more hits and metadata from the search results page.
+</li><li>Sample from all hits.
+</li></ul></li></ul><h2 id="Meeting24-11-20103:00pminHB10.320">Meeting 24-11-2010 @ 3:00pm in HB10.320</h2>
+<p>
+<em>Attendees:</em> Carsten, Martha, Raynor.<br />
+<em>Topic:</em> CSDM2011 paper and MTurk experiments.
+</p>
+<ul><li>Run 10 HITs for a reward of $0.10:
+<ul><li>5 "Before HITs".
+</li><li>5 "After HITs".
+</li></ul></li><li>Run these HITs under 5 different conditions:
+<ul><li>3 different titles.
+</li><li>2 question conditions.
+</li></ul></li><li>Have each HIT be completed by 10 workers: (5+5)*(3+2)*10 = 500 assignments.
+</li></ul><ul><li>Run HITs in succession (not concurrently). Start with 5 Before HITs under 1 condition, monitor the uptake and predict the total time required to complete the full experiment.
+</li></ul><h2 id="Meeting24-11-20102:00pminHB09SmallMeetingRoom">Meeting 24-11-2010 @ 2:00pm in HB09 Small Meeting Room</h2>
+<p>
+<em>Attendees:</em> Niels, Nitin, Martha, Raynor.<br />
+<em>Topic:</em> Near-Duplicate Detection
+</p>
+<p>
+What is a near-duplicate?
+Several possible candidates:
+</p>
+<ul><li>Contains "the same" content.
+</li><li>One person would not watch both.
+<ul><li>One will do for everyone.
+</li><li>Functional duplication.
+</li></ul></li><li>Non-junkie would want only *one* of these.
+</li></ul><p>
+Do we want to detect serial media?
+</p>
+<ul><li>Tractable?
+</li><li>Tolerable?
+</li><li>Niels: might be hindering rather than helping if several "Series X" episodes are grouped+collapsed.
+</li></ul><p>
+Concerns and restrictions:
+</p>
+<ul><li>Niels: computational complexity is important. Needs to be real-time when presenting the search results.
+</li></ul><p>
+Current plan of attack:
+</p>
+<ol><li>How to visualize search results?
+<ul><li>Go to a public tracker e.g. TPB and fetch the top 100 popular torrents.
+</li><li>Use Tribler to get lists of search results.
+</li><li>Make a HIT (crowdsource term, "Human Intelligence Task") requiring users to cluster the lists.
+</li><li>Pilot the HIT.
+</li><li>Run the HIT.
+</li></ul></li><li>Use Turk (or Crowdflower) to understand the hard issues related to noise. Need to get typical examples of ND+SI.
+<ul><li>Get Top 100 from TPB.
+</li><li>Use Tribler to search (try several obvious searches). 
+</li><li>Create ND+SI groups from results.
+</li><li>Create plausible corruptions.
+</li><li>Test for user sensitivity on Turk.
+</li><li>Present the user with three or four different groupings + compare.
+</li></ul></li><li>Algorithm for identifying near-duplicates (ND) and serial items (SI):
+<ul><li>Two-step approach: first use category information.
+</li><li>Rule based?
+</li><li>Machine learning?
+</li></ul></li><li>Create a distributed version.
+</li><li>Simulate how this leads to network health.
+</li></ol><h2 id="Meeting18-11-201010:00aminHB10.320">Meeting 18-11-2010 @ 10:00am in HB10.320</h2>
+<ul><li>CSDM2011: aim to get a short paper (&lt;=4 pages) about crowdsourcing. 
+</li><li>Tag cloud user study is not a piecemeal task, rather it requires cognitive processing and an opinion of the worker. It's also different because P2P networks are outside of the daily experience of the average Internet user. The final point is that there's risk that workers apply a matching strategy to substrings in the filenames to classify them (i.e. matching strategy is literal or superficial strategy rather than one that reflects the complete comprehension of the task).
+<ul><li>We study the following research questions:
+<ul><li>The impact of the title on the uptake and work quality.
+</li><li>The impact of sketch-like mockup on the uptake and work quality.
+</li><li>The impact of the free-text justification questions on the uptake and work quality.
+</li></ul></li><li>We are also interested in the following aspects:
+<ul><li>Optimal award level.
+</li><li>Difference between open and closed.
+</li><li>How many workers in the open condition do both the before and after HIT (this will answer whether recruitment is necessary).
+</li></ul></li></ul></li></ul><h2 id="Meeting02-09-20102:00pminHB10.320">Meeting 02-09-2010 @ 2:00pm in HB10.320</h2>
+<ul><li>"Single glimps of understanding of what's in the system"
+</li><li>"Feeling that there's a network behind it"
+</li><li>"Shortens the time to understanding what you can find"
+</li><li>"Surrogate for experience with the system"
+</li><li>"Overspecification: right level of specific. of the query"
+</li></ul><h2 id="Meeting19-08-20105:00pminHB09.030HB10.320">Meeting 19-08-2010 @ 5:00pm in HB09.030 / HB10.320</h2>
+<p>
+Current plan:
+</p>
+<ul><li>Work on a first version of "content overview"/"network buzz". Build a small prototype and then merge it into the native GUI mainbranch of Tribler.
+</li><li>Continue to work on mockups.
+</li><li>Short paper at ECIR 2011? Tag clouds in distributed systems: peer by peer variability.
+<ul><li>Difference between peers
+<ul><li>Idea: compare difference with searching/non-searching peers.
+</li></ul></li><li>How close do we approximate global state?
+<ul><li><em>What is global state?</em> E.g. what to do with dead torrents?
+</li></ul></li><li>"Fake idf"
+</li><li>Spam issues
+</li><li>Unbounded scalability
+</li></ul></li></ul><h2 id="Meeting26-07-20103:30pminHB09.030">Meeting 26-07-2010 @ 3:30pm in HB09.030</h2>
+<p>
+By Johan:
+</p>
+<ul><li>Take all crawled <a class="wiki" href="/ClickLog">ClickLog</a> data.
+</li><li>Simply take existing visualisation techniques.
+</li><li>Focus: extract "tags" (terms) from <a class="wiki" href="/ClickLog">ClickLog</a>; spam prevention; tf-idf...
+</li></ul><p>
+Current plan:
+</p>
+<ol><li>Compare different interfaces using mockups:
+<ul><li>Alphabetical term clouds
+</li><li>Term list versus term cloud
+</li><li>Visual weighting on/off
+</li><li>Single terms versus multi-terms (e.g., 2-term phrases like in <a class="ext-link" href="http://www.deeperweb.com"><span class="icon">​</span>DeeperWeb Search</a>)
+</li><li>Multi-level navigation
+</li></ul></li><li>Algorithms:
+<ul><li>Alpha peers
+</li><li>Channels
+</li><li>Reputation
+</li><li>Query patterns
+</li></ul></li><li>Identification of alpha peers.
+</li></ol><h2 id="Meeting14-07-20102pminShannonRoom">Meeting 14-07-2010 @ 2pm in Shannon Room</h2>
+<p>
+<em>Agenda: Discuss feasability of different routes of adding metadata enrichment to Tribler. Talk about the content of deliverable 7.1 and field trials.</em>
+</p>
+<ul><li>Discussion of 7.1 deliverable postponed to 15-07.
+</li><li>Focus on the question whether tag clouds enhance user experience.
+</li><li>Get the documentation of <a class="wiki" href="/ClickLog">ClickLog</a> up to date and describe the setup of the <a class="wiki" href="/ClickLog">ClickLog</a> crawl experiment.
+</li><li>(Low priority) Check the duplicate term bug.
+<ul><li>I found two peers P and Q. P logged a few of its own clicks. Peer Q stored the same information about these clicks performed by P, but with different term_order values for certain entries. The bug appears to be in the propagation of <a class="wiki" href="/ClickLog">ClickLog</a> data.
+</li></ul></li></ul><h2 id="Meeting01-07-201011aminHB09.030">Meeting 01-07-2010 @ 11am in HB 09.030</h2>
+<p>
+<em>Agenda: Outline of Tribler x <a class="ext-link" href="http://www.petamedia.eu/"><span class="icon">​</span>PetaMedia</a> project</em>
+</p>
+<p>
+Metadata enrichment approaches:
+</p>
+<ul><li>Use <a class="wiki" href="/ClickLog">ClickLog</a> for evaluation of tags. Task: collect <a class="wiki" href="/ClickLog">ClickLog</a> information and perform a manual assessment. Generate keywords/tags from a swarm name (using techniques like <a class="ext-link" href="http://en.wikipedia.org/wiki/Tf%E2%80%93idf"><span class="icon">​</span>tf-idf</a> and <a class="ext-link" href="http://books.google.com/books?id=Z0PZxPsR44AC&amp;pg=PA642&amp;lpg=PA642&amp;dq=tpcw+term+pair+co-occurrence+weight&amp;source=bl&amp;ots=quxvcHr4rC&amp;sig=IUkY5q9NsDhszFplpbLnlPcwtn0&amp;ei=YFkuTLHtDJyfOOLHmYcC&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=1&amp;ved=0CBcQ6AEwAA"><span class="icon">​</span>TPCW</a>) and compare these tags with <a class="wiki" href="/ClickLog">ClickLog</a> terms. <br /><br />
+<ul><li>Note: Today (02-07), Johan suggested to also consider term position. For example, certain terms often appear at the beginning or at the end of a swarm name.
+</li><li><em>Question:</em> How exactly are we going to use this information?
+</li></ul></li></ul><ul><li>How and where can we use tag clouds? Current consensus is to use tag clouds to represent a global view of popular content, e.g. search queries discovered through <a class="wiki" href="/ClickLog">ClickLog</a>. <br /><br />
+<ul><li><em>Question:</em> Previously the idea was to have a tag cloud/pond for a selected swarm. Will it still be useful to display a list of (possibly frequently used?) tags for a selected swarm?
+</li></ul></li></ul><ul><li>Duplicate filtering: Improvement of search results. Collapse 100+ dupes and find 1 representative item name. Related paper: <a class="ext-link" href="http://portal.acm.org/citation.cfm?id=1631144.1631157"><span class="icon">​</span>Multimodal video copy detection applied to social media</a>.
+<ul><li><em>Question:</em> The paper discusses video and audio analysis. *If* we are going to apply this to Tribler, who would be responsible for generating the video/audio descriptors and how will it be spread? Can we enforce integrity of these descriptions?
+</li></ul></li></ul></td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>

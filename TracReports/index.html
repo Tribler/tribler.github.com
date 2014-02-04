@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/trac.css" type="text/css" />
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
+<![endif]-->
+
+<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="#">Tribler</a>
+				    <ul>
+				        <li><a href="/about.html">About Tribler</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="/download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="/howto.html">How does it work</a></li>
+				        <li><a href="/faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+					<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+					<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+					<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="trac"><table><tr><td><h1 id="TracReports">Trac Reports</h1>
+<p>
+<a class="missing" href="#">TracGuideToc</a>
+</p>
+<p>
+The Trac reports module provides a simple, yet powerful reporting facility
+to present information about tickets in the Trac database.
+</p>
+<p>
+Rather than have its own report definition format, <a class="wiki" href="/TracReports">TracReports</a> relies on standard SQL
+SELECT statements for custom report definition. 
+</p>
+<p>
+A report consists of these basic parts:
+</p>
+<ul><li>ID -- Unique (sequential) identifier 
+</li><li>Title  -- Descriptive title
+</li><li>Description  -- A brief description of the report, in <a class="wiki" href="/WikiFormatting">WikiFormatting</a> text.
+</li><li>Report Body -- List of results from report query, formatted according to the methods described below.
+</li><li>Footer -- Links to alternative download formats for this report.
+</li></ul><h2 id="ChangingSortOrder">Changing Sort Order</h2>
+<p>
+Simple reports - ungrouped reports to be specific - can be changed to be sorted by any column simply by clicking the column header. 
+</p>
+<p>
+If a column header is a hyperlink (red), click the column you would like to sort by. Clicking the same header again reverses the order.
+</p>
+<h2 id="AlternateDownloadFormats">Alternate Download Formats</h2>
+<p>
+Aside from the default HTML view, reports can also be exported in a number of alternate formats.
+At the bottom of the report page, you will find a list of available data formats. Click the desired link to 
+download the alternate report format.
+</p>
+<h3 id="Comma-delimited-CSVCommaSeparatedValues">Comma-delimited - CSV (Comma Separated Values)</h3>
+<p>
+Export the report as plain text, each row on its own line, columns separated by a single comma (',').
+<strong>Note:</strong> Column data is stripped from carriage returns, line feeds and commas to preserve structure.
+</p>
+<h3 id="Tab-delimited">Tab-delimited</h3>
+<p>
+Like above, but uses tabs (        ) instead of comma.
+</p>
+<h3 id="RSS-XMLContentSyndication">RSS - XML Content Syndication</h3>
+<p>
+All reports support syndication using XML/RSS 2.0. To subscribe to a , click the the orange 'XML' icon at the bottom of the page. See <a class="wiki" href="/TracRss">TracRss</a> for general information on RSS support in Trac.
+</p>
+<hr />
+<h2 id="CreatingCustomReports">Creating Custom Reports</h2>
+<p>
+<em>Creating a custom report requires a comfortable knowledge of SQL.</em>
+</p>
+<p>
+A report is basically a single named SQL query, executed and presented by
+Trac.  Reports can be viewed and created from a custom SQL expression directly
+in from the web interface.
+</p>
+<p>
+Typically, a report consists of a SELECT-expression from the 'ticket' table,
+using the available columns and sorting the way you want it.
+</p>
+<h2 id="Ticketcolumns">Ticket columns</h2>
+<p>
+The <em>ticket</em> table has the following columns:
+</p>
+<ul><li>id
+</li><li>time
+</li><li>changetime
+</li><li>component
+</li><li>severity  
+</li><li>priority 
+</li><li>owner
+</li><li>reporter
+</li><li>cc
+</li><li>url
+</li><li>version
+</li><li>milestone
+</li><li>status
+</li><li>resolution
+</li><li>summary
+</li><li>description
+</li></ul><p>
+See <a class="wiki" href="/TracTickets">TracTickets</a> for a detailed description of the column fields.
+</p>
+<p>
+<strong>all active tickets, sorted by priority and time</strong>
+</p>
+<p>
+<strong>Example:</strong> <em>All active tickets, sorted by priority and time</em>
+</p>
+<pre class="wiki">SELECT id AS ticket, status, severity, priority, owner, 
+       time as created, summary FROM ticket 
+  WHERE status IN ('new', 'assigned', 'reopened')
+  ORDER BY priority, time
+</pre><hr />
+<h2 id="AdvancedReports:DynamicVariables">Advanced Reports: Dynamic Variables</h2>
+<p>
+For more flexible reports, Trac supports the use of <em>dynamic variables</em> in report SQL statements. 
+In short, dynamic variables are <em>special</em> strings that are replaced by custom data before query execution.
+</p>
+<h3 id="UsingVariablesinaQuery">Using Variables in a Query</h3>
+<p>
+The syntax for dynamic variables is simple, any upper case word beginning with '$' is considered a variable.
+</p>
+<p>
+Example:
+</p>
+<pre class="wiki">SELECT id AS ticket,summary FROM ticket WHERE priority='$PRIORITY'
+</pre><p>
+To assign a value to $PRIORITY when viewing the report, you must define it as an argument in the report URL, leaving out the the leading '$'.
+</p>
+<p>
+Example:
+</p>
+<pre class="wiki"> http://projects.edgewall.com/trac/reports/14?PRIORITY=high
+</pre><h3 id="SpecialConstantVariables"><a class="missing" href="#">Special/Constant</a> Variables</h3>
+<p>
+There is one <em>magic</em> dynamic variable to allow practical reports, its value automatically set without having to change the URL. 
+</p>
+<ul><li>$USER -- Username of logged in user.
+</li></ul><p>
+Example (<em>List all tickets assigned to me</em>):
+</p>
+<pre class="wiki">SELECT id AS ticket,summary FROM ticket WHERE owner='$USER'
+</pre><hr />
+<h2 id="AdvancedReports:CustomFormatting">Advanced Reports: Custom Formatting</h2>
+<p>
+Trac is also capable of more advanced reports, including custom layouts,
+result grouping and user-defined CSS styles. To create such reports, we'll use
+specialized SQL statements to control the output of the Trac report engine.
+</p>
+<h2 id="SpecialColumns">Special Columns</h2>
+<p>
+To format reports, <a class="wiki" href="/TracReports">TracReports</a> looks for 'magic' column names in the query
+result. These 'magic' names are processed and affect the layout and style of the 
+final report.
+</p>
+<h3 id="Automaticallyformattedcolumns">Automatically formatted columns</h3>
+<ul><li><strong>ticket</strong> -- Ticket ID number. Becomes a hyperlink to that ticket. 
+</li><li><strong>created, modified, date, time</strong> -- Format cell as a date and/or time.
+</li></ul><ul><li><strong>description</strong> -- Ticket description field, parsed through the wiki engine.
+</li></ul><p>
+<strong>Example:</strong>
+</p>
+<pre class="wiki">SELECT id as ticket, created, status, summary FROM ticket 
+</pre><h3 id="Customformattingcolumns">Custom formatting columns</h3>
+<p>
+Columns whose names begin and end with 2 underscores (Example: <strong>_</strong><em>'_color_</em><strong>'_</strong>) are
+assumed to be <em>formatting hints</em>, affecting the appearance of the row.
+ 
+</p>
+<ul><li><strong>_</strong><em>'_group_</em><strong>'_</strong> -- Group results based on values in this column. Each group will have its own header and table.
+</li><li><strong>_</strong><em>'_color_</em><strong>'_</strong> -- Should be a numeric value ranging from 1 to 5 to select a pre-defined row color. Typically used to color rows by issue priority.
+</li><li><strong>_</strong><em>'_style_</em><strong>'_</strong> -- A custom CSS style expression to use for the current row. 
+</li></ul><p>
+<strong>Example:</strong> <em>List active tickets, grouped by milestone, colored by priority</em>
+</p>
+<pre class="wiki">SELECT p.value AS __color__,
+     t.milestone AS __group__,
+     (CASE owner WHEN 'daniel' THEN 'font-weight: bold; background: red;' ELSE '' END) AS __style__,
+       t.id AS ticket, summary
+  FROM ticket t,enum p
+  WHERE t.status IN ('new', 'assigned', 'reopened') 
+    AND p.name=t.priority AND p.type='priority'
+  ORDER BY t.milestone, p.value, t.severity, t.time
+</pre><p>
+<strong>Note:</strong> A table join is used to match <em>ticket</em> priorities with their
+numeric representation from the <em>enum</em> table.
+</p>
+<h3 id="Changinglayoutofreportrows">Changing layout of report rows</h3>
+<p>
+By default, all columns on each row are display on a single row in the HTML
+report, possibly formatted according to the descriptions above. However, it's
+also possible to create multi-line report entries.
+</p>
+<ul><li><strong>column_</strong> -- <em>Break row after this</em>. By appending an underscore ('_') to the column name, the remaining columns will be be continued on a second line.
+</li></ul><ul><li><strong>_column_</strong> -- <em>Full row</em>. By adding an underscore ('_') both at the beginning and the end of a column name, the data will be shown on a separate row.
+</li></ul><ul><li><strong>_column</strong>  --  <em>Hide data</em>. Prepending an underscore ('_') to a column name instructs Trac to hide the contents from the HTML output. This is useful for information to be visible only if downloaded in other formats (like CSV or RSS/XML).
+</li></ul><p>
+<strong>Example:</strong> <em>List active tickets, grouped by milestone, colored by priority, with  description and multi-line layout</em>
+</p>
+<pre class="wiki">SELECT p.value AS __color__,
+       t.milestone AS __group__,
+       (CASE owner 
+          WHEN 'daniel' THEN 'font-weight: bold; background: red;' 
+          ELSE '' END) AS __style__,
+       t.id AS ticket, summary AS summary_,             -- ## Break line here
+       component,version, severity, milestone, status, owner,
+       time AS created, changetime AS modified,         -- ## Dates are formatted
+       description AS _description_,                    -- ## Uses a full row
+       changetime AS _changetime, reporter AS _reporter -- ## Hidden from HTML output
+  FROM ticket t,enum p
+  WHERE t.status IN ('new', 'assigned', 'reopened') 
+    AND p.name=t.priority AND p.type='priority'
+  ORDER BY t.milestone, p.value, t.severity, t.time
+</pre><hr />
+<p>
+See also: <a class="wiki" href="/TracTickets">TracTickets</a>, <a class="wiki" href="/TracQuery">TracQuery</a>, <a class="wiki" href="/TracGuide">TracGuide</a>
+</p>
+</td>
+</tr>
+</table>
+</section>	
+
+</body>
+</html>
