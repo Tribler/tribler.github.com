@@ -105,9 +105,9 @@
 				document.writeln('<p>For Mac OS X 10.6 or higher');
 				document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
 			}
-			else if (osName == "Linux") {
+			else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
 				document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
-				document.writeln('<p>For Linux (Debian/Ubuntu/Fedora/openSUSE)</p>');
+				document.writeln('<p>For Linux</p>');
 			}
 			else {
 				document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
