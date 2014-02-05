@@ -93,7 +93,7 @@ Tribler solves these problems by constructing a hash tree of the content and usi
 We have chosen a minimalistic design that does not affect the existing <a class="wiki" href="/BitTorrent">BitTorrent</a> protocol and clients very much. The design is backwards compatible in the sense that clients supporting the Simple Merkle Hash extension can still be made to process regular torrent files easily.
 </p>
 <p>
-<a class="missing" href="#"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/MerkleHashes/merkletree-v4.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/MerkleHashes/merkletree-v4.png"></a>
 </p>
 <p>
 From the content we construct as hash tree as follows. Given a piece size, we calculate the hashes of all the pieces in the file set. Next, we create a binary tree of sufficient height. Sufficient height means that the lowest level in the tree has enough nodes to hold all piece hashes in the set. We place all piece hashes in the tree, starting at the left-most leaf. The remaining leaves in the tree are assigned a hash value of 0. Finally, we calculate the hash values of the higher levels in the tree, by concatenating the hash values of the two children (again left to right) and computing the hash of that aggregate. This process ends in a hash value for the root node, which we call the root hash.

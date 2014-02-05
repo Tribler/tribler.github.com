@@ -91,7 +91,7 @@ The similarity function is part of the system for fast keyword search. Every Tri
 An example of a semantic overlay is shown here:
 </p>
 <p>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"></a><br />
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"></a><br />
 In which Peer 1 and 3 are connected, because they are interested in Animals. Peer 2 and 3, because of Programming. But no connection exists between Peer 1 and 2, because they do not have overlapping interests. The similarity function in Tribler thus offers semantic clustering and scalability.
 </p>
 <hr />
@@ -100,12 +100,12 @@ In which Peer 1 and 3 are connected, because they are interested in Animals. Pee
 In the overlay peers exchange information regarding their download history. Using this information a User x Item matrix is constucted.
 </p>
 <p>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"></a><br />
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"></a><br />
 A row in the User x Item matrix represent the preference list of a peer. When a peer has downloaded an item, this is represented by a 1.
 </p>
 <p>
 Using the User x Item matrix, similarity can be calculated by formula (1):
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"></a><br />
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"></a><br />
 </p>
 <ul><li>M<sub>10</sub>, denotes the number of items User 1 downloaded, but User 2 did not.
 </li><li>M<sub>01</sub>, denotes the number of items User 2 downloaded, but User 1 did not.
@@ -128,7 +128,7 @@ Peer recommendation has two utilities in Tribler:
 </li><li>When a user changes his/her preference list (i.e. downloading a new item), similarity between all users can change thus again a Full-Update is run. 
 </li><li>When a peer receives a new Buddycast message, only the peer-peer similarity to the sender is updated (Single-Update). For the taste buddies and random peers in the message, the peer picks out the ones of which it has no preference list and then updates the indirect peer-peer similarity with them by formula (3). Note that the indirect peer-peer similarity is stored as negtive value in order to be distinct with the direct one. (REALLY?)<br />
 </li></ul><p>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"></a>
 </p>
 <hr />
 <h2 id="TorrentRelevance">Torrent Relevance</h2>
@@ -206,7 +206,7 @@ Using the dataset, then several well known similarity functions were evaluated. 
 A method which resulted in a improvement of the recommendations and thus the similarity between users, uses the swarmnames of items to find similar ones. These additional psuedo-ratings then allow for overlap and thus reduce the sparsity.
 </p>
 <p>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"></a><br />
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"></a><br />
 This more complex similarity function is called ItemItem(Levenshtein) and is not yet implemented in Tribler.
 The final thesis report can be downloaded <a class="missing attachment">here</a>.
 </p>

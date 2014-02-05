@@ -152,31 +152,31 @@ Deployment crawl results, etc
 The graphs below show the bandwidth usage during the crawl, the number of the peers actually PEXed, statistics about the first PEX message, and the likelihood of reconnecting to a previously known peer in the future.
 </p>
 <p>
-<a class="missing" href="#"></a>
-<a class="missing" href="#"></a>
-<a class="missing" href="#"></a>
-<a class="missing" href="#"></a>
-<a class="missing" href="#"></a><a class="missing" href="#"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-bandwidth-pex-zoom.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-bandwidth-pex-zoom.png" width="982px"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexers.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexers.png"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexsize-zoom.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexsize-zoom.png"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexresponse-combined.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexresponse-combined.png" width="982px"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online.png" width="490px"></a><a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online-percentage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online-percentage.png" width="490px"></a>
 </p>
 <p>
 <strong>3 Linux ISO swarms</strong> <br />
 Below is a graph showing the number of peers still connectable after we've last seen them. Note that the big drop at the end can be explained through the lack of data points: only 203 of the 475 initial peers have been checked for their online status.
 </p>
 <p>
-<a class="missing" href="#"></a><a class="missing" href="#"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online.png" width="490px"></a><a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online-percentage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online-percentage.png" width="490px"></a>
 </p>
 <p>
 If we crawl the swarm while trying to stay connected to PEX-capable peers until the connection is dropped by the other party, the graph looks quite different (see below). Peers seem to be less likely connectable after they have closed the connection. Also, while less peers get sent an online check, there is an increasing trend of connectability. This is in line with the results of the "Understanding Churn in Peer-to-Peer Networks" paper, where the authors found the uptime of a peer to be a good indicator of the peer's remaining uptime.
 </p>
 <p>
-<a class="missing" href="#"></a><a class="missing" href="#"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online.png" width="490px"></a><a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online-percentage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online-percentage.png" width="490px"></a>
 </p>
 <h2 id="ResearchAssignment">Research Assignment</h2>
 <p>
 Ongoing work by Raynor. Large measurements show that The Pirate Bay is the most dominant central tracker. For each tracker we computed the number of total peers that it tracks. This was done by summing up the swarm sizes of all torrents in which a tracker was mentioned in the announce fields. The .torrent files of these swarms were obtained by running the <a class="ext-link" href="http://svn.tribler.org/abc/branches/release-4.5/Tribler/Core/BuddyCast/TorrentCollecting.py"><span class="icon">​</span>Tribler TorrentCollecting</a> software for roughly a year. Swarm sizes were constantly updated during this time. The top 20 trackers are depicted in the bar chart below:
 </p>
 <p>
-<a class="missing" href="#"></a> <br /> <strong>Dataset:</strong> 283,031 swarms, total of 52,634,778 peers.
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-TPB.PNG"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-TPB.PNG"></a> <br /> <strong>Dataset:</strong> 283,031 swarms, total of 52,634,778 peers.
 </p>
 <p>
 In this chart, peers that are tracked solely by a tracker are marked as "Single Tracker". Hence, these peers come from a swarm which are only tracked by a single tracker. The remaining peers come from swarms that are tracked by multiple trackers. "Primary Tracker" indicates the peer came from a multi-tracker swarm which is primarily tracked by this tracker, i.e. the tracker is mentioned in the 'announce' field of the torrent file. If the tracker was not mentioned in the 'announce' field (and hence, it must have been mentioned in the 'announce-list' field), we label the peers as "Foreign Tracker".

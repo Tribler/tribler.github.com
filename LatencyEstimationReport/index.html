@@ -183,7 +183,7 @@ The measurement was conducted during one night, at my place, on a symmetric 20Mb
 </li><li># of IPS responding to ping for which the last router was also responding to pings: 526 (33%)
 </li></ul><h3 id="routerrttvshostrtt">router rtt vs host rtt</h3>
 <p>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-ipmin.png"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-ipmin.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-ipmin.png"></a>
 </p>
 <p>
 Results are almost as expected: most of the host rtts match the router rtts. There are virtually no router rtts bigger than host rtts, whereas there is a significant amount of IPs with much bigger host rtt than router rtt. This can be attributed to the last-mile congestion.
@@ -193,7 +193,7 @@ Virtually all router rtts are &lt; 400ms. 400ms is the expected rtt to the most 
 </p>
 <h3 id="hostrttvstcprtt">host rtt vs tcp rtt</h3>
 <p>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/ipmin-tcpmin.png"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/ipmin-tcpmin.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/ipmin-tcpmin.png"></a>
 </p>
 <p>
 This graph is the one with most outliers. It is worth mentioning that the outliers go much further than the 1 second interval visible on the graph.
@@ -206,8 +206,8 @@ Nevertheless, there is a visible correlation: when the tcp rtt is small, the hos
 </p>
 <h3 id="routerrttvstcprtt">router rtt vs tcp rtt</h3>
 <p>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-tcpmin.png"></a>
-<a class="missing" href="#"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-tcpmin_close.png"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-tcpmin.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-tcpmin.png"></a>
+<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-tcpmin_close.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/LatencyEstimationReport/rmin-tcpmin_close.png"></a>
 </p>
 <p>
 This is the most important graph for us. Since the router rtt does not take last-mile congestion into account, we might treat it as the "best measurable rtt" of the connection.
