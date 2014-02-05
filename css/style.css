@@ -159,6 +159,7 @@ header nav {
 		width: 289px; height: 250px; float: left; margin: 10px 0 20px 20px;
 		border: 1px solid #e0e0e0;
 		background: #fff;
+		display: inline; /* IE6 margin fix */
 	}
 		#content .feature:hover {
 			background: #f7f7f7;
