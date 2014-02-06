@@ -47,17 +47,18 @@
 		jQuery(document).ready(function(){
 
 		$('.faq_answer').hide();
+		$('.faq_question').addClass('inactive');
 		$('.faq_question').click(function(){
 		t = $(this);
-		if (!t.hasClass('active'))
+		if (!t.hasClass('inactive'))
 		{
 		t.parent().children('.faq_answer').slideToggle();
-		t.addClass('active');
+		t.addClass('inactive');
 		}
 		else
 		{
 		t.parent().children('.faq_answer').slideToggle();
-		t.removeClass('active');
+		t.removeClass('inactive');
 		}
 		return false;
 		});

@@ -331,7 +331,7 @@ header nav {
 		margin-left:30px;
 	}
 .faq_question {
-	background: transparent url(../img/faq_inactive.png) center left no-repeat;
+	background: transparent url(../img/faq_active.png) center left no-repeat;
 	margin: 0 25px 0 25px;
 	font-weight:normal;
 	margin-top:5px !important;
@@ -341,18 +341,20 @@ header nav {
 	padding-right:5px;
 	text-decoration:underline;
 	cursor: pointer;
+	background-color:#f7f7f7;
+	border-color:#e0e0e0;
+	border-style:solid;
+	border-width:1px 1px 0 1px;	
 }
-.faq .active {
-	background: transparent url(../img/faq_active.png) center left no-repeat;
+.faq .inactive {
+	background: transparent url(../img/faq_inactive.png) center left no-repeat;
 	margin: 0 25px 0 25px;
 	padding-top:5px;
 	padding-right:5px;
 	padding-bottom:0;
 	height:auto;
-	background-color:#f7f7f7;
-	border-color:#e0e0e0;
-	border-style:solid;
-	border-width:1px 1px 0 1px;
+	background-color:#fff;
+	border:None;
 }
 
 .faq_answer {
