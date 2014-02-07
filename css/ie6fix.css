@@ -4,6 +4,9 @@ header nav {
 header nav ul ul {
 	width:150px;
 }
+header nav ul ul li a:hover, header nav ul li a:hover {
+	color: #fff;
+}
 .about, .faq {
 	margin-top: 140px;
 }
