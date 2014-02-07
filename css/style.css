@@ -262,13 +262,14 @@ header nav {
 	}
 	.howto .spacer{
 		float:left; height: 1px;
-		width: 2%;
+		width: 3%;
 	}
 	.howto .image{
 		float:left;
-		width: 70%;
+		width: 69%;
 	}
 	.howto  .image img{
+		margin-top: 25px;
 		width:100%;
 	}
 	.howto .image img.shadow {
