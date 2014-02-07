@@ -84,12 +84,13 @@ header nav {
 		header nav ul ul {
 			background: #ff5123; border-radius: 0px; padding: 0;
 			position: absolute; top: 100%;
+			border-left:1px solid #ff5123;
 		}
 			header nav ul ul li {
 				float: none;
 				border-right: 0;
-				border-top: 1px solid #fff;
-				border-bottom: 1px solid #ffc3b5;
+				border-top: 1px solid #ff3300;
+				border-bottom: 1px solid #ff3300;
 				position: relative;
 			}
 				header nav ul ul li:first-child {
