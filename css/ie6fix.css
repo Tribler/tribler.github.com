@@ -4,6 +4,6 @@ header nav {
 header nav ul ul {
 	width:150px;
 }
-.about {
+.about, .faq {
 	margin-top: 140px;
 }
