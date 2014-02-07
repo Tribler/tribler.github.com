@@ -8,6 +8,13 @@ body {
 	background: #fff url(../img/bg-pattern.png);
 }
 
+h1 {
+	font-size:25px;
+}
+h2, h3 {
+	font-size:15px;
+}
+
 a {
 	color: #494949; text-decoration: none;
 }
@@ -271,13 +278,9 @@ header nav {
 		-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 		-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 	}
-	.howto h2{
+	.howto h2, h3{
 		margin: 10px 0 10px 0;
-		font-size: 15px; font-style:italic;	color: #aaa8a8;
-	}
-	.howto h3{
-		margin: 10px 0 10px 0;
-		font-size: 15px; color: #ff3300;
+		color: #ff3300;
 	}
 
 .about {
@@ -285,10 +288,6 @@ header nav {
 }
 .about h1 {
 	margin-bottom:25px;
-	font-size:25px;
-}
-.about h2 {
-	font-size:17px;
 }
 .about .vision {
 	color: #ff3300;
@@ -310,15 +309,10 @@ header nav {
 }
 
 .faq {
-	margin: 70px 10px 50px 10px;
+	margin: 70px 35px 50px 35px;
 }
-	.faq h1 {
-		margin: 0 25px 0 25px;
-		font-size:25px;
-	}
 	.faq h2 {
-		margin: 50px 25px 0 25px;
-		font-size:15px;
+		margin-top: 50px;
 		border-bottom: 1px solid #ff3300;
 	}
 .faq_item {
@@ -330,7 +324,6 @@ header nav {
 	}
 .faq_question {
 	background: transparent url(../img/faq_active.png) center left no-repeat;
-	margin: 0 25px 0 25px;
 	font-weight:normal;
 	margin-top:5px !important;
 	margin-bottom:0px !important;
@@ -346,7 +339,6 @@ header nav {
 }
 .faq .inactive {
 	background: transparent url(../img/faq_inactive.png) center left no-repeat;
-	margin: 0 25px 0 25px;
 	padding-top:5px;
 	padding-right:5px;
 	padding-bottom:0;
@@ -356,7 +348,6 @@ header nav {
 }
 
 .faq_answer {
-	margin: 0 25px 0 25px;
 	padding:5px 25px 10px 25px;
 	overflow:hidden;
 	height:auto;
