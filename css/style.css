@@ -84,7 +84,9 @@ header nav {
 		header nav ul ul {
 			background: #ff5123; border-radius: 0px; padding: 0;
 			position: absolute; top: 100%;
-			border-left:1px solid #ff5123;
+			border: 1px solid #ff5123;
+			border-top: 1px solid #ff3300;
+			border-bottom: 1px solid #ff3300;
 		}
 			header nav ul ul li {
 				float: none;
