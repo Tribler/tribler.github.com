@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -103,9 +102,9 @@ If information could be passed around in the form of signed certificates of cont
 <h2 id="Synchronizingviewswithtrustedtorrents">Synchronizing views with trusted torrents</h2>
 <p>
 Consider a network for which the reputation network has converged in all peers. The central idea of swarm-based reputation consensus is that the centroids of the reputation graph can periodically (once every few days maybe) initiate torrents to propagate the contribution network they currently have. After a (small) number of these peers perform this operation, other peers join the torrents and update their current reputation network by merging their view of the system with that of the trusted peer that initiated the torrent. 
-<br /> [Rahim: I think that reputation graph based on upload contribution is not appropriate to make a snapshot of others upload treatment. Look at example below: In this reputation graph, node 5 has uploaded to nodes 3 and 7 and according to definition of the graph center it is the center of the graph. But based on this info what it can do for others?] <a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/Picture 1.png"></a> <br />
+<br /> [Rahim: I think that reputation graph based on upload contribution is not appropriate to make a snapshot of others upload treatment. Look at example below: In this reputation graph, node 5 has uploaded to nodes 3 and 7 and according to definition of the graph center it is the center of the graph. But based on this info what it can do for others?] <a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/Picture 1.png"></a> <br />
 If instead of reputation graph, nodes use another metric to decide whether to make a snapshot of reputation graph or not, it will be better. We can name it awareness graph and each node that knows more makes snapshot and creates relevant swarm. For example, suppose figure below:<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/Picture 2.png"></a><br />
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/Picture 2.png"></a><br />
 In this figure blue nodes and edges between them show the local reputation graph of the associated red node. If the reputation graph be converged all nodes will have same view point. In this figure nodes 6 and 2 more less than node 9. Node 9 knows about 7 upload actions ( number of edges) but the others know about 5 uploads. So if node 9 make a snapshot and propagate it, it will be better and brings more info to others. <br />
 But there is two important questions: in a distributed environment how a node should know that  it knows more than others and it's knowledge  is fresher? ]
 </p>
@@ -172,18 +171,18 @@ To have a proper imagination of the layout and connectivity of the bartercast gr
 </li><li>Ranks: Red=5 , Blue=4, Green=3 ,Golden=2, olivergreen=1 and pink=no connection 
 </li></ul><h3 id="Bartercastgraphforthefirst20000recordsmax_degree65">Bartercast graph (for the first 20000 records), max_degree=65 ===  </h3>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_0806_2.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_0806_2.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_0806_2.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_0806_2.png"></a>
 <br />
 </p>
 <h3 id="Bartercastgraphzoomedinforthefirst20000records">Bartercast graph zoomed in (for the first 20000 records) ===  </h3>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_zoom_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_zoom_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_zoom_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_zoom_0806.png"></a>
 <br /> <br />
 </p>
 <h3 id="Bartercastgraphallrecordstill2009-08-06max_degree189">Bartercast graph all records till 2009-08-06 , max_degree=189 ===  </h3>
 <p>
 <em>Note:</em> A higher resolution picture also is attached but showing it on the wiki messes the text. You can download and look at it by other tools.<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_with_all_record_till_0806_less_resolution.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_with_all_record_till_0806_less_resolution.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_with_all_record_till_0806_less_resolution.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_with_all_record_till_0806_less_resolution.png"></a>
 <br /> The "graphviz" files also are attached, "databasecrawler_090806_1_bartercast_graph.gv" for limited first 20000 records, and "bartercast_graph_all_records_till_0806.gv" for all records. You can use ZGRViewer to see different fomrs of zooming (bird eye, block,...) and see nodes connectivity details. 
 <br /> 
 </p>
@@ -206,16 +205,16 @@ different cycles. In the way calculations for last periods are less accurate(bec
 </p>
 </blockquote>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_0806.png"></a>
 </p>
 <p>
 Below graph just shows average number of replicas<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_just_replicas_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_just_replicas_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_just_replicas_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_just_replicas_0806.png"></a>
 </p>
 <h3 id="Coverage">Coverage ===  </h3>
 <p>
 By definition coverage means, the rate of the peers that have a records in their cache. Figure below shows the average of coverage for different records in different cycles <br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_average_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_average_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_average_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_average_0806.png"></a>
 </p>
 <h3 id="Convergence">Convergence ===  </h3>
 <p>
@@ -228,7 +227,7 @@ By Convergence we mean the how local history of a node can represent local union
 </li><li>Very bad: Nodes cover less than 20% of the records in the system.
 </li></ul><p>
 figure and table below shows the obtained result  <br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_0806.png"></a>
 </p>
 <h3 id="Peerscacherichnessaccuracyandonliness">Peers cache richness, accuracy and onliness</h3>
 <p>
@@ -244,7 +243,7 @@ The below fuzzy terms have been used to categorize richness peers richness level
 </li><li>Very bad: cache_size &lt; max_cache_size / 16
 </li></ul><p>
 Figure and table below shows the obtained result<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/richness_level_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/richness_level_0806.png"></a> 
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/richness_level_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/richness_level_0806.png"></a> 
 </p>
 <p>
 It is possible that some peers be rich in cache but they don't reply to the crawaler for long time. An other metric that is used to measure this phenomena is accuracy. Accurate peers are those that reply to the crawler just very close, in time, to the end of measurement. For exampe, if the last collected record is in the system be logged at time T then those peers that have replied to the crawler after 
@@ -257,7 +256,7 @@ T -threshold_level are very accurate. List below shows different accuracy levels
 </li><li>Very bad: 4 x (T-threshold) &lt; peer_last_reply_time
 </li></ul><p>
 For calculation, the threshold is set to eight hours and a slack of four hours also deducted from last reply time to leverage the values around the middle. Figure below shows the result:<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/cache_accuracy_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/cache_accuracy_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/cache_accuracy_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/cache_accuracy_0806.png"></a>
 </p>
 <p>
 Another parameter about peers that worth to measure is their onliness, or the rate of their online time to the time passed since their discovery by crawler. Because of the way that crawler contacts with peers, their online time is not accurate but in approximation it is very close to accurate value. Again we used fuzzy value to categorize onliness:
@@ -269,7 +268,7 @@ Another parameter about peers that worth to measure is their onliness, or the ra
 </li><li>Very bad: onliness &lt; 0.2 .
 </li></ul><p>
 Graph below shows the result:<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/onliness_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/onliness_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/onliness_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/onliness_0806.png"></a>
   
 </p>
 <h3 id="Correlationbetweenparameters">Correlation between parameters</h3>
@@ -287,15 +286,15 @@ same story is applied for other correlations shown below.
 </p>
 <p>
 Correlation between accuracy and onliness<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_online_correlation_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_online_correlation_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_online_correlation_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_online_correlation_0806.png"></a>
 </p>
 <p>
 Correlation between richness and accuracy<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_richness_correlation_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_richness_correlation_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_richness_correlation_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_richness_correlation_0806.png"></a>
 </p>
 <p>
 Correlation between richness and onliness<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_richness_online_correlation_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_richness_online_correlation_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_richness_online_correlation_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_richness_online_correlation_0806.png"></a>
 </p>
 <h3 id="Discoveryofpeersbycrawler">Discovery of peers by crawler</h3>
 <p>
@@ -303,19 +302,19 @@ Crawler finds new permids in the system by via three ways. The are founded and g
 </p>
 <h3 id="Cumulativenumberofdiscoveredpeerswithoutoverlap">Cumulative number of discovered peers without overlap</h3>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_0806.png"></a>
 </p>
 <h3 id="Cumulativenumberofdiscoveredpeerswithoverlap">Cumulative number of discovered peers with overlap</h3>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_with_overlap_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_with_overlap_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_with_overlap_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_with_overlap_0806.png"></a>
 </p>
 <h3 id="dailydiscoveryofnewpeers">daily discovery of new peers</h3>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_newpeers_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_newpeers_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_newpeers_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_newpeers_0806.png"></a>
 </p>
 <h3 id="Cumulativenumberofconnectedpeers">Cumulative number of connected peers</h3>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_connected_peers_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_connected_peers_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_connected_peers_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_connected_peers_0806.png"></a>
 </p>
 <h3 id="Recordsupdatestatistics">Records update statistics</h3>
 <p>
@@ -323,19 +322,19 @@ Another interesting that we measured was the update ratio of bartercast records.
 </p>
 <p>
 Histogram for records with different updates (all records)<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_0806.png"></a>
 </p>
 <p>
 Cumulative sum of records with different updates<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_cumulative_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_cumulative_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_cumulative_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_cumulative_0806.png"></a>
 </p>
 <p>
 Histogram for records( distinct from_id and to_id ) with different number of updates<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_0806.png"></a>
 </p>
 <p>
 Cumulative sum of records ( distinct from_id and to_id ) with different number of of updates<br />
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_cumulative_0806.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_cumulative_0806.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_cumulative_0806.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_cumulative_0806.png"></a>
 </p>
 <p>
 As it is seen from the graph most of the records never get second update.<br /><br />
@@ -370,38 +369,38 @@ Correlation graph without zooming
 </p>
 <blockquote>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_no_zoom.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_no_zoom.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_no_zoom.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_no_zoom.png"></a>
 </p>
 </blockquote>
 <p>
 Correlation graph with [-1000 , 1000 ] on x-axis and [-0.2 ,0.2] on y-axis
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_1000_2_2.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_1000_2_2.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_1000_2_2.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_1000_2_2.png"></a>
 </p>
 <p>
 Correlation graph with [-500,500] on x-axis and [-0.1, 0.1] on y-axis
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_500_1_1.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_500_1_1.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_500_1_1.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_500_1_1.png"></a>
 </p>
 <p>
 Correlation graph with [-200,200] on x-axis and [-0.05 ,0.05] on y-axis
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_200_05_05.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_200_05_05.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_200_05_05.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_200_05_05.png"></a>
 </p>
 <p>
 Correlation graph with [-100 , 100] on x-axis and [-0.2, 0.1] on y-axis
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_2_1.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_2_1.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_2_1.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_2_1.png"></a>
 </p>
 <p>
 Correlation graph with [-100, 100] on x-axis and [-0.02, 0.02] on y-axis
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_02_02.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_02_02.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_02_02.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_02_02.png"></a>
 </p>
 <p>
 As the graphs show there are few dots in the left-up and right-down quarters of the page and it means that there is positive correlation between Avg of SRs and net-contribution, but from the scattering of dots it does not seems to be a strong correlation. To give a better answer we calculated the correlation coefficient between these two parameters.Because of the non-linear function that is used in calculating the reputation, "arctan" , we don't expect to have a linear correlation between them, as Pearson correlation shows this fact. Before calculating we also removed outliers that may unexpectedly deviate the result. Below is the result for different models in 2-hop maxflow:<br />
@@ -437,7 +436,56 @@ As it was expected there is no strong correlation two parameters but at least it
 </li><li><a class="ext-link" href="http://www.nature.com/nature/journal/v437/n7063/full/nature04131.html"><span class="icon">​</span>Evolution of indirect reciprocity</a>, Nature Journal.
 </li><li><a class="ext-link" href="http://www.nature.com/nature/journal/v364/n6432/abs/364056a0.html"><span class="icon">​</span>A strategy of win-stay, lose-shift that outperforms tit-for-tat in the Prisoner's Dilemma game</a>, Nature Journal
 </li><li><a class="ext-link" href="http://webee.technion.ac.il/~idish/ftp/Brahms-Comnet-Mar09.pdf"><span class="icon">​</span>Brahms: Byzantine Resilient Random Membership Sampling</a>
-</li></ul></td>
+</li></ul><div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_0806.png">average_of_replicase_0806.png</a>
+(<span>8.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/average_of_replicase_just_replicas_0806.png">average_of_replicase_just_replicas_0806.png</a>
+(<span>6.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_no_zoom.png">avg_2_hop_no_zoom.png</a>
+(<span>7.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_1000_2_2.png">avg_2_hop_zoom_1000_2_2.png</a>
+(<span>8.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_02_02.png">avg_2_hop_zoom_100_02_02.png</a>
+(<span>12.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_2_1.png">avg_2_hop_zoom_100_2_1.png</a>
+(<span>10.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_100_2_2.png">avg_2_hop_zoom_100_2_2.png</a>
+(<span>10.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_200_05_05.png">avg_2_hop_zoom_200_05_05.png</a>
+(<span>11.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/avg_2_hop_zoom_500_1_1.png">avg_2_hop_zoom_500_1_1.png</a>
+(<span>9.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bartercast_graph_all_records_till_0806.gv">bartercast_graph_all_records_till_0806.gv</a>
+(<span>305.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/Bartercast_measurement_crop.png">Bartercast_measurement_crop.png</a>
+(<span>93.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_0806_2.png">bcast_all_node_0806_2.png</a>
+(<span>71.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_all_node_zoom_0806.png">bcast_all_node_zoom_0806.png</a>
+(<span>96.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_with_all_record_till_0806.png">bcast_with_all_record_till_0806.png</a>
+(<span>295.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/bcast_with_all_record_till_0806_less_resolution.png">bcast_with_all_record_till_0806_less_resolution.png</a>
+(<span>83.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/cache_accuracy_0806.png">cache_accuracy_0806.png</a>
+(<span>50.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_0806.png">convergence_0806.png</a>
+(<span>45.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_75_75_0717.png">convergence_75_75_0717.png</a>
+(<span>63.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_averagee_0717.png">convergence_averagee_0717.png</a>
+(<span>6.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/convergence_averagee_with_stdv_0717.png">convergence_averagee_with_stdv_0717.png</a>
+(<span>8.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_75_75_0717.png">coverage_75_75_0717.png</a>
+(<span>39.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_averagee_0717.png">coverage_averagee_0717.png</a>
+(<span>7.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_averagee_with_stdv_0717.png">coverage_averagee_with_stdv_0717.png</a>
+(<span>8.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/coverage_average_0806.png">coverage_average_0806.png</a>
+(<span>11.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/databasecrawler_090806_1_bartercast_graph.gv">databasecrawler_090806_1_bartercast_graph.gv</a>
+(<span>66.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/drawReplicationAverage.p">drawReplicationAverage.p</a>
+(<span>611.0bytes</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/onliness_0806.png">onliness_0806.png</a>
+(<span>37.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_online_correlation_0806.png">peers_accuracy_online_correlation_0806.png</a>
+(<span>7.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_accuracy_richness_correlation_0806.png">peers_accuracy_richness_correlation_0806.png</a>
+(<span>8.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_convergence_averagee_0717.png">peers_convergence_averagee_0717.png</a>
+(<span>26.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_richness_online_correlation_0806.png">peers_richness_online_correlation_0806.png</a>
+(<span>7.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_0806.png">peers_stat_0806.png</a>
+(<span>11.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_connected_peers_0806.png">peers_stat_connected_peers_0806.png</a>
+(<span>8.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_newpeers_0806.png">peers_stat_newpeers_0806.png</a>
+(<span>10.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/peers_stat_with_overlap_0806.png">peers_stat_with_overlap_0806.png</a>
+(<span>13.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/Picture%201.png">Picture 1.png</a>
+(<span>9.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/Picture%202.png">Picture 2.png</a>
+(<span>18.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_0806.png">records_update_ratio_0806.png</a>
+(<span>6.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_cumulative_0806.png">records_update_ratio_cumulative_0806.png</a>
+(<span>9.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_0806.png">records_update_ratio_distinct_fromId_toId_0806.png</a>
+(<span>5.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/records_update_ratio_distinct_fromId_toId_cumulative_0806.png">records_update_ratio_distinct_fromId_toId_cumulative_0806.png</a>
+(<span>9.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/replication_75_75_0717.png">replication_75_75_0717.png</a>
+(<span>48.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/replica_averagee_0717.png">replica_averagee_0717.png</a>
+(<span>7.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/replica_averagee_with_stdv_0717.png">replica_averagee_with_stdv_0717.png</a>
+(<span>9.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SwarmBasedReputationConsensus/richness_level_0806.png">richness_level_0806.png</a>
+(<span>53.6KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

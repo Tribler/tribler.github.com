@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -152,31 +151,31 @@ Deployment crawl results, etc
 The graphs below show the bandwidth usage during the crawl, the number of the peers actually PEXed, statistics about the first PEX message, and the likelihood of reconnecting to a previously known peer in the future.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-bandwidth-pex-zoom.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-bandwidth-pex-zoom.png" width="982px"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexers.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexers.png"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexsize-zoom.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexsize-zoom.png"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexresponse-combined.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexresponse-combined.png" width="982px"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online.png" width="490px"></a><a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online-percentage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online-percentage.png" width="490px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-bandwidth-pex-zoom.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-bandwidth-pex-zoom.png" width="982px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexers.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexers.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexsize-zoom.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexsize-zoom.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexresponse-combined.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexresponse-combined.png" width="982px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online.png" width="490px"></a><a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online-percentage.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online-percentage.png" width="490px"></a>
 </p>
 <p>
 <strong>3 Linux ISO swarms</strong> <br />
 Below is a graph showing the number of peers still connectable after we've last seen them. Note that the big drop at the end can be explained through the lack of data points: only 203 of the 475 initial peers have been checked for their online status.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online.png" width="490px"></a><a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online-percentage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online-percentage.png" width="490px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online.png" width="490px"></a><a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online-percentage.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online-percentage.png" width="490px"></a>
 </p>
 <p>
 If we crawl the swarm while trying to stay connected to PEX-capable peers until the connection is dropped by the other party, the graph looks quite different (see below). Peers seem to be less likely connectable after they have closed the connection. Also, while less peers get sent an online check, there is an increasing trend of connectability. This is in line with the results of the "Understanding Churn in Peer-to-Peer Networks" paper, where the authors found the uptime of a peer to be a good indicator of the peer's remaining uptime.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online.png" width="490px"></a><a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online-percentage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online-percentage.png" width="490px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online.png" width="490px"></a><a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online-percentage.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online-percentage.png" width="490px"></a>
 </p>
 <h2 id="ResearchAssignment">Research Assignment</h2>
 <p>
 Ongoing work by Raynor. Large measurements show that The Pirate Bay is the most dominant central tracker. For each tracker we computed the number of total peers that it tracks. This was done by summing up the swarm sizes of all torrents in which a tracker was mentioned in the announce fields. The .torrent files of these swarms were obtained by running the <a class="ext-link" href="http://svn.tribler.org/abc/branches/release-4.5/Tribler/Core/BuddyCast/TorrentCollecting.py"><span class="icon">​</span>Tribler TorrentCollecting</a> software for roughly a year. Swarm sizes were constantly updated during this time. The top 20 trackers are depicted in the bar chart below:
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-TPB.PNG"><img src="http://www.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-TPB.PNG"></a> <br /> <strong>Dataset:</strong> 283,031 swarms, total of 52,634,778 peers.
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-TPB.PNG"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-TPB.PNG"></a> <br /> <strong>Dataset:</strong> 283,031 swarms, total of 52,634,778 peers.
 </p>
 <p>
 In this chart, peers that are tracked solely by a tracker are marked as "Single Tracker". Hence, these peers come from a swarm which are only tracked by a single tracker. The remaining peers come from swarms that are tracked by multiple trackers. "Primary Tracker" indicates the peer came from a multi-tracker swarm which is primarily tracked by this tracker, i.e. the tracker is mentioned in the 'announce' field of the torrent file. If the tracker was not mentioned in the 'announce' field (and hence, it must have been mentioned in the 'announce-list' field), we label the peers as "Foreign Tracker".
@@ -272,7 +271,42 @@ discover content and can be adapted to discover peers.
 However, security is not fully taken into account and a trivial pollution attack
 can bring the system down.
 </p>
-</td>
+<div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/2-Hop%20TorrentSmell%20-%20DevMeeting%2010-07-2009%20v2.ppt">2-Hop TorrentSmell - DevMeeting 10-07-2009 v2.ppt</a>
+(<span>1.0MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Azureus_DHT_failure.png">Azureus_DHT_failure.png</a>
+(<span>41.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-bandwidth-pex-zoom.png">crawl1-bandwidth-pex-zoom.png</a>
+(<span>75.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online-percentage.png">crawl1-online-percentage.png</a>
+(<span>40.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-online.png">crawl1-online.png</a>
+(<span>52.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexers.png">crawl1-pexers.png</a>
+(<span>25.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexresponse-combined.png">crawl1-pexresponse-combined.png</a>
+(<span>91.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/crawl1-pexsize-zoom.png">crawl1-pexsize-zoom.png</a>
+(<span>70.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/data_s2%3D10_i%3D600_j%3D60_scan%3D30.pdf">data_s2=10_i=600_j=60_scan=30.pdf</a>
+(<span>336.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/graph-singletpbswarm.pdf">graph-singletpbswarm.pdf</a>
+(<span>12.0MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/graph-ubuntu-swarm.eps">graph-ubuntu-swarm.eps</a>
+(<span>1.5MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online-percentage.png">linux-keepalive-online-percentage.png</a>
+(<span>44.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-keepalive-online.png">linux-keepalive-online.png</a>
+(<span>53.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online-percentage.png">linux-online-percentage.png</a>
+(<span>40.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/linux-online.png">linux-online.png</a>
+(<span>48.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/MSc_Thesic_final_jroozenburg.pdf">MSc_Thesic_final_jroozenburg.pdf</a>
+(<span>1.0MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/pexquality.eps">pexquality.eps</a>
+(<span>33.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/research-20090327.pdf">research-20090327.pdf</a>
+(<span>1.3MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/research-20090506.pdf">research-20090506.pdf</a>
+(<span>1.3MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/stats.bz2">stats.bz2</a>
+(<span>14.9MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/stats2.bz2">stats2.bz2</a>
+(<span>36.1MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/thesis-draft2-pexchapter.pdf">thesis-draft2-pexchapter.pdf</a>
+(<span>1.8MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/thesis-draft3-implchapter.pdf">thesis-draft3-implchapter.pdf</a>
+(<span>6.1MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/thesis-draft5.pdf">thesis-draft5.pdf</a>
+(<span>6.6MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/thesis-final-vliegendhart.pdf">thesis-final-vliegendhart.pdf</a>
+(<span>5.8MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Hosts-12G.png">Top20Hosts-12G.png</a>
+(<span>18.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Hosts-166M.png">Top20Hosts-166M.png</a>
+(<span>18.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-Peers-SingleMulti.PNG">Top20Trackers-Peers-SingleMulti.PNG</a>
+(<span>18.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-Peers.PNG">Top20Trackers-Peers.PNG</a>
+(<span>18.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/Top20Trackers-TPB.PNG">Top20Trackers-TPB.PNG</a>
+(<span>35.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/DistributedTracker/tpb-9swarms-connectivitymatrix.pdf">tpb-9swarms-connectivitymatrix.pdf</a>
+(<span>7.9MB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

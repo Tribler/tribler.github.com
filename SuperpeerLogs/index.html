@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -99,59 +98,75 @@ In total 50gb of log data has been parsed, resulting in a dataset which contains
 Tribler daily usage. Important events, such as being in the news or a release of a new client, are shown at the bottom of each graph.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage.png"></a>
 </p>
 <p>
 Tribler daily usage, includes peers of which the overlay version is not known. This is due to never communicating with the superpeers, before detecting this peer using another peer his friend/randomlist. After a peer has communicated once with a superpeer, the highest known version is used to fill in this not known version.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_with.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_with.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_with.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_with.png"></a>
 </p>
 <p>
 Cumulative graph.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_cumul.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_cumul.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_cumul.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_cumul.png"></a>
 </p>
 <h3 id="BehaviourofTop-50downloaders">Behaviour of Top-50 downloaders</h3>
 <p>
 The number of downloads per day, for the top-50 most active downloaders.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50.png"></a>
 </p>
 <p>
 The same, only the downloads are cumulative now.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50_cumul.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50_cumul.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50_cumul.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50_cumul.png"></a>
 </p>
 <p>
 The number of downloads per hour of day (showing only top-10). Possibly due to the resolution of the superpeer logdata (1 message every 4 hours), no day/night rithm can be seen. But no obvious bot activity either.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top10_hour.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top10_hour.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top10_hour.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top10_hour.png"></a>
 </p>
 <h3 id="Triblerdistributions">Tribler distributions</h3>
 <p>
 Popularity of torrent files.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_torrent_dist.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_torrent_dist.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_torrent_dist.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_torrent_dist.png"></a>
 </p>
 <p>
 Time between first-seen and last-seen in seconds. All users with a difference of less then 60 seconds are removed.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_user_dist.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_user_dist.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_user_dist.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_user_dist.png"></a>
 </p>
 <p>
 Number of torrents downloaded per user.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_active_dist.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_active_dist.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_active_dist.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_active_dist.png"></a>
 </p>
-</td>
+<div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_active_dist.png">tribler_active_dist.png</a>
+(<span>16.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage.png">tribler_daily_usage.png</a>
+(<span>52.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_cumul.png">tribler_daily_usage_cumul.png</a>
+(<span>76.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_daily_usage_with.png">tribler_daily_usage_with.png</a>
+(<span>56.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_first_last.png">tribler_first_last.png</a>
+(<span>27.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top10_hour.png">tribler_top10_hour.png</a>
+(<span>84.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50.png">tribler_top50.png</a>
+(<span>67.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_top50_cumul.png">tribler_top50_cumul.png</a>
+(<span>77.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_torrent_cluster.png">tribler_torrent_cluster.png</a>
+(<span>11.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_torrent_cluster_zoom.png">tribler_torrent_cluster_zoom.png</a>
+(<span>22.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_torrent_dist.png">tribler_torrent_dist.png</a>
+(<span>15.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SuperpeerLogs/tribler_user_dist.png">tribler_user_dist.png</a>
+(<span>18.1KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

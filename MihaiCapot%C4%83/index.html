@@ -9,13 +9,13 @@
 <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
 
-<!--[if lt IE 9]>
-<script src="/js/html5shiv.js"></script>
-<![endif]-->
-
-<!--[if lte IE 6]>
-<script src="/js/ie6fix.js"></script>
-<link href="/css/ie6fix.css" rel="stylesheet" />
+<!--[if IE]>
+<script>
+  document.createElement('header');
+  document.createElement('footer');
+  document.createElement('section');
+  document.createElement('nav');
+</script>
 <![endif]-->
 
 <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
@@ -44,18 +44,17 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
 
 <div id="wrap">
 	<header>
-		<a href="/"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
 		
 		<nav>
 			<ul>
-				<li><a href="/">Tribler</a>
+				<li><a href="#">Tribler</a>
 				    <ul>
 				        <li><a href="/about.html">About Tribler</a></li>
 				        <li><a href="http://statistics.tribler.org">Statistics</a></li>

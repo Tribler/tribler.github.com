@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -335,7 +334,7 @@ In order to able Tribler to use the new multiparty transport protocol, some inte
 As a first approach of <em>swift</em> integration in Tribler, the HTTP Downloader could be taken as a model. In this case, a new <em>swift</em> Downloader must be designed, making the <em>swift</em> swarm to be considered a single <a class="wiki" href="/BitTorrent">BitTorrent</a> peer acting as a leecher for the Tribler <a class="missing" href="#">PiecePicker</a>. The novel module should interact with the regular <a class="wiki" href="/BitTorrent">BitTorrent</a>'s piece picker operation and translate the <a class="wiki" href="/BitTorrent">BitTorrent</a> piece requests to <em>swift</em> operation.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/design1.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/design1.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/design1.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/design1.png"></a>
 </p>
 <p>
 High-level module schema, presenting the intended interaction between all of the involved one. Red color indicates the new components designed to integrate <em>swift</em> as a transport protocol for Tribler.
@@ -355,7 +354,7 @@ First, two considerations:
 <ul><li><a class="wiki" href="/BitTorrent">BitTorrent</a> piece length will be always regarded as a power of 2, so they can be easily converted to <em>swift</em> bins, as one of the pieces corresponds to a branch of the tree identified by a bin from layer N.
 </li><li>Only .torrents describing a single file would be managed. As a first implementation, this would keep things simpler and would make easier all the piece management.
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/btpieces_2_swiftbins.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/btpieces_2_swiftbins.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/btpieces_2_swiftbins.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/btpieces_2_swiftbins.png"></a>
 </p>
 <p>
 <a class="wiki" href="/BitTorrent">BitTorrent</a> pieces to <em>swift</em> bins. Assuming 4 KBytes <a class="wiki" href="/BitTorrent">BitTorrent</a> pieces, each layer 2 bin would stand for a whole <a class="wiki" href="/BitTorrent">BitTorrent</a> piece: in the diagram, bin 3 would stand for <a class="wiki" href="/BitTorrent">BitTorrent</a> piece 0 and bin 11 for piece 1.
@@ -381,7 +380,7 @@ The module should coordinate the operation of both protocols by notifying each o
 It notifies the Tribler <a class="missing" href="#">PiecePicker</a> which pieces are available to be obtained from the <em>swift</em> swarm. With this information, the <a class="missing" href="#">PiecePicker</a> can better determine which pieces to retrieve first. This information is maintained by libswift in a binary tree for each remote peer contacted, so some method was needed to obtain it in a way the <a class="missing" href="#">PiecePicker</a> understood it.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/binmaps_or_and_2bitmap.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/binmaps_or_and_2bitmap.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/binmaps_or_and_2bitmap.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/binmaps_or_and_2bitmap.png"></a>
 </p>
 <p>
 Binmap combination and collapse. Assuming binary trees representing the status of remote peers to be the ones shown in (a), (b) and (c), the result of applying an OR operation to all trees would be the one in (d). If <a class="wiki" href="/BitTorrent">BitTorrent</a> pieces were 4 KBytes, reading the tree to layer 3 would result in the bit string <strong>1001</strong>.
@@ -404,7 +403,7 @@ Some constraints limited the operation of the <em>swift</em> integration module:
 To assure all libswift related tasks were run in the Libswift Thread, a task scheduler mechanism was implemented. All other threads can add a task to execute by this thread and they are stored on a queue. The queued tasks are executed every time the thread is run. Together with a similar feature of the Network Thread, this becomes a communication mechanism between both threads.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/thread_interaction.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/thread_interaction.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/thread_interaction.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/thread_interaction.png"></a>
 </p>
 <h4 id="Pieceretrievaltechniques">Piece retrieval techniques</h4>
 <p>
@@ -447,7 +446,7 @@ Assess the correct operation of the implemented integration, making sure the pie
 The scenario used to run this test was composed by one server acting as a tracker and seeder for <a class="wiki" href="/BitTorrent">BitTorrent</a> and another server acting as a tracker/seeder for <em>swift</em>. The expected result was <a class="wiki" href="/BitTorrent">BitTorrent</a> downloading data at a fixed rate and libswift obtaining also some data.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test1m_result.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test1m_result.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test1m_result.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test1m_result.png"></a>
 </p>
 <p>
 Assessment results. As expected, <a class="wiki" href="/BitTorrent">BitTorrent</a> only downloaded at the limited rate of 8 Mbps, but <em>swift</em> bandwidth (around 2.5 Mbps) indicates some pieces were obtained from the <em>swift</em> swarm.
@@ -463,19 +462,19 @@ After making sure the protocol coordination worked fine, the performance of the 
 The procedure here was to test the solution under different rate conditions. Therefore, the same test was run in 3 more situations: running Tribler with the <a class="wiki" href="/BitTorrent">BitTorrent</a> rate unlimited; the rate limited to 40 Mbps and to 2 Mbps.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/testunlimited_result.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/testunlimited_result.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/testunlimited_result.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/testunlimited_result.png"></a>
 </p>
 <p>
 Bandwidth evolution when <a class="wiki" href="/BitTorrent">BitTorrent</a> not limited. As shown, <a class="wiki" href="/BitTorrent">BitTorrent</a> works close the the link limit and <em>swift</em> uses only around 2.5 Mbps.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test5m_result.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test5m_result.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test5m_result.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test5m_result.png"></a>
 </p>
 <p>
 Bandwidth evolution when <a class="wiki" href="/BitTorrent">BitTorrent</a> limited to 40 Mbps. <a class="wiki" href="/BitTorrent">BitTorrent</a> works only at around 40 Mbps but <em>swift</em> keeps using only around 2.5 Mbps.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test250k_result.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test250k_result.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test250k_result.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test250k_result.png"></a>
 </p>
 <p>
 Bandwidth evolution when <a class="wiki" href="/BitTorrent">BitTorrent</a> limited to 2 Mbps. Again, while <a class="wiki" href="/BitTorrent">BitTorrent</a> uses only 2 Mbps (so the link is almost empty), <em>swift</em> again only uses around 2.5 Mbps.
@@ -486,7 +485,20 @@ After running all the experiments and considering also the results obtained in t
 <p>
 Although the obtained results were not promising, this work pretended to be a first approach to protocol integration. The reasons most likely to be behind of this low performance are the time based operation used when integrating the newly created thread with the Tribler Network Thread and the single-piece requesting mechanism used to interact with libswift.
 </p>
-</td>
+<div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/binmaps_or_and_2bitmap.png">binmaps_or_and_2bitmap.png</a>
+(<span>28.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/btpieces_2_swiftbins.png">btpieces_2_swiftbins.png</a>
+(<span>22.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/design1.png">design1.png</a>
+(<span>44.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test1m_result.png">test1m_result.png</a>
+(<span>7.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test250k_result.png">test250k_result.png</a>
+(<span>7.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/test5m_result.png">test5m_result.png</a>
+(<span>8.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/testunlimited_result.png">testunlimited_result.png</a>
+(<span>9.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/thesis_reportdraft_20100705.pdf">thesis_reportdraft_20100705.pdf</a>
+(<span>1.0MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/swift2TriblerIntegration/thread_interaction.png">thread_interaction.png</a>
+(<span>82.2KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

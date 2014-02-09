@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -82,7 +81,7 @@
 	
 	<section id="trac"><table><tr><td><h2 id="AddingGrowlSupport">Adding Growl Support</h2>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/Growl/Growl in Tribler.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/Growl/Growl in Tribler.png"></a>
 </p>
 <p>
 <a class="ext-link" href="http://www.growl.info"><span class="icon">​</span>Growl</a> is a notification daemon for Mac OS/X. Applications supporting Growl can send it information, upon which Growl can issue a pop-up to notify the user. It is a popular program and supporting it is fairly easy. This text will focus on the Python support, and will assume you have Growl installed already.
@@ -125,12 +124,18 @@ x.notify("Download started","Downloading","Foo.torrent")
 The above program will register itself with Growl, specifying its application name, icon and the classes of notifications it will send. The latter allows the user to configure which classes he will actually allow to pop-up. After registering, a notification is sent, specifying the class name, the title and the content of the pop-up. For example, the popup could look like this:
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/Growl/Example growl popup.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/Growl/Example growl popup.png"></a>
 </p>
 <p>
 Notice that if Growl is not installed, the above code will do nothing.
 </p>
-</td>
+<div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/Growl/Example%20growl%20popup.png">Example growl popup.png</a>
+(<span>8.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/Growl/Growl%20in%20Tribler.png">Growl in Tribler.png</a>
+(<span>229.0KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

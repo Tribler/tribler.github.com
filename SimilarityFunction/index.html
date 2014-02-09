@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -91,7 +90,7 @@ The similarity function is part of the system for fast keyword search. Every Tri
 An example of a semantic overlay is shown here:
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"></a><br />
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png"></a><br />
 In which Peer 1 and 3 are connected, because they are interested in Animals. Peer 2 and 3, because of Programming. But no connection exists between Peer 1 and 2, because they do not have overlapping interests. The similarity function in Tribler thus offers semantic clustering and scalability.
 </p>
 <hr />
@@ -100,12 +99,12 @@ In which Peer 1 and 3 are connected, because they are interested in Animals. Pee
 In the overlay peers exchange information regarding their download history. Using this information a User x Item matrix is constucted.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"></a><br />
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png"></a><br />
 A row in the User x Item matrix represent the preference list of a peer. When a peer has downloaded an item, this is represented by a 1.
 </p>
 <p>
 Using the User x Item matrix, similarity can be calculated by formula (1):
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"></a><br />
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.png"></a><br />
 </p>
 <ul><li>M<sub>10</sub>, denotes the number of items User 1 downloaded, but User 2 did not.
 </li><li>M<sub>01</sub>, denotes the number of items User 2 downloaded, but User 1 did not.
@@ -128,7 +127,7 @@ Peer recommendation has two utilities in Tribler:
 </li><li>When a user changes his/her preference list (i.e. downloading a new item), similarity between all users can change thus again a Full-Update is run. 
 </li><li>When a peer receives a new Buddycast message, only the peer-peer similarity to the sender is updated (Single-Update). For the taste buddies and random peers in the message, the peer picks out the ones of which it has no preference list and then updates the indirect peer-peer similarity with them by formula (3). Note that the indirect peer-peer similarity is stored as negtive value in order to be distinct with the direct one. (REALLY?)<br />
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG"></a>
 </p>
 <hr />
 <h2 id="TorrentRelevance">Torrent Relevance</h2>
@@ -206,11 +205,57 @@ Using the dataset, then several well known similarity functions were evaluated. 
 A method which resulted in a improvement of the recommendations and thus the similarity between users, uses the swarmnames of items to find similar ones. These additional psuedo-ratings then allow for overlap and thus reduce the sparsity.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"></a><br />
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png"></a><br />
 This more complex similarity function is called ItemItem(Levenshtein) and is not yet implemented in Tribler.
 The final thesis report can be downloaded <a class="missing attachment">here</a>.
 </p>
-</td>
+<div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Adaptive%20Web%20Search%20Based%20on%20User%20Profile%20Constructed%20without%20Any%20Effort%20from%20Users.pdf">Adaptive Web Search Based on User Profile Constructed without Any Effort from Users.pdf</a>
+(<span>304.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Amazon-Recommendations.pdf">Amazon-Recommendations.pdf</a>
+(<span>353.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/breese_98_empirical.pdf">breese_98_empirical.pdf</a>
+(<span>242.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/clements_08_optimizing.pdf">clements_08_optimizing.pdf</a>
+(<span>310.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/clustering%20methods%20for%20collaborative%20filtering.pdf">clustering methods for collaborative filtering.pdf</a>
+(<span>242.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Combining%20Collaborative%20Filtering%20with%20Personal%20Agents%20for%20Better%20Recommendations.pdf">Combining Collaborative Filtering with Personal Agents for Better Recommendations.pdf</a>
+(<span>89.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/compfunction.PNG">compfunction.PNG</a>
+(<span>5.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Content-Boosted%20Collaborative%20Filtering%20for%20Improved%20Recommendations.pdf">Content-Boosted Collaborative Filtering for Improved Recommendations.pdf</a>
+(<span>97.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Cosine%2C%20Anderberg%20voor%20Arno%20Boudewijn.pdf">Cosine, Anderberg voor Arno Boudewijn.pdf</a>
+(<span>316.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/e-commerce.pdf">e-commerce.pdf</a>
+(<span>583.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Eigentaste%20A%20Constant%20Time%20Collaborative%20Filtering%20Algorithm.pdf">Eigentaste A Constant Time Collaborative Filtering Algorithm.pdf</a>
+(<span>775.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/eigentrust.pdf">eigentrust.pdf</a>
+(<span>198.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/fab-content-based-filtering.pdf">fab-content-based-filtering.pdf</a>
+(<span>470.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/gnutella-rc.pdf">gnutella-rc.pdf</a>
+(<span>166.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/han_04_scalable.pdf">han_04_scalable.pdf</a>
+(<span>483.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/herlocker_02_empirical.pdf">herlocker_02_empirical.pdf</a>
+(<span>135.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/improving%20lookup%20performance%20over%20a%20widely-deployed%20dht.pdf">improving lookup performance over a widely-deployed dht.pdf</a>
+(<span>197.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Incorporating%20Contextual%20Information%20in%20Recommender%20Systems.PDF">Incorporating Contextual Information in Recommender Systems.PDF</a>
+(<span>449.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/indirectsimfunction.PNG">indirectsimfunction.PNG</a>
+(<span>13.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/ipoque%20internet%20survey.pdf">ipoque internet survey.pdf</a>
+(<span>4.0MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/item2peersimfunction.PNG">item2peersimfunction.PNG</a>
+(<span>4.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Karypis2001.pdf">Karypis2001.pdf</a>
+(<span>169.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Load%20reducing%20in%20the%20kad%20p2p%20system.pdf">Load reducing in the kad p2p system.pdf</a>
+(<span>170.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Meeting%2017%20September%202009.pdf">Meeting 17 September 2009.pdf</a>
+(<span>222.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/mirza_03_studying.pdf">mirza_03_studying.pdf</a>
+(<span>634.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Passive%20Profiling%20from%20Server%20Logs%20in%20an%20Online%20Recruitement%20Enviroment.pdf">Passive Profiling from Server Logs in an Online Recruitement Enviroment.pdf</a>
+(<span>103.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/percolation-based%20search.pdf">percolation-based search.pdf</a>
+(<span>321.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Personalized%20Recommendation%20in%20Social%20Tagging%20Systems.pdf">Personalized Recommendation in Social Tagging Systems.pdf</a>
+(<span>556.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/pollution%20in%20p2p%20file%20sharing%20system.pdf">pollution in p2p file sharing system.pdf</a>
+(<span>2.5MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/precrec.png">precrec.png</a>
+(<span>51.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/ResearchAssignment.pdf">ResearchAssignment.pdf</a>
+(<span>1.2MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/sarwar_01_itembased.pdf">sarwar_01_itembased.pdf</a>
+(<span>250.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Search%20Performance%20Analysis%20in%20Peer-to-Peer%20Networks.pdf">Search Performance Analysis in Peer-to-Peer Networks.pdf</a>
+(<span>70.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/semantic.png">semantic.png</a>
+(<span>8.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/simfunction.PNG">simfunction.PNG</a>
+(<span>11.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/survey%20or%20research%20toward%20robust%20p2p%20networks%20search%20methods.pdf">survey or research toward robust p2p networks search methods.pdf</a>
+(<span>1.4MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/thesis.pdf">thesis.pdf</a>
+(<span>978.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Toward%20a%20Personal%20Recommender%20System.pdf">Toward a Personal Recommender System.pdf</a>
+(<span>1.0MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/userxitem.png">userxitem.png</a>
+(<span>9.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/Wang2006.pdf">Wang2006.pdf</a>
+(<span>397.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/wang_06_distributed.pdf">wang_06_distributed.pdf</a>
+(<span>548.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/SimilarityFunction/wang_06_unifying.pdf">wang_06_unifying.pdf</a>
+(<span>390.2KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

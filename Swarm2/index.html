@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -109,7 +108,13 @@ Regarding connectivity of swarms served by different trackers it is natural to c
 The code for the simulator is attached. The simulator consumes a special data format produced as follows: 
 </p>
 <pre class="wiki">cat trace/connbtuser.log | ./reformat.pl | sort -n &gt; time-trace.txt
-</pre></td>
+</pre><div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/Swarm2/reformat.pl">reformat.pl</a>
+(<span>324.0bytes</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/Swarm2/sim-right-10.cpp">sim-right-10.cpp</a>
+(<span>3.1KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

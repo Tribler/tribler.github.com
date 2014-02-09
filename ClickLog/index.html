@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -247,7 +246,14 @@ Code-wise, this means writing alternative implementations of Core.Search.Keyword
 </li><li>which keywords were used most frequently (this brings to my attention that the family filter would probably have to check the autocomplete...)
 </li></ul></li><li>Of course, we would like to see if the reranking improves position. This is where the reranking_strategy comes into play. There should be some significant differences in average click position between reranked and non-reranked results (or between the different reranking strategies). Besides the possibility for fancy graphs, this allows for an informed decision which reranking strategy to finally use in a later version of Tribler.
 </li><li>Actually, any analysis we might perform on aggregated clicklog data could also be a funky analysis in the regular Tribler client, performed on the peer data available to the user. Just as a side node.
-</li></ul></td>
+</li></ul><div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/ClickLog/time_insert.png">time_insert.png</a>
+(<span>7.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/ClickLog/time_relfrequency.png">time_relfrequency.png</a>
+(<span>8.3KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/ClickLog/time_termcompletion.png">time_termcompletion.png</a>
+(<span>10.3KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

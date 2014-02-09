@@ -44,7 +44,6 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -92,7 +91,7 @@ This page will contain raw results, which allows us to link to them before we ha
 The following picture shows which peers were watching the live video stream on Saturday July 19th 07:30 CEST.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/earth_map_modified_0080.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/earth_map_modified_0080.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/earth_map_modified_0080.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/earth_map_modified_0080.png"></a>
 </p>
 <p>
 The animated version, running from Thursday July 17th to Friday July 25th, is available as peer_live.mp4, attached to this wiki page. Each frame represents 30 minutes of actual time.
@@ -108,23 +107,32 @@ The figure below presents the average quality as observed by the peers. The bott
 The average stall time and piece loss is skewed towards malfunctioning clients, which for instance report a continuous stall as well as 80-100% piece loss. To avoid this bias, we plot the median values instead.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/loss.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/loss.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/loss.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/loss.png"></a>
 </p>
 <h2 id="Sessionduration">Session duration</h2>
 <p>
 The figure below plots the length of each visit in a log-log plot. The 'rank' of a peer means its order in the list of visits ordered from long to short.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sessiondurations.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sessiondurations.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sessiondurations.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sessiondurations.png"></a>
 </p>
 <h2 id="Sharingefficiency">Sharing efficiency</h2>
 <p>
 Our network consists of our seeding servers (which make the video stream available) and the users. The figure below shows the cumulative amount of data which the peers downloaded from the seeding servers and other users and the cumulative amount of data uploaded between the users. The blue line shows the ratio uploaded:downloaded, indicating the total sharing ratio of the users. At the last point of measurement, the users supplied 40% of the data to each other. Our servers thus had to supply 60% of the stream. Note that peers were not given any preference to download from the seeding servers or the users. Instead, the seeding servers and users were treated the same and ran the same software. Since the seeding servers obtain each piece the earliest, peers have a natural tendency to request the pieces from them.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sharingratio.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sharingratio.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sharingratio.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sharingratio.png"></a>
 </p>
-</td>
+<div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/earth_map_modified_0080.png">earth_map_modified_0080.png</a>
+(<span>232.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/loss.png">loss.png</a>
+(<span>32.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/peers_live.mp4">peers_live.mp4</a>
+(<span>2.5MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sessiondurations.png">sessiondurations.png</a>
+(<span>12.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/StreamingExperimentResults/sharingratio.png">sharingratio.png</a>
+(<span>25.2KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	
