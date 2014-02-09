@@ -17,6 +17,9 @@
 	#trac a.missing:hover {
 		color: #00bff4;
 	}
+#trac img {
+	max-width: 900px;
+}
 #trac h1 {
 	margin: 10px 0;
 }
