@@ -132,10 +132,14 @@ header nav {
 #gettribler {
     margin: 0 30px 20px 20px;
 	float: right;
+	display:table;
 }
 	#gettribler .button a {
-		display: block; height: 50px; width: 200px;
-		color: white; font-size: 17px; line-height: 50px;
+		display: block; height: 75px; width: 250px;
+		color: white; font-size: 20px; line-height: 50px;
+		font-weight:bold;
+		display: table-cell;
+		vertical-align: middle;
 		text-decoration: none; text-align: center;
 		background: #00b7ea;
 		background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
@@ -165,14 +169,21 @@ header nav {
 	overflow: hidden; clear: both;
 	padding-bottom: 20px;
 }
+	#content .line {
+		width: 900px; height:2px; float: left; margin: 0 20px 0 20px;
+		border-top: 2px solid #a7a7a7;
+		display: inline;
+	}
 	#content .feature {
 		width: 289px; height: 250px; float: left; margin: 10px 0 20px 20px;
-		border: 1px solid #e0e0e0;
+		border: 1px solid #fff;
 		background: #fff;
 		display: inline; /* IE6 margin fix */
 	}
 		#content .feature:hover {
+			border: 1px solid #e0e0e0;
 			background: #f7f7f7;
+			color: #494949;
 		}
 		#content .feature .title {
 			font-size: 20px;
@@ -202,7 +213,8 @@ header nav {
 			#content .feature table tr:first-child  td{
 				border-bottom: 2px solid #ff3300;
 			}
-		#content .feature p a {
+		#content .feature p.link {
+			margin-left: 15px;
 		    background: transparent url(../img/link.png) center left no-repeat;
 			padding-left: 15px;
 			color: #ff3300;
@@ -242,15 +254,32 @@ header nav {
 
 		}
 
+footer {
+	width: 960px; height:100px;
+	background: #000;
+	}
+	footer #gettribler {
+		float: none;
+		padding-top:20px;
+		margin-left: 380px;
+	}
+		footer #gettribler p {
+			color: #fff;
+		}
+		footer #gettribler .button a {
+			height: 50px; width: 200px; font-size: 17px; font-weight: normal;
+			margin:0 auto;
+		}
+		
 .howto {
 	margin: 10px 30px 10px 30px;
 	display: inline-block;
 }
-	.howto:first-child {
-		margin-top: 70px;
+	.howto td{
+		margin-top:50px;
 	}
-	.howto:last-child {
-		margin-bottom: 50px;
+	.howto td:last-child.image{
+		margin-top:125px;
 	}
 	.howto img{
 		margin-right: 10px;
@@ -259,10 +288,6 @@ header nav {
 	.howto .text{
 		float:left;
 		width: 26%;
-	}
-	.howto .spacer{
-		float:left; height: 1px;
-		width: 2%;
 	}
 	.howto .image{
 		float:left;
