@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link href="css/style.css" rel="stylesheet" />
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+
+<!--[if lt IE 9]>
+<script src="/js/html5shiv.js"></script>
+<![endif]-->
+
+<!--[if lte IE 6]>
+<script src="/js/ie6fix.js"></script>
+<link href="/css/ie6fix.css" rel="stylesheet" />
+<![endif]-->
+
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    </script>
+
+</head>
+
+<body>
+
+<div id="wrap">
+	<header>
+		<a href="/"><img src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+		<nav>
+			<ul>
+				<li><a href="/">Tribler</a>
+				    <ul>
+				        <li><a href="about.html">About Tribler</a></li>
+				        <li><a href="anonimity.html">Anonimity</a></li>
+				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
+				    </ul>
+				</li>
+				<li><a href="download.html">Download</a></li>
+				<li><a href="#">Users</a>
+				    <ul>
+				        <li><a href="howto.html">How does it work</a></li>
+				        <li><a href="faq.html">FAQ</a></li>
+				    </ul>
+				</li>
+				<li><a href="#">Developers</a>
+				    <ul>
+						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+						<li><a href="/TitleIndex">Archive</a></li>
+				    </ul>
+				</li>
+				<li><a href="http://forum.tribler.org">Forum</a></li>
+			</ul>
+		</nav>
+	</header>	
+	
+	<section id="content">
+		<div class="anonimity">
+			<h1>Towards Anonimity</h1>
+			<h2>Privacy in downloading</h2>
+			<p>Governments are trying to control the media by blocking websites,hunting down bloggers and installation of Internet Kill switches. We are working on solving these issue by expanding our Open Source software.</p><br>
+
+			<p>Becoming "lawyer-proof" is our current target.</p><br>
+
+			<p>Legal threats and harassment are an important tool today to stop dissidents and unpopular opinions in the media. Tribler aims to fully protect you from harm, but beware that we're not finished yet.</p>
+			 
+			<h2>Disclaimer</h2>
+			<p>Tribler has come a long way in the field of file sharing and aims to enrich the Tribler community with anonymous downloading. The protocols and methods that are being used have proven to be very effective. Unfortunately it is not yet possible to download regular files anonymously.</p><br>
+
+			<p>Currently we are testing the new version and optimizing the downloading performance. Feel free to join this process by downloading the newest version. In this version it is possible to download a test file anonymously, yet there is no absolute guarantee that the downloading performed by Tribler will be 100% anonymous.</p><br>
+		</div>
+
+		<div class="anonimity">
+			<h1>How it works</h1>
+			<div class="text">
+				<h3><img src="img/balloon1.png" />Bittorrent Swarm</h3>
+				<p>When you search for content you send out a request to all Tribler users. These users are connected in the Tribler community. You will receive the content from one of the other members. This can be traced.</p>
+			</div>
+			<div class="spacer"></div>
+			<div class="image">
+				<img src="img/anonimity1.png" />
+			</div>
+		</div>
+		
+		<div class="anonimity">
+			<div class="text">
+				<h3><img src="img/balloon2.png" />First proxy layer</h3>
+				<p>Via a proxy layer the content is passed to you. Therefore the direction between you, the receiver, and the sender is interupted. Proxies are virtual places that forward the content as they are told.</p>
+			</div>
+			<div class="spacer"></div>
+			<div class="image">
+				<img src="img/anonimity2.png" />
+			</div>
+		</div>
+
+		<div class="anonimity">				
+			<div class="text">
+				<h3><img src="img/balloon3.png" />Second proxy layer</h3>
+				<p>Adding a second layer ofm proxies makes it even more difficult to trace the route of the content, creating anonymity for you as a user.</p>	
+			</div>
+			<div class="spacer"></div>
+			<div class="image">
+				<img src="img/anonimity3.png" />
+			</div>
+		</div>
+
+	</section>
+</div>	
+
+</body>
+</html>
