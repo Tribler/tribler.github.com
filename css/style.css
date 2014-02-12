@@ -289,12 +289,17 @@ footer {
 		float:left;
 		width: 26%;
 	}
+	.howto .spacer{
+		float:left; height: 1px;
+		width: 3%;
+	}
 	.howto .image{
 		float:left;
-		width: 70%;
+		width: 69%;
 	}
 	.howto  .image img{
-		width:100%;
+		margin-top: 25px;
+		width:591px;
 	}
 	.howto .image img.shadow {
 		margin-top: 75px;

@@ -17,6 +17,9 @@
 	#trac a.missing:hover {
 		color: #00bff4;
 	}
+#trac img {
+	max-width: 900px;
+}
 #trac h1 {
 	margin: 10px 0;
 }
@@ -24,6 +27,7 @@
 		margin-top: 0;
 	}
 #trac h2, #trac h3 {
+	color: #494949;
 	margin: 5px 0;
 }
 #trac ul, #trac ol {
@@ -36,4 +40,9 @@
 	padding: .25em;
 	overflow: hidden;
 	line-height: 100%;
+}
+#attachments {
+	margin-top: 10px;
+	border: 1px outset #996;
+	padding: 1em
 }

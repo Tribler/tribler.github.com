@@ -44,18 +44,17 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
 
 <div id="wrap">
 	<header>
-		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		<a href="/"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
 		
 		<nav>
 			<ul>
-				<li><a href="#">Tribler</a>
+				<li><a href="/">Tribler</a>
 				    <ul>
 				        <li><a href="/about.html">About Tribler</a></li>
 				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
@@ -99,8 +98,8 @@ development, I'll give some attention on how to reproduce a building
 and installation environment.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/demo.PNG"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/code.PNG"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/demo.PNG"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/code.PNG"></a>
 <em>The classid in this example is incorrect. It should be clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921</em>
 </p>
 <h1 id="Architecture">Architecture</h1>
@@ -119,7 +118,7 @@ the architecture has been modeled as a client/server architecture
 where the Plug-in is the client and the BG is the server.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/Architecture.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/Architecture.png" width="50%"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/Architecture.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/Architecture.png" width="50%"></a>
 </p>
 <h2 id="Plug-inBGProcessinteraction">Plug-in / BG Process interaction</h2>
 <p>
@@ -169,7 +168,7 @@ in the playback region handled by Vlc.
 Here is shown an interaction scheme between Plug-in / BG / P2P Core:
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/interaction.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/interaction.png" width="50%"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/interaction.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/interaction.png" width="50%"></a>
 </p>
 <h2 id="TheBackgroundProcess">The Background Process</h2>
 <h3 id="Overview1">Overview</h3>
@@ -379,7 +378,7 @@ register your callbacks for every event you want to handle:
 </li><li>EV_STOP
 </li><li>EV_INFO
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/BG Framework.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/BG Framework.png"></a>
 </p>
 <h1 id="Todoandopenissuescurrentstatus">Todo and open issues (current status)</h1>
 <ul><li>Perform building environment and building procedure.
@@ -396,9 +395,18 @@ is going to be downloaded both through HTTP and <a class="wiki" href="/BitTorren
 root-hash of the torrent providing a security hash-checking mechanism (see <a class="wiki" href="/MerkleHashes">MerkleHashes</a> for more details).
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/P2P web content retrivial.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/P2P web content retrivial.png"></a>
 </p>
-</td>
+<div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/Architecture.png">Architecture.png</a>
+(<span>58.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/BG%20Framework.png">BG Framework.png</a>
+(<span>20.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/interaction.png">interaction.png</a>
+(<span>40.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/Makefile">Makefile</a>
+(<span>64.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/BrowserPlugin/P2P%20web%20content%20retrivial.png">P2P web content retrivial.png</a>
+(<span>89.0KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	

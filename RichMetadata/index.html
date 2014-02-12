@@ -44,18 +44,17 @@
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
     </script>
 
-	<script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
 
 <div id="wrap">
 	<header>
-		<a href="/index.html"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
+		<a href="/"><img src="/img/tribler-logo.png" alt="Return to the homepage" /></a>
 		
 		<nav>
 			<ul>
-				<li><a href="#">Tribler</a>
+				<li><a href="/">Tribler</a>
 				    <ul>
 				        <li><a href="/about.html">About Tribler</a></li>
 				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
@@ -204,7 +203,7 @@ A <a class="missing" href="#">ChannelCast</a> message is made of several entries
 Our enhancements of the protocol add to each entry in the message the so called <em>rich metadata entry</em>. In the figure below the contents of this entry are shown.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_announce.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_announce.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_announce.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_announce.png"></a>
 </p>
 <dl class="wiki"><dt><strong>description</strong></dt><dd>is a 500bytes maximum bit string. It is thought to provide a freeform textual description for the item, but it is currently unsed.
 </dd><dt><strong>timestamp</strong></dt><dd>is an unix timestamp reflecting the date the rich metadata entry was last modified by its publisher
@@ -230,7 +229,7 @@ A peer willing to retrieve the contents of one or more subtitles for an item wit
 Two new Overlay Message Types have been introduced to implement the protocol.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_get_subs.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_get_subs.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_get_subs.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_get_subs.png"></a>
 </p>
 <p>
 <strong>GET_SUBS</strong> (a) is sent by peers as request message
@@ -252,7 +251,7 @@ Two new Overlay Message Types have been introduced to implement the protocol.
 <p>
 An example of the entire diffusion process is shown in the image below.
  
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/example_diff_total.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/example_diff_total.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/example_diff_total.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/example_diff_total.png"></a>
 </p>
 <p>
 The figure represents a sample of the network showing one publisher (green circle), subscribers of his channel (purple circle), and other peers. The  publisher has added two subtitles for an item in its channel, one in Dutch, one in Italian. Yellow shadows underneath the peers mean that the announcement for the subtitles has been received. Vertical and horizontal patterns inside the circles respectively reflect the availability of one of the actual subtitles contents. 
@@ -271,7 +270,7 @@ In the section the architecture of the Subtitles Subsystem is presented: first w
 In the figure below a logical view of the macro-blocks of the systems is shown. The components that were already implemented by the platform are pictured in a lighter shade of grey.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch1.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch1.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch1.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch1.png"></a>
 </p>
 <dl class="wiki"><dt><strong>RMD Gossip</strong></dt><dd>creates outgoing, and processes incoming gossip messages, managing Rich Metadata (subtitles) information. Implements the necessary extension to the <a class="missing" href="#">ChannelCast</a> module.
 </dd><dt><strong>RMD DB</strong></dt><dd>Newly added component of the Tribler <a class="wiki" href="/MegaCache">MegaCache</a>, it manages the information needs of the whole Subtitles Subsystem, facilitating the retrieval and the persistence of rich metadata.
@@ -283,26 +282,26 @@ In the figure below a logical view of the macro-blocks of the systems is shown. 
 The responsibilities of the above components are further split in the modules they are made of, as shown in the next figure along with their reciprocal dependencies. Please consult the API reference for full details ( <a class="missing attachment">attachment:api.pdf</a> or <a class="ext-link" href="http://subtitles.zxq.net"><span class="icon">​</span>http://subtitles.zxq.net</a> )
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch_dependencies.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch_dependencies.png"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch_dependencies.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch_dependencies.png"></a>
 </p>
 <p>
 In the next figures the basic interactions between these modules are shown in several sequence diagrams. They are not meant to be fully detailed, but to show and let the reader understand the basic program flow. (Click on each figure to  zoom)
 </p>
 <ul><li>Peer gossiping subtitles.
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_out.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_out.png" width="800px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_out.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_out.png" width="800px"></a>
 </p>
 <ul><li>Peer receiving gossip about subtitles.
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_in.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_in.png" width="800px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_in.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_in.png" width="800px"></a>
 </p>
 <ul><li>Peer creating and sending a subtitle contents request.
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/request_subtitles.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/request_subtitles.png" width="800px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/request_subtitles.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/request_subtitles.png" width="800px"></a>
 </p>
 <ul><li>Peer receiving some subtitle contents trough a SUBS message.
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitles_in.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitles_in.png" width="800px"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitles_in.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitles_in.png" width="800px"></a>
 </p>
 <h2 id="Experimentalresults">Experimental results</h2>
 <p>
@@ -393,8 +392,8 @@ The parameters that we considered to describe swarms behavior are:
 For each of them we report below a boxplot graph, describing how this parameter vary among different experiments, and then we report a significative example for each of them.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_stats.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_stats.png" width="380"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_example.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_example.png" width="380"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_stats.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_stats.png" width="380"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_example.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_example.png" width="380"></a>
 </p>
 <dl class="wiki"><dt><em>number of peers</em></dt><dd>it is higly variable both during a single emulation and
 in different emulations: this is due to the randomness in choosing traces.
@@ -404,8 +403,8 @@ quartiles in a single experiment are considered, it can be notices that they
 vary in a limited range, around 20 peers wide.
 </dd></dl>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_stats.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_stats.png" width="380"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_cdf_example.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_cdf_example.png" width="380"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_stats.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_stats.png" width="380"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_cdf_example.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_cdf_example.png" width="380"></a>
 </p>
 <dl class="wiki"><dt><em>churn events distribution</em></dt><dd>from the boxplot above it can be seen that in
 all the reported experiment runs the churn rate is particularly high, and
@@ -414,8 +413,8 @@ view. In the figure next to it we show the CDF of the churn events for one of
 the experiments as an example: it can be seen that the distribution is highly concentrated around the origin of the axis: this means that the interval between two consecutive churn events tends to be very small; in the example 50% of churn events happens within 60 seconds from each other.
 </dd></dl>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/sess_length_notau_stats.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/sess_length_notau_stats.png" width="380"></a>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/sesslength_cdf_example.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/sesslength_cdf_example.png" width="380"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/sess_length_notau_stats.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/sess_length_notau_stats.png" width="380"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/sesslength_cdf_example.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/sesslength_cdf_example.png" width="380"></a>
 </p>
 <dl class="wiki"><dt><em>session length distribution</em></dt><dd>from the boxplot graph it is easy to see that the session length is highly variable within a single experiment, but more ore less the characteristics of this attribute are the same in different experiments. In the graph on the right the CDF of the session length distribution is shown for a single run. For a lot of peers the session length can be extremely small (less then 90 minutes for the 25 % of the peers), while for the upper 25% it is longer then 12 hours. (We didn't measure sessions longer then 12 hours since our emulations are at most 1 day long. The measurement of sessions longer then half this window would lead to biased results towards short sessions [for an explanation consult the thesis (when it will be written :P ))
 </dd></dl>
@@ -440,7 +439,7 @@ Making a total of 120 bytes overhead per announcement.
 We measured how the bandwidth usage evolves in time: the figures below are shown the results.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_total_announce.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_total_announce.png" width="600"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_total_announce.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_total_announce.png" width="600"></a>
 </p>
 <p>
 The images above is taken from an experiment run for 24 hours in the official Tribler overlay. The bandwidth used for announcement
@@ -454,7 +453,7 @@ Nevertheless 25Kbytes is much more then the minimum required bandwidth to inform
 Therefore there must be a spoil of bandwidth in sending duplicates: this is confirmed in the figure below.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_duplicates_unique.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_duplicates_unique.png" width="600"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_duplicates_unique.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_duplicates_unique.png" width="600"></a>
 </p>
 <p>
 Nearly the 50% of the announcements sent are duplicates. The fact that
@@ -476,10 +475,10 @@ The following figure shows the evolution of coverage in time for three different
 </li><li>experiment <em>E2</em> differs from E1 in that the moderator goes up and down every 4 hours.
 </li><li>experiment <em>E3</em> introduces a subscriber to the same setting of E2
 </li></ul><p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage.png" width="600"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage.png" width="600"></a>
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage_zoom.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage_zoom.png" width="600"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage_zoom.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage_zoom.png" width="600"></a>
 </p>
 <p>
 An important result is that in every case, after around 1500 seconds from the
@@ -498,7 +497,7 @@ A central factor for the effectiveness for metadata diffusion is the timely rece
 In the next figure we show the CDF of waiting times in a single experiment.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/waiting.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/waiting.png" width="600"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/waiting.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/waiting.png" width="600"></a>
 </p>
 <p>
 More then half of the emulated peers receive the announcement within 600 seconds from their first appearance in the overlay, and 90% of them receive it within 1200 seconds.
@@ -522,7 +521,7 @@ exchange, while the seconds shows how this is split between the publisher and th
 The size of the exchanged subtitle is approximately 60Kbytes, covering a film 1:30 long.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_total.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_total.png" width="600"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_total.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_total.png" width="600"></a>
 </p>
 <p>
 The overhall consumed bandwidth in 12 hours emulation amounts to ~ 3500 KBs. A
@@ -532,7 +531,7 @@ slightly faster growth is recognizable in the first part of the emulation, in wh
 Next figure shows how the requests are split between the subscriber and the publisher. Notice that in the middle part of the simulation the publisher's line stops to grow since the moderator goes down for 4 hours.
 </p>
 <p>
-<a class="wiki" href="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_mod_subsc.png"><img src="http://www.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_mod_subsc.png" width="600"></a>
+<a class="wiki" href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_mod_subsc.png"><img src="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_mod_subsc.png" width="600"></a>
 </p>
 <p>
   
@@ -560,7 +559,38 @@ Next figure shows how the requests are split between the subscriber and the publ
 <ul><li>Create an extensible framework to disseminate a broader variety of Metadata (e.g. thumbnails, video previews, timed descriptions or ads...)
 </li><li>Work on something able to overcome the <em>duplicates</em> problem (Bloom filters?)
 </li><li>Invert the dependency item -&gt; metadata. Now metadata refers to items, but metadata should be the centre of a channel: metadata is what describes an item in a channel. This allows, for example, several physical contents (e.g. videos with different qualities) to be linked to the same item in a channel. Exploring an MPEG-21 like approach could be interesting.
-</li></ul></td>
+</li></ul><div id="attachments">
+<h3 class="foldable">Attachments</h3>
+<ul>
+<li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/api.pdf">api.pdf</a>
+(<span>357.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch1.png">arch1.png</a>
+(<span>41.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/arch_dependencies.png">arch_dependencies.png</a>
+(<span>40.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_cdf_example.png">churn_cdf_example.png</a>
+(<span>12.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/churn_stats.png">churn_stats.png</a>
+(<span>25.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/example_diff_total.png">example_diff_total.png</a>
+(<span>135.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_example.png">num_peers_example.png</a>
+(<span>16.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/num_peers_stats.png">num_peers_stats.png</a>
+(<span>24.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage.png">percentage.png</a>
+(<span>37.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/percentage_zoom.png">percentage_zoom.png</a>
+(<span>23.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/preliminary_analysys_document.pdf">preliminary_analysys_document.pdf</a>
+(<span>278.6KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_duplicates_unique.png">real_duplicates_unique.png</a>
+(<span>15.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/real_total_announce.png">real_total_announce.png</a>
+(<span>28.2KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/request_subtitles.png">request_subtitles.png</a>
+(<span>37.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/sesslength_cdf_example.png">sesslength_cdf_example.png</a>
+(<span>11.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/sess_length_notau_stats.png">sess_length_notau_stats.png</a>
+(<span>30.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_announce.png">subs_announce.png</a>
+(<span>15.0KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_get_subs.png">subs_get_subs.png</a>
+(<span>17.7KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_mod_subsc.png">subs_mod_subsc.png</a>
+(<span>15.5KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subs_total.png">subs_total.png</a>
+(<span>31.1KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitles_in.png">subtitles_in.png</a>
+(<span>17.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitles_on_the_wire_spec.pdf">subtitles_on_the_wire_spec.pdf</a>
+(<span>155.8KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_in.png">subtitle_gossiping_in.png</a>
+(<span>18.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/subtitle_gossiping_out.png">subtitle_gossiping_out.png</a>
+(<span>19.9KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/thesis.pdf">thesis.pdf</a>
+(<span>3.5MB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/user_manual.pdf">user_manual.pdf</a>
+(<span>294.4KB</span>)</li><li><a href="http://kayapo.tribler.org/trac/raw-attachment/wiki/RichMetadata/waiting.png">waiting.png</a>
+(<span>14.5KB</span>)</li></ul>
+</div></td>
 </tr>
 </table>
 </section>	
