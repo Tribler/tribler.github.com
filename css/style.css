@@ -275,11 +275,11 @@ footer {
 	margin: 10px 30px 10px 30px;
 	display: inline-block;
 }
-	.howto td{
-		margin-top:50px;
+	.howto:first-child {
+		margin-top: 70px;
 	}
-	.howto td:last-child.image{
-		margin-top:125px;
+	.howto:last-child {
+		margin-bottom: 50px;
 	}
 	.howto img{
 		margin-right: 10px;
@@ -315,7 +315,48 @@ footer {
 		margin: 10px 0 10px 0;
 		color: #ff3300;
 	}
-
+	
+.anonimity {
+	margin: 10px 30px 10px 30px;
+	display: inline-block;
+}
+	.anonimity:first-child {
+		margin-top: 70px;
+	}
+	.anonimity:last-child {
+		margin-bottom: 50px;
+	}
+	.anonimity img{
+		margin-right: 10px;
+		vertical-align:middle;
+	}
+	.anonimity .text{
+		float:left;
+		width: 35%;
+	}
+	.anonimity .spacer{
+		float:left; height: 1px;
+		width: 3%;
+	}
+	.anonimity .image{
+		float:left;
+		width: 62%;
+	}
+	.anonimity .image img {
+		margin-top: 75px;
+		border: 1px solid #e0e0e0;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+		-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+		-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+	}
+	.anonimity h2, h3{
+		margin: 10px 0 10px 0;
+		color: #ff3300;
+	}
+	
 .about {
 	margin: 70px 30px 50px 30px;
 }
