@@ -316,34 +316,33 @@ footer {
 		color: #ff3300;
 	}
 	
-.anonimity {
+.anonymity {
 	margin: 10px 30px 10px 30px;
 	display: inline-block;
 }
-	.anonimity:first-child {
+	.anonymity:first-child {
 		margin-top: 70px;
 	}
-	.anonimity:last-child {
+	.anonymity:last-child {
 		margin-bottom: 50px;
 	}
-	.anonimity img{
+	.anonymity img{
 		margin-right: 10px;
-		vertical-align:middle;
+		vertical-align: middle;
 	}
-	.anonimity .text{
-		float:left;
-		width: 35%;
+	.anonymity .text{
+		float: left;
+		width: 28%;
 	}
-	.anonimity .spacer{
-		float:left; height: 1px;
+	.anonymity .spacer{
+		float: left; height: 1px;
 		width: 3%;
 	}
-	.anonimity .image{
-		float:left;
+	.anonymity .image{
+		float: left;
 		width: 62%;
 	}
-	.anonimity .image img {
-		margin-top: 75px;
+	.anonymity .image img {
 		border: 1px solid #e0e0e0;
 		border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -352,7 +351,10 @@ footer {
 		-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 		-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 	}
-	.anonimity h2, h3{
+	.anonymity h1{
+		margin-bottom: 30px;
+	}
+	.anonymity h2, h3{
 		margin: 10px 0 10px 0;
 		color: #ff3300;
 	}
