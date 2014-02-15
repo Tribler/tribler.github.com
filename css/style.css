@@ -169,10 +169,29 @@ header nav {
 	overflow: hidden; clear: both;
 	padding-bottom: 20px;
 }
-	#content .line {
-		width: 900px; height:2px; float: left; margin: 0 20px 0 20px;
+	#content p.link {
+		margin-left: 15px;
+		background: transparent url(../img/link.png) center left no-repeat;
+		padding-left: 15px;
+		color: #ff3300;
+	}
+	#content .line , .line-red{
+		height:2px; float: left; margin: 0 20px 0 20px; width: 915px;
 		border-top: 2px solid #a7a7a7;
 		display: inline;
+	}
+	#content .line-red {
+		height:2px; float: left; margin: 0 30px 0 30px; width: 895px;
+		border-top: 2px solid #ff3300;
+		display: inline;
+	}
+	#content .spacer {
+		margin-top: 70px;
+	}
+	#content > h1 {
+		margin-left: 30px;
+		margin-right: 30px;
+		margin-bottom: 20px;
 	}
 	#content .feature {
 		width: 289px; height: 250px; float: left; margin: 10px 0 20px 20px;
@@ -198,7 +217,10 @@ header nav {
 			float: right;
 		}
 		#content .feature p {
-			margin: 0 0 5px 0; padding: 0 13px 0 13px;
+			margin-left: 0 0 5px 0; padding: 0 13px 0 13px;
+		}
+		#content .feature p.link {
+			margin-left: 15px; padding-left: 15px;
 		}
 		#content .feature table {
 			width: 263px;
@@ -213,12 +235,6 @@ header nav {
 			#content .feature table tr:first-child  td{
 				border-bottom: 2px solid #ff3300;
 			}
-		#content .feature p.link {
-			margin-left: 15px;
-		    background: transparent url(../img/link.png) center left no-repeat;
-			padding-left: 15px;
-			color: #ff3300;
-		}
 
 	#content .download {
 		width: 289px; height: 250px; float: left; margin: 70px 0 20px 20px;
@@ -252,6 +268,27 @@ header nav {
 		#content .changelog li {
 			margin: 0 20px 0 20px;
 
+		}
+	#content .support {
+		width: 417px; height: 160px; float: left; margin: 10px 30px 20px 30px;
+		border: 1px solid #fff;
+		border-bottom: 2px solid #ff3300;
+		background: #fff;
+		display: inline;
+	}
+		#content .support:hover {
+			border: 1px solid #e0e0e0;
+			border-bottom: 2px solid #ff3300;
+			background: #f7f7f7;
+			color: #494949;
+		}
+		#content .support img{
+			margin: 10px;
+			float: left;
+		}
+		#content .support p{
+			margin: 10px;
+			overflow: auto;
 		}
 
 footer {
