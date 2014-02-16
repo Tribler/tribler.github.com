@@ -270,9 +270,10 @@ header nav {
 
 		}
 	#content .support {
-		width: 417px; height: 160px; float: left; margin: 10px 30px 20px 30px;
+		width: 397px; height: 180px; float: left; margin: 10px 30px 20px 30px;
 		border: 1px solid #fff;
 		border-bottom: 2px solid #ff3300;
+		padding: 10px;
 		background: #fff;
 		display: inline;
 	}
@@ -285,6 +286,7 @@ header nav {
 		#content .support img{
 			margin: 10px;
 			float: left;
+			padding: 15px 0;
 		}
 		#content .support p{
 			margin: 10px;
