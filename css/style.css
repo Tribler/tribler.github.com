@@ -175,7 +175,7 @@ header nav {
 		padding-left: 15px;
 		color: #ff3300;
 	}
-	#content .line , .line-red{
+	#content .line {
 		height:2px; float: left; margin: 0 20px 0 20px; width: 915px;
 		border-top: 2px solid #a7a7a7;
 		display: inline;
@@ -270,7 +270,7 @@ header nav {
 
 		}
 	#content .support {
-		width: 397px; height: 180px; float: left; margin: 10px 30px 20px 30px;
+		width: 397px; height: 180px; float: left; margin: 0 30px 0 30px;
 		border: 1px solid #fff;
 		border-bottom: 2px solid #ff3300;
 		padding: 10px;
