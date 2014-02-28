@@ -354,6 +354,9 @@ footer {
 		margin: 10px 0 10px 0;
 		color: #ff3300;
 	}
+	.howto .screenshots img{
+		padding: 16px;
+	}
 	
 .anonymity {
 	margin: 10px 30px 10px 30px;
