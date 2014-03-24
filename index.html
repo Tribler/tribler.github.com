@@ -21,11 +21,6 @@
 <link href="/css/ie6fix.css" rel="stylesheet" />
 <![endif]-->
 
-<script src="/js/wow.min.js"></script>
-<script>
- new WOW().init();
-</script>
-
 <script src="js/wow.min.js"></script>
 <script>
  new WOW().init();
@@ -57,8 +52,13 @@
       }
       _loadSuper = window.onload;
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-    </script>
-	
+
+      function toggleIDs(id1, id2) {
+        document.getElementById(id1).style.display = "table-cell";
+        document.getElementById(id2).style.display = "none";
+      }
+
+</script>
 </head>
 
 <body>
@@ -141,51 +141,45 @@
 	<div id="wrap"><br>	
 	
 		<section id="content">
-			<a class="feature" href="anonymity.html">
-				<p class="title"><img src="img/anonymity.png">Towards Anonymity</p>
-				
-				<p>Mass-surveillance and government snooping is becoming increasingly impossible with Tribler. We're trying to combine Bittorrent streaming with the Tor hidden services architecture. A lot of work goes into making this feature stable.</p>
-				
-				<p class="link">How it works</p>
+			<a class="feature" onmouseover="toggleIDs('anon_text', 'anon_title')" onmouseout="toggleIDs('anon_title', 'anon_text')" href="anonymity.html">
+				<p id="anon_title" class="title"><img src="img/anonymity.png" /><span>Towards<br>Anonymity</span></p>
+
+				<p id="anon_text" class="description">Mass-surveillance and government snooping is becoming increasingly impossible with Tribler. We're trying to combine Bittorrent streaming with the Tor hidden services architecture.</p>
 			</a>
 			
-			<a class="feature" href="howto.html">
-				<p class="title"><img src="img/gui.png">User interface</p>
+			<a class="feature" onmouseover="toggleIDs('ui_text', 'ui_title')" onmouseout="toggleIDs('ui_title', 'ui_text')" href="howto.html">
+				<p id="ui_title" class="title"><img src="img/gui.png"><span>User<br>interface</span></p>
 				
-				<p>Check out our general user interface and other screenshots. The graphical user interface makes sharing files easy and accessible.</p>
-				
-				<p class="link">Get started</p>
+				<p id="ui_text" class="description">Check out our general user interface and other screenshots. The graphical user interface makes sharing files easy and accessible.</p>
 			</a>
 
-			<a class="feature">
-				<p class="title"><img src="img/nowebsites.png">No websites</p>
+			<a class="feature" onmouseover="toggleIDs('www_text', 'www_title')" onmouseout="toggleIDs('www_title', 'www_text')">
+				<p id="www_title" class="title"><img src="img/nowebsites.png"><span>No<br>websites</span></p>
 
-				<p>Tribler software facilitates sharing content without an external server. You can choose to download files without having to search the web for downloadsites.</p>
+				<p id="www_text" class="description">Tribler software facilitates sharing content without an external server. You can choose to download files without having to search the web for downloadsites.</p>
 			</a>
 
-			<a class="feature" href="http://github.com/Tribler/tribler">
-				<p class="title"><img src="img/opensource.png">Open Source</p>
+			<a class="feature" onmouseover="toggleIDs('os_text', 'os_title')" onmouseout="toggleIDs('os_title', 'os_text')" href="http://github.com/Tribler/tribler">
+				<p id="os_title" class="title"><img src="img/opensource.png"><span>Open<br>Source</span></p>
 
-				<p>Triblers software is Open Source so you can verify if it works as advertised.</p>
+				<p id="os_text" class="description">Triblers software is Open Source so you can verify if it works as advertised.
 				
-				<p><iframe src="http://ghbtns.com/github-btn.html?user=Tribler&repo=tribler&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe></p>
+				<iframe src="http://ghbtns.com/github-btn.html?user=Tribler&repo=tribler&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe></p>
 			</a>
 
-			<a class="feature" href="#">
-				<p class="title"><img src="img/speed.png">Connectivity Speed</p>
+			<a class="feature" onmouseover="toggleIDs('cs_text', 'cs_title')" onmouseout="toggleIDs('cs_title', 'cs_text')" href="#">
+				<p id="cs_title" class="title"><img src="img/speed.png"><span>Connectivity<br>Speed</span></p>
 				
-				<table>
+				<table id="cs_text" class="description">
 					<tr><td>Upload</td><td>4.9</td><td>mb/s</td></tr>
 					<tr><td>Download</td><td>5.2</td><td>mb/s</td></tr>
 				</table>
-				
-				<p class="link">Show stats</p>
 			</a>
 
-			<a class="feature">
-				<p class="title"><img src="img/streaming.png">Streaming</p>
+			<a class="feature" onmouseover="toggleIDs('vp_text', 'vp_title')" onmouseout="toggleIDs('vp_title', 'vp_text')">
+				<p id="vp_title" class="title"><img src="img/streaming.png">Streaming</p>
 
-				<p>Tribler has an intergrated videoplayer which allows you to stream videos even before the download is finished. The videoplayer is fully functional and includes the ability to seek within a video, without having to download the entire file first.</p>
+				<p id="vp_text" class="description">Tribler has an intergrated videoplayer which allows you to stream videos even before the download is finished.</p>
 			</a>
 		</section>
 	</div>	

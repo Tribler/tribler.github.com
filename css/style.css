@@ -212,43 +212,40 @@ header nav {
 		margin-bottom: 20px;
 	}
 	#content .feature {
-		width: 289px; height: 250px; float: left; margin: 10px 0 20px 20px;
+		width: 280px; height: 120px; float: left; margin: 10px 0 20px 20px;
+		padding: 5px;
 		border: 1px solid #fff;
 		background: #fff;
-		display: inline; /* IE6 margin fix */
+		display: table;
 	}
-		#content .feature:hover {
-			border: 1px solid #e0e0e0;
-			background: #f7f7f7;
+		#content .feature .description {
 			color: #494949;
+			display: none; 
+			vertical-align: middle; 
 		}
 		#content .feature .title {
+		    display:inline-block;
 			font-size: 20px;
 			font-weight:bold;
 		}
+		#content .feature .title span{
+			display: inline-block;
+			vertical-align:middle;
+			line-height:120%;
+		}
 		#content .feature .title img {
-			margin: 10px 10px 10px 0;
+			display: inline-block;
 			vertical-align: middle;
-		}
-		#content .feature .screenshot {
-			margin-right: 13px;
-			float: right;
-		}
-		#content .feature p {
-			margin-left: 0 0 5px 0; padding: 0 13px 0 13px;
-		}
-		#content .feature p.link {
-			margin-left: 15px; padding-left: 15px;
+			margin: 10px 10px 0 0;
 		}
 		#content .feature table {
-			width: 263px;
 			margin: 0 13px 0 13px;
 			border-collapse: collapse; 
 			border-spacing: 50px 50px;
 			font-size: 18px; font-weight:bold;
 		}
 			#content .feature table td{
-				padding: 10px 0;
+				padding: 10px 10px;
 			}
 			#content .feature table tr:first-child  td{
 				border-bottom: 2px solid #ff3300;
