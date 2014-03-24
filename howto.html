@@ -5,6 +5,7 @@
 <title>Tribler</title>
 
 <link href="css/style.css" rel="stylesheet" />
+<link href="css/animate.min.css" rel="stylesheet">
 <link href="css/lightbox.css" rel="stylesheet" />
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -18,6 +19,11 @@
 <script src="/js/ie6fix.js"></script>
 <link href="/css/ie6fix.css" rel="stylesheet" />
 <![endif]-->
+
+<script src="/js/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/lightbox-2.6.min.js"></script>
@@ -49,12 +55,16 @@
 </head>
 
 <body>
-
-<div id="wrap">
 	<header>
-		<a href="/"><img src="img/tribler-logo.png" alt="Return to the homepage" /></a>
-		
-		<nav>
+		<div class="wow fadeInDown">
+			<div class="wow fadeInLeft">
+				<a href="https://www.facebook.com/TriblerTeam"><img class="facebook-icon" src="img/facebook-icon.png" /></a>
+				<a href="https://twitter.com/TriblerTeam"><img class="twitter-icon" src="img/twitter-icon.png" /></a>
+				<a href="https://github.com/Tribler"><img class="github-icon" src="img/github-icon.png" /></a>
+			</div>
+			<a href="/"><img class="header-logo" src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+				
+			<nav>
 			<ul>
 				<li><a href="/">Tribler</a>
 				    <ul>

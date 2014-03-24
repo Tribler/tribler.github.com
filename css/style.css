@@ -46,7 +46,7 @@ header img.facebook-icon, .twitter-icon, .github-icon{
 	position: absolute;
 }
 header img.facebook-icon:hover, .twitter-icon:hover, .github-icon:hover{
-    background:#ffff99;
+    background:#ffeae5;
 }
 header img.facebook-icon {
     margin: 5px 0 0 15px;
@@ -286,6 +286,7 @@ header nav {
 			color: #ff3300;
 		}
 	#content .changelog{
+	    clear:both;
 		margin: 20px 20px 20px 20px;
 	}
 		#content .changelog li {
