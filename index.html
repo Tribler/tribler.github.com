@@ -4,10 +4,13 @@
 <meta charset="utf-8" />
 <title>Tribler</title>
 
-<link href="css/style.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lightbox.css" />
+<link rel="stylesheet" href="css/animate.min.css">
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="canonical" href="http://www.tribler.org/index.html">
+
 
 <!--[if lt IE 9]>
 <script src="/js/html5shiv.js"></script>
@@ -18,7 +21,13 @@
 <link href="/css/ie6fix.css" rel="stylesheet" />
 <![endif]-->
 
+<script src="js/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
+
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/lightbox-2.6.min.js"></script>
 <script type="text/javascript" src="js/ua-parser.min.js"></script>
 <script type="text/javascript">
       var uservoiceOptions = {
@@ -48,80 +57,85 @@
 </head>
 
 <body>
-
-<div id="wrap">
 	<header>
-		<a href="/"><img src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+		<div class="wow fadeInDown">
+			<div class="wow fadeInLeft">
+				<a href="https://www.facebook.com/TriblerTeam"><img class="facebook-icon" src="img/facebook-icon.png" /></a>
+				<a href="https://twitter.com/TriblerTeam"><img class="twitter-icon" src="img/twitter-icon.png" /></a>
+				<a href="https://github.com/Tribler"><img class="github-icon" src="img/github-icon.png" /></a>
+			</div>
+			<a href="/"><img class="header-logo" src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+				
+			<nav>
+				<ul>
+					<li><a href="/">Tribler</a>
+						<ul>
+							<li><a href="about.html">About Tribler</a></li>
+							<li><a href="anonymity.html">Towards Anonymity</a></li>
+							<li><a href="http://statistics.tribler.org">Statistics</a></li>
+						</ul>
+					</li>
+					<li><a href="download.html">Download</a></li>
+					<li><a href="support-index.html">Support</a>
+						<ul>
+							<li><a href="howto.html">How does it work</a></li>
+							<li><a href="faq.html">FAQ</a></li>
+						</ul>
+					</li>
+					<li><a href="developer-index.html">Developers</a>
+						<ul>
+							<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+							<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+							<li><a href="/TitleIndex">Archive</a></li>
+						</ul>
+					</li>
+					<li><a href="http://forum.tribler.org">Forum</a></li>
+				</ul>
+			</nav>
 		
-		<nav>
-			<ul>
-				<li><a href="/">Tribler</a>
-				    <ul>
-				        <li><a href="about.html">About Tribler</a></li>
-				        <li><a href="anonymity.html">Towards Anonymity</a></li>
-				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
-				    </ul>
-				</li>
-				<li><a href="download.html">Download</a></li>
-				<li><a href="support-index.html">Support</a>
-				    <ul>
-				        <li><a href="howto.html">Get Started</a></li>
-				        <li><a href="faq.html">FAQ</a></li>
-				    </ul>
-				</li>
-				<li><a href="developer-index.html">Developers</a>
-				    <ul>
-						<li><a href="https://github.com/Tribler/tribler">Github</a></li>
-				        <li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
-						<li><a href="/TitleIndex">Archive</a></li>
-				    </ul>
-				</li>
-				<li><a href="http://forum.tribler.org">Forum</a></li>
-			</ul>
-		</nav>
+		</div>
 	</header>	
 	
 	<section id="main">
-		<div id="main-info">
-	        <h1>Tribler 6.2.0</h1>
-		    <h2>Overcoming Censorship</h2>
-		    <p>Tribler aims to liberate the media by not relying on websites, severs or DNS infrastructure. Stay in control of your own content. Find share and enjoy, whenever you want!</p>
+		<div class="wow fadeInDown">
+	        <h1>Search and stream torrents</h1>
+		    <h2>Moving towards overcoming censorship</h2>
+			<script type="text/javascript">
+				var parser = new UAParser();
+				var result = parser.getResult();
+				var osName = result.os.name.toLowerCase();
+				if (osName == "windows") {
+					document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.exe">Download Tribler</a></div>');
+					document.writeln('<p>For Windows 8/7/Vista/XP');
+					document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
+				}
+				else if (osName == "mac os x") {
+					document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Download Tribler</a></div>');
+					document.writeln('<p>For Mac OS X 10.6 or higher');
+					document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
+				}
+				else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
+					document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
+					document.writeln('<p>For Linux</p>');
+				}
+				else {
+					document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
+					document.writeln('<p>Unknown OS</p>');
+				}
+			</script>
+			<noscript><div class="button"><a href="download.html">Download</a></div></noscript>
 		</div>
+		<div class="wow fadeInUp">
+			<a href="img/image0.png" data-lightbox="screenshots"  alt="Screenshot of the Tribler GUI" title="Channel contents | View the torrents within a channel."><img src="img/image0.png" /></a>
+			<!-- <a href="/"><img src="img/image0.png" alt="Screenshot of the Tribler GUI" /></a> -->
+		</div>
+
 	</section>
+
+<div class="bar"/></div>
+<div id="wrap"><br>	
 	
-	<div id="gettribler">
-
-		<script type="text/javascript">
-			var parser = new UAParser();
-			var result = parser.getResult();
-			var osName = result.os.name.toLowerCase();
-			if (osName == "windows") {
-				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.exe">Download</a></div>');
-				document.writeln('<p>For Windows 8/7/Vista/XP');
-				document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
-			}
-			else if (osName == "mac os x") {
-				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Download</a></div>');
-				document.writeln('<p>For Mac OS X 10.6 or higher');
-				document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
-			}
-			else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
-				document.writeln('<div class="button"><a href="download.html">Download</a></div>');
-				document.writeln('<p>For Linux</p>');
-			}
-			else {
-				document.writeln('<div class="button"><a href="download.html">Download</a></div>');
-				document.writeln('<p>Unknown OS</p>');
-			}
-		</script>
-		
-		<noscript><div class="button"><a href="download.html">Download</a></div></noscript>
-
-	</div>
-
 	<section id="content">
-		<div class="line"></div>
-	
 		<a class="feature" href="anonymity.html">
 			<p class="title"><img src="img/anonymity.png">Towards Anonymity</p>
 			
@@ -170,39 +184,34 @@
 
 			<p>Tribler has an intergrated videoplayer which allows you to stream videos even before the download is finished. The videoplayer is fully functional and includes the ability to seek within a video, without having to download the entire file first.</p>
 		</a>
-		
 	</section>
-	
-	<footer>
-		<div id="gettribler">
-
-			<script type="text/javascript">
-				var parser = new UAParser();
-				var result = parser.getResult();
-				var osName = result.os.name.toLowerCase();
-				if (osName == "windows") {
-					document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.exe">Download Tribler</a></div>');
-				}
-				else if (osName == "mac os x") {
-					document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Download Tribler</a></div>');
-				}
-				else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
-					document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
-				}
-				else {
-					document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
-				}
-			</script>
-			
-			<noscript><div class="button"><a href="download.html">Download Tribler</a></div></noscript>
-			
-			<p>Tribler 6.3.0 with Anonymity test</p>
-
-		</div>
-		
-	</footer>
-
 </div>	
+
+	<footer>
+
+		<script type="text/javascript">
+			var parser = new UAParser();
+			var result = parser.getResult();
+			var osName = result.os.name.toLowerCase();
+			if (osName == "windows") {
+				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.exe">Download Tribler</a>');
+			}
+			else if (osName == "mac os x") {
+				document.writeln('<div class="button"><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Download Tribler</a>');
+			}
+			else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
+				document.writeln('<div class="button"><a href="download.html">Download Tribler</a><');
+			}
+			else {
+				document.writeln('<div class="button"><a href="download.html">Download Tribler</a>');
+			}
+			document.writeln('<p>Tribler 6.3.0 with Anonymity test</p></div>');
+		</script>
+		
+		<noscript><div class="button"><a href="download.html">Download Tribler</a><p>Tribler 6.3.0 with Anonymity test</p></div></noscript>
+
+	</footer>
+	
 
 </body>
 </html>

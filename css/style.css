@@ -5,7 +5,7 @@ body, div, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, img, form, fieldse
 
 body {
 	font: 14px Helvetica, Sans-Serif; line-height: 24px; color: #494949;
-	background: #fff url(../img/bg-pattern.png);
+	background: #fff;
 }
 
 h1 {
@@ -24,15 +24,38 @@ a {
 	
 #wrap {
 	width: 960px; margin: 0 auto 24px auto; background: #fff;
-	box-shadow: 0px 5px 45px #343434;
-	-moz-box-shadow: 0px 5px 45px #343434;
-	-webkit-box-shadow: 0px 5px 45px #343434;
-	behavior: url(/js/PIE.htc);
+
 }
 
-header img {
-    margin: 0 0 0 30px;
+header img.header-logo {
+    margin: 0 0 0 50px;
 	position: absolute;
+	border-bottom-right-radius: 12px;
+	border-bottom-left-radius: 12px;
+	-moz-border-radius-bottomright: 12px;
+	-moz-border-radius-bottomleft: 12px;
+	-webkit-border-bottom-right-radius: 12px;
+	-webkit-border-bottom-left-radius: 12px;
+	box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+	-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+header img.facebook-icon, .twitter-icon, .github-icon{
+    background:#fff;
+	border-radius: 50%;
+	position: absolute;
+}
+header img.facebook-icon:hover, .twitter-icon:hover, .github-icon:hover{
+    background:#ffff99;
+}
+header img.facebook-icon {
+    margin: 5px 0 0 15px;
+}
+header img.twitter-icon {
+    margin: 35px 0 0 15px;
+}
+header img.github-icon {
+    margin: 65px 0 0 15px;
 }
 
 header nav {
@@ -107,63 +130,63 @@ header nav {
 					}
 		
 #main {
-	clear: both; height: 260px; overflow: hidden; margin: 0 0 20px 0;
-	color: #a6a6a6;
-	background: #000 url(../img/feature_main_background.png) no-repeat;
+	clear: both; height: 500px; overflow: hidden; margin: 0;
+	color: #494949;
+	padding-top: 70px;
+	background: #fff;
+	text-align: center;
 }
 	#main h1 {
-		margin: 10px 0 10px 0;
-		font-size: 35px; color: #ff3300;
+		margin: 0 auto;
+		font-size: 35px;
+		padding: 10px 0;
 	}
 	#main h2 {
-		margin: 10px 0 10px 0;
-		font-size: 22px; font-style:italic;	color: #fff;
+		margin: 0 auto;
+		font-size: 18px;
+	}
+	#main p {
+		margin: 0 auto;
+		font-size: 14px;
+		line-height: 110%;
 	}
 	#main img {
-		float: right; margin: 22px 0 0 0;
+		margin-top: 50px;
 	}
-	#main-info {
-		float: left; width: 450px; margin: 80px 0 0 30px;
+	
+.button a {
+	margin: 10px auto;
+	margin-top: 50px;
+	height: 65px; width: 275px; line-height: 65px;
+	color: white; font-size: 20px; font-weight:bold; text-align: center;
+	display:inline-block;
+	text-decoration: none;
+	background: #ff5123;
+	background: -moz-linear-gradient(top, #ff5123  0%, #db441e 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff5123), color-stop(100%, #db441e));
+	background: -webkit-linear-gradient(top, #ff5123 0%, #db441e 100%);
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+	-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 	}
-    	#main-info p {
-			margin: 0 0 34px 0; font-size: 16px;
-		}
+	.button a:hover {
+		background: #ff896b;
+		background: -moz-linear-gradient(top, #ff896b 0%, #ff5123 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff896b), color-stop(100%,#ff5123));
+		background: -webkit-linear-gradient(top, #ff896b 0%,#ff5123 100%);
+	}
+ .bar {
+	margin: 0 auto;
+	height: 20px; width: 100%;
+	background: #ff5123;
+	background: -moz-linear-gradient(top, #ff5123  0%, #db441e 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff5123), color-stop(100%, #db441e));
+	background: -webkit-linear-gradient(top, #ff5123 0%, #db441e 100%);
+	}
 
-#gettribler {
-    margin: 0 30px 20px 20px;
-	float: right;
-	display:table;
-}
-	#gettribler .button a {
-		display: block; height: 75px; width: 250px;
-		color: white; font-size: 20px; line-height: 50px;
-		font-weight:bold;
-		display: table-cell;
-		vertical-align: middle;
-		text-decoration: none; text-align: center;
-		background: #00b7ea;
-		background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%);
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00b7ea), color-stop(100%,#009ec3));
-		background: -webkit-linear-gradient(top, #00b7ea 0%,#009ec3 100%);
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		border-radius: 5px;
-		box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-		-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-		-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-		}
-		#gettribler .button a:hover {
-			background: #00bff4;
-			background: -moz-linear-gradient(top, #00bff4 0%, #00a8ce 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00bff4), color-stop(100%,#00a8ce));
-			background: -webkit-linear-gradient(top, #00bff4 0%,#00a8ce 100%);
-		}
-	#gettribler p{
-		margin-top:10px;
-		text-align: center;
-		font-size: 13px;
-		line-height: 120%;
-	}
 		
 #content {
 	overflow: hidden; clear: both;
@@ -294,20 +317,19 @@ header nav {
 		}
 
 footer {
-	width: 960px; height:100px;
+	width: 100%; height:100px;
+	color: #fff;
 	background: #000;
+	float: none;
+	padding-top:20px;
+}
+	footer .button {
+		margin-left: 40%;
 	}
-	footer #gettribler {
-		float: none;
-		padding-top:20px;
-		margin-left: 380px;
-	}
-		footer #gettribler p {
-			color: #fff;
-		}
-		footer #gettribler .button a {
-			height: 50px; width: 200px; font-size: 17px; font-weight: normal;
-			margin:0 auto;
+		footer .button a {
+			height: 50px; width: 200px; line-height: 50px;
+			font-size: 17px;
+			margin: 0 auto;
 		}
 		
 .howto {
