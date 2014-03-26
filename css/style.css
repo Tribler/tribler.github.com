@@ -60,7 +60,7 @@ header img.github-icon {
 
 header nav {
 	float: right;
-	margin: 0 30px 30px 0;
+	margin: 10px 30px 30px 0;
 }
     header nav ul ul {
 	    display: none;
@@ -69,13 +69,6 @@ header nav {
 			display: block;
 		}
     header nav ul {
-    	background: #fff; 
-    	background: linear-gradient(top, #fff 0%, #efefef 100%);  
-	    background: -moz-linear-gradient(top, #fff 0%, #efefef 100%); 
-    	background: -webkit-linear-gradient(top, #fff 0%,#efefef 100%); 
-		border: 1px solid #e0e0e0;
-		border-top: None;
-	    box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
 		padding: 0 30px 0 30px;
 	    list-style: none;
 	    position: relative;
