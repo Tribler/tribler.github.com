@@ -173,11 +173,8 @@ header nav {
 	}
  .bar {
 	margin: 0 auto;
-	height: 20px; width: 100%;
-	background: #ff5123;
-	background: -moz-linear-gradient(top, #ff5123  0%, #db441e 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff5123), color-stop(100%, #db441e));
-	background: -webkit-linear-gradient(top, #ff5123 0%, #db441e 100%);
+	height: 22px; width: 100%;
+	background: transparent url(../img/bar.png) center left repeat;
 	}
 
 		
@@ -227,6 +224,7 @@ header nav {
 			line-height:120%;
 		}
 		#content .feature .title img {
+		    height: 99px; width: 99px;
 			display: inline-block;
 			vertical-align: middle;
 			margin: 10px 10px 0 0;
