@@ -12,7 +12,7 @@ body:after {
   z-index: 9999;
   background-color: black;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-  opacity: 0.8;
+  opacity: 0.8 !important;
   display: none;
 }
 
