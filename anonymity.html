@@ -93,24 +93,25 @@
 		<section id="content">
 			<div class="anonymity">
 				<h1>Towards Anonymity</h1>
-				<h2>Privacy in downloading</h2>
-				<p>Governments are trying to control the media by blocking websites,hunting down bloggers and installation of Internet Kill switches. We are working on solving these issue by expanding our Open Source software.</p><br>
+				<p>Tribler is testing anonymous downloading. Bittorrent is fast, but has no privacy. Real anonymous Internet access is offered by the (slow) Tor network. Tribler now includes support for a subset of the TOR onion routing protocol.</p><br>
+				<p><h2>Developers only: <a href="https://github.com/Tribler/tribler/wiki/Anonymous-Downloading-and-Streaming-specifications">Tribler Anonymity Specification</a> (for all details)</h2></p><br>
 
-				<p>Becoming "lawyer-proof" is our current target.</p><br>
-
-				<p>Legal threats and harassment are an important tool today to stop dissidents and unpopular opinions in the media. Tribler aims to fully protect you from harm, but beware that we're not finished yet.</p>
-				 
 				<h2>Disclaimer</h2>
-				<div class="disclaimer"><p>Tribler has come a long way in the field of file sharing and aims to enrich the Tribler community with anonymous downloading. The protocols and methods that are being used have proven to be very effective. Unfortunately it is not yet possible to download regular files anonymously.</p><br>
-
-				<p>Currently we are testing the new version and optimizing the downloading performance. Feel free to join this process by downloading the newest version. In this version it is possible to download a test file anonymously, yet there is no absolute guarantee that the downloading performed by Tribler will be 100% anonymous.</p><br></div>
+				<div class="disclaimer"><p>Do not put yourself in danger. Our anonymous download feature is not yet finished.</p><br>
+					
+				<p>This version of Tribler automatically downloads a
+				single 50MByte test file anonymously. We are sharing the design and code so that the community can test and evaluate it.
+				This helps us make sure that it’s as secure as it needs to be before people start relying on it.</p><br></div>
 			</div>
 
 			<div class="anonymity">
 				<h1>How it works</h1>
 				<div class="text">
 					<h3><img src="img/balloon1.png" />Bittorrent Swarm</h3>
-					<p>When you search for content you send out a request to all Tribler users. These users are connected in the Tribler community. You will receive the content from one of the other members. This can be traced.</p>
+					<p>Bittorrent offers no privacy protection.
+					It is easily traced that you are downloading certain (controversial) content.
+					Content is offered openly and everybody can see who is doing what. 
+					Dissidents and unpopular opinions can be easily discovered and subsequently stopped.</p>
 				</div>
 				<div class="spacer"></div>
 				<div class="image">
@@ -120,8 +121,8 @@
 			
 			<div class="anonymity">
 				<div class="text">
-					<h3><img src="img/balloon2.png" />First proxy layer</h3>
-					<p>Via a proxy layer the content is passed to you. Therefore the direction between you, the receiver, and the sender is interrupted. Proxies are virtual places that forward the content as they are told.</p>
+					<h3><img src="img/balloon2.png" />One proxy layer</h3>
+					<p>All downloads now go through other computers. All direct contact with the Bittorrent swarm is gone. The proxy layer is simply a set of computers that relay messages between you and the Bittorrent swarm. However, you need to fully trust all these selected proxies, they can see exactly what you download. The proxies encrypt the data, only you can read it.</p>
 				</div>
 				<div class="spacer"></div>
 				<div class="image">
@@ -131,8 +132,10 @@
 
 			<div class="anonymity">				
 				<div class="text">
-					<h3><img src="img/balloon3.png" />Second proxy layer</h3>
-					<p>Adding a second layer of proxies makes it even more difficult to trace the route of the content, creating anonymity for you as a user.</p>	
+					<h3><img src="img/balloon3.png" />Two proxy layers</h3>
+					<p>Adding a second layer of proxies gives you more privacy.
+					Two layers of protection make it difficult to trace you. Proxies no longer need to be fully trusted. A single bad proxy can not see exactly what is going on.
+					The first proxy layer encrypts the data for you and the second proxy layer adds another layer of encryption. You are the only one who can decrypt these two layers correctly. Tribler uses three proxy layers to make sure bad proxies that are spying on people can do little damage.</p>	
 				</div>
 				<div class="spacer"></div>
 				<div class="image">
@@ -142,8 +145,12 @@
 
 			<div class="anonymity">				
 				<div class="text">
-					<h3><img src="img/balloon4.png" />The hidden provider</h3>
-					<p>Triblers future steps include making the provider hidden as well. When this is possible, uploading can become just as anonymous as downloading. This will be achieved by adding proxy layers for the provider side, just as the above-mentioned steps 2 and 3.</p>	
+					<h3><img src="img/balloon4.png" />The hidden seeder</h3>
+					<p>Seeders are unprotected in the above steps. We want to fix that in the future.
+					Uploading is just as anonymous as downloading with hidden seeding. We will add proxy layers for the seeder, similar to steps 2 and 3 above.
+					<!--We plan to enhance the 'Tor hidden services' to make it suitable in the P2P world with NAT boxes, temporary IP addresses, frequent peer failures and connectability issues.--!>
+					The beauty of hidden seeding is that it can encrypt the content already in such a manner that only the downloader can read it (end-to-end encryption). 
+          This creates a darknet that is quite safe.</p>	
 				</div>
 				<div class="spacer"></div>
 				<div class="image">
@@ -152,15 +159,23 @@
 			</div>
 
 			<div class="anonymity">
-				<h1>The Tribler 6.3.0 Anonymity test</h1>
+				<h1>Tribler anonymity test</h1>
 				<div class="text">
-					<p>In the newest release of Tribler software an Anonymity test has been included. The current version incorporates the first three of the above mentioned steps, but the next release will offer also anonymous uploading.</p>
-	 
-					<p>In this release it is possible to anonymously download a test file within the Anonymity tab. Be aware that no other files can be downloaded anonymously yet, but after the trial this should be feasible soon.</p>
+	
+        <p>The anonymity test, active in the "Downloads Section" is shown. It starts automatically in 5 minutes.
+        Note the anonymous download speed of 1.5 MByte/second using only 4 connections.
+        The anonymity tab in the lower torrent details shows more details such as active and created (2 out of 3 hops) circuits.
+        Only the Internet address of the first hop in circuits is shown, others are known only by their public key.
+        </p><br>
+   
+				<p>We now support a subset of the <a href="https://www.torproject.org/about/overview.html.en">TOR onion routing</a> protocol.
+				Our custom onion network is enhanced to allow everyone to function as a relay. 
+        Even people behind a restrictive NAT box can join and help others protect their privacy.
+				<a href="https://github.com/Tribler/tribler/wiki/Anonymous-Downloading-and-Streaming-specifications">For full details read the Anonymous Protocol page for developers</a>.</p>
 				</div>
 				<div class="spacer"></div>
 				<div class="image">
-					<img src="img/anonymity5.png" />
+					<img src="img/anonymity5.png" width="115%" height="120%" />
 				</div>
 			</div>
 			
