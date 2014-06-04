@@ -53,11 +53,6 @@
       _loadSuper = window.onload;
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
 
-      function toggleIDs(id1, id2) {
-        document.getElementById(id1).style.display = "table-cell";
-        document.getElementById(id2).style.display = "none";
-      }
-
 </script>
 </head>
 
@@ -152,45 +147,54 @@
 	<div id="wrap"><br>	
 	
 		<section id="content">
-			<a class="feature" onmouseover="toggleIDs('anon_text', 'anon_title')" onmouseout="toggleIDs('anon_title', 'anon_text')" href="anonymity.html">
-				<p id="anon_title" class="title"><img src="img/anonymity.png" /><span>Towards<br>Anonymity</span></p>
+			<a class="feature" href="anonymity.html">
+				<p class="title"><img src="img/anonymity.png" /><span>Towards<br>Anonymity</span></p>
 
-				<p id="anon_text" class="description">Anonymous Bittorrent streaming is coming. Included now: automatic test download using our custom TOR implementation.</p>
+				<p class="description">
+				    Anonymous Bittorrent streaming is coming. Included now: automatic test download using our custom TOR implementation.
+				    <p class="link">How anonymity works</p>
+				</p>
+				
 			</a>
 			
-			<a class="feature" onmouseover="toggleIDs('ui_text', 'ui_title')" onmouseout="toggleIDs('ui_title', 'ui_text')" href="howto.html">
-				<p id="ui_title" class="title"><img src="img/gui.png"><span>User<br>interface</span></p>
+			<a class="feature" href="howto.html">
+				<p class="title"><img src="img/gui.png"><span>User<br>interface</span></p>
 				
-				<p id="ui_text" class="description">Check out our general user interface and other screenshots. We try to make sharing easy and accessible.</p>
+				<p class="description">
+					Check out our general user interface and other screenshots. We try to make sharing easy and accessible.
+					<p class="link">Get started & screenshots</p>
+				</p>
 			</a>
 
-			<a class="feature" onmouseover="toggleIDs('www_text', 'www_title')" onmouseout="toggleIDs('www_title', 'www_text')">
-				<p id="www_title" class="title"><img src="img/nowebsites.png"><span>No<br>websites</span></p>
+			<a class="feature">
+				<p class="title"><img src="img/nowebsites.png"><span>No<br>websites</span></p>
 
-				<p id="www_text" class="description">Tribler includes search. You can find lot of videos without any web site. We try to make Tribler impossible to censor and hard to kill.</p>
+				<p class="description">Tribler includes search. You can find lot of videos without any web site. We try to make Tribler impossible to censor and hard to kill.</p>
 			</a>
 
-			<a class="feature" onmouseover="toggleIDs('os_text', 'os_title')" onmouseout="toggleIDs('os_title', 'os_text')" href="http://github.com/Tribler/tribler">
-				<p id="os_title" class="title"><img src="img/opensource.png"><span>Open<br>Source</span></p>
+			<a class="feature" href="http://github.com/Tribler/tribler">
+				<p class="title"><img src="img/opensource.png"><span>Open<br>Source</span></p>
 
-				<p id="os_text" class="description">Tribler is Open Source and non-profit. Please contribute : 
-				
-				<iframe src="http://ghbtns.com/github-btn.html?user=Tribler&repo=tribler&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe></p>
+				<p class="description">
+					Tribler is Open Source and non-profit. Please contribute : 
+					<iframe src="http://ghbtns.com/github-btn.html?user=Tribler&repo=tribler&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+					<p class="link">Source code on GitHub</p>
+				</p>
 			</a>
 
-			<a class="feature" onmouseover="toggleIDs('cs_text', 'cs_title')" onmouseout="toggleIDs('cs_title', 'cs_text')" href="#">
-				<p id="cs_title" class="title"><img src="img/speed.png"><span>Connectivity<br>Speed</span></p>
+			<a class="feature" href="#">
+				<p class="title"><img src="img/speed.png"><span>Connectivity<br>Speed</span></p>
 				
-				<table id="cs_text" class="description">
+				<table class="description">
 					<tr><td>Upload</td><td>4.9</td><td>mb/s</td></tr>
 					<tr><td>Download</td><td>5.2</td><td>mb/s</td></tr>
 				</table>
 			</a>
 
-			<a class="feature" onmouseover="toggleIDs('vp_text', 'vp_title')" onmouseout="toggleIDs('vp_title', 'vp_text')">
-				<p id="vp_title" class="title"><img src="img/streaming.png">Streaming</p>
+			<a class="feature">
+				<p class="title"><img src="img/streaming.png">Streaming</p>
 
-				<p id="vp_text" class="description">Tribler can play your videos. You can watch even before the download is finished.</p>
+				<p class="description">Tribler can play your videos. You can watch even before the download is finished.</p>
 			</a>
 		</section>
 	</div>	
