@@ -60,7 +60,7 @@ header img.github-icon {
 
 header nav {
 	float: right;
-	margin: 10px 30px 0 0;
+	margin: 10px 30px 30px 0;
 }
     header nav ul ul {
 	    display: none;
