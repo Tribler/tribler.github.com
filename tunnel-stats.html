@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tribler</title>
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lightbox.css" />
+<link rel="stylesheet" href="css/animate.min.css">
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="canonical" href="http://www.tribler.org/index.html">
+
+
+<!--[if lt IE 9]>
+<script src="/js/html5shiv.js"></script>
+<![endif]-->
+
+<!--[if lte IE 6]>
+<script src="/js/ie6fix.js"></script>
+<link href="/css/ie6fix.css" rel="stylesheet" />
+<![endif]-->
+
+<script src="js/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/lightbox.min.js"></script>
+<script type="text/javascript" src="js/ua-parser.min.js"></script>
+<script type="text/javascript">
+      var uservoiceOptions = {
+        /* required */
+        key: 'tribler',
+        host: 'tribler.uservoice.com',
+        forum: '90409',
+        showTab: true,
+        /* optional */
+        alignment: 'right',
+        background_color:'#f00',
+        text_color: 'white',
+        hover_color: '#009ec3',
+        lang: 'en'
+      };
+
+      function _loadUserVoice() {
+        var s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
+        document.getElementsByTagName('head')[0].appendChild(s);
+      }
+      _loadSuper = window.onload;
+      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+
+</script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="/js/flot/excanvas.min.js"></script><![endif]-->
+<script type="text/javascript" src="js/flot/jquery.flot.min.js"></script>
+<script type="text/javascript" src="js/flot/jquery.flot.time.min.js"></script>    
+<script type="text/javascript" src="js/flot/jshashtable-3.0.min.js"></script>    
+<script type="text/javascript" src="js/flot/jquery.numberformatter-1.2.4.min.js"></script>
+<script type="text/javascript" src="js/flot/jquery.flot.symbol.min.js"></script>
+<script type="text/javascript" src="js/flot/jquery.flot.axislabels.min.js"></script>
+<script>
+var data_orig = [];
+var data_exit = [];
+var data_relay = [];
+var dataset;
+var totalPoints = 100;
+var now = new Date().getTime();
+
+function GetDataAndPlot() {
+    var url = "http://95.211.198.143:8667/history?callback=?";
+    $.getJSON(url,
+        function(json) {
+        
+            var arrayLength = json.length;
+            for (var i = 0; i < arrayLength; i++) {
+                var data_entry = json[i];
+                var timestamp = now - ((arrayLength - i) * 60000);
+                data_orig.push([timestamp, data_entry[0]]);
+                data_exit.push([timestamp, data_entry[1]]);
+                data_relay.push([timestamp, data_entry[2]]);
+            }
+            dataset = [
+                        { label: "Originator", data: data_orig, color: "#00A2E8" },
+                        { label: "Exit", data: data_exit, color: "#A349A4" },
+                        { label: "Relay", data: data_relay, color: "#E7A410" }
+                    ];
+            $.plot($("#flot-placeholder1"), dataset, options);
+        }
+    );
+}
+
+var options = {
+    series: {
+        lines: {
+            show: true,
+            lineWidth: 1.2,
+            fill: false,
+            
+        },
+        shadowSize: 0
+    },
+    xaxis: {
+        mode: "time",
+        timezone: "browser",
+        axisLabel: "Time",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 10
+    },
+    yaxis: {
+        min: 0,
+        axisLabel: "Average bandwidth - KiB/s",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 6
+    },
+    legend: {        
+        labelBoxBorderColor: "#fff"
+    },
+    grid: {                
+        backgroundColor: "#fff",
+        tickColor: "#eee"
+    }
+};
+
+$(document).ready(function () {
+    GetDataAndPlot();
+});
+</script>
+</head>
+
+<body>
+
+	<header>
+		<div class="wow fadeInDown">
+			<div class="wow fadeInLeft">
+				<a href="https://www.facebook.com/TriblerTeam"><img class="facebook-icon" src="img/facebook-icon.png" alt="" /></a>
+				<a href="https://twitter.com/TriblerTeam"><img class="twitter-icon" src="img/twitter-icon.png" alt="" /></a>
+				<a href="https://github.com/Tribler"><img class="github-icon" src="img/github-icon.png" alt="" /></a>
+			</div>
+			<a href="/"><img class="header-logo" src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+		
+			<nav>
+				<ul>
+					<li><a href="/">Tribler</a>
+						<ul>
+							<li><a href="about.html">About Tribler</a></li>
+							<li><a href="anonymity.html">Towards Anonymity</a></li>
+							<li><a href="http://statistics.tribler.org">Statistics</a></li>
+						</ul>
+					</li>
+					<li><a href="download.html">Download</a></li>
+					<li><a href="support-index.html">Support</a>
+						<ul>
+							<li><a href="howto.html">How does it work</a></li>
+							<li><a href="faq.html">FAQ</a></li>
+						</ul>
+					</li>
+					<li><a href="developer-index.html">Developers</a>
+						<ul>
+							<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+							<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+							<li><a href="/TitleIndex">Archive</a></li>
+						</ul>
+					</li>
+					<li><a href="http://forum.tribler.org">Forum</a></li>
+				</ul>
+			</nav>
+		
+		</div>
+	</header>	
+	
+	<section id="main">
+	    <h2>Average bandwith for a single peer during the past 3 hours</h2><br>
+        <div id="flot-placeholder1" style="width:550px;height:300px;margin:0 auto;"></div>
+    </section>
+
+</body>
+</html>
