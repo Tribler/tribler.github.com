@@ -94,7 +94,7 @@
 				<p><img src="img/win.png"></p>			
 
 				<p>
-					<a href="http://dl.tribler.org/Tribler_6.2.0.exe">Tribler 6.2.0 for Windows</a><br>
+					<a href="https://github.com/Tribler/tribler/releases/download/v6.3.1/Tribler_6.3.1.exe">Tribler 6.3.1 for Windows</a><br>
 					Windows XP, Windows Vista, and Windows 7 / 8
 				</p>
 			</div>
@@ -104,7 +104,7 @@
 
 				<p><img src="img/osx.png"></p>			
 
-				<p><a href="http://dl.tribler.org/Tribler_6.2.0.dmg">Tribler 6.2.0 for Mac OS X</a><br></p>
+				<p><a href="https://github.com/Tribler/tribler/releases/download/v6.3.1/Tribler-6.3.1.dmg">Tribler 6.3.1 for Mac OS X</a><br></p>
 			</div>
 
 			<div class="download">
@@ -113,12 +113,12 @@
 				<p><img src="img/linux.png"></p>			
 
 				<p>
-					<a href="http://dl.tribler.org/tribler_6.2.0ubuntu1_all.deb">Tribler 6.2.0 for Ubuntu</a>
+					<a href="https://github.com/Tribler/tribler/releases/download/v6.3.1/tribler_6.3.1_all.deb">Tribler 6.3.1 for Ubuntu</a>
 					<br>Swift dependency:<br>
-					<a href="http://dl.tribler.org/tribler-swift_6.2.0ubuntu1_i386.deb">i386</a> or <a href="http://dl.tribler.org/tribler-swift_6.2.0ubuntu1_amd64.deb">amd64</a><br>
+					<a href="https://github.com/Tribler/tribler/releases/download/v6.3.1/tribler-swift_6.3.1_i386.deb">i386</a> or <a href="https://github.com/Tribler/tribler/releases/download/v6.3.1/tribler-swift_6.3.1_amd64.deb">amd64</a><br>
 				</p>
 
-				<p><a href="https://github.com/Tribler/tribler/tree/v6.2.0">Browse source code </a> or <a href="https://github.com/Tribler/tribler/archive/v6.2.0.zip">download as zip</a><br></p>
+				<p><a href="https://github.com/Tribler/tribler/tree/v6.3.1">Browse source code </a> or <a href="https://github.com/Tribler/tribler/archive/v6.3.1.zip">download as zip</a><br></p>
 			
 			</div>
 
@@ -126,12 +126,36 @@
 
 				Changes since last version:
 				<ul>
-					<li>Video on demand is back! No more waiting for video downloads! Also, we have seeking now.</li>
-					<li>Less disk and CPU consumption</li>
-					<li>UI improvements</li>
-					<li>Fixes for the bugs found in 6.1 and reported by the community during the 6.2 RCs (Thanks!)</li>
+					<li>A year of bug fixing, polishing and performance tweaking
+						<ul>
+							<li>towards anonymous streaming</li>
+							<li>Tor-like anonymous tunnel building, based on UDP</li>
+							<li>Support for Cell,Create,Extend, and Ping Tor protocol messages</li>
+							<li>Diffie-Hellman session key exchange</li>
+							<li>Real-time crawler for bandwidth performance (inspired by metrics.torproject.org)</li>
+							<li>decentralised directory service for Tor-like routers</li>
+							<li>automatic anonymous 50MByte test download using new Tor-like protocol</li>
+							<li>no general anonymous downloads yet, trial-only</li>
+						</ul>
+					</li>
+					<li>thumbnail navigation
+						<ul>
+							<li>single-click streaming from main screen</li>
+							<li>channels can now optionally be browsed by thumbnails</li>
+							<li>Youtube-like GUI composed of user-generated images</li>
+							<li>Prepares the way for remote control navigation & operation</li>
+						</ul>
+					</li>
+					<li>complete rewrite of the elastic database engine (the dispersy overlay)
+						<ul>
+							<li>use of Twisted frameworks instead of our custom event-handlers</li>
+							<li>less reliance on master bootstrap servers (new discovery community)</li>
+							<li>improvements in NAT puncturing efficiency</li>
+							<li>faster data synchronisation between Tribler peers</li>
+						</ul>
+					</li>
+					<li>dropped support for Mac models from 2008, due to Python support issues</li>
 				</ul>
-					
 			</div>
 			
 		</section>
