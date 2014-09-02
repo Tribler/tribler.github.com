@@ -173,7 +173,12 @@ $(document).ready(function () {
 	</header>	
 	
 	<section id="main">
-	    <h2>Average bandwith for a single peer during the past 3 hours</h2><br>
+      <h2>Real-time statistics on relay bandwith in the network</h2><br>
+         <div class="text">
+           <p>The figure below shows the average bandwidth for a single peer during the past 3 hours.<br>
+           When a peer is not actively relaying it counts as 0 KiBps to accurately reflect the true average network load.<br>
+           <b><a href="https://metrics.torproject.org/bandwidth.html">Inspired by the Tor network metrics page</a></b>.
+           </p><br></div>
         <div id="flot-placeholder1" style="width:550px;height:300px;margin:0 auto;"></div>
     </section>
 
