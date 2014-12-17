@@ -63,7 +63,7 @@
 				<li><a href="/">Tribler</a>
 				    <ul>
 				        <li><a href="about.html">About Tribler</a></li>
-				        <li><a href="anonymity.html">Towards Anonymity</a></li>
+				        <li><a href="anonymity.html">Anonymity</a></li>
 				        <li><a href="http://statistics.tribler.org">Statistics</a></li>
 				    </ul>
 				</li>
@@ -89,15 +89,15 @@
 	<div id="wrap"><br>	
 		<section id="content">
 			<div class="anonymity">
-				<h1>Towards Anonymity</h1>
-				<p>Tribler is testing anonymous downloading. Bittorrent is fast, but has no privacy. Real anonymous Internet access is offered by the (slow) Tor network. Tribler now includes support for a subset of the TOR onion routing protocol.</p><br>
+				<h1>Anonymity</h1>
+				<p>Tribler offers anonymous downloading. Bittorrent is fast, but has no privacy. We do NOT use the normal Tor network, but created a dedicated Tor-like onion routing network exclusively for torrent downloading. Tribler follows the Tor wire protocol specification and hidden services spec quite closely, but is enhanced to need no central (directory) server.</p><br>
 				<p><h2>Developers only: <a href="https://github.com/Tribler/tribler/wiki/Anonymous-Downloading-and-Streaming-specifications">Tribler Anonymity Specification</a> (for all details)</h2></p><br>
 
 				<h2>Disclaimer</h2>
-				<div class="disclaimer"><p>Do not put yourself in danger. Our anonymous download feature is not yet finished.</p><br>
+				<div class="disclaimer"><p>Do not put yourself in danger. Our anonymous download feature is not yet broadly tested.</p><br>
 					
-				<p>This version of Tribler automatically downloads a
-				single 50MByte test file anonymously. We are sharing the design and code so that the community can test and evaluate it.
+				<p>Anonymous downloading is a new feature, barely a year old. 
+				We are sharing the design and code so that the community can test and evaluate it.
 				This helps us make sure that it’s as secure as it needs to be before people start relying on it.</p><br></div>
 			</div>
 
@@ -143,11 +143,12 @@
 			<div class="anonymity">				
 				<div class="text">
 					<h3><img src="img/balloon4.png" />The hidden seeder</h3>
-					<p>Seeders are unprotected in the above steps. We want to fix that in the future.
-					Uploading is just as anonymous as downloading with hidden seeding. We will add proxy layers for the seeder, similar to steps 2 and 3 above.
+					<p>Seeders are unprotected in the above steps. This version of Tribler includes experimental support for hidden seeding.
+					Uploading is just as anonymous as downloading with hidden seeding. We now automatically add proxy layers for seeders, similar to steps 2 and 3 above.
 					<!--We plan to enhance the 'Tor hidden services' to make it suitable in the P2P world with NAT boxes, temporary IP addresses, frequent peer failures and connectability issues.--!>
 					The beauty of hidden seeding is that it can encrypt the content already in such a manner that only the downloader can read it (end-to-end encryption). 
-          This creates a darknet that is quite safe.</p>	
+          This creates a darknet that is quite safe. However, we still need to enhance hidden seeding with features to improve the traversal of NAT boxes, now they lower the speeds significantly.</p>
+				<b><a href="https://github.com/Tribler/tribler/wiki/Hidden-Services-Specifications-for-anonymous-seeding">Read the specifications</a></b>.</p>
 				</div>
 				<div class="spacer"></div>
 				<div class="image">
@@ -167,7 +168,7 @@
    
 				<p>We now support a subset of the <a href="https://www.torproject.org/about/overview.html.en">TOR onion routing</a> protocol.
 				Our custom onion network is enhanced to allow everyone to function as a relay. 
-        Even people behind a restrictive NAT box can join and help others protect their privacy.
+        Even people behind a restrictive NAT box can join and help others protect their privacy. Hidden services for seeders is also supported (experimental).
 				<b><a href="https://github.com/Tribler/tribler/wiki/Anonymous-Downloading-and-Streaming-specifications">For full details read the Anonymous Protocol page for developers</a></b>.</p>
 				</div>
 				<div class="spacer"></div>
