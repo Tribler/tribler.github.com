@@ -94,7 +94,7 @@
 				<p><img src="img/win.png"></p>
 
 				<p>
-					<a href="https://github.com/Tribler/tribler/releases/download/v6.4.0/Tribler_6.4.0.exe">Tribler 6.4.0 for Windows</a><br>
+					<a href="https://github.com/Tribler/tribler/releases/download/v6.4.1/Tribler_6.4.1.exe">Tribler 6.4.1 for Windows</a><br>
 					Windows XP, Windows Vista, and Windows 7 / 8
 				</p>
 			</div>
@@ -104,7 +104,7 @@
 
 				<p><img src="img/osx.png"></p>
 
-				<p><a href="https://github.com/Tribler/tribler/releases/download/v6.4.0/Tribler-6.4.0.dmg">Tribler 6.4.0 for Mac OS X</a></br>(Sorry, Leopard support dropped)</p>
+				<p><a href="https://github.com/Tribler/tribler/releases/download/v6.4.1/Tribler-6.4.1.dmg">Tribler 6.4.1 for Mac OS X</a></br>(Sorry, Leopard support dropped)</p>
 			</div>
 
 			<div class="download">
@@ -112,31 +112,56 @@
 
 				<p><img src="img/linux.png"></p>
 
-				<p><a href="https://github.com/Tribler/tribler/releases/download/v6.4.0/tribler_6.4.0_all.deb">Tribler 6.4.0 for Ubuntu</a> </p>
+				<p><a href="https://github.com/Tribler/tribler/releases/download/v6.4.1/tribler_6.4.1_all.deb">Tribler 6.4.1 for Ubuntu</a> </p>
 
-				<p><a href="https://github.com/Tribler/tribler/tree/v6.4.0">Browse source code </a> or <a href="https://github.com/Tribler/tribler/archive/v6.4.0.zip">download as zip</a><br></p>
+				<p><a href="https://github.com/Tribler/tribler/tree/v6.4.1">Browse source code </a> or <a href="https://github.com/Tribler/tribler/archive/v6.4.1.zip">download as zip</a><br></p>
 
 			</div>
 
 			<div class="changelog">
 
-			  Changes since last release:
-                          <ul>
-                            <li>Experimental anonymous downloading feature enabled</li>
-                            <li>Major stability improvements</li>
-                            <li>Dedicated anontunnel dispersy community</li>
-	                    <li>Experimental hidden seeding services now should work</li>
-	                    <li>Torrent database cleanup when upgrading database (it may take a while if your megacache is big)</li>
-                            <li>Dropped Swift dependency</li>
-                            <li>Thumbnails temporarily disabled</li>
-                            <li>Torrent files are now transfered trough a TFTP-like protocol instead of Swift</li>
-                            <li>If the database/megacache migration fails for some reason, it will be moved aside and Tribler will start from scratch instead of just crashing</li>
-                            <li>Dispersy DB cleanup</li>
-                            <li>During DB migration, any found leftover torrent file will be automatically imported into Tribler and the corrupt/duplicate ones will be dropped</li>
-                            <li>Make bootstrap a bit more aggressive so Tribler gets to a working state a bit faster</li>
-                          </ul>
-                          <br/>
+			    <b>Changes since last release:</br></b>
 
+                            <p>This release contains critical security updates.
+                                PLEASE UPDATE from V6.4.0 to V6.4.1.</br>
+                            </p>
+
+                            <ul>
+                                <li>The anonymity in V6.4.0 did not function properly.</li>
+                                <li>Users are advised to only enable anonymous downloading in V6.4.1 it if
+                                    they understand the implications stated within the on-screen advisory.</li>
+                            <li>Our experimental hidden seeding feature did not perform adequately.
+                                You are likely to function as a exit node for the traffic of other
+                                users.  Very very bad of us. We're working hard on fixing this issue,
+                                but that will take significant amount of work (issue #23 in Github).
+
+                            </li>
+                            <li>We want to get this right. We are very grateful for the help that
+                                security expert "Yawning" is giving us. All critical issues raised by
+                                him/her are either fixed or are being working on. Especially the
+                                advise to replace our simplistic AES-ECB with AES-GCM saved us quite
+                                some development time. You can track our progress at:
+                                https://github.com/Tribler/tribler/issues/1066
+                            </li>
+                            </ul>
+                            <b>Detailed changes:</b>
+                            <ul>
+                                <li>removed all references to gmpy.rand (security cleanup)</li>
+                                <li>one-time AES keys are generated with python's random.randint() (FIXED)</li>
+                                <li>code for researching homomorphic encryption removed, how not to do RSA: def rsa_encrypt(key, element) (security cleanup)</li>
+                                <li>warn user about the dangers of enabling anonymity (_temporary_ emergency fix)</li>
+                                <li>Fix Tribler crashes when starting Tribler just after stopping it.</li>
+                                <li>Fix: allow removing torrents from own channel (Thanks Dan Arnould!)</li>
+                                <li>Fixes for the tunnel community.</li>
+                                <li>Make TunnelCommunity (P2P encrypted proxy downloads) loading configurable and disabled by default</li>
+                                <li>Opt-in dialog for TunnelCommunity</li>
+                                <li>Several fixes and cleanups for the cryptographic code.</li>
+                                <li>Update .deb dependencies</li>
+                                <li>Update windows packager for new curves.ec location</li>
+                                <li>Updated tunneled download test description</li>
+                            </ul>
+                            <p>To see a complete list of the changes, please <a src="https://github.com/Tribler/tribler/compare/v6.4.0...v6.4.1">click here</a>.</p>
+                            <br/>
 			</div>
 
 		</section>
