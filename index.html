@@ -112,24 +112,63 @@
 				var osName = result.os.name.toLowerCase();
 				if (osName == "windows") {
 					document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/Tribler_6.5.2.exe">Download Tribler</a></div>');
-					document.writeln('<p>For Windows 8/7/Vista/XP');
+					document.writeln('<p><b>For Windows 8/7/Vista/XP</b>');
 					document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
 				}
 				else if (osName == "mac os x") {
 					document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/Tribler-6.5.2.dmg">Download Tribler</a></div>');
-					document.writeln('<p>For Snow Leopard or newer');
+					document.writeln('<p><b>For Snow Leopard or newer</b>');
 					document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
 				}
 				else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
 					document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/tribler_6.5.2_all.deb">Download Tribler</a></div>');
-					document.writeln('<p>For Linux</p>');
+					document.writeln('<p><b>For Linux</b></p>');
 				}
 				else {
 					document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
-					document.writeln('<p>Unknown OS</p>');
+					document.writeln('<p><b>Unknown OS</b></p>');
 				}
 			</script>
 			<noscript><div class="button"><a href="download.html">Download</a></div></noscript>
+            <p id="release_dlcount">Total downloads: ?</p>
+
+            <script>
+                function httpGet(theUrl, callback)
+                {
+                    if (window.XMLHttpRequest)
+                    {// code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp=new XMLHttpRequest();
+                    }
+                    else
+                    {// code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange=function()
+                    {
+                        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                        {
+                            callback(xmlhttp.responseText);
+                        }
+                    }
+                    xmlhttp.open("GET", theUrl, true );
+                    xmlhttp.send();
+                }
+
+                function add_dls(a, b){
+                    if (!(b["name"].endsWith(".txt") || b["name"].endsWith(".txt.asc") || b["name"].endsWith(".tar.xz"))) {
+                        return a + b["download_count"];
+                    } else {
+                        return a;
+                    }
+                }
+
+                function get_downloads(raw_json){
+                    dlcount = JSON.parse(raw_json)["assets"].reduce(add_dls, 0);
+                    document.getElementById('release_dlcount').innerHTML = "Total downloads: " + dlcount;
+                }
+
+                httpGet("https://api.github.com/repos/Tribler/tribler/releases/latest", get_downloads);
+            </script> 
 		</div>
 		<div class="wow fadeInUp">
 			<a href="img/image0.png" data-lightbox="screenshots" title="Channel contents | View the torrents within a channel."><img width=500px height=350px src="img/image0.png" title="Screenshot of the Tribler GUI" alt="" /></a>
