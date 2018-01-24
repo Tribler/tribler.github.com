@@ -16,11 +16,11 @@ h2, h3 {
 }
 
 a {
-	color: #d0d0d0; text-decoration: none;
+	color: #ffbc86; text-decoration: none;
 }
-	a:hover {
-		color: #ffffff;
-	}
+a:hover {
+    color: #F86F00;
+}
 	
 #wrap {
 	width: 960px; margin: 0 auto 24px auto; background: #505050;
@@ -40,13 +40,14 @@ header img.header-logo {
 	-moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 	-webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 }
-header img.facebook-icon, .twitter-icon, .github-icon{
-    background:#eee;
+header img.facebook-icon, header img.twitter-icon, header img.github-icon{
+    background-color:#505050;
 	border-radius: 50%;
 	position: absolute;
+	width:24px;
 }
 header img.facebook-icon:hover, .twitter-icon:hover, .github-icon:hover{
-    background:#fff;
+    background:#505050;
 }
 header img.facebook-icon {
     margin: 5px 0 0 15px;
@@ -120,7 +121,7 @@ header nav {
 			}
 		
 #main {
-	clear: both; height: 550px; overflow: hidden; margin: 0;
+	clear: both; height: 650px; overflow: hidden; margin: 0;
 	color: #D0D0D0;
 	padding-top: 70px;
 	background: #505050;
@@ -259,9 +260,9 @@ header nav {
 			margin: 0 0 5px 0; padding: 0 13px 0 13px;
 			text-align:center;
 			}
-		#content .download p a {
+		/*#content .download p a {
 			color: #fff;
-		}
+		}*/
 	#content .changelog{
 	    clear:both;
 		margin: 20px 20px 20px 20px;
@@ -299,6 +300,7 @@ footer {
 	color: #505050;
 	background: #505050;
 	padding-top:20px;
+	margin-bottom:20px;
 }
 	footer .button p, footer .button a{
 		display: block;
@@ -490,4 +492,45 @@ footer {
 	border-color:#404040;
 	border-style:solid;
 	border-width:0 1px 1px 1px;
+}
+
+.notification{
+    margin-top:16px;
+}
+.notification h2{
+    color: #fff;
+    font-size: large;
+    text-shadow: 1px 1px 1px #f8680647;
+}
+.download_section{
+    padding:10px 0;
+    text-align: center;
+}
+.download_section a.download_url, .download_section a.download_url{
+    color: white;
+    padding: 16px 24px;
+    margin: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    background: #FF6F00;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+#release_dlcount{
+    margin-top:4px;
+    font-size: large;
+}
+#total_downloads_all_versions{
+    background-color: #71717161;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
 }
