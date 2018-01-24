@@ -26,31 +26,31 @@
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/lightbox.min.js"></script>
 <script type="text/javascript" src="js/ua-parser.min.js"></script>
-<script type="text/javascript">
-      var uservoiceOptions = {
-        /* required */
-        key: 'tribler',
-        host: 'tribler.uservoice.com',
-        forum: '90409',
-        showTab: true,
-        /* optional */
-        alignment: 'right',
-        background_color:'#f00',
-        text_color: 'white',
-        hover_color: '#009ec3',
-        lang: 'en'
-      };
+<!--<script type="text/javascript">-->
+      <!--var uservoiceOptions = {-->
+        <!--/* required */-->
+        <!--key: 'tribler',-->
+        <!--host: 'tribler.uservoice.com',-->
+        <!--forum: '90409',-->
+        <!--showTab: true,-->
+        <!--/* optional */-->
+        <!--alignment: 'right',-->
+        <!--background_color:'#f00',-->
+        <!--text_color: 'white',-->
+        <!--hover_color: '#009ec3',-->
+        <!--lang: 'en'-->
+      <!--};-->
 
-      function _loadUserVoice() {
-        var s = document.createElement('script');
-        s.setAttribute('type', 'text/javascript');
-        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
-        document.getElementsByTagName('head')[0].appendChild(s);
-      }
-      _loadSuper = window.onload;
-      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+      <!--function _loadUserVoice() {-->
+        <!--var s = document.createElement('script');-->
+        <!--s.setAttribute('type', 'text/javascript');-->
+        <!--s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");-->
+        <!--document.getElementsByTagName('head')[0].appendChild(s);-->
+      <!--}-->
+      <!--_loadSuper = window.onload;-->
+      <!--window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };-->
 
-</script>
+<!--</script>-->
 </head>
 
 <body>
@@ -97,78 +97,27 @@
 		<div class="wow fadeInDown">
 			<h1>Privacy using our Tor-inspired onion routing</h1>
 			<h2>Search and download torrents with less worries or censorship</h2>
+			<br/>
+			<h2>Disclaimer</h2>
+			<div class="anonymity">
+				<div class="disclaimer"><p>Do not put yourself in danger. Our anonymity is not yet mature.</p><br>
 
-                                <h2>Disclaimer</h2>
-                                <div class="anonymity"><div class="disclaimer"><p>Do not put yourself in danger. Our anonymity is not yet mature.</p><br>
+				<p>Tribler does not protect you against spooks and government agencies.
+				We are a torrent client and aim to protect you against lawyer-based attacks and censorship.
+				With help from many volunteers we are continuously evolving and improving.</p><br>
+				</div>
+			</div>
 
-                                <p>Tribler does not protect you against spooks and government agencies.
-                                We are a torrent client and aim to protect you against lawyer-based attacks and censorship.
-                                With help from many volunteers we are continuously evolving and improving.</p><br></div></div>
+			<div class="notification">
+				<h2>Tribler 7 releasing on January 25, 2018</h2>
+			</div>
+			<div class="download_section">
+				<p id="download_os">For Windows/macOS/Linux</p>
+				<a id="main_download_url" class="download_url" href="download.html">Download Tribler 7 Preview</a><br/>
+				<span id="download_page">More options on <a href="download.html">downloads page</a></span>
+				<div id="release_dlcount">Total Downloads: <span id="total_downloads_all_versions">...</span></div>
+			</div>
 
-
-			<script type="text/javascript">
-				var parser = new UAParser();
-				var result = parser.getResult();
-				var osName = result.os.name.toLowerCase();
-				if (osName == "windows") {
-					document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/Tribler_6.5.2.exe">Download Tribler</a></div>');
-					document.writeln('<p><b>For Windows 8/7/Vista/XP</b>');
-					document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
-				}
-				else if (osName == "mac os x") {
-					document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/Tribler-6.5.2.dmg">Download Tribler</a></div>');
-					document.writeln('<p><b>For Snow Leopard or newer</b>');
-					document.writeln('<br>Or go to the <a href="download.html">download page</a></p>');
-				}
-				else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
-					document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/tribler_6.5.2_all.deb">Download Tribler</a></div>');
-					document.writeln('<p><b>For Linux</b></p>');
-				}
-				else {
-					document.writeln('<div class="button"><a href="download.html">Download Tribler</a></div>');
-					document.writeln('<p><b>Unknown OS</b></p>');
-				}
-			</script>
-			<noscript><div class="button"><a href="download.html">Download</a></div></noscript>
-            <p id="release_dlcount">Total downloads: ?</p>
-
-            <script>
-                function httpGet(theUrl, callback)
-                {
-                    if (window.XMLHttpRequest)
-                    {// code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp=new XMLHttpRequest();
-                    }
-                    else
-                    {// code for IE6, IE5
-                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    xmlhttp.onreadystatechange=function()
-                    {
-                        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                        {
-                            callback(xmlhttp.responseText);
-                        }
-                    }
-                    xmlhttp.open("GET", theUrl, true );
-                    xmlhttp.send();
-                }
-
-                function add_dls(a, b){
-                    if (!(b["name"].endsWith(".txt") || b["name"].endsWith(".txt.asc") || b["name"].endsWith(".tar.xz"))) {
-                        return a + b["download_count"];
-                    } else {
-                        return a;
-                    }
-                }
-
-                function get_downloads(raw_json){
-                    dlcount = JSON.parse(raw_json)["assets"].reduce(add_dls, 0);
-                    document.getElementById('release_dlcount').innerHTML = "Total downloads: " + dlcount;
-                }
-
-                httpGet("https://api.github.com/repos/Tribler/tribler/releases/latest", get_downloads);
-            </script> 
 		</div>
 		<div class="wow fadeInUp">
 			<a href="img/image0.png" data-lightbox="screenshots" title="Channel contents | View the torrents within a channel."><img width=500px height=350px src="img/image0.png" title="Screenshot of the Tribler GUI" alt="" /></a>
@@ -233,26 +182,49 @@
 
 	<footer>
 
-		<script type="text/javascript">
-			var parser = new UAParser();
-			var result = parser.getResult();
-			var osName = result.os.name.toLowerCase();
-			if (osName == "windows") {
-				document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/Tribler_6.5.2.exe">Download Tribler</a>');
-			}
-			else if (osName == "mac os x") {
-				document.writeln('<div class="button"><a href="https://github.com/Tribler/tribler/releases/download/v6.5.2/Tribler-6.5.2.dmg">Download Tribler</a>');
-			}
-			else {
-				document.writeln('<div class="button"><a href="download.html">Download Tribler</a>');
-			}
-			document.writeln('<p>Tribler 6.5.2 with Anonymity test</p></div>');
-		</script>
-
-		<noscript><div class="button"><a href="download.html">Download Tribler</a><p>Tribler 6.5.2 with Anonymity test</p></div></noscript>
+		<div class="download_section">
+			<p id="footer_download_os">For Windows/macOS/Linux</p>
+			<a id="footer_download_url" class="download_url" href="download.html">Download Tribler 7 Preview</a><br/>
+		</div>
+		<br/>
 
 	</footer>
 
-
+	<script type="text/javascript">
+		var parser = new UAParser();
+		var result = parser.getResult();
+		var osName = result.os.name.toLowerCase();
+		if (osName == "windows") {
+			$("#download_os").html("For Windows 8/7/Vista/XP");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler_7.0.0-rc5_x64.exe");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler_7.0.0-rc5_x64.exe");
+		}
+		else if (osName == "mac os x") {
+			$("#download_os").html("For macOS (Snow Leopard or later)");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler-7.0.0-rc5.dmg");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler-7.0.0-rc5.dmg");
+		}
+		else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
+			$("#download_os").html("For Linux");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/tribler_7.0.0-rc5_all.deb");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/tribler_7.0.0-rc5_all.deb");
+		}
+		else {
+			$("#download_os").html("Unknown OS");
+			$("#main_download_url").attr("href","download.html");
+			$("#footer_download_url").attr("href","download.html");
+		}
+	</script>
+	<script>
+		$.get( "https://api.github.com/repos/Tribler/tribler/releases", function( data ) {
+			var total = 0;
+			$.each(data, function(index, release){
+				$.each(release["assets"], function(index2, asset){
+					total += asset["download_count"];
+				});
+			});
+			document.getElementById('total_downloads_all_versions').innerHTML = total;
+		});
+	</script>
 </body>
 </html>
