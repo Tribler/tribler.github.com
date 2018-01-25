@@ -108,12 +108,9 @@
 				</div>
 			</div>
 
-			<div class="notification">
-				<h2>Tribler 7 releasing on January 25, 2018</h2>
-			</div>
 			<div class="download_section">
 				<p id="download_os">For Windows/macOS/Linux</p>
-				<a id="main_download_url" class="download_url" href="download.html">Download Tribler 7 Preview</a><br/>
+				<a id="main_download_url" class="download_url" href="download.html">Download Tribler 7</a><br/>
 				<span id="download_page">More options on <a href="download.html">downloads page</a></span>
 				<div id="release_dlcount">Total Downloads: <span id="total_downloads_all_versions">...</span></div>
 			</div>
@@ -184,7 +181,7 @@
 
 		<div class="download_section">
 			<p id="footer_download_os">For Windows/macOS/Linux</p>
-			<a id="footer_download_url" class="download_url" href="download.html">Download Tribler 7 Preview</a><br/>
+			<a id="footer_download_url" class="download_url" href="download.html">Download Tribler 7</a><br/>
 		</div>
 		<br/>
 
@@ -196,18 +193,18 @@
 		var osName = result.os.name.toLowerCase();
 		if (osName == "windows") {
 			$("#download_os").html("For Windows 8/7/Vista/XP");
-			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler_7.0.0-rc5_x64.exe");
-			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler_7.0.0-rc5_x64.exe");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0/Tribler_7.0.0_x64.exe");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0/Tribler_7.0.0_x64.exe");
 		}
 		else if (osName == "mac os x") {
 			$("#download_os").html("For macOS (Snow Leopard or later)");
-			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler-7.0.0-rc5.dmg");
-			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/Tribler-7.0.0-rc5.dmg");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0/Tribler-7.0.0.dmg");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0/Tribler-7.0.0.dmg");
 		}
 		else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
 			$("#download_os").html("For Linux");
-			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/tribler_7.0.0-rc5_all.deb");
-			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0-rc5/tribler_7.0.0-rc5_all.deb");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0/tribler_7.0.0_all.deb");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.0/tribler_7.0.0_all.deb");
 		}
 		else {
 			$("#download_os").html("Unknown OS");
@@ -225,6 +222,15 @@
 			});
 			document.getElementById('total_downloads_all_versions').innerHTML = total;
 		});
+	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111501715-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-111501715-1');
 	</script>
 </body>
 </html>

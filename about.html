@@ -21,30 +21,30 @@
  new WOW().init();
 </script>
 
-<script type="text/javascript">
-      var uservoiceOptions = {
-        /* required */
-        key: 'tribler',
-        host: 'tribler.uservoice.com',
-        forum: '90409',
-        showTab: true,
-        /* optional */
-        alignment: 'right',
-        background_color:'#f00',
-        text_color: 'white',
-        hover_color: '#009ec3',
-        lang: 'en'
-      };
+<!--<script type="text/javascript">-->
+      <!--var uservoiceOptions = {-->
+        <!--/* required */-->
+        <!--key: 'tribler',-->
+        <!--host: 'tribler.uservoice.com',-->
+        <!--forum: '90409',-->
+        <!--showTab: true,-->
+        <!--/* optional */-->
+        <!--alignment: 'right',-->
+        <!--background_color:'#f00',-->
+        <!--text_color: 'white',-->
+        <!--hover_color: '#009ec3',-->
+        <!--lang: 'en'-->
+      <!--};-->
 
-      function _loadUserVoice() {
-        var s = document.createElement('script');
-        s.setAttribute('type', 'text/javascript');
-        s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");
-        document.getElementsByTagName('head')[0].appendChild(s);
-      }
-      _loadSuper = window.onload;
-      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-    </script>
+      <!--function _loadUserVoice() {-->
+        <!--var s = document.createElement('script');-->
+        <!--s.setAttribute('type', 'text/javascript');-->
+        <!--s.setAttribute('src', ("https:" == document.location.protocol ? "https://" : "http://") + "cdn.uservoice.com/javascripts/widgets/tab.js");-->
+        <!--document.getElementsByTagName('head')[0].appendChild(s);-->
+      <!--}-->
+      <!--_loadSuper = window.onload;-->
+      <!--window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };-->
+    <!--</script>-->
 	
 </head>
 
@@ -70,7 +70,7 @@
 				<li><a href="download.html">Download</a></li>
 				<li><a href="support-index.html">Support</a>
 				    <ul>
-				        <li><a href="howto.html">Get Started</a></li>
+				        <li><a href="howto.html">How does it work</a></li>
 				        <li><a href="faq.html">FAQ</a></li>
 				    </ul>
 				</li>
