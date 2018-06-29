@@ -108,15 +108,27 @@
 				</div>
 			</div>
 
+			<br/><br/>
+
 			<div class="download_section">
 				<p id="download_os">For Windows/macOS/Linux</p>
 				<a id="main_download_url" class="download_url" href="download.html">Download Tribler 7.0.2</a><br/>
-				<a href="https://github.com/tribler/tribler/releases/v7.1.0-beta">Or download the beta preview of Tribler 7.1.0</a><br/>
+				<a id="instructions" style="" href=""></a>
 				<span id="download_page">More options on <a href="download.html">downloads page</a></span>
 				<div id="release_dlcount">Total Downloads: <span id="total_downloads_all_versions">...</span></div>
 			</div>
+			
+			<div>
+				<h3>Looking for the bleeding edge version?</h3>
+				<div> Check out <strong>
+						<a href="https://github.com/tribler/tribler/releases/v7.1.0-rc1">Tribler 7.1.0-rc1</a>
+					</strong>
+				</div>
+			</div>
+			<br/>
 
 		</div>
+		
 		<div class="wow fadeInUp">
 			<a href="img/image0.png" data-lightbox="screenshots" title="Channel contents | View the torrents within a channel."><img width=500px height=350px src="img/image0.png" title="Screenshot of the Tribler GUI" alt="" /></a>
 		</div>
@@ -189,6 +201,7 @@
 	</footer>
 
 	<script type="text/javascript">
+	$(document).ready(function(){
 		var parser = new UAParser();
 		var result = parser.getResult();
 		var osName = result.os.name.toLowerCase();
@@ -206,12 +219,16 @@
 			$("#download_os").html("For Linux");
 			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.2/Tribler_7.0.2_all.deb");
 			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.0.2/Tribler_7.0.2_all.deb");
+			$("#instructions").html("Installation instructions for Linux");
+			$("#instructions").css("display", "block");
+			$("#instructions").attr("href", "./linux.html");
 		}
 		else {
 			$("#download_os").html("Unknown OS");
 			$("#main_download_url").attr("href","download.html");
 			$("#footer_download_url").attr("href","download.html");
 		}
+	});
 	</script>
 	<script>
 		$.get( "https://api.github.com/repos/Tribler/tribler/releases", function( data ) {

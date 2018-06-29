@@ -14,7 +14,9 @@ h1 {
 h2, h3 {
 	font-size:15px;
 }
-
+h2.light{
+    color:#ffb77e;
+}
 a {
 	color: #ffbc86; text-decoration: none;
 }
@@ -533,4 +535,28 @@ footer {
     border-radius: 5px;
     font-weight: bold;
     color: #fff;
+}
+a.download_button_small{
+    color: white;
+    padding: 2px 12px;
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    background: #FF6F00;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+blockquote{
+    border-left:2px solid #fff; padding-left:16px;
+    color: #989898;
+}
+a.dim{
+    color:#b3a79d;
 }

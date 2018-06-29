@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Linux - Tribler</title>
+
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lightbox.css" />
+<link rel="stylesheet" href="css/animate.min.css">
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="canonical" href="https://www.tribler.org/index.html">
+
+<!--[if lt IE 9]>
+<script src="/js/html5shiv.js"></script>
+<![endif]-->
+<script src="js/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
+
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/lightbox.min.js"></script>
+<script type="text/javascript" src="js/ua-parser.min.js"></script>
+</head>
+
+<body>
+    <header>
+		<div class="wow fadeInDown">
+			<div class="wow fadeInLeft">
+				<a href="https://www.facebook.com/TriblerTeam"><img class="facebook-icon" src="img/facebook-icon.png" alt="" /></a>
+				<a href="https://twitter.com/TriblerTeam"><img class="twitter-icon" src="img/twitter-icon.png" alt="" /></a>
+				<a href="https://github.com/Tribler"><img class="github-icon" src="img/github-icon.png" alt="" /></a>
+			</div>
+			<a href="/"><img class="header-logo" src="img/tribler-logo.png" alt="Return to the homepage" /></a>
+
+			<nav>
+				<ul>
+					<li><a href="/">Tribler</a>
+						<ul>
+							<li><a href="about.html">About Tribler</a></li>
+							<li><a href="anonymity.html">Anonymity</a></li>
+							<li><a href="http://statistics.tribler.org">Statistics</a></li>
+						</ul>
+					</li>
+					<li><a href="download.html">Download</a></li>
+					<li><a href="support-index.html">Support</a>
+						<ul>
+							<li><a href="howto.html">How does it work</a></li>
+							<li><a href="faq.html">FAQ</a></li>
+						</ul>
+					</li>
+					<li><a href="developer-index.html">Developers</a>
+						<ul>
+							<li><a href="https://github.com/Tribler/tribler">Github</a></li>
+							<li><a href="https://github.com/Tribler/tribler/wiki">Wiki</a></li>
+							<li><a href="/TitleIndex">Archive</a></li>
+						</ul>
+					</li>
+					<li><a href="https://forum.tribler.org">Forum</a></li>
+				</ul>
+			</nav>
+
+		</div>
+	</header>
+
+
+    <div id="wrap"><br>
+
+		<section id="content">
+			<div>
+				<h1>Tribler for Linux</h1>
+				<p class="title"><img src="img/linux.png" alt="" /></p>
+			</div>
+
+			<h2 class="light">Latest release - Tribler 7.1.0-rc1</h2>
+
+			<p>
+				<ul>
+					<li>➜ Debian Package <a class='download_button_small' href="https://github.com/Tribler/tribler/releases/download/v7.1.0-rc1/tribler_7.1.0-rc1_all.deb">Download 7.1.0-rc1</a> </li>
+					<li><strong>➜ Source tar file</strong> <a href="https://github.com/Tribler/tribler/releases/download/v7.1.0-rc1/Tribler-v7.1.0-rc1.tar.xz">Download</a> </li>
+					<li><strong>➜ Source code</strong> <a target="_blank" href="https://github.com/Tribler/tribler/tree/v7.1.0-rc1">Github</a> </li>
+				</ul>
+
+			</p>
+			<div>
+				<h2 class="light">Installation instructions</h2>
+				<blockquote style="border-left:2px solid #fff; padding-left:16px">
+					<pre>
+wget https://github.com/Tribler/tribler/releases/download/v7.1.0-rc1/tribler_7.1.0-rc1_all.deb
+sudo apt-get install ./tribler_7.1.0-rc1_all.deb</pre>
+				</blockquote>
+			</div>
+
+			<br/>
+			<h2 class="light">Stable release - Tribler 7.0.2</h2>
+			<p>
+				<ul>
+					<li>➜ Debian Package <a class='download_button_small' href="https://github.com/Tribler/tribler/releases/download/v7.0.2/tribler_7.0.2_all.deb">Download 7.0.2</a> </li>
+					<li><strong>➜ Source tar file</strong> <a href="https://github.com/Tribler/tribler/archive/v7.0.2.tar.gz">Download</a> </li>
+					<li><strong>➜ Source code</strong> <a href="https://github.com/Tribler/tribler/tree/v7.0.2">Github</a> </li>
+				</ul>
+
+			</p>
+
+			<br/>
+			<div>
+				<h2 class="light">Installation instructions</h2>
+				<blockquote>
+					<pre>
+wget https://github.com/Tribler/tribler/releases/download/v7.0.2/tribler_7.0.2_all.deb
+sudo apt-get install ./tribler_7.0.2_all.deb</pre>
+				</blockquote>
+			</div>
+
+			<br/><br/>
+			<h2 class="light">Known issues</h2>
+			<div>
+				1) Ubuntu 18.04 supports libsodium23 while Tribler 7.0.2 requires libsodium13 or libsodium18.
+				This causes installation to fail on Ubuntu 18.04+ systems. Please follow the following instructions
+				to install libsodium18 individually and continue with the Tribler installation.
+				<blockquote>
+					wget http://mirrors.kernel.org/ubuntu/pool/universe/libs/libsodium/libsodium18_1.0.8-5_amd64.deb<br/>
+sudo apt-get install ./libsodium18_1.0.8-5_amd64.deb
+				</blockquote>
+			</div>
+			<br/>
+			<div>
+				2) Tribler uses VLC for playing media files. Some issues with VLC installations were reported while installing
+				Tribler. To install latest VLC media player on Ubuntu 18.04, please use this link
+				<a href="https://linuxconfig.org/how-to-install-latest-vlc-media-player-on-ubuntu-18-04-bionic-beaver-using-ppa">here</a>
+			</div>
+
+			<br/><hr/>
+			<div>
+				<strong>If you face any problems installing or using Tribler, please notify us by creating an issue
+				<a href="https://github.com/Tribler/tribler/issues/new">here</a>. We look forward to your continuous support.
+				</strong>
+			</div>
+
+		</section>
+	</div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111501715-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-111501715-1');
+	</script>
+</body>
+</html>
