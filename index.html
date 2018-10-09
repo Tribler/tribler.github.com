@@ -197,12 +197,12 @@
 		var result = parser.getResult();
 		var osName = result.os.name.toLowerCase();
 		if (osName == "windows") {
-			$("#download_os").html("For Windows 8/7/Vista/XP");
+			$("#download_os").html("For Windows 10/8/7/Vista");
 			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.0/Tribler_7.1.0_x64.exe");
 			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.0/Tribler_7.1.0_x64.exe");
 		}
 		else if (osName == "mac os x") {
-			$("#download_os").html("For macOS (Snow Leopard or later)");
+			$("#download_os").html("For macOS (Yosemite or later)");
 			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.0/Tribler-7.1.0.dmg");
 			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.0/Tribler-7.1.0.dmg");
 		}
