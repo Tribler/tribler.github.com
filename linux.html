@@ -73,60 +73,29 @@
 				<p class="title"><img src="img/linux.png" alt="" /></p>
 			</div>
 
-			<h2 class="light">Latest release - Tribler 7.1.0-rc2</h2>
+			<h2 class="light">Latest release - Tribler 7.1.0</h2>
 
 			<p>
 				<ul>
-					<li>➜ Debian Package <a class='download_button_small' href="https://github.com/Tribler/tribler/releases/download/v7.1.0-rc2/tribler_7.1.0-rc2_all.deb">Download 7.1.0-rc2</a> </li>
-					<li><strong>➜ Source tar file</strong> <a href="https://github.com/Tribler/tribler/releases/download/v7.1.0-rc2/Tribler-v7.1.0-rc2.tar.xz">Download</a> </li>
-					<li><strong>➜ Source code</strong> <a target="_blank" href="https://github.com/Tribler/tribler/tree/v7.1.0-rc2">Github</a> </li>
+					<li>➜ Debian Package <a class='download_button_small' href="https://github.com/Tribler/tribler/releases/download/v7.1.0/tribler_7.1.0_all.deb">Download 7.1.0</a> </li>
+					<li><strong>➜ Source tar file</strong> <a href="https://github.com/Tribler/tribler/releases/download/v7.1.0/Tribler-v7.1.0.tar.xz">Download</a> </li>
+					<li><strong>➜ Source code</strong> <a target="_blank" href="https://github.com/Tribler/tribler/tree/v7.1.0">Github</a> </li>
 				</ul>
 
 			</p>
+            <br/>
 			<div>
 				<h2 class="light">Installation instructions</h2>
 				<blockquote style="border-left:2px solid #fff; padding-left:16px">
 					<pre>
-wget https://github.com/Tribler/tribler/releases/download/v7.1.0-rc2/tribler_7.1.0-rc2_all.deb
-sudo apt-get install ./tribler_7.1.0-rc2_all.deb</pre>
+wget https://github.com/Tribler/tribler/releases/download/v7.1.0/tribler_7.1.0_all.deb
+sudo apt-get install ./tribler_7.1.0_all.deb</pre>
 				</blockquote>
 			</div>
-
 			<br/>
-			<h2 class="light">Stable release - Tribler 7.0.2</h2>
-			<p>
-				<ul>
-					<li>➜ Debian Package <a class='download_button_small' href="https://github.com/Tribler/tribler/releases/download/v7.0.2/tribler_7.0.2_all.deb">Download 7.0.2</a> </li>
-					<li><strong>➜ Source tar file</strong> <a href="https://github.com/Tribler/tribler/archive/v7.0.2.tar.gz">Download</a> </li>
-					<li><strong>➜ Source code</strong> <a href="https://github.com/Tribler/tribler/tree/v7.0.2">Github</a> </li>
-				</ul>
-
-			</p>
-
-			<br/>
-			<div>
-				<h2 class="light">Installation instructions</h2>
-				<blockquote>
-					<pre>
-wget https://github.com/Tribler/tribler/releases/download/v7.0.2/tribler_7.0.2_all.deb
-sudo apt-get install ./tribler_7.0.2_all.deb</pre>
-				</blockquote>
-			</div>
-
-			<br/><br/>
 			<h2 class="light">Known issues</h2>
 			<div>
-				1) Ubuntu 18.04 supports libsodium23 while Tribler 7.0.2 requires libsodium13 or libsodium18.
-				This causes installation to fail on Ubuntu 18.04+ systems. Please follow the following instructions
-				to install libsodium18 individually and continue with the Tribler installation.
-				<blockquote>
-					wget http://mirrors.kernel.org/ubuntu/pool/universe/libs/libsodium/libsodium18_1.0.8-5_amd64.deb<br/>
-sudo apt-get install ./libsodium18_1.0.8-5_amd64.deb
-				</blockquote>
-			</div>
-			<br/>
-			<div>
-				2) Tribler uses VLC for playing media files. Some issues with VLC installations were reported while installing
+				1) Tribler uses VLC for playing media files. Some issues with VLC installations were reported while installing
 				Tribler. To install latest VLC media player on Ubuntu 18.04, please use this link
 				<a href="https://linuxconfig.org/how-to-install-latest-vlc-media-player-on-ubuntu-18-04-bionic-beaver-using-ppa">here</a>
 			</div>
