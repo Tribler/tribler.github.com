@@ -560,3 +560,9 @@ blockquote{
 a.dim{
     color:#b3a79d;
 }
+.alert{
+    color: #ffffff;
+    background-color: #fe6e0117;
+    display: inline-block;
+    padding: 8px;
+}
