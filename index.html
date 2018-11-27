@@ -112,7 +112,7 @@
 
 			<div class="download_section">
 				<p id="download_os">For Windows/macOS/Linux</p>
-				<a id="main_download_url" class="download_url" href="download.html">Download Tribler 7.1.2</a><br/>
+				<a id="main_download_url" class="download_url" href="download.html">Download Tribler 7.1.3</a><br/>
 				<a id="instructions" style="" href=""></a>
 				<span id="download_page">More options on <a href="download.html">downloads page</a></span>
 				<div id="release_dlcount">Total Downloads: <span id="total_downloads_all_versions">...</span></div>
@@ -185,7 +185,7 @@
 
 		<div class="download_section">
 			<p id="footer_download_os">For Windows/macOS/Linux</p>
-			<a id="footer_download_url" class="download_url" href="download.html">Download Tribler 7.1.2</a><br/>
+			<a id="footer_download_url" class="download_url" href="download.html">Download Tribler 7.1.3</a><br/>
 		</div>
 		<br/>
 
@@ -198,18 +198,18 @@
 		var osName = result.os.name.toLowerCase();
 		if (osName == "windows") {
 			$("#download_os").html("For Windows 10/8/7/Vista");
-			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.2/Tribler_7.1.2_x64.exe");
-			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.2/Tribler_7.1.2_x64.exe");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.3/Tribler_7.1.3_x64.exe");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.3/Tribler_7.1.3_x64.exe");
 		}
 		else if (osName == "mac os x") {
 			$("#download_os").html("For macOS (Yosemite or later)");
-			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.2/Tribler-7.1.2.dmg");
-			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.2/Tribler-7.1.2.dmg");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.3/Tribler-7.1.3.dmg");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.3/Tribler-7.1.3.dmg");
 		}
 		else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
 			$("#download_os").html("For Linux");
-			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.2/Tribler_7.1.2_all.deb");
-			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.2/Tribler_7.1.2_all.deb");
+			$("#main_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.3/Tribler_7.1.3_all.deb");
+			$("#footer_download_url").attr("href","https://github.com/Tribler/tribler/releases/download/v7.1.3/Tribler_7.1.3_all.deb");
 			$("#instructions").html("Installation instructions for Linux");
 			$("#instructions").css("display", "block");
 			$("#instructions").attr("href", "./linux.html");
