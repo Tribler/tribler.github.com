@@ -67,29 +67,29 @@
 
     <div id="wrap"><br>
 
-		<section id="content">
+		<section class="linux-content" id="content">
 			<div>
 				<h1>Tribler for Linux</h1>
 				<p class="title"><img src="img/linux.png" alt="" /></p>
 			</div>
 
-			<h2 class="light">Latest release - Tribler 7.1.3</h2>
+			<h2 id="linux-content-header" class="light">Latest release -</h2>
 
 			<p>
 				<ul>
-					<li>➜ Debian Package <a class='download_button_small' href="https://github.com/Tribler/tribler/releases/download/v7.1.3/tribler_7.1.3_all.deb">Download 7.1.3</a> </li>
-					<li><strong>➜ Source tar file</strong> <a href="https://github.com/Tribler/tribler/releases/download/v7.1.3/Tribler-v7.1.3.tar.gz">Download</a> </li>
-					<li><strong>➜ Source code</strong> <a target="_blank" href="https://github.com/Tribler/tribler/tree/v7.1.3">Github</a> </li>
+					<li>➜ Debian Package <a id="debian-download-url" class='download_button_small' href="download.html">Download</a> </li>
+					<li><strong>➜ Source tar file</strong> <a id="tribler-source-url" href="download.html">Download</a> </li>
+					<li><strong>➜ Source code</strong> <a id="tribler-source-tree-url" target="_blank" href="download.html">Github</a> </li>
 				</ul>
 
 			</p>
             <br/>
 			<div>
 				<h2 class="light">Installation instructions</h2>
-				<blockquote style="border-left:2px solid #fff; padding-left:16px">
+				<blockquote id="debian-install-code" style="border-left:2px solid #fff; padding-left:16px">
 					<pre>
-wget https://github.com/Tribler/tribler/releases/download/v7.1.3/tribler_7.1.3_all.deb
-sudo apt-get install ./tribler_7.1.3_all.deb</pre>
+wget <span id="debian-install-code-url"></span>
+sudo apt-get install <span id="debian-install-code-file"></span></pre>
 				</blockquote>
 			</div>
 			<br/>
@@ -119,5 +119,6 @@ sudo apt-get install ./tribler_7.1.3_all.deb</pre>
 
 	  gtag('config', 'UA-111501715-1');
 	</script>
+	<script src="js/tribler.js"></script>
 </body>
 </html>
