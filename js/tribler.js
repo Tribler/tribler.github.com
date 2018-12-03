@@ -42,6 +42,9 @@ $(document).ready(function() {
                 linux_url = asset["browser_download_url"];
                 linux_file_name = asset["name"];
             }
+            else if(asset["name"].endsWith("x86.exe")) {
+                windows32_url = asset["browser_download_url"];
+            }
             else if(asset["name"].endsWith("x64.exe")) {
                 windows64_url = asset["browser_download_url"];
             }
@@ -51,7 +54,7 @@ $(document).ready(function() {
         });
 
         if(pagename == "index.html") {
-            $('#total_downloads_all_versions').innerHTML = total;
+            $("#total_downloads_all_versions").html(total);
 
             // set download URLs
             var parser = new UAParser();
