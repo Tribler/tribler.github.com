@@ -53,7 +53,7 @@ $(document).ready(function() {
             }
         });
 
-        if(pagename == "index.html") {
+        if(typeof(isfront) !== 'undefined') {
             $("#total_downloads_all_versions").html(total);
 
             // set download URLs
