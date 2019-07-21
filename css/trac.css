@@ -1,21 +1,37 @@
 #trac {
 	padding: 140px 30px 20px 30px;
 	margin: 0 0 0 0;
+	color: #444;
 }
-#trac table td{
+
+#trac table table {
+	margin: 5px;
+	border-collapse: collapse;
+	color: #DDD;
+}
+
+#trac table table, table table td{
+	border: 3px solid #444444;
+	border-spacing: 5px;
 	vertical-align:top;
 }
-#trac a {
-	color: #ff3300; text-decoration: none;
+
+#trac table table td {
+	padding: 5px;
 }
-	#trac a:hover {
-		color: #00bff4;
-	}
+
+#trac table table tr:nth-child(even) {
+	background-color: #AAA3;
+}
+
+#trac a {
+	text-decoration: none;
+}
 #trac a.missing {
-	color: #000; text-decoration: none;
+	color: #F86F00AB; text-decoration: none;
 }
 	#trac a.missing:hover {
-		color: #00bff4;
+		color: #DDD;
 	}
 #trac img {
 	max-width: 900px;
@@ -27,7 +43,7 @@
 		margin-top: 0;
 	}
 #trac h2, #trac h3 {
-	color: #494949;
+	color: #;
 	margin: 5px 0;
 }
 #trac ul, #trac ol {
@@ -35,7 +51,7 @@
 }
 #trac pre.wiki, #trac pre.literal-block, #trac pre.code, #trac .code pre {
 	background: #f7f7f7;
-	border: 1px solid #d7d7d7;
+	border: 1px solid #DDD;
 	margin: 1em 1.75em;
 	padding: .25em;
 	overflow: hidden;
