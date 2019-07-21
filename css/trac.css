@@ -10,7 +10,7 @@
 	color: #DDD;
 }
 
-#trac table table, table table td{
+#trac table table, #trac table table td{
 	border: 3px solid #444444;
 	border-spacing: 5px;
 	vertical-align:top;
