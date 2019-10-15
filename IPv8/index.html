@@ -15,7 +15,17 @@
 <![endif]-->
 
 
+<style>
+.blink {
+  animation: blinker 1s step-start infinite;
+}
 
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+</style>
 <script src="/js/wow.min.js"></script>
 <script>
  new WOW().init();
@@ -87,7 +97,18 @@
 		</nav>
 	</header>	
 	
-	<section id="trac"><table><tr><td><h1 id="IPv8:Peer-to-Peeroverlaynetwork">IPv8: Peer-to-Peer overlay network</h1>
+	<section id="trac"><table><tr><td>
+    <div style="background-color: black">
+    <center>
+    <p style="color: red">
+    <h2 class="blink" style="color: red">WARNING:</h2>
+    You are looking at a <b>very old</b> (2010) archive.<br>
+    This document describes the original design of IPv8 and should be treated as a historic curiosity.<br>
+    If you are looking for an up-to-date description of IPv8, please visit <a href="https://github.com/Tribler/py-ipv8">https://github.com/Tribler/py-ipv8</a>.<br>
+    </p>
+    </center>
+    </div><br>
+    <h1 id="IPv8:Peer-to-Peeroverlaynetwork">IPv8: Peer-to-Peer overlay network</h1>
 <p>
 <em>In short: a library for networking in 
 distributed applications based on a P2P-overlay which handles IP changes,
