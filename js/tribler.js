@@ -7,7 +7,26 @@ $(document).ready(function() {
         $(".downloads-content").hide()
     }
 
-    function update_page(stablerelease){
+    $.get("https://api.github.com/repos/Tribler/tribler/releases", function (data) {
+        var total = 0;
+        var stablerelease = undefined;
+        var prevrelease = undefined;
+        $.each(data, function (index, release) {
+            $.each(release["assets"], function (index2, asset) {
+                total += asset["download_count"];
+            });
+
+            if (!release["prerelease"] && !stablerelease) {
+                // we found a stable release; update fields
+                stablerelease = release;
+                $("#main_download_url").text("Download Tribler " + release["name"].substring(1))
+                $("#footer_download_url").text("Download Tribler " + release["name"].substring(1))
+            }
+            else if(!release["prerelease"] && !prevrelease && stablerelease) {
+                prevrelease = release;
+            }
+        });
+
         // find the right assets in the stable release
         windows64_url = undefined;
         windows32_url = undefined;
@@ -35,6 +54,8 @@ $(document).ready(function() {
         });
 
         if(typeof(isfront) !== 'undefined') {
+            $("#total_downloads_all_versions").html(total);
+
             // set download URLs
             var parser = new UAParser();
             var result = parser.getResult();
@@ -84,35 +105,6 @@ $(document).ready(function() {
             $(".downloads-content").show()
             $("#github-compare-url").attr("href", 'https://github.com/Tribler/tribler/compare/' + prevrelease['tag_name'] + '...' + stablerelease['tag_name'])
         }
-    }
 
-    var releases_page = 1;
-    var total_downloads = 0;
-    var next_page_exists = true;
-    do{
-        $.get("https://api.github.com/repos/Tribler/tribler/releases?page="+releases_page, function (data) {
-            var stablerelease = undefined;
-            var prevrelease = undefined;
-            next_page_exists = data.length != 0
-            $.each(data, function (index, release) {
-                $.each(release["assets"], function (index2, asset) {
-                    total_downloads += asset["download_count"];
-                    $("#total_downloads_all_versions").html(total_downloads.toLocaleString());
-                });
-
-                if (!release["prerelease"] && !stablerelease) {
-                    // we found a stable release; update fields
-                    stablerelease = release;
-                    $("#main_download_url").text("Download Tribler " + release["name"].substring(1));
-                    $("#footer_download_url").text("Download Tribler " + release["name"].substring(1));
-                    update_page(stablerelease);
-                }
-                else if(!release["prerelease"] && !prevrelease && stablerelease) {
-                    prevrelease = release;
-                }
-            });
-        });
-        releases_page += 1
-    }while(next_page_exists && releases_page < 5);
-
+    });
 });
