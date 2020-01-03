@@ -6,8 +6,9 @@ $(document).ready(function() {
     else if(pagename == "download.html") {
         $(".downloads-content").hide()
     }
+    $("#pre_release").hide();
 
-    function update_page(stablerelease){
+    function update_page(stablerelease, prevrelease, prerelease){
         // find the right assets in the stable release
         windows64_url = undefined;
         windows32_url = undefined;
@@ -34,24 +35,56 @@ $(document).ready(function() {
             }
         });
 
+        // find the right assets in the prerelease
+        pre_windows64_url = undefined;
+        pre_windows32_url = undefined;
+        pre_mac_url = undefined;
+        pre_linux_url = undefined;
+        pre_linux_file_name = undefined;
+        pre_source_url = undefined;
+        if(prerelease != undefined){
+            $("#pre_release").show();
+            $.each(prerelease["assets"], function(index, asset) {
+                if(asset["name"].endsWith(".dmg")) {
+                    pre_mac_url = asset["browser_download_url"];
+                }
+                else if(asset["name"].endsWith(".deb")) {
+                    pre_linux_url = asset["browser_download_url"];
+                    pre_linux_file_name = asset["name"];
+                }
+                else if(asset["name"].endsWith("x86.exe")) {
+                    pre_windows32_url = asset["browser_download_url"];
+                }
+                else if(asset["name"].endsWith("x64.exe")) {
+                    pre_windows64_url = asset["browser_download_url"];
+                }
+                else if(asset["name"].endsWith("tar.xz")) {
+                    pre_source_url = asset["browser_download_url"];
+                }
+            });
+        }
+
         if(typeof(isfront) !== 'undefined') {
             // set download URLs
             var parser = new UAParser();
             var result = parser.getResult();
             var osName = result.os.name.toLowerCase();
             if (osName == "windows") {
-                $("#download_os").html("For Windows 7/8/10");
+                $("#download_os").html("For Windows 7/8/10 (64-bit)");
                 $("#main_download_url").attr("href", windows64_url);
+                $("#pre_release_download_url").attr("href", pre_windows64_url);
                 $("#footer_download_url").attr("href", windows64_url);
             }
             else if (osName == "mac os x") {
                 $("#download_os").html("For macOS (Yosemite or later)");
                 $("#main_download_url").attr("href", mac_url);
+                $("#pre_release_download_url").attr("href", pre_mac_url);
                 $("#footer_download_url").attr("href", mac_url);
             }
             else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
                 $("#download_os").html("For Linux");
                 $("#main_download_url").attr("href", linux_url);
+                $("#pre_release_download_url").attr("href", pre_linux_url);
                 $("#footer_download_url").attr("href", linux_url);
                 $("#instructions").html("Installation instructions for Linux");
                 $("#instructions").css("display", "block");
@@ -90,18 +123,24 @@ $(document).ready(function() {
     $.get("https://api.github.com/repos/Tribler/tribler/releases", function (data) {
             var stablerelease = undefined;
             var prevrelease = undefined;
+            var prerelease = undefined;
             $.each(data, function (index, release) {
+                if (index==0 && release["prerelease"] && !prerelease) {
+                    // we found a prerelease;
+                    prerelease = release;
+                    $("#pre_release_download_url").text("Download Tribler " + release["name"].substring(1));
+                }
                 if (!release["prerelease"] && !stablerelease) {
                     // we found a stable release; update fields
                     stablerelease = release;
-                    $("#main_download_url").text("Download Tribler " + release["name"].substring(1));
-                    $("#footer_download_url").text("Download Tribler " + release["name"].substring(1));
-                    update_page(stablerelease);
+                    $("#main_download_url").text("Download Tribler " + release["name"].substring(1) + " (stable)");
+                    $("#footer_download_url").text("Download Tribler " + release["name"].substring(1) + " (stable)");
                 }
                 else if(!release["prerelease"] && !prevrelease && stablerelease) {
                     prevrelease = release;
                 }
             });
+            update_page(stablerelease, prevrelease, prerelease);
         });
 
     // Fetch all the releases from the API and get aggregate sum of downloads.
