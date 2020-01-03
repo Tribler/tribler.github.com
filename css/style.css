@@ -416,12 +416,12 @@ footer {
 		color: #fff;
 	}
 	.anonymity .disclaimer {
-		padding: 10px 150px 0 150px;
+		padding: 16px 150px;
 		background-color: #404040;
 		background-image: url(../img/danger.png) , url(../img/danger.png);
 		background-repeat: no-repeat, no-repeat;
 		background-position: left 10px center, right 10px center;
-		border: 1px solid #000;
+		border: 1px solid #404040;
 		border-radius: 10px;
 		-moz-border-radius: 10px;
 		-webkit-border-radius: 10px;
