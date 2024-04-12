@@ -259,10 +259,9 @@
     </div>
 </footer>
 
-<script type="module">
-    import {createApp, reactive} from 'https://unpkg.com/petite-vue?module'
-
-    const store = reactive({
+<script src="./js/vue/petite-vue.iife.js"></script>
+<script>
+    const store = PetiteVue.reactive({
         ghUser: 'Tribler',
         ghRepo: 'tribler',
         stableRelease: null,
@@ -349,7 +348,7 @@
 
     store.fetchReleaseInfo();
 
-    createApp({store}).mount()
+    PetiteVue.createApp({store}).mount()
 </script>
 
 
