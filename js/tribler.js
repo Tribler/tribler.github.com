@@ -6,6 +6,7 @@ $(document).ready(function () {
         $(".downloads-content").hide()
     }
     $("#pre_release").hide();
+    $("#experimental_release").hide();
 
     function update_page(stablerelease, prevrelease, prerelease, experimental_release) {
         // find the right assets in the stable release
