@@ -91,7 +91,7 @@ $(document).ready(function () {
                 $("#pre_release_download_url").attr("href", pre_windows64_url);
                 $("#footer_download_url").attr("href", windows64_url);
 
-                if(pre_windows64_url != undefined || pre_windows32_url != undefined){
+                if(exp_windows64_url != undefined || exp_windows32_url != undefined){
                     $("#experimental_release").show();
                     const userAgent = navigator.userAgent;
                     if (userAgent.indexOf("WOW64") !== -1 || userAgent.indexOf("Win64") !== -1) {
@@ -106,7 +106,7 @@ $(document).ready(function () {
                 $("#pre_release_download_url").attr("href", pre_mac_url);
                 $("#footer_download_url").attr("href", mac_url);
 
-                if(pre_mac_url != undefined){
+                if(exp_mac_url != undefined){
                     $("#experimental_release").show();
                     $("#experimental_release_download_url").attr("href", exp_mac_url);
                 }
@@ -119,7 +119,7 @@ $(document).ready(function () {
                 $("#instructions").css("display", "block");
                 $("#instructions").attr("href", "./linux.html");
 
-                if(pre_linux_url != undefined){
+                if(exp_linux_url != undefined){
                     $("#experimental_release").show();
                     $("#experimental_release_download_url").attr("href", exp_linux_url);
                 }
