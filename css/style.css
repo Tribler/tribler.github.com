@@ -123,7 +123,7 @@ header nav {
 			}
 		
 #main {
-	clear: both; height: 650px; overflow: hidden; margin: 0;
+	clear: both; height: 800px; overflow: hidden; margin: 0;
 	color: #D0D0D0;
 	padding-top: 70px;
 	background: #505050;
@@ -534,7 +534,7 @@ footer {
     -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
     -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 }
-.download_section a.pre_download_url, .download_section a.pre_download_url{
+.download_section a.pre_download_url, .download_section a.experimental_download_url{
     color: white;
     padding: 8px 16px;
     margin: 8px;
