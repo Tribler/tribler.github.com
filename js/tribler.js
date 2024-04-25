@@ -17,16 +17,16 @@ $(document).ready(function () {
         let linux_file_name = undefined;
         let source_url = undefined;
         $.each(stablerelease["assets"], function (index, asset) {
-            if (asset["name"].endsWith(".dmg")) {
+            if (asset["name"].endsWith(".dmg") && !asset["name"].includes("debug")) {
                 mac_url = asset["browser_download_url"];
-            } else if (asset["name"].endsWith(".deb")) {
+            } else if (asset["name"].endsWith(".deb") && !asset["name"].includes("debug")) {
                 linux_url = asset["browser_download_url"];
                 linux_file_name = asset["name"];
-            } else if (asset["name"].endsWith("x86.exe")) {
+            } else if (asset["name"].endsWith("x86.exe") && !asset["name"].includes("debug")) {
                 windows32_url = asset["browser_download_url"];
-            } else if (asset["name"].endsWith("x64.exe")) {
+            } else if (asset["name"].endsWith("x64.exe") && !asset["name"].includes("debug")) {
                 windows64_url = asset["browser_download_url"];
-            } else if (asset["name"].endsWith("tar.xz")) {
+            } else if (asset["name"].endsWith("tar.xz") && !asset["name"].includes("debug")) {
                 source_url = asset["browser_download_url"];
             }
         });
