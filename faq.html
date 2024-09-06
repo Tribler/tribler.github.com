@@ -119,19 +119,19 @@
 				<h2>Downloading and Uploading</h2>
 				<div class="faq_item">
 					<div class="faq_question">How do I download using Tribler?</div >
-					<div class="faq_answer"><p>The easiest way to download using Tribler is to search from the search panel at the top of the screen. Just type in what you're looking for and press the ENTER button. You will be taken to the Results tab and your search results will start coming in. When you've found what you're looking for you can click the Download button directly or first click on the search result to examine it in detail and then click the Download button.</p>
+					<div class="faq_answer"><p>The easiest way to download using Tribler is to search from the search panel at the top of the screen. Just type in what you're looking for and press the ENTER button. You will be taken to the Results tab and your search results will start coming in. When you've found what you're looking for you can click search result to show the download details. If you're happy with the anonymization settings (ON by default), you can click the button to start downloading.</p>
 					<p>For a step by step introduction, see the example below:<ol>
-					<li>Type Sintel in the search bar and click on the Search button; (Visit the Sintel website for more information about the movie.)</li>
-					<li>The results view should come forward and give you a number of results. One of them should be named Sintel. You can now click the download button to the right.</li>
+					<li>Type Sintel in the search bar and press ENTER; (Visit the Sintel website for more information about the movie.)</li>
+					<li>The results view should come forward and give you a number of results. At least one of them should be named Sintel. You can now click, which will show you the download information dialog.</li>
 					<li>Tribler will now gather information about the torrent. When this is completed, you will see a list of files in the torrent. Optionally, you can select or deselect files for downloading.</li>
-					<li>You then have to select a location where to place the file. Click DOWNLOAD when you're satisfied with the location;</li>
+					<li>You then have to select a location where to place the file. Click "Download" when you're satisfied with the location;</li>
 					<li>The file now starts to download and will be visible in the downloads tab. Notice that you see the current progress here. This will tell you how much has been downloaded, how large the file is and how much time it will take at the current downloading speed.</li>
-					<li>Tribler allows you to watch videos while they are being downloaded. When you download a video, the streaming button appears at the top of the screen. When clicking this button, you will go to the video player and the video will play. If you have a slow internet connection, the video might shutter when being played.</li></ol></p></div>
+					<!-- li>Tribler allows you to watch videos while they are being downloaded. When you download a video, the streaming button appears at the top of the screen. When clicking this button, you will go to the video player and the video will play. If you have a slow internet connection, the video might shutter when being played.</li --></ol></p></div>
 				</div>
 
 				<div class="faq_item">
 					<div class="faq_question">Can I use Tribler to download a torrent file?</div >
-					<div class="faq_answer"><p>Yes, Tribler has been specifically designed to download torrent files. To download a specific .torrent file present on your computer, click on the big plus button in the upper-right corner of the screen. Magnet links or torrent files present on websites can also be downloaded this way.</p></div>
+					<div class="faq_answer"><p>Yes, Tribler has been specifically designed to download torrent files. To download a specific .torrent file present on your computer, click on the big plus button in the top-left corner of the screen. Magnet links or torrent files present on websites can also be downloaded this way.</p></div>
 				</div>
 
 				<div class="faq_item">
@@ -141,41 +141,13 @@
 
 				<div class="faq_item">
 					<div class="faq_question">How do I upload using Tribler?</div >
-					<div class="faq_answer"><p>If you wish to upload something you have already downloaded you can just start the download for it as usual and point to the same directory where you stored the files when downloading them. Tribler will then start by checking all the data to see if it's there. After that Tribler will try to download any missing data and will start uploading the data you already had.</p>
-					<p>If you wish to upload something new you can add it to your own channel. To do this go to your channel by clicking the MY CHANNEL tab in the left menu. If you don't have a channel yet, you can create one here. Click on the Manage Torrents tab and then click the Add... button. Choose Create in the dialog that pops up. Here you can browse for the file(s) you wish to make available and tweak some settings before clicking Create .torrent(s). They will be added to your channel and anyone who can find your channel will ultimately hear about them as well (new content might take a while to propagate through the network).</p></div>
-				</div>
-
-				<div class="faq_item">
-					<div class="faq_question">What are bandwidth tokens and what can I do with them?</div>
-					<div class="faq_answer"><p>In Tribler, you compensate other users for the bandwidth you use when downloading with anonymity. When uploading content to other (Tribler) users, you earn <b>bandwidth tokens</b>. If you accumulate more bandwidth tokens, you get preferential treatment when downloading anonymously, which results in higher download speeds.</p>
-						<p>The exact amount of bandwidth tokens you pay to others, depends on the level of anonymity. This is the number of other users, or hops, you use during a download. If you download with three hop anonymity, your encrypted data is sent through the machines of three other Tribler users. Increasing the number of hops benefits anonymity but costs you more bandwidth tokens.</p>
-						<p>For example, if you download a 1 Gigabyte video with one hop anonymity, you pay 1 Gigabyte worth of bandwidth tokens. Each additional hop increases the amount of bandwidth tokens you have to pay. When downloading the same file using three hops, you pay 3 Gigabyte of bandwidth tokens instead.</p>
-						<p>Your token balance indicates how much work you have performed for other users and how much work other users have performed for you. At this time, this work is the amount of incoming and outgoing traffic but our mechanism is open for extension (e.g., in a future release we could also reward users for storing data or performing computations). The amount of performed and consumed work are indicated as ‘given’ and ‘taken’ in the user interface respectively. Subtracting the amount of ‘taken’ bytes from the amount of ‘given’ bytes yields the bandwidth token balance.</p>
-						<p>We refer the interested reader to <a href="https://www.sciencedirect.com/science/article/pii/S1389128621001705" target="_blank">our recent publication</a> (see Section 7) that further discusses our token mechanism and provides more technical details.</p>
-					</div>
-				</div>
-
-				<div class="faq_item">
-					<div class="faq_question">How can I earn bandwidth tokens?</div>
-					<div class="faq_answer">
-						<p>You can earn bandwidth tokens by simply running Tribler. When connected to other peers in the Tribler network, your Tribler instance automatically becomes eligible for relaying traffic to other users if other users download content anonymously. Relaying traffic will increase your bandwidth token balance. You will also earn bandwidth tokens by sharing channel content with other users. Channel content will be shared after subscribing to a channel. You can view which channels you are currently sharing by going to the ‘downloads’ tab and then the ‘channels’ tab.</p>
-						<p>Please take into consideration that Tribler by default downloads with one-hop anonymity. This means that an anonymous download only uses a single exit node and circuits thus do not include relay nodes. This currently raises the bar to reliably earn bandwidth tokens. We are aware of this and we are exploring to modify the default settings of anonymous downloads, making it easier for users to increase their bandwidth token balance. Naively applying this change, however, would have a negative effect on the overall download speed. As such, we only want to implement this modification once we are confident that it will not degrade the user experience of our downloading functionality.</p>
-					</div>
-				</div>
-
-				<div class="faq_item">
-					<div class="faq_question">Why is my bandwidth token balance decreasing, even when I do not have any active (anonymous) downloads?</div>
-					<div class="faq_answer">
-						<p>We frequently receive reports from users that their bandwidth token balance is decreasing. When downloading anonymously, other users perform work for you since the data you are downloading is routed through one or more nodes, and encrypted. When a circuit is removed, the downloader transfers the appropriate amount of bandwidth tokens to the involved nodes in a circuit, lowering the bandwidth token balance of the downloader and increasing the token balance of the other nodes in the circuit. This is usually the main reason why your token balance is decreasing.</p>
-						<p>However, Tribler also performs other work in the background, such as downloading channels from other users and fetching health statistics of channel torrents (which includes the number of downloaders and seeders of a particular torrent). These operations also decrease your token balance since you reward the users that helped you.</p>
-						<p>Finally, we acknowledge that your token balance can decrease as the result of a software bug. Accounting the amount of work performed and consumed is part of our bigger goal to reward good behavior and to address long-term free-riding behavior (the situation where one only uses Tribler to download content without contributing anything back to the network). Designing and deploying such mechanisms is challenging and requires many iterations to get it right. With each release, we aim to improve our token mechanism and address outstanding issues. From our experience, software bugs related to the bandwidth token balance can be very subtle and sometimes requires significant time investment to understand. By carefully tracking the overall network health and the dynamics of token payouts, we aim to analyse and improve our accounting mechanism, eventually leading to a healthier and fairer network.</p>
-					</div>
+					<div class="faq_answer"><p>If you wish to upload something you have already downloaded you can just start the download for it as usual and point to the same directory where you stored the files when downloading them. Tribler will then start by checking all the data to see if it's there. After that Tribler will try to download any missing data and will start uploading the data you already had.</p></div>
 				</div>
 				
 				<h2>Administration</h2>
 				<div class="faq_item">
 					<div class="faq_question">I found an issue in Tribler. What should I do to report it?</div >
-					<div class="faq_answer"><p>We take bug reports very seriously and try to investigate each of them. When Tribler encounters a crash, you will be prompted with a dialog that allows you to send additional information to us. This helps us with debugging and fixing the issue. If you have a suggestion for us or another problem, you can either create a post in <a href="https://forum.tribler.org">our forums</a> or create <a href="https://github.com/Tribler/tribler/issues/new">an issue on Github</a>.</p></div>
+					<div class="faq_answer"><p>We take bug reports very seriously and try to investigate each of them. When Tribler encounters a crash, you will be prompted with a dialog that allows you to send additional information to us. This helps us with debugging and fixing the issue. If you have a suggestion for us or another problem, you can either create <a href="https://github.com/Tribler/tribler/issues/new">an issue on Github</a>.</p></div>
 				</div>
 				
 				<div class="faq_item">
@@ -203,23 +175,18 @@
 				
 				<div class="faq_item">
 					<div class="faq_question">How do I upgrade to a newer version of Tribler?</div >
-					<div class="faq_answer"><p>Just install the new version, see here for instructions on that. Tribler will automatically upgrade data from old versions when it is first started, if necessary. All your data, torrents, channels and settings will be retained.</p></div>
+					<div class="faq_answer"><p>Just install the new version, see here for instructions on that. Tribler will automatically upgrade data from old versions, if possible.</p></div>
 				</div>
 				
 				<div class="faq_item">
 					<div class="faq_question">Can I limit the download or upload speed of Tribler?</div >
-					<div class="faq_answer"><p>You can limit the download or upload speed of active downloads and seeds by going into the Settings and, under the BANDWIDTH tab, setting the desired values. Note, however, that this limits the speed of active downloads and seeds, not of Tribler in its entirety. The overhead of the Tribler protocol, in particular, can't be limited at this point.</p></div>
+					<div class="faq_answer"><p>You can limit the download or upload speed of active downloads and seeds by going into the Settings and, under the Bandwidth tab, setting the desired values. Note, however, that this limits the speed of active downloads and seeds, not of Tribler in its entirety. The overhead of the Tribler protocol, in particular, can't be limited at this point.</p></div>
 				</div>
 				
 				<div class="faq_item">
 					<div class="faq_question">Can I block peers or addresses in Tribler?</div >
 					<div class="faq_answer"><p>No, you can't. Although this feature has been requested a number of times and is available in some other clients, it is not one that is likely to appear in Tribler. The first use of the feature is to manually block certain peers. This usage scenario just asks for abusive behaviour, since actual reasons for blocking (such as freeloading) are very hard to investigate for a human being and easy to misjudge. The second usage scenario is using block lists to keep out unwanted eyes, such as governments that don't wish to upload or download but want to spy on you. This usage, however, is not very effective and provides a false sense of security at best.</p>
 					<p>If you still wish to block lists of peers to prevent spying parties to connect to you, you can use external software such as PeerBlock that is specialised in this.</p></div>
-				</div>
-				
-				<div class="faq_item">
-					<div class="faq_question">How do I delete my channel?</div >
-					<div class="faq_answer"><p>Basically removing all .torrents from your channel is now the only option. We cannot do much better that this as you are still kindly requesting other peers to please remove your channel. We cannot force anyone to actually remove the channel.</p></div>
 				</div>
 				
 				<h2>Troubleshooting</h2>
@@ -238,48 +205,26 @@
 					<li>Allow incoming connections to the ports used by Tribler and forward those ports to the correct computer - this is most common for hardware you connect through or software running on computers you connect through, such as routers, (local) servers, computers providing shared internet to your computer or advanced switches.</li></ul></p>
 					<p>For a description of which ports to open, see below. How you open ports completely depends on the device or software you're trying to configure, but  PortForward has excellent coverage of most of them.</p>
 					<p>Note that some routers actually provide both port forwarding and a firewall. The two are not the same, but both can hinder your connection. Forwarding the ports is needed to have incoming connections to your router to be forwarded to the computer running Tribler, while allowing those incoming connections is needed to allow them in the first place.</p>
-					<p>If all of this doesn't help you get your downloads going, you can always visit our forums for more help.</p></div>
+					<p>If all of this doesn't help you get your downloads going, you can always check out our GitHub for more help.</p></div>
 				</div>
 				
 				<div class="faq_item">
 					<div class="faq_question">What ports does Tribler use?</div >
-					<div class="faq_answer"><p>The ports Tribler uses depends on the port number configured under Settings, Connection. The default port number is 7760.</p>
-					<p>The ports actually in use by Tribler, for a given configured port number N, are:
-					<ul><li>TCP N</li>
-					<li>TCP (N-1)</li>
-					<li>UDP N</li>
-					<li>UDP (N-1)</li></ul></p>
-					<p>So for the default configuration that is:
-					<ul><li>TCP 7760</li>
-					<li>TCP 7759</li>
-					<li>UDP 7760</li>
-					<li>UDP 7759</li></ul></p>
-					<p>These are the ports used for incoming connections.</p>
+					<div class="faq_answer"><p>The main port that Tribler uses for BitTorrent traffic can be set under Settings, General. The default port number is 8085.</p>
+					<p>Additional, optional, settings to use a manual proxy can be found under Settings, Connection.</p>
 					<p>You are most welcome to configure a different port, but keep in mind that ports below 1024 are privileged and therefore most likely unavailable to Tribler. Choose a value higher than 1025 to be safe. Also keep in mind that each port number can be used by only one program at the same time. If you have other BitTorrent software running, for example, and want Tribler to use the same port then you will first have to close that other program completely before running Tribler or configuring Tribler's port.</p></div>
 				</div>
 				
 				<div class="faq_item">
-					<div class="faq_question">Why don't I see all the torrents in a channel?</div >
-					<div class="faq_answer"><p>There are several reasons that not all torrents in a channel show up:
-					<ul><li>You have the family filter on;</li>
-					<li>You have not marked the channel as your favorite and hence only get a preview of up to 50 torrents;</li>
-					<li>Tribler simply hasn't heard of all torrents in the channel yet.</li></ul></p>
-					<p>Note, in particular, that all of these apply to torrents in your own channel if you look them up from the main channels view instead of under My Channels.</p>
-					<p>Not 'having heard' of the torrents might be a bit vague, but has to do with the way channels are distributed. Tribler uses a gossiping protocol to communicate, something you can compare very well with real world gossiping. People (peers) meet each other (connect) and then they exchange information. Not everybody knows the latest in town (not every peer knows every torrent), but if you go around enough (exchange information with enough peers) you'll be kept up to date (know the current state of the channel). Just like real world gossiping, where it would become a very busy mess if you'd put all the people together in a room to keep each other constantly informed, Tribler peers aren't constantly exchanging information either. As such, gossiping, while disseminating information quite effectively, can take some time to get you the latest information.</p></div>
-				</div>
-				
-				<div class="faq_item">
 					<div class="faq_question">How do I reset Tribler completely?</div >
-					<div class="faq_answer"><p>To completely reset Tribler you can remove the settings directory in its entirety. This will completely wipe all settings and active downloads or seeds, as well as your download and upload history (and hence reset your reputation). Note that it will not remove the actual data, either partial or complete, of your downloads, just the knowledge that you were downloading them. Unless you put your downloads in the settings directory yourself, of course.</p>
+					<div class="faq_answer"><p>To completely reset Tribler you can remove the settings directory in its entirety (%APPDATA%/.Tribler for Windows and ~/.Tribler for other Operating Systems). This will completely wipe all settings and active downloads or seeds, as well as your download and upload history (and hence reset your reputation). Note that it will not remove the actual data, either partial or complete, of your downloads, just the knowledge that you were downloading them. Unless you put your downloads in the settings directory yourself, of course.</p>
 					<p>If you're concerned about losing things nonetheless, you can also just temporarily rename the directory and start Tribler again to see what happens. If this does not give the desired results, you can restore your backed up directory again.</p>
 					<p>To find your settings directory, see below.</p></div>
 				</div>
 				
 				<div class="faq_item">
 					<div class="faq_question">Where do I find the settings directory of Tribler?</div >
-					<div class="faq_answer"><p>Under Windows, depending on the version and settings, either of these two:
-					<ul><li>%APPDATA%\.Tribler</li>
-					<li>%APPDATA%\roaming\.Tribler</li></ul></p>
+					<div class="faq_answer"><p>Under Windows the directory is set to %APPDATA%\.Tribler</li></p>
 					<p>You can enter the %APPDATA% directory by opening an explorer, typing %APPDATA% in the address bar and then hitting Enter.</p>
 					<p>Under Linux or Mac the .Tribler directory is stored in your home directory, /home/USERNAME/.Tribler (or ~/.Tribler). Note that, since it begins with a ., it will be hidden by default. Search the web to find out how to see hidden files depending on your environment ( Ubuntu / Gnome / Nautilus,  Kubuntu / KDE / Dolphin / Konqueror,  MacOS / Finder).</p></div>
 				</div>
@@ -318,7 +263,7 @@
 				
 				<div class="faq_item">
 					<div class="faq_question">How can I contact Tribler?</div >
-					<div class="faq_answer"><p>Contact us via <b><a href="http://forum.tribler.org">our forum</a></b> or <a href="https://github.com/Tribler/tribler">Github</a>.</p></div>
+					<div class="faq_answer"><p>Contact us via <a href="https://github.com/Tribler/tribler">Github</a>.</p></div>
 				</div>
 				
 				<h2>Supported Features</h2>
@@ -329,14 +274,14 @@
 				
 				<div class="faq_item">
 					<div class="faq_question">Does Tribler have a WebUI?</div >
-					<div class="faq_answer"><p>There is currently no way to run Tribler in a browser. However, you can use our RESTful API, built for developers, to communicate with the Tribler core. See <a href="http://tribler.readthedocs.io/en/latest/restapi/introduction.html">here</a> for the documentation of this API.</p></div>
+					<div class="faq_answer"><p>Tribler runs in a browser by default. If you're feeling adventurous, you can even use its REST API manually.</p></div>
 				</div>
 								
 				<h2>Miscellaneous</h2>
 				<div class="faq_item">
 					<div class="faq_question">What's with the collected torrent files?</div >
 					<div class="faq_answer"><p>The collected torrent files are collected while you are online. They are part of the distributed library of torrent files you search through when you search using Tribler. All Tribler peers in the network participate in that large library by exchanging torrents and keeping a part of that library available by storing it locally.</p>
-					<p>The folder with collected torrent files will at first be filled to contain up to 50,000 .torrent files (50,000 .torrents files are actually stored in 150,000 files, as each file is accompanied by a hash, and tree). After that Tribler will now and then throw away a part of that collection and find some others to store locally, keeping the library up to date.</p></div>
+					<p>The database with collected torrent files will at first be filled to contain up to 50,000 .torrent files. You can remove the .db files in the sqlite folder of your settings directory if Tribler outgrows your disk space.</p></div>
 				</div>
 				
 				<div class="faq_item">
@@ -346,64 +291,18 @@
 				
 				<div class="faq_item">
 					<div class="faq_question">Tribler seems to be doing a lot more than just downloading. Can I stop that?</div >
-					<div class="faq_answer"><p>Yes, it does a lot more. Tribler peers are part of an overlay network that exchanges information about channels and torrents, among other things. This overlay network is the basis for the features Tribler offers, such as the integrated search and channels.</p>
+					<div class="faq_answer"><p>Yes, it does a lot more. Tribler peers are part of an overlay network that exchanges information about channels and torrents, among other things. This overlay network is the basis for the features Tribler offers, such as the integrated search.</p>
 					<p>Could you stop it? Theoretically, yes. And if you stopped it, it would take your client a few minutes to do searches, but otherwise it would function. You would be leeching on the network, then, taking and not giving. If everybody else stops it, though, you might just as well use any plain old BitTorrent since all of Tribler's features will break down. So yes, theoretically you could stop it, but you shouldn't.</p></div>
 				</div>
 				
 				<div class="faq_item">
 					<div class="faq_question">What are bootstrap peers?</div >
 					<div class="faq_answer"><p>Imagine a large circle of users (called peers), each of whom use Tribler file sharing software. File sharing software only functions if it can communicate with other peers. File sharing software requires the Internet address of others in order to search, download and share content with others. On initial startup, the sharing software must bootstrap and find at least one other peer.</p><br>
-					
-					<p><strong>List of online peers</strong></p>
-					<p>The most simple method of bootstrapping is using a list of currently online peers plus their port number. See the example below.
-					<br> # file: bootstraptribler.txt
-					<br> # default bootstrap peers
-					<br> server1.always-online.org 6420
-					<br> host1.never-offline.russia 6420
-					<br> sealand.routed.org 6420
-					<br> 168.0.0.13 6420</p><br>
 					 
 					<p>A file sharing program needs a fresh list of peers to bootstrap. Thus a pre-defined list of peers is included in the software installer. As peers can go offline it is important that at least one peer out of possibly thousands on the list is still online. This pre-existing address list of possibly working peers must therefore remain valid for as long as possible.</p>
-					<p>Bootstrapping is done by contacting peers in the list, possibly in parallel. If a single peers replies, we are connected. Once connected, the peer requests a fresh list of working peer Internet addresses. The peer tries to connect to the nodes it was shipped with, as well as nodes it receives from other peers, until it reaches a certain quota.
-					By default Tribler software itself has hard coded some well known online peers. Different online peers for bootstrapping can be used by creating a bootstraptribler.txt file in the format shown above.</p>
-					<p>You need to store this file in the following location, depending on your operating system:
-					<ul><li>Windows: C:\Users\<YOUR USER NAME>\AppData\Roaming\.Tribler\bootstraptribler.txt</li>
-					<li>Mac: /Users/<YOUR USER NAME>/.Tribler/bootstraptribler.txt</li>
-					<li>Linux: /home/<YOUR USER NAME>/.Tribler/bootstraptribler.txt</li></ul></p><br>
-					
-					<p><strong>How to run a bootstraptribler peer</strong></p>
-					<p>Any computer with a open connection to the Internet can run a bootstraptribler peer. More volunteers will increase the robustness of the peer-to-peer overlay, i.e. if the peers hosted by various universities are unavailable, people can choose to use different peers.</p><br>
-					
-					<p><strong>Setup on Ubuntu Linux</strong></p>
-					<p>Technically inclined people are more likely to run a bootstraptribler peer, hence we only explain how to run one on a Ubuntu Linux distribution from source. While it is easy to run on different distributions or operation systems, we will not go into that here.
-					<ol><li>Install required package.
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; sudo apt-get install python-m2crypto</li>
-					<li>Prepare a directory to store the database.
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; mkdir bootstraptribler    > cd bootstraptribler</li>
-					<li>Download the Tribler source code.
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; svn checkout http://svn.tribler.org/abc/branches/release-5.5.x release-5.5.x </li>
-					<li>Prepare your own bootstraptribler.txt.
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; # file: bootstraptribler/bootstraptribler.txt
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; # default TUDelft bootstraptribler peer
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; dispersy2.tribler.org 6422
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; dispersy3.tribler.org 6423
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; dispersy4.tribler.org 6424
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; dispersy5.tribler.org 6425
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; dispersy6.tribler.org 6426
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; # my own bootstrap peer
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; my.hostname.edu 6420
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; # other public bootstrap peers
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; other.hostname.edu 6420
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; more.hostname.edu 6420</li>
-					<li>Run the bootstrap peer on port 6420:
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; cd release-5.5.x    > export PYTHONPATH=.    > python -O Tribler/Main/dispersy-tracker.py --statedir ../ --port 6420</li>
-					<li>Spread the word. Use search engines, social media sites, friends, etc. and let people know that you are running a bootstrap peer. Remember that they need to add your Internet address too their bootstraptribler.txt so they can find you!</li></ol></p><br>
-					
-					<p><strong>Thank you for running a bootstrap peer</strong></p>
-					<p>By running a bootstrap peer you are helping out the file sharing community. Thnx! For over 6 years we have been making Tribler as robust as possible. 10+ year old systems such as Gnutella are also distributed. However, all first, second and third generation file sharing software either uses central servers or offers no protection against spam plus lacks our social features and streaming. We define this as "4G P2P". It is trivial to sabotage Gnutella to the point at which it becomes useless. Several ideas have been proposed on bootstrapping systems without any online peer list, simply by smart brute force pinging?. We hope to implement these ideas from University of Denver one day and make this page obsolete, feel free to submit your code...</p>
-					<p>With a thriving community of bootstraptribler peers we as academics are trying to make something new: extreme robust systems. The  Amazon cloud has occasional downtime and many websites  like Facebook and Twitter had downtime over the years. That could change if more developers used our self-organising system principles.
-					<p>Result: The only way to take it down is to take The Internet down.</p>
-					<p>We are proud that Tribler never had a single second of downtime in the six years since it exists. Yes, we had software bug and version upgrade issues. However, the overlay has always been alive and evolving. We still have a lot of ideas on how to improve matters. Currently we are creating more robust alternatives for all TCP-based protocols, including Bittorrent itself.</p></div>
+					<p>Bootstrapping is done by contacting peers in the list, possibly in parallel. If a single peers replies, we are connected. Once connected, the peer requests a fresh list of working peer Internet addresses. The peer tries to connect to the nodes it was shipped with, as well as nodes it receives from other peers, until it reaches a certain quota.</p>
+					<p>By default, Tribler software itself has hard coded some well known online peers. Different online peers for bootstrapping can be used by modifying your configuration.json file in your settings directory.</p>
+					</div>
 				</div>
 
 			</div>
