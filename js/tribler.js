@@ -174,10 +174,12 @@ $(document).ready(function () {
 
         // Fetch experimental release
         let experimental_release = undefined;
-        $.get("https://api.github.com/repos/qstokkink/TriblerExperimental/releases", function (data) {
-            experimental_release = data[0];
-            update_page(stablerelease, prevrelease, prerelease, experimental_release);
-        });
+        
+        // DISABLED, re-enable by pointing to some repository here:
+        //$.get("https://api.github.com/repos/qstokkink/TriblerExperimental/releases", function (data) {
+        //    experimental_release = data[0];
+        //    update_page(stablerelease, prevrelease, prerelease, experimental_release);
+        //});
 
         update_page(stablerelease, prevrelease, prerelease, experimental_release);
     });
