@@ -19,7 +19,7 @@ $(document).ready(function () {
         $.each(stablerelease["assets"], function (index, asset) {
             if (asset["name"].endsWith(".dmg") && !asset["name"].includes("debug")) {
                 mac_url = asset["browser_download_url"];
-            } else if (asset["name"].endsWith(".deb") && !asset["name"].includes("debug")) {
+            } else if (asset["name"].endsWith("x64.deb") && !asset["name"].includes("debug")) {
                 linux_url = asset["browser_download_url"];
                 linux_file_name = asset["name"];
             } else if (asset["name"].endsWith("x86.exe") && !asset["name"].includes("debug")) {
@@ -43,7 +43,7 @@ $(document).ready(function () {
             $.each(prerelease["assets"], function (index, asset) {
                 if (asset["name"].endsWith(".dmg")) {
                     pre_mac_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith(".deb")) {
+                } else if (asset["name"].endsWith("x64.deb")) {
                     pre_linux_url = asset["browser_download_url"];
                     pre_linux_file_name = asset["name"];
                 } else if (asset["name"].endsWith("x86.exe")) {
@@ -68,7 +68,7 @@ $(document).ready(function () {
             $.each(experimental_release["assets"], function (index, asset) {
                 if (asset["name"].endsWith(".dmg")) {
                     exp_mac_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith(".deb")) {
+                } else if (asset["name"].endsWith("x64.deb")) {
                     exp_linux_url = asset["browser_download_url"];
                     exp_linux_file_name = asset["name"];
                 } else if (asset["name"].endsWith("x86.exe")) {
