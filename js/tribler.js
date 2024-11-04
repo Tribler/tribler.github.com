@@ -8,121 +8,85 @@ $(document).ready(function () {
     $("#pre_release").hide();
     $("#experimental_release").hide();
 
+    function find_asset_url(release, os, architecture) {
+        if (release == undefined) return undefined;
+
+        os = os.toLowerCase();
+        let assets = release["assets"];
+        for (var i = 0; i < assets.length; i++) {
+            let name = assets[i]["name"];
+            if (name.includes("debug"))
+                 continue;
+
+            if (os == "macos" && name.endsWith('.dmg'))
+                return assets[i]["browser_download_url"];
+            if (os == "windows" && architecture == "amd64" && name.endsWith('x64.exe'))
+                return assets[i]["browser_download_url"];
+            if (os == "windows" && architecture == "x86" && name.endsWith('x86.exe'))
+                return assets[i]["browser_download_url"];
+            if (os == "linux" && architecture == "amd64" && name.endsWith('x64.deb'))
+                return assets[i]["browser_download_url"];
+            if (os == "linux" && architecture == "arm64" && name.endsWith('aarch64.deb'))
+                return assets[i]["browser_download_url"];
+            if (os == "linux" && name.endsWith('all.deb'))
+                return assets[i]["browser_download_url"];
+        }
+    }
+
     function update_page(stablerelease, prevrelease, prerelease, experimental_release) {
-        // find the right assets in the stable release
-        let windows64_url = undefined;
-        let windows32_url = undefined;
-        let mac_url = undefined;
-        let linux_url = undefined;
-        let linux_file_name = undefined;
-        let source_url = undefined;
-        $.each(stablerelease["assets"], function (index, asset) {
-            if (asset["name"].endsWith(".dmg") && !asset["name"].includes("debug")) {
-                mac_url = asset["browser_download_url"];
-            } else if (asset["name"].endsWith(".deb") && !asset["name"].includes("debug")) {
-                linux_url = asset["browser_download_url"];
-                linux_file_name = asset["name"];
-            } else if (asset["name"].endsWith("x86.exe") && !asset["name"].includes("debug")) {
-                windows32_url = asset["browser_download_url"];
-            } else if (asset["name"].endsWith("x64.exe") && !asset["name"].includes("debug")) {
-                windows64_url = asset["browser_download_url"];
-            } else if (asset["name"].endsWith("tar.xz") && !asset["name"].includes("debug")) {
-                source_url = asset["browser_download_url"];
-            }
-        });
-
-        // find the right assets in the prerelease
-        let pre_windows64_url = undefined;
-        let pre_windows32_url = undefined;
-        let pre_mac_url = undefined;
-        let pre_linux_url = undefined;
-        let pre_linux_file_name = undefined;
-        let pre_source_url = undefined;
-        if (prerelease != undefined) {
-            $("#pre_release").show();
-            $.each(prerelease["assets"], function (index, asset) {
-                if (asset["name"].endsWith(".dmg")) {
-                    pre_mac_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith("x64.deb")) {
-                    pre_linux_url = asset["browser_download_url"];
-                    pre_linux_file_name = asset["name"];
-                } else if (asset["name"].endsWith("x86.exe")) {
-                    pre_windows32_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith("x64.exe")) {
-                    pre_windows64_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith("tar.xz")) {
-                    pre_source_url = asset["browser_download_url"];
-                }
-            });
-        }
-
-        // find the right assets in the prerelease
-        let exp_windows64_url = undefined;
-        let exp_windows32_url = undefined;
-        let exp_mac_url = undefined;
-        let exp_linux_url = undefined;
-        let exp_linux_file_name = undefined;
-        let exp_source_url = undefined;
-        if (experimental_release != undefined) {
-            console.log(experimental_release);
-            $.each(experimental_release["assets"], function (index, asset) {
-                if (asset["name"].endsWith(".dmg")) {
-                    exp_mac_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith("x64.deb")) {
-                    exp_linux_url = asset["browser_download_url"];
-                    exp_linux_file_name = asset["name"];
-                } else if (asset["name"].endsWith("x86.exe")) {
-                    exp_windows32_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith("x64.exe")) {
-                    exp_windows64_url = asset["browser_download_url"];
-                } else if (asset["name"].endsWith("tar.xz")) {
-                    exp_source_url = asset["browser_download_url"];
-                }
-            });
-        }
-
         if (typeof (isfront) !== 'undefined') {
-            // set download URLs
             var parser = new UAParser();
-            var result = parser.getResult();
-            var osName = result.os.name.toLowerCase();
+            var osName = parser.getOS().name.toLowerCase();
+            var architecture = parser.getCPU().architecture;
+
+            // set download URLs
             if (osName == "windows") {
                 $("#download_os").html("For Windows 7/8/10 (64-bit)");
-                $("#main_download_url").attr("href", windows64_url);
-                $("#pre_release_download_url").attr("href", pre_windows64_url);
-                $("#footer_download_url").attr("href", windows64_url);
 
-                if(exp_windows64_url != undefined || exp_windows32_url != undefined){
+                let stable = find_asset_url(stablerelease, osName, architecture);
+                $("#main_download_url").attr("href", stable);
+                $("#footer_download_url").attr("href", stable);
+                $("#pre_release_download_url").attr("href", find_asset_url(prerelease, osName, architecture));
+
+                let exp32 = find_asset_url(experimental_release, osName, 'x86');
+                let exp64 = find_asset_url(experimental_release, osName, 'amd64');
+                if (exp32 != undefined || exp64 != undefined) {
                     $("#experimental_release").show();
                     const userAgent = navigator.userAgent;
                     if (userAgent.indexOf("WOW64") !== -1 || userAgent.indexOf("Win64") !== -1) {
-                        $("#experimental_release_download_url").attr("href", exp_windows64_url);
+                        $("#experimental_release_download_url").attr("href", exp64);
                     } else {
-                        $("#experimental_release_download_url").attr("href", exp_windows32_url);
+                        $("#experimental_release_download_url").attr("href", exp32);
                     }
                 }
-            } else if (osName == "mac os x") {
+            } else if (osName == "macos") {
                 $("#download_os").html("For macOS (Yosemite or later)");
-                $("#main_download_url").attr("href", mac_url);
-                $("#pre_release_download_url").attr("href", pre_mac_url);
-                $("#footer_download_url").attr("href", mac_url);
 
-                if(exp_mac_url != undefined){
+                let stable = find_asset_url(stablerelease, osName);
+                $("#main_download_url").attr("href", stable);
+                $("#footer_download_url").attr("href", stable);
+                $("#pre_release_download_url").attr("href", find_asset_url(prerelease, osName));
+
+                let exp = find_asset_url(experimental_release, osName);
+                if (exp != undefined) {
                     $("#experimental_release").show();
-                    $("#experimental_release_download_url").attr("href", exp_mac_url);
+                    $("#experimental_release_download_url").attr("href", exp);
                 }
             } else if (jQuery.inArray(osName, new Array('kubuntu', 'xubuntu', 'lubuntu', 'ubuntu', 'gentoo', 'fedora', 'mandriva', 'redhat', 'suse', 'debian', 'slackware', 'arch', 'linux')) !== -1) {
                 $("#download_os").html("For Linux");
-                $("#main_download_url").attr("href", linux_url);
-                $("#pre_release_download_url").attr("href", pre_linux_url);
-                $("#footer_download_url").attr("href", linux_url);
+
+                let stable = find_asset_url(stablerelease, "linux", architecture);
+                $("#main_download_url").attr("href", stable);
+                $("#footer_download_url").attr("href", stable);
+                $("#pre_release_download_url").attr("href", find_asset_url(prerelease, "linux", architecture));
                 $("#instructions").html("Installation instructions for Linux");
                 $("#instructions").css("display", "block");
                 $("#instructions").attr("href", "./linux.html");
 
-                if(exp_linux_url != undefined){
+                let exp = find_asset_url(experimental_release, "linux", architecture);
+                if (exp != undefined) {
                     $("#experimental_release").show();
-                    $("#experimental_release_download_url").attr("href", exp_linux_url);
+                    $("#experimental_release_download_url").attr("href", exp);
                 }
             } else {
                 $("#download_os").html("Unknown OS");
@@ -130,21 +94,22 @@ $(document).ready(function () {
                 $("#footer_download_url").attr("href", "download.html");
             }
         } else if (pagename == "linux.html") {
+            let stable = find_asset_url(stablerelease, "linux", "amd64");
             $("#linux-content-header").text("Latest release - Tribler " + stablerelease["name"].substring(1));
-            $("#debian-download-url").attr("href", linux_url);
+            $("#debian-download-url").attr("href", stable);
             $("#debian-download-url").text("Download " + stablerelease["name"].substring(1));
-            $("#tribler-source-url").attr("href", source_url);
+            $("#tribler-source-url").attr("href", stablerelease["tarball_url"]);
             $("#tribler-source-tree-url").attr("href", 'https://github.com/Tribler/tribler/tree/' + stablerelease['tag_name']);
 
-            $("#debian-install-code-url").text(linux_url);
-            $("#debian-install-code-file").text("./" + linux_file_name);
+            $("#debian-install-code-url").text(find_asset_url(stablerelease, "linux"));
+            $("#debian-install-code-file").text("./" + stable.split(/(\\|\/)/g).pop());
             $("#debian-install-code").show();
         } else if (pagename == "download.html") {
-            $("#download-url-win64").attr("href", windows64_url);
-            $("#download-url-win32").attr("href", windows32_url);
-            $("#download-url-mac").attr("href", mac_url);
-            $("#download-url-linux").attr("href", linux_url);
-            $("#tribler-source-url").attr("href", source_url);
+            $("#download-url-win64").attr("href", find_asset_url(stablerelease, "windows", "amd64"));
+            $("#download-url-win32").attr("href", find_asset_url(stablerelease, "windows", "x86"));
+            $("#download-url-mac").attr("href", find_asset_url(stablerelease, "macos"));
+            $("#download-url-linux").attr("href", find_asset_url(stablerelease, "linux", "amd64"));
+            $("#tribler-source-url").attr("href", stablerelease["zipball_url"]);
             $(".tribler-source-tree-url").attr("href", 'https://github.com/Tribler/tribler/tree/' + stablerelease['tag_name']);
             $(".downloads-content").show()
             $("#github-compare-url").attr("href", 'https://github.com/Tribler/tribler/compare/' + prevrelease['tag_name'] + '...' + stablerelease['tag_name'])
@@ -160,6 +125,7 @@ $(document).ready(function () {
             if (index == 0 && release["prerelease"] && !prerelease) {
                 // we found a prerelease;
                 prerelease = release;
+                $("#pre_release").show();
                 $("#pre_release_download_url").text("Download Tribler " + release["name"].substring(1));
             }
             if (!release["prerelease"] && !stablerelease) {
@@ -174,7 +140,7 @@ $(document).ready(function () {
 
         // Fetch experimental release
         let experimental_release = undefined;
-        
+
         // DISABLED, re-enable by pointing to some repository here:
         //$.get("https://api.github.com/repos/qstokkink/TriblerExperimental/releases", function (data) {
         //    experimental_release = data[0];
