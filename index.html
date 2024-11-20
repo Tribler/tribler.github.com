@@ -5,9 +5,8 @@
 	<title>Tribler - Privacy using our Tor-inspired onion routing</title>
 
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content;default-src 'self';script-src 'self' 'report-sample' 'unsafe-inline' https://googletagmanager.com https://tagmanager.google.com https://www.googletagmanager.com;style-src 'self' 'report-sample' 'unsafe-inline' tagmanager.google.com www.googletagmanager.com;object-src 'none';frame-src 'self' ghbtns.com www.googletagmanager.com;child-src 'self' www.googletagmanager.com;img-src 'self' data: www.googletagmanager.com;font-src 'self' data:;connect-src 'self' api.github.com www.googletagmanager.com *.google-analytics.com;manifest-src 'self';base-uri 'self';form-action 'self';media-src 'self';worker-src 'self'; upgrade-insecure-requests">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 
 	<meta name="description" content="Tribler is a powerful and censorship resistant peer-to-peer decentralized torrent client, providing fast and privacy enhanced file-sharing experiences using Tor-inspired onion routing. Download and share torrents with ease.">
 	<meta name="keywords" content="Tribler, torrent client, peer-to-peer, decentralized, file sharing">
@@ -28,7 +27,7 @@
 		  "url": "https://tribler.org"
 		}
 	</script>
-		
+
 
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/lightbox.css" />
@@ -147,7 +146,7 @@
 			</div>
 
 		</div>
-		
+
 <!--		<div class="wow fadeInUp">-->
 <!--			<a href="img/image0.png" data-lightbox="screenshots" title="Channel contents | View the torrents within a channel."><img width=500px height=350px src="img/image0.png" title="Screenshot of the Tribler GUI" alt="" /></a>-->
 <!--		</div>-->
