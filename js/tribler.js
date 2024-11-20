@@ -94,7 +94,7 @@ $(document).ready(function () {
                 $("#footer_download_url").attr("href", "download.html");
             }
         } else if (pagename == "linux.html") {
-            let stable = find_asset_url(stablerelease, "linux", "amd64");
+            let stable = find_asset_url(stablerelease, "linux", new UAParser().getCPU().architecture);
             $("#linux-content-header").text("Latest release - Tribler " + stablerelease["name"].substring(1));
             $("#debian-download-url").attr("href", stable);
             $("#debian-download-url").text("Download " + stablerelease["name"].substring(1));
@@ -109,6 +109,9 @@ $(document).ready(function () {
             $("#download-url-win32").attr("href", find_asset_url(stablerelease, "windows", "x86"));
             $("#download-url-mac").attr("href", find_asset_url(stablerelease, "macos"));
             $("#download-url-linux").attr("href", find_asset_url(stablerelease, "linux", "amd64"));
+            let arm = find_asset_url(stablerelease, "linux", "arm64")
+            $("#download-url-linux-arm").toggle(arm && !arm.endsWith("all.deb"));
+            $("#download-url-linux-arm").attr("href", arm);
             $("#tribler-source-url").attr("href", stablerelease["zipball_url"]);
             $(".tribler-source-tree-url").attr("href", 'https://github.com/Tribler/tribler/tree/' + stablerelease['tag_name']);
             $(".downloads-content").show()
